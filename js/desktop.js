@@ -199,9 +199,14 @@ function renderDesktopIcons(){
         </span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
+    } else if (item.type === 'txt') {
+      icon.innerHTML = `
+        <span class="txt-file-icon" aria-hidden="true"></span>
+        <span class="desktop-icon-label">${item.label}</span>
+      `;
     } else {
       icon.innerHTML = `
-        <span class="icon-glyph">${item.type === 'txt' ? 'TXT' : item.type === 'game' ? 'GAME' : 'DIR'}</span>
+        <span class="icon-glyph">${item.type === 'game' ? 'GAME' : 'DIR'}</span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
     }
