@@ -74,58 +74,6 @@ function setScore(uid, value) {
   if (el) el.textContent = value;
 }
 
-function drawCRTBackdrop(ctx, canvas, tint = 'rgba(88,255,171,0.22)') {
-  ctx.save();
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const gradient = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 20, canvas.width / 2, canvas.height / 2, canvas.width * 0.7);
-  gradient.addColorStop(0, 'rgba(12,45,30,.24)');
-  gradient.addColorStop(0.55, 'rgba(3,14,10,.92)');
-  gradient.addColorStop(1, 'rgba(0,0,0,1)');
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.globalAlpha = 0.12;
-  ctx.fillStyle = tint;
-  for (let y = 0; y < canvas.height; y += 4) {
-    ctx.fillRect(0, y, canvas.width, 2);
-  }
-  ctx.globalAlpha = 1;
-
-  ctx.strokeStyle = 'rgba(88,255,171,.08)';
-  ctx.lineWidth = 1;
-  for (let i = 0; i <= canvas.width; i += 18) {
-    ctx.beginPath();
-    ctx.moveTo(i, 0);
-    ctx.lineTo(i, canvas.height);
-    ctx.stroke();
-  }
-  ctx.restore();
-}
-
-function neonFill(ctx, color, blur = 16) {
-  ctx.shadowColor = color;
-  ctx.shadowBlur = blur;
-  ctx.fillStyle = color;
-}
-
-function overlayText(ctx, canvas, title, subtitle) {
-  ctx.save();
-  ctx.fillStyle = 'rgba(0,0,0,.42)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.textAlign = 'center';
-  ctx.shadowBlur = 16;
-  ctx.shadowColor = '#58ffab';
-  ctx.fillStyle = '#cffff0';
-  ctx.font = '700 30px "Courier New", monospace';
-  ctx.fillText(title, canvas.width / 2, canvas.height / 2 - 12);
-  ctx.shadowBlur = 10;
-  ctx.shadowColor = '#7fffff';
-  ctx.fillStyle = '#7ef8bc';
-  ctx.font = '500 14px "Courier New", monospace';
-  ctx.fillText(subtitle, canvas.width / 2, canvas.height / 2 + 18);
-  ctx.restore();
-}
-
 function initSnake(uid) {
   const canvas = makeCanvas(uid, 360, 360);
   if (!canvas) return;
@@ -183,28 +131,26 @@ function initSnake(uid) {
   }
 
   function draw(gameOver = false) {
-    drawCRTBackdrop(ctx, canvas, 'rgba(88,255,171,.18)');
-    ctx.strokeStyle = 'rgba(88,255,171,.08)';
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(4,10,18,.62)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = 'rgba(255,255,255,.035)';
     for (let i = 0; i <= cells; i++) {
       ctx.beginPath(); ctx.moveTo(i * size, 0); ctx.lineTo(i * size, canvas.height); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(0, i * size); ctx.lineTo(canvas.width, i * size); ctx.stroke();
     }
-
-    neonFill(ctx, '#ff425d', 18);
+    ctx.fillStyle = '#f0b35f';
     ctx.beginPath();
-    ctx.roundRect(food.x * size + 3, food.y * size + 3, size - 6, size - 6, 2);
+    ctx.roundRect(food.x * size + 3, food.y * size + 3, size - 6, size - 6, 5);
     ctx.fill();
-
     snake.forEach((p, i) => {
-      neonFill(ctx, i === 0 ? '#7fffff' : '#58ffab', i === 0 ? 18 : 12);
+      ctx.fillStyle = i === 0 ? '#f5f7fb' : '#7bb7ff';
       ctx.beginPath();
-      ctx.roundRect(p.x * size + 2, p.y * size + 2, size - 4, size - 4, 2);
+      ctx.roundRect(p.x * size + 2, p.y * size + 2, size - 4, size - 4, 5);
       ctx.fill();
     });
-
-    ctx.shadowBlur = 0;
-    if (gameOver) overlayText(ctx, canvas, 'GAME OVER', 'RESET PARA TENTAR DE NOVO');
-    if (!running && score === 0) overlayText(ctx, canvas, 'SNAKE', 'CLIQUE EM INICIAR');
+    if (gameOver) overlayText(ctx, canvas, 'GAME OVER', 'Reset para tentar de novo');
+    if (!running && score === 0) overlayText(ctx, canvas, 'SNAKE', 'Clique em Iniciar');
   }
 
   function changeDirection(key) {
@@ -294,9 +240,6 @@ function initMines(uid) {
         if (!cell.open && !finished) cell.flag = !cell.flag;
         draw();
       });
-      if (cell.open && !cell.mine && cell.near) {
-        btn.style.color = ['#7ef8bc','#7fffff','#f8ff65','#ff8d57','#f08bff','#7ef8bc','#7fffff','#ff425d'][cell.near - 1] || '#d6fff2';
-      }
       grid.appendChild(btn);
     });
   }
@@ -362,23 +305,20 @@ function initPong(uid) {
   }
 
   function draw() {
-    drawCRTBackdrop(ctx, canvas, 'rgba(127,255,255,.14)');
-    ctx.strokeStyle = 'rgba(88,255,171,.24)';
-    ctx.shadowColor = '#58ffab';
-    ctx.shadowBlur = 8;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(4,10,18,.62)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = 'rgba(255,255,255,.12)';
     ctx.setLineDash([6, 10]);
     ctx.beginPath(); ctx.moveTo(canvas.width / 2, 0); ctx.lineTo(canvas.width / 2, canvas.height); ctx.stroke();
     ctx.setLineDash([]);
-
-    neonFill(ctx, '#58ffab', 16);
-    ctx.beginPath(); ctx.roundRect(player.x, player.y, player.w, player.h, 0); ctx.fill();
-    neonFill(ctx, '#7fffff', 16);
-    ctx.beginPath(); ctx.roundRect(ai.x, ai.y, ai.w, ai.h, 0); ctx.fill();
-    neonFill(ctx, '#ff425d', 18);
+    ctx.fillStyle = '#f5f7fb';
+    ctx.beginPath(); ctx.roundRect(player.x, player.y, player.w, player.h, 6); ctx.fill();
+    ctx.fillStyle = '#7bb7ff';
+    ctx.beginPath(); ctx.roundRect(ai.x, ai.y, ai.w, ai.h, 6); ctx.fill();
+    ctx.fillStyle = '#f0b35f';
     ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2); ctx.fill();
-    ctx.shadowBlur = 0;
-
-    if (!running && playerScore === 0 && aiScore === 0) overlayText(ctx, canvas, 'PONG', 'CLIQUE EM INICIAR');
+    if (!running && playerScore === 0 && aiScore === 0) overlayText(ctx, canvas, 'PONG', 'Clique em Iniciar');
   }
 
   function movePaddle(clientY) {
@@ -393,4 +333,18 @@ function initPong(uid) {
   document.getElementById(`${uid}-start`)?.addEventListener('click', start);
   document.getElementById(`${uid}-reset`)?.addEventListener('click', reset);
   reset();
+}
+
+function overlayText(ctx, canvas, title, subtitle) {
+  ctx.save();
+  ctx.fillStyle = 'rgba(0,0,0,.34)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#f5f7fb';
+  ctx.font = '800 30px system-ui, sans-serif';
+  ctx.fillText(title, canvas.width / 2, canvas.height / 2 - 10);
+  ctx.fillStyle = '#c7d2e3';
+  ctx.font = '500 14px system-ui, sans-serif';
+  ctx.fillText(subtitle, canvas.width / 2, canvas.height / 2 + 20);
+  ctx.restore();
 }
