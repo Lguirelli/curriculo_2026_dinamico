@@ -1,19 +1,35 @@
-# Lorenzo OS — Portfolio POC
+# Lorenzo OS — Portfólio Interativo
 
-Projeto de currículo e portfólio em formato de sistema operacional.
+Protótipo de currículo e portfólio em formato de sistema operacional.
 
-## Como editar conteúdo
-- Currículo desktop/mobile: `content/curriculo/*.html`
+## Como editar
+
+- Currículo desktop: `content/curriculo/*.html`
+- Currículo mobile: `content/mobile/notas/*.html`
 - Portfólio: `content/portfolio/*/*.html`
-- CSS desktop: `css/desktop.css`
-- Janelas: `css/windows.css` e `js/windows.js`
-- Mobile: `css/mobile.css` e `js/mobile.js`
+- Estilo desktop: `css/desktop.css`
+- Estilo das janelas: `css/windows.css`
+- Lógica dos ícones: `js/desktop.js`
+- Lógica das janelas: `js/windows.js`
 
-## Interações desktop
-- 1 clique seleciona ícone
-- Arrastar move ícone
-- Soltar aplica snap to grid
-- 2 cliques abre arquivo/pasta
-- TXT abre como janela pequena
-- Botão amarelo alterna tela cheia
-- Botão vermelho fecha
+## Comportamento desktop
+
+- Arquivos `.txt` começam alinhados no grid à esquerda.
+- Pastas e jogos começam alinhados no grid à direita.
+- 1 clique seleciona.
+- Arrastar reposiciona.
+- Ao soltar, aplica snap to grid.
+- 2 cliques abre.
+- `.txt` abre como caixa pequena flutuante.
+- Botão amarelo expande para tela cheia.
+- Botão vermelho fecha.
+
+## Rodar localmente
+
+Use um servidor local, porque os conteúdos são carregados via `fetch`:
+
+```bash
+python -m http.server 8000
+```
+
+Depois acesse `http://localhost:8000`.

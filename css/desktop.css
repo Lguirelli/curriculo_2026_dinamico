@@ -1,21 +1,63 @@
-.desktop-os{position:relative;width:100vw;height:100vh;background:radial-gradient(circle at 50% 38%,rgba(81,115,145,.45),transparent 28%),linear-gradient(135deg,#152233 0%,#24384b 52%,#132033 100%);overflow:hidden;user-select:none}
-.desktop-area{position:absolute;inset:0 0 var(--taskbar) 0;overflow:hidden}
-.wallpaper-orb{position:absolute;left:50%;top:46%;width:min(34vw,420px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 40% 28%,#e9c87b,#b89351 54%,#6a4b2f 55%,#0e1b2b 56%,#7ca6b8 62%,#e8eef0 64%,#0e273a 68%,#e9c87b 69%);box-shadow:0 28px 90px rgba(0,0,0,.22);opacity:.86;pointer-events:none}
-.desktop-icons{position:absolute;inset:0}
-.desktop-icon{position:absolute;width:92px;height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;border:1px solid transparent;border-radius:14px;color:#fff;text-shadow:0 1px 2px #000;font-size:12px;font-weight:700;touch-action:none}
-.desktop-icon.selected{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.24);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+.desktop-os{
+  position:relative;
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+  user-select:none;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(101,139,171,.28),transparent 32%),
+    linear-gradient(145deg,#122033 0%,#20344a 48%,#111d2e 100%);
+}
+.desktop-area{position:absolute;inset:var(--topbar) 0 0 0;overflow:hidden}
+.top-panel{
+  position:absolute;left:0;right:0;top:0;height:var(--topbar);z-index:7000;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:0 10px;background:rgba(8,12,18,.48);border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(18px);font-size:12px;color:rgba(255,255,255,.86);
+}
+.top-apps-button{justify-self:start;height:20px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);font-size:11px}
+.top-panel-clock{justify-self:center;letter-spacing:.02em;color:rgba(255,255,255,.78)}
+.top-panel-status{justify-self:end;display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.78)}
+.wallpaper-scene{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.wallpaper-scene:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 44%,rgba(255,255,255,.035),transparent 25%)}
+.wallpaper-moon{
+  position:absolute;left:50%;top:45%;width:min(26vw,360px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);
+  background:
+    radial-gradient(circle at 42% 30%,rgba(255,255,255,.15),transparent 7%),
+    linear-gradient(155deg,#f3d38a 0%,#bd9855 58%,#101c2a 59%,#88b6c8 66%,#f1f4ee 68%,#294a62 72%,#f0cd7a 73%);
+  box-shadow:0 40px 110px rgba(0,0,0,.34), inset -18px -22px 38px rgba(0,0,0,.16);
+  opacity:.9;
+}
+.wallpaper-mist{position:absolute;height:36%;filter:blur(18px);opacity:.15;border-radius:999px;background:#9ed3ea;transform:rotate(-10deg)}
+.mist-a{width:55%;left:-12%;top:33%}.mist-b{width:44%;right:-10%;top:45%;opacity:.10}
+.desktop-icons{position:absolute;inset:0;z-index:2}
+.desktop-icon{
+  position:absolute;width:86px;height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+  border:1px solid transparent;border-radius:13px;color:#fff;text-shadow:0 2px 3px rgba(0,0,0,.66);
+  font-size:12px;font-weight:700;line-height:1.15;text-align:center;touch-action:none;background:transparent;
+}
+.desktop-icon span:last-child{max-width:78px;white-space:normal;word-break:break-word}
+.desktop-icon.selected{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.28);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 14px 34px rgba(0,0,0,.18)}
 .desktop-icon.dragging{opacity:.92;z-index:999;transform:scale(1.04)}
-.icon-glyph{width:48px;height:48px;border-radius:9px;display:grid;place-items:center;font-size:11px;font-weight:900;color:#0f1824;background:linear-gradient(180deg,#fff9d9,#e5bd6a);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 10px 18px rgba(0,0,0,.22)}
-.desktop-icon.folder .icon-glyph{background:linear-gradient(180deg,#8793a2,#344152);color:#eaf0f8}
-.desktop-icon.game .icon-glyph{background:linear-gradient(180deg,#b6d4ff,#455f88);color:#07111d}
-.taskbar{position:absolute;left:0;right:0;bottom:0;height:var(--taskbar);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 12px;background:rgba(13,20,30,.74);border-top:1px solid rgba(255,255,255,.10);backdrop-filter:blur(16px);z-index:5000}
-.start-button{justify-self:start;height:28px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.13);color:#fff;font-size:12px}
-.contact-dock{justify-self:center;display:flex;gap:8px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.08);box-shadow:0 10px 25px rgba(0,0,0,.22)}
-.dock-icon{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;text-decoration:none;background:rgba(255,255,255,.12);font-weight:800;font-size:13px;transition:.18s ease}
-.dock-icon:hover{transform:translateY(-5px) scale(1.08);background:rgba(255,255,255,.22)}
-.system-clock{justify-self:end;font-size:12px;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);padding:6px 10px;border-radius:999px;min-width:72px;text-align:center}
-.start-menu{position:absolute;left:12px;bottom:50px;width:360px;max-height:520px;padding:14px;border-radius:20px;background:rgba(16,24,36,.86);border:1px solid rgba(255,255,255,.13);box-shadow:var(--shadow);backdrop-filter:blur(22px);z-index:6000;display:none;grid-template-columns:repeat(2,1fr);gap:8px}
+.icon-glyph{width:52px;height:52px;border-radius:11px;display:grid;place-items:center;font-size:10px;font-weight:900;color:#111a27;background:linear-gradient(180deg,#fff8d5,#e8bf66);box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 12px 20px rgba(0,0,0,.22)}
+.desktop-icon.folder .icon-glyph{background:linear-gradient(180deg,#dbe6f0 0%,#8da0b4 42%,#344050 100%);color:#eaf0f8}
+.desktop-icon.game .icon-glyph{background:linear-gradient(180deg,#d7edff 0%,#7596c1 50%,#344c71 100%);color:#101927}
+.dock{
+  position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:6500;
+  display:flex;gap:8px;padding:6px 10px;border-radius:18px;background:rgba(14,21,32,.48);border:1px solid rgba(255,255,255,.13);
+  backdrop-filter:blur(24px);box-shadow:0 18px 55px rgba(0,0,0,.38);
+}
+.dock-icon{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;text-decoration:none;background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,.07));font-weight:900;font-size:13px;transition:.18s ease;border:1px solid rgba(255,255,255,.09)}
+.dock-icon:hover{transform:translateY(-7px) scale(1.08);background:rgba(255,255,255,.20)}
+.start-menu{
+  position:absolute;left:12px;bottom:70px;width:560px;max-width:calc(100vw - 24px);max-height:560px;z-index:7600;
+  display:none;grid-template-columns:170px 1fr;gap:14px;padding:14px;border-radius:20px;background:rgba(12,18,29,.76);
+  border:1px solid rgba(255,255,255,.14);box-shadow:var(--shadow);backdrop-filter:blur(28px);
+}
 .start-menu.open{display:grid}
-.start-menu h2{grid-column:1/-1;margin:0 0 8px;font-size:14px;color:var(--gold)}
-.start-menu button{text-align:left;padding:12px;border-radius:12px;background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.08)}
-.start-menu button:hover{background:rgba(255,255,255,.15)}
+.start-menu-sidebar{display:flex;flex-direction:column;gap:10px;padding:10px;border-right:1px solid rgba(255,255,255,.10);font-size:12px;color:var(--muted)}
+.start-menu-sidebar strong{color:#fff;margin-bottom:8px}.start-menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;overflow:auto;padding:4px}
+.start-menu-grid button{min-height:92px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#fff}
+.start-menu-grid button:hover{background:rgba(255,255,255,.13)}
+.start-menu-grid span{width:44px;height:40px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(180deg,#dbe6f0,#53677b);font-size:10px;font-weight:900}
+.start-menu-grid small{font-size:11px;font-weight:700}

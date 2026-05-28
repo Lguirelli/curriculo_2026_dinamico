@@ -12,33 +12,51 @@
 </head>
 <body>
   <main id="desktopOS" class="desktop-os" aria-label="Desktop portfolio">
+    <header class="top-panel">
+      <button id="startButton" class="top-apps-button" type="button">Apps</button>
+      <div id="topPanelClock" class="top-panel-clock">quinta, 28 de maio 00:00</div>
+      <div class="top-panel-status">
+        <span>pt</span>
+        <span>◔</span>
+        <span>⌁</span>
+        <span>▣</span>
+      </div>
+    </header>
+
     <section id="desktopArea" class="desktop-area">
-      <div class="wallpaper-orb" aria-hidden="true"></div>
+      <div class="wallpaper-scene" aria-hidden="true">
+        <div class="wallpaper-moon"></div>
+        <div class="wallpaper-mist mist-a"></div>
+        <div class="wallpaper-mist mist-b"></div>
+      </div>
       <div id="desktopIcons" class="desktop-icons"></div>
     </section>
 
-    <nav class="taskbar" aria-label="Barra do sistema">
-      <button id="startButton" class="start-button" type="button">Apps</button>
-      <div class="contact-dock" aria-label="Contatos">
-        <a href="#" class="dock-icon" title="Email">✉</a>
-        <a href="#" class="dock-icon" title="LinkedIn">in</a>
-        <a href="#" class="dock-icon" title="GitHub">⌘</a>
-        <a href="#" class="dock-icon" title="Instagram">◎</a>
-        <a href="#" class="dock-icon" title="WhatsApp">☏</a>
-      </div>
-      <div id="systemClock" class="system-clock">00:00</div>
-    </nav>
-
     <aside id="startMenu" class="start-menu" aria-label="Menu de aplicativos">
-      <h2>Applications</h2>
-      <button data-open-folder="f1">F1</button>
-      <button data-open-folder="ia">IA</button>
-      <button data-open-folder="web">Web</button>
-      <button data-open-folder="branding">Branding</button>
-      <button data-open-game="snake">Snake</button>
-      <button data-open-game="mines">Campo Minado</button>
-      <button data-open-game="pong">Pong</button>
+      <div class="start-menu-sidebar">
+        <strong>All Applications</strong>
+        <span>Currículo</span>
+        <span>Portfólio</span>
+        <span>Jogos</span>
+      </div>
+      <div class="start-menu-grid">
+        <button data-open-folder="f1"><span>DIR</span><small>F1</small></button>
+        <button data-open-folder="ia"><span>DIR</span><small>IA</small></button>
+        <button data-open-folder="web"><span>DIR</span><small>Web</small></button>
+        <button data-open-folder="branding"><span>DIR</span><small>Branding</small></button>
+        <button data-open-game="snake"><span>GAME</span><small>Snake</small></button>
+        <button data-open-game="mines"><span>GAME</span><small>Campo Minado</small></button>
+        <button data-open-game="pong"><span>GAME</span><small>Pong</small></button>
+      </div>
     </aside>
+
+    <nav class="dock" aria-label="Contatos">
+      <a href="#" class="dock-icon" title="Email">✉</a>
+      <a href="#" class="dock-icon" title="LinkedIn">in</a>
+      <a href="#" class="dock-icon" title="GitHub">⌘</a>
+      <a href="#" class="dock-icon" title="Instagram">◎</a>
+      <a href="#" class="dock-icon" title="WhatsApp">☏</a>
+    </nav>
 
     <section id="windowsLayer" class="windows-layer" aria-label="Janelas abertas"></section>
   </main>
