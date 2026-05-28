@@ -16,25 +16,25 @@
 }
 
 * { box-sizing: border-box; }
-html, body { width: 100%; min-height: 100%; margin: 0; background: #e4c488; color: var(--text); overflow-x: hidden; }
+html, body { width: 100%; min-height: 100%; margin: 0; background: var(--bg); color: var(--text); overflow: hidden; }
 button, a { font: inherit; color: inherit; }
 button { border: 0; cursor: pointer; }
 a { text-decoration: none; }
 
-.os-shell { min-height: 100vh; padding: 18px; }
+.os-shell { min-height: 100vh; padding: 0; }
 .desktop-view {
   position: relative;
-  width: min(1500px, 100%);
-  height: calc(100vh - 36px);
-  min-height: 760px;
-  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
+  min-height: 0;
+  margin: 0;
   overflow: hidden;
-  border-radius: 26px;
+  border-radius: 0;
   background: radial-gradient(circle at center, #2b3442 0, var(--bg) 46%, #222a36 100%);
-  box-shadow: 0 30px 80px rgba(0,0,0,.4);
+  box-shadow: none;
 }
 
-.desktop-widgets { position: absolute; top: 72px; left: 38px; width: 350px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; z-index: 3; }
+.desktop-widgets { display: none; }
 .widget { background: linear-gradient(145deg, #2b3342, #202733); border: 1px solid rgba(0,0,0,.35); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; min-height: 112px; display: flex; flex-direction: column; justify-content: center; gap: 5px; }
 .time-widget strong { font-size: 42px; line-height: 1; }
 .time-widget span, .system-widget span, .date-widget span, .weather-widget small { color: var(--white); font-size: 14px; }
@@ -72,18 +72,21 @@ a { text-decoration: none; }
 .window-titlebar:active { cursor: grabbing; }
 .window-titlebar strong { color: var(--white); font-size: 13px; }
 .window-actions { display: flex; gap: 8px; }
-.window-actions button { width: 15px; height: 15px; border-radius: 50%; background: #e76464; color: transparent; }
-.window-body { padding: 18px; }
+.window-actions button { width: 28px; height: 28px; border-radius: 50%; background: #e76464; color: #171c25; font-size: 0; font-weight: 900; display: grid; place-items: center; box-shadow: 0 4px 10px rgba(0,0,0,.24); }
+.window-actions button::before { content: '×'; font-size: 20px; line-height: 1; }
+.window-actions button:hover { filter: brightness(1.12); transform: scale(1.04); }
+.window-body { padding: 18px; max-height: calc(100vh - 112px); overflow: auto; }
 
 .portfolio-file h2, .text-file h2 { margin-top: 0; color: var(--white); }
 .portfolio-file p, .text-file p { color: var(--white); line-height: 1.6; }
 .portfolio-placeholder { margin-top: 18px; min-height: 180px; border: 1px dashed rgba(233,195,127,.45); border-radius: 14px; display: grid; place-items: center; color: var(--muted); background: rgba(255,255,255,.04); }
 
-.taskbar { position: absolute; left: 0; right: 0; bottom: 0; height: 42px; background: rgba(24,29,39,.96); border-top: 1px solid rgba(255,255,255,.08); display: grid; grid-template-columns: 210px 1fr 390px; align-items: center; z-index: 60; }
+.taskbar { position: absolute; left: 0; right: 0; bottom: 0; height: 42px; background: rgba(24,29,39,.96); border-top: 1px solid rgba(255,255,255,.08); display: grid; grid-template-columns: 210px 1fr 220px; align-items: center; z-index: 60; }
 .start-button { height: 100%; background: transparent; color: var(--white); text-align: left; padding-left: 18px; }
 .taskbar-contact-icons { justify-self: center; display: flex; gap: 12px; align-items: center; }
 .taskbar-contact-icons a { width: 31px; height: 31px; border-radius: 9px; display: grid; place-items: center; background: linear-gradient(135deg, #f6efe1, #dfa855); color: #202733; font-weight: 900; box-shadow: 0 5px 12px rgba(0,0,0,.28); }
-.taskbar-status { justify-self: end; padding-right: 18px; display: flex; gap: 16px; align-items: center; color: var(--white); font-size: 13px; }
+.taskbar-status { justify-self: end; padding-right: 18px; display: flex; gap: 12px; align-items: center; color: var(--white); font-size: 13px; }
+.system-clock-only strong { color: var(--accent); font-size: 15px; }
 
 .game-shell { display: grid; gap: 14px; justify-items: center; }
 .game-head { width: 100%; display: flex; justify-content: space-between; align-items: center; color: var(--white); }
@@ -123,8 +126,85 @@ canvas { max-width: 100%; background: #111720; border-radius: 10px; border: 1px 
 .hidden { display: none !important; }
 
 @media (max-width: 800px) {
-  html, body { background: #1f2631; }
+  html, body { background: #1f2631; overflow: hidden; }
   .os-shell { padding: 0; }
   .desktop-view { display: none; }
   .mobile-view { display: grid; }
 }
+
+/* Portfolio folders */
+.portfolio-folder {
+  min-height: 330px;
+  color: var(--white);
+}
+.folder-toolbar {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  margin: -4px -4px 18px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  color: var(--muted);
+  font-size: 12px;
+}
+.folder-toolbar span::after {
+  content: '/';
+  margin-left: 8px;
+  opacity: .55;
+}
+.folder-toolbar strong {
+  color: var(--white);
+  font-size: 12px;
+}
+.folder-file-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 22px 18px;
+  align-items: start;
+}
+.folder-file {
+  background: transparent;
+  min-height: 96px;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 8px;
+  color: var(--white);
+  border-radius: 10px;
+  padding: 8px 4px;
+}
+.folder-file:hover,
+.folder-file:focus-visible {
+  background: rgba(255,255,255,.06);
+  outline: 1px solid rgba(233,195,127,.28);
+}
+.folder-file small {
+  max-width: 92px;
+  text-align: center;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.15;
+  text-shadow: 0 2px 3px #000;
+}
+.file-thumb {
+  position: relative;
+  width: 54px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: linear-gradient(#596473, #343d4a);
+  box-shadow: inset 0 -9px 0 rgba(0,0,0,.22), 0 8px 16px rgba(0,0,0,.25);
+}
+.file-thumb::before {
+  font-size: 23px;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.3));
+}
+.file-doc::before { content: 'TXT'; font-size: 12px; font-weight: 900; color: #111720; }
+.file-doc { background: linear-gradient(160deg, #fff7d3, #e3b663); }
+.file-image::before { content: '▧'; color: #f6efe1; }
+.file-app::before { content: '◇'; color: #f6efe1; }
+.file-video::before { content: '▶'; color: #f6efe1; }

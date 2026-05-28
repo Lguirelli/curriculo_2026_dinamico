@@ -9,37 +9,6 @@
 <body>
   <main class="os-shell">
     <section class="desktop-view" aria-label="Versão desktop">
-      <aside class="desktop-widgets">
-        <article class="widget time-widget">
-          <strong data-clock>00:00</strong>
-          <span>Local time</span>
-        </article>
-
-        <article class="widget system-widget">
-          <strong>Hello Lorenzo</strong>
-          <span>WiFi: Portfolio OS</span>
-          <span>CPU: <b data-random-cpu>32%</b></span>
-          <div class="mini-chart"></div>
-          <span>RAM: <b data-random-ram>48%</b></span>
-          <div class="bar"><i data-random-bar></i></div>
-        </article>
-
-        <article class="widget weather-widget">
-          <div class="weather-icon">☁</div>
-          <strong><span data-weather-temp>--</span>°C</strong>
-          <span data-weather-desc>Carregando clima</span>
-          <small data-weather-extra>Detectando localização...</small>
-        </article>
-
-        <article class="widget date-widget">
-          <b data-date-day>00</b>
-          <div>
-            <strong data-weekday>Monday</strong>
-            <span data-full-date>January 2026</span>
-          </div>
-        </article>
-      </aside>
-
       <div class="desktop-wallpaper" aria-hidden="true">
         <div class="wave-circle">
           <div class="wave">∿</div>
@@ -74,12 +43,8 @@
           <a href="https://wa.me/5500000000000" target="_blank" rel="noreferrer" title="WhatsApp">☎</a>
           <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" title="Instagram">◎</a>
         </nav>
-        <div class="taskbar-status">
-          <span>♫</span>
-          <span data-taskbar-weather>--°C</span>
-          <span data-taskbar-date>---</span>
-          <span data-taskbar-clock>00:00</span>
-          <span>◖ <b data-battery>64%</b></span>
+        <div class="taskbar-status system-clock-only" aria-label="Relógio do sistema">
+          <strong data-taskbar-clock>00:00</strong>
         </div>
       </footer>
     </section>
@@ -187,34 +152,50 @@
   </template>
 
   <template id="f1-template">
-    <article class="portfolio-file">
-      <h2>F1 Visualizer</h2>
-      <p>Placeholder de projeto para visualizador interativo de Fórmula 1.</p>
-      <div class="portfolio-placeholder">Preview / imagem / vídeo do projeto</div>
+    <article class="portfolio-folder">
+      <div class="folder-toolbar"><span>Home</span><span>Portfolio</span><strong>F1</strong></div>
+      <div class="folder-file-grid">
+        <button class="folder-file"><span class="file-thumb file-image"></span><small>preview.png</small></button>
+        <button class="folder-file"><span class="file-thumb file-doc"></span><small>dados.json</small></button>
+        <button class="folder-file"><span class="file-thumb file-app"></span><small>visualizer.app</small></button>
+        <button class="folder-file"><span class="file-thumb file-video"></span><small>replay.mp4</small></button>
+      </div>
     </article>
   </template>
 
   <template id="ia-template">
-    <article class="portfolio-file">
-      <h2>Agentes de IA</h2>
-      <p>Placeholder de projeto para automações, agentes de atendimento e fluxos com IA.</p>
-      <div class="portfolio-placeholder">Preview / fluxograma / dashboard</div>
+    <article class="portfolio-folder">
+      <div class="folder-toolbar"><span>Home</span><span>Portfolio</span><strong>IA</strong></div>
+      <div class="folder-file-grid">
+        <button class="folder-file"><span class="file-thumb file-doc"></span><small>fluxo.pdf</small></button>
+        <button class="folder-file"><span class="file-thumb file-image"></span><small>dashboard.png</small></button>
+        <button class="folder-file"><span class="file-thumb file-app"></span><small>agente.app</small></button>
+        <button class="folder-file"><span class="file-thumb file-doc"></span><small>prompt.md</small></button>
+      </div>
     </article>
   </template>
 
   <template id="web-template">
-    <article class="portfolio-file">
-      <h2>Web / Landing Pages</h2>
-      <p>Placeholder de projeto para páginas, interfaces e experiências digitais.</p>
-      <div class="portfolio-placeholder">Preview / mockup / URL</div>
+    <article class="portfolio-folder">
+      <div class="folder-toolbar"><span>Home</span><span>Portfolio</span><strong>Web</strong></div>
+      <div class="folder-file-grid">
+        <button class="folder-file"><span class="file-thumb file-image"></span><small>home.png</small></button>
+        <button class="folder-file"><span class="file-thumb file-doc"></span><small>copy.txt</small></button>
+        <button class="folder-file"><span class="file-thumb file-app"></span><small>landing.html</small></button>
+        <button class="folder-file"><span class="file-thumb file-doc"></span><small>style.css</small></button>
+      </div>
     </article>
   </template>
 
   <template id="branding-template">
-    <article class="portfolio-file">
-      <h2>Branding</h2>
-      <p>Placeholder de projeto para identidade visual, posicionamento e conteúdo.</p>
-      <div class="portfolio-placeholder">Preview / cases / peças</div>
+    <article class="portfolio-folder">
+      <div class="folder-toolbar"><span>Home</span><span>Portfolio</span><strong>Branding</strong></div>
+      <div class="folder-file-grid">
+        <button class="folder-file"><span class="file-thumb file-image"></span><small>logo.png</small></button>
+        <button class="folder-file"><span class="file-thumb file-doc"></span><small>manual.pdf</small></button>
+        <button class="folder-file"><span class="file-thumb file-image"></span><small>paleta.png</small></button>
+        <button class="folder-file"><span class="file-thumb file-doc"></span><small>tom-de-voz.txt</small></button>
+      </div>
     </article>
   </template>
 

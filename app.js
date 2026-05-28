@@ -11,53 +11,17 @@ function pad(n) {
   return String(n).padStart(2, "0");
 }
 
+function setText(selector, value) {
+  const el = $(selector);
+  if (el) el.textContent = value;
+}
+
 function updateClock() {
   const now = new Date();
   const hhmm = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
   $$('[data-clock]').forEach(el => el.textContent = hhmm);
-  $('[data-taskbar-clock]').textContent = hhmm;
-  $('[data-date-day]').textContent = pad(now.getDate());
-  $('[data-weekday]').textContent = now.toLocaleDateString('en-US', { weekday: 'long' });
-  $('[data-full-date]').textContent = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-  $('[data-taskbar-date]').textContent = now.toLocaleDateString('en-US', { weekday: 'short', day: '2-digit', month: 'short' });
-}
-
-function randomSystem() {
-  const cpu = Math.floor(22 + Math.random() * 48);
-  const ram = Math.floor(35 + Math.random() * 35);
-  $('[data-random-cpu]').textContent = `${cpu}%`;
-  $('[data-random-ram]').textContent = `${ram}%`;
-  $('[data-random-bar]').style.width = `${ram}%`;
-  $('[data-battery]').textContent = `${Math.floor(48 + Math.random() * 45)}%`;
-}
-
-async function loadWeather() {
-  const setFallback = () => {
-    $('[data-weather-temp]').textContent = '30';
-    $('[data-weather-desc]').textContent = 'Few Clouds';
-    $('[data-weather-extra]').textContent = 'Clima demonstrativo';
-    $('[data-taskbar-weather]').textContent = '30°C';
-  };
-
-  if (!navigator.geolocation) return setFallback();
-
-  navigator.geolocation.getCurrentPosition(async pos => {
-    try {
-      const { latitude, longitude } = pos.coords;
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code,wind_speed_10m,relative_humidity_2m`;
-      const res = await fetch(url);
-      const data = await res.json();
-      const temp = Math.round(data.current.temperature_2m);
-      const wind = data.current.wind_speed_10m;
-      const hum = data.current.relative_humidity_2m;
-      $('[data-weather-temp]').textContent = temp;
-      $('[data-weather-desc]').textContent = 'Local Weather';
-      $('[data-weather-extra]').textContent = `Wind: ${wind}km/h · Humidity: ${hum}%`;
-      $('[data-taskbar-weather]').textContent = `${temp}°C`;
-    } catch (error) {
-      setFallback();
-    }
-  }, setFallback, { timeout: 3000 });
+  setText('[data-taskbar-clock]', hhmm);
+  setText('[data-taskbar-date]', now.toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short' }));
 }
 
 function makeWindow(appId, title, contentNode) {
@@ -76,14 +40,19 @@ function makeWindow(appId, title, contentNode) {
   win.innerHTML = `
     <header class="window-titlebar" data-drag-handle>
       <strong>${title}</strong>
-      <div class="window-actions"><button data-close>close</button></div>
+      <div class="window-actions"><button type="button" data-close aria-label="Fechar janela">Fechar</button></div>
     </header>
     <div class="window-body"></div>
   `;
   $('.window-body', win).append(contentNode);
   $('[data-window-layer]').append(win);
   makeDraggable(win, $('[data-drag-handle]', win));
-  $('[data-close]', win).addEventListener('click', () => win.remove());
+  const closeButton = $('[data-close]', win);
+  closeButton.addEventListener('pointerdown', ev => ev.stopPropagation());
+  closeButton.addEventListener('click', ev => {
+    ev.stopPropagation();
+    win.remove();
+  });
   win.addEventListener('pointerdown', () => win.style.zIndex = ++state.z);
   return win;
 }
@@ -551,12 +520,10 @@ function openTextMobile(title, html) {
 function boot() {
   updateClock();
   setInterval(updateClock, 1000);
-  randomSystem();
-  setInterval(randomSystem, 6000);
-  loadWeather();
   setupDesktopIcons();
   setupMobile();
-  $('[data-start]').addEventListener('click', () => openApp('about'));
+  const start = $('[data-start]');
+  if (start) start.addEventListener('click', () => openApp('about'));
 }
 
 boot();
