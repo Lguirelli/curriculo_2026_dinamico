@@ -57,16 +57,53 @@
 .icon-glyph::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 28% 20%, rgba(255,255,255,.72), transparent 26%), linear-gradient(180deg, rgba(255,255,255,.12), transparent 55%)}
 .desktop-icon.game .icon-glyph{color:#0d1b2e;background:linear-gradient(180deg,#edf6ff 0%,#b9d2ef 48%,#647e9e 100%)}
 
-.portfolio-folder-icon{position:relative;display:block;width:62px;height:48px;perspective:900px;transform-style:preserve-3d;filter:drop-shadow(0 10px 18px rgba(0,0,0,.20));transition:transform .35s ease, filter .35s ease}
-.portfolio-folder-back,.portfolio-folder-front{position:absolute;left:0;right:0;display:block;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:hidden}
-.portfolio-folder-back{top:3px;height:34px;border-radius:15px 18px 10px 10px;background:linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.24), 0 10px 18px rgba(0,0,0,.16);transition:transform .45s ease}
-.portfolio-folder-back::before{content:"";position:absolute;top:-1px;left:0;width:26px;height:9px;border-radius:12px 8px 0 0;background:linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.08));border:1px solid rgba(255,255,255,.14);border-bottom:0}
-.portfolio-folder-back::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 24% 22%, rgba(255,255,255,.18), transparent 28%), linear-gradient(180deg, rgba(255,255,255,.08), transparent 54%)}
-.portfolio-folder-front{bottom:0;height:36px;border-radius:12px 12px 16px 16px;background:linear-gradient(145deg, rgba(255,255,255,.26), rgba(255,255,255,.08));border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 12px 22px rgba(0,0,0,.18);transform-origin:bottom center;transition:transform .45s ease, box-shadow .45s ease}
-.portfolio-folder-front::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 26%, rgba(255,255,255,.24), transparent 24%), linear-gradient(180deg, rgba(255,255,255,.12), transparent 62%)}
-.desktop-icon.folder:hover .portfolio-folder-icon,.desktop-icon.folder.selected .portfolio-folder-icon{transform:translateY(-2px)}
-.desktop-icon.folder:hover .portfolio-folder-back,.desktop-icon.folder.selected .portfolio-folder-back{transform:translateY(-4px) rotateX(-3deg)}
-.desktop-icon.folder:hover .portfolio-folder-front,.desktop-icon.folder.selected .portfolio-folder-front{transform:rotateX(-16deg) translateY(3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.38), 0 16px 28px rgba(0,0,0,.22)}
+.portfolio-folder-icon.glass-folder-mini{position:relative;display:block;width:62px;height:46px;perspective:1000px;transform-style:preserve-3d;transition:transform 420ms cubic-bezier(.2,.8,.2,1),filter 420ms cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 10px 16px rgba(0,0,0,.16))}
+.portfolio-folder-icon.glass-folder-mini .folder-core,
+.portfolio-folder-icon.glass-folder-mini .folder-back,
+.portfolio-folder-icon.glass-folder-mini .folder-front,
+.portfolio-folder-icon.glass-folder-mini .folder-shine{position:absolute;display:block;pointer-events:none}
+.portfolio-folder-icon.glass-folder-mini .folder-core{
+  left:17px;top:2px;width:37px;height:28px;border-radius:7px 18px 8px 8px;
+  background:radial-gradient(circle at 34% 50%, rgba(255,255,255,.32), transparent 25%),radial-gradient(circle at 74% 38%, rgba(255,255,255,.16), transparent 28%),linear-gradient(135deg, rgba(244,132,105,.92), rgba(221,92,69,.82));
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.5), inset -4px -6px 10px rgba(118,35,26,.20), 0 5px 14px rgba(0,0,0,.20);
+  overflow:hidden;transform:translateZ(-8px);transition:transform 460ms cubic-bezier(.2,.8,.2,1)
+}
+.portfolio-folder-icon.glass-folder-mini .folder-core::before,
+.portfolio-folder-icon.glass-folder-mini .folder-core::after{content:"";position:absolute;border-radius:inherit}
+.portfolio-folder-icon.glass-folder-mini .folder-core::before{inset:4px 4px 5px 5px;border:1px solid rgba(141,50,37,.14);border-left-color:transparent;border-bottom-color:transparent;transform:rotate(2deg)}
+.portfolio-folder-icon.glass-folder-mini .folder-core::after{inset:10px 12px 6px 10px;border:1px solid rgba(255,255,255,.22);border-right-color:transparent;border-top-color:transparent;transform:rotate(-8deg)}
+.portfolio-folder-icon.glass-folder-mini .folder-back{
+  left:5px;right:4px;bottom:9px;height:24px;border-radius:6px 9px 5px 5px;
+  background:radial-gradient(circle at 48% 46%, rgba(244,132,105,.20), transparent 36%),linear-gradient(145deg, rgba(255,255,255,.40), rgba(222,222,216,.18));
+  border:1px solid rgba(255,255,255,.34);backdrop-filter:blur(10px) saturate(128%);-webkit-backdrop-filter:blur(10px) saturate(128%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.68), inset 0 -1px 0 rgba(40,40,42,.06), 0 6px 14px rgba(0,0,0,.16);
+  transform:translateZ(-4px);transition:transform 460ms cubic-bezier(.2,.8,.2,1)
+}
+.portfolio-folder-icon.glass-folder-mini .folder-back::before{content:"";position:absolute;left:-1px;top:-1px;width:25px;height:10px;border-radius:6px 0 9px 0;background:linear-gradient(145deg, rgba(255,255,255,.52), rgba(229,229,222,.22));border-top:1px solid rgba(255,255,255,.56);border-left:1px solid rgba(255,255,255,.56)}
+.portfolio-folder-icon.glass-folder-mini .folder-front{
+  left:0;right:0;bottom:0;height:31px;border-radius:7px 7px 10px 10px;
+  background:radial-gradient(circle at 48% 45%, rgba(244,132,105,.34), transparent 38%),radial-gradient(circle at 72% 31%, rgba(255,255,255,.34), transparent 24%),linear-gradient(145deg, rgba(255,255,255,.48), rgba(238,236,228,.28));
+  border:1px solid rgba(255,255,255,.38);border-bottom-color:rgba(45,45,48,.24);
+  backdrop-filter:blur(12px) saturate(134%);-webkit-backdrop-filter:blur(12px) saturate(134%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.78), inset 0 -8px 14px rgba(0,0,0,.05), 0 8px 16px rgba(13,13,15,.18), 0 1px 0 rgba(0,0,0,.20);
+  transform-origin:bottom center;transform:rotateX(0deg) translateZ(8px);
+  transition:transform 520ms cubic-bezier(.2,.8,.2,1),box-shadow 520ms cubic-bezier(.2,.8,.2,1),backdrop-filter 520ms cubic-bezier(.2,.8,.2,1)
+}
+.portfolio-folder-icon.glass-folder-mini .folder-front::before{content:"";position:absolute;left:-1px;top:-1px;width:24px;height:10px;border-radius:6px 0 10px 0;background:linear-gradient(145deg, rgba(255,255,255,.64), rgba(230,230,222,.30));border-top:1px solid rgba(255,255,255,.62);border-left:1px solid rgba(255,255,255,.62)}
+.portfolio-folder-icon.glass-folder-mini .folder-front::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg, rgba(255,255,255,.24), transparent 28%, transparent 62%, rgba(255,255,255,.12)),repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 1px, transparent 1px 5px);opacity:.46}
+.portfolio-folder-icon.glass-folder-mini .folder-shine{inset:0;border-radius:7px 7px 10px 10px;overflow:hidden;transform:translateZ(12px)}
+.portfolio-folder-icon.glass-folder-mini .folder-shine::before{content:"";position:absolute;width:36px;height:72px;left:-46px;top:-16px;background:linear-gradient(90deg, transparent, rgba(255,255,255,.38), transparent);transform:rotate(18deg);opacity:0;transition:left 720ms cubic-bezier(.2,.8,.2,1),opacity 320ms ease}
+.desktop-icon.folder:hover .portfolio-folder-icon.glass-folder-mini,
+.desktop-icon.folder.selected .portfolio-folder-icon.glass-folder-mini{transform:translateY(-2px) scale(1.025);filter:drop-shadow(0 12px 18px rgba(244,132,105,.12))}
+.desktop-icon.folder:hover .portfolio-folder-icon.glass-folder-mini .folder-core,
+.desktop-icon.folder.selected .portfolio-folder-icon.glass-folder-mini .folder-core{transform:translateY(-3px) translateZ(-11px) rotateX(-3deg)}
+.desktop-icon.folder:hover .portfolio-folder-icon.glass-folder-mini .folder-back,
+.desktop-icon.folder.selected .portfolio-folder-icon.glass-folder-mini .folder-back{transform:translateY(-2px) translateZ(-6px) rotateX(-4deg)}
+.desktop-icon.folder:hover .portfolio-folder-icon.glass-folder-mini .folder-front,
+.desktop-icon.folder.selected .portfolio-folder-icon.glass-folder-mini .folder-front{transform:rotateX(-13deg) translateY(3px) translateZ(12px);backdrop-filter:blur(10px) saturate(145%);-webkit-backdrop-filter:blur(10px) saturate(145%);box-shadow:inset 0 1px 0 rgba(255,255,255,.82), inset 0 -8px 14px rgba(0,0,0,.05), 0 12px 22px rgba(0,0,0,.22), 0 1px 0 rgba(0,0,0,.20)}
+.desktop-icon.folder:hover .portfolio-folder-icon.glass-folder-mini .folder-shine::before,
+.desktop-icon.folder.selected .portfolio-folder-icon.glass-folder-mini .folder-shine::before{left:70px;opacity:1}
+
 .dock{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;align-items:center;gap:9px;padding:10px 14px;border-radius:22px;background:rgba(22,26,38,.38);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.12);box-shadow:var(--shadow-xl), inset 0 1px 0 rgba(255,255,255,.06)}
 .dock-icon{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;color:var(--text-1);font-size:13px;font-weight:900;background:linear-gradient(160deg,rgba(255,255,255,.20),rgba(255,255,255,.045));border:1px solid rgba(255,255,255,.10);box-shadow:0 10px 20px rgba(0,0,0,.20);transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
 .dock-icon:hover{transform:translateY(-5px) scale(1.06);background:rgba(255,255,255,.12);box-shadow:0 16px 28px rgba(0,0,0,.26)}
@@ -84,3 +121,7 @@
   .portfolio-folder-back{height:31px}
   .portfolio-folder-front{height:34px}
 }
+
+@media (max-height: 760px){.portfolio-folder-icon.glass-folder-mini{width:58px;height:43px}.portfolio-folder-icon.glass-folder-mini .folder-core{left:16px;width:34px;height:26px}.portfolio-folder-icon.glass-folder-mini .folder-back{height:23px}.portfolio-folder-icon.glass-folder-mini .folder-front{height:29px}}
+
+@media (max-width: 1180px){.portfolio-folder-icon.glass-folder-mini{width:60px;height:44px}}
