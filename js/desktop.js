@@ -1,5 +1,5 @@
-const GRID = { leftX: 24, rightX: 0, topY: 44, col: 96, row: 102 };
-const LS_KEY = 'lorenzo_os_desktop_positions_v5';
+const GRID = { leftX: 28, rightX: 0, topY: 42, col: 104, row: 112 };
+const LS_KEY = 'lorenzo_os_desktop_positions_dark_glass_v1';
 
 function loadPositions(){
   try{return JSON.parse(localStorage.getItem(LS_KEY) || '{}')}catch{return {}}
@@ -15,12 +15,12 @@ function snapToGrid(x,y,side='left'){
   const snappedX = originX + Math.round((x - originX) / GRID.col) * GRID.col;
   const snappedY = originY + Math.round((y - originY) / GRID.row) * GRID.row;
   return {
-    x: Math.max(0, Math.min(window.innerWidth - 94, snappedX)),
-    y: Math.max(GRID.topY, Math.min(window.innerHeight - 132, snappedY))
+    x: Math.max(0, Math.min(window.innerWidth - 102, snappedX)),
+    y: Math.max(GRID.topY, Math.min(window.innerHeight - 136, snappedY))
   };
 }
 function getRightGridX(){
-  return Math.max(GRID.leftX, window.innerWidth - 112);
+  return Math.max(GRID.leftX, window.innerWidth - 122);
 }
 function clearSelection(){
   document.querySelectorAll('.desktop-icon.selected').forEach(i=>i.classList.remove('selected'));

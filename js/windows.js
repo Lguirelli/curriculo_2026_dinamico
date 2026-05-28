@@ -14,7 +14,7 @@ async function fetchHTML(path){
 function createWindow({title, html, kind='default', x=null, y=null}){
   const layer = windowsLayer();
   const win = document.createElement('article');
-  win.className = `os-window ${kind === 'text' ? 'text-window' : ''}`;
+  win.className = `os-window ${kind === 'text' ? 'text-window' : kind === 'folder-window' ? 'folder-window' : kind === 'game' ? 'game-window' : ''}`;
   win.style.zIndex = ++topZ;
   if(x !== null) win.style.left = `${x}px`;
   if(y !== null) win.style.top = `${y}px`;
@@ -66,7 +66,7 @@ function openFolder(folder){
       <span>HTML</span><small>${file.label}</small>
     </button>`).join('');
   const html = `<div class="folder-grid">${files}</div>`;
-  const win = createWindow({title:folder.label, html, kind:'folder', x:Math.round(window.innerWidth*.24), y:Math.round(window.innerHeight*.12)});
+  const win = createWindow({title:folder.label, html, kind:'folder-window', x:Math.round(window.innerWidth*.24), y:Math.round(window.innerHeight*.12)});
   win.querySelectorAll('[data-file-path]').forEach(btn=>{
     btn.addEventListener('dblclick', async ()=>{
       const html = await fetchHTML(btn.dataset.filePath);
