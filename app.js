@@ -1,11 +1,15 @@
 const desktopClock = document.querySelector('[data-desktop-clock]');
+const desktopClockSmall = document.querySelector('[data-desktop-clock-small]');
 const mobileClock = document.querySelector('[data-mobile-clock]');
+const mobileClockSettings = document.querySelector('[data-mobile-clock-settings]');
 
 function updateClock() {
   const now = new Date();
   const time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
   if (desktopClock) desktopClock.textContent = time;
+  if (desktopClockSmall) desktopClockSmall.textContent = time;
   if (mobileClock) mobileClock.textContent = time;
+  if (mobileClockSettings) mobileClockSettings.textContent = time;
 }
 
 updateClock();
@@ -23,7 +27,6 @@ const windowLayer = document.querySelector('[data-window-layer]');
 const startButton = document.querySelector('[data-start-button]');
 const startMenu = document.querySelector('[data-start-menu]');
 let highestZ = 100;
-let selectedFile = null;
 
 function snap(value, grid) {
   return Math.round(value / grid) * grid;
@@ -35,11 +38,11 @@ function saveLayout() {
     left: file.style.left,
     top: file.style.top
   }));
-  localStorage.setItem('lorenzo-os-desktop-layout', JSON.stringify(layout));
+  localStorage.setItem('lorenzo-os-desktop-layout-v2', JSON.stringify(layout));
 }
 
 function loadLayout() {
-  const saved = JSON.parse(localStorage.getItem('lorenzo-os-desktop-layout') || 'null');
+  const saved = JSON.parse(localStorage.getItem('lorenzo-os-desktop-layout-v2') || 'null');
 
   files.forEach((file, index) => {
     const position = saved?.find(item => item.id === file.dataset.fileId);
@@ -51,7 +54,58 @@ function loadLayout() {
 function selectFile(file) {
   files.forEach(item => item.classList.remove('selected'));
   file.classList.add('selected');
-  selectedFile = file;
+}
+
+function clampWindowPosition(win, x, y) {
+  const layerRect = windowLayer.getBoundingClientRect();
+  const winRect = win.getBoundingClientRect();
+  const maxX = Math.max(0, layerRect.width - winRect.width - 12);
+  const maxY = Math.max(0, layerRect.height - winRect.height - 12);
+
+  return {
+    x: Math.min(Math.max(12, x), maxX),
+    y: Math.min(Math.max(12, y), maxY)
+  };
+}
+
+function enableWindowDrag(win) {
+  const header = win.querySelector('.window-header');
+  let startX = 0;
+  let startY = 0;
+  let originX = 0;
+  let originY = 0;
+
+  header.addEventListener('pointerdown', event => {
+    if (event.target.closest('button')) return;
+
+    win.style.zIndex = ++highestZ;
+    startX = event.clientX;
+    startY = event.clientY;
+    originX = parseInt(win.style.left, 10) || 0;
+    originY = parseInt(win.style.top, 10) || 0;
+
+    header.setPointerCapture(event.pointerId);
+    win.classList.add('moving');
+  });
+
+  header.addEventListener('pointermove', event => {
+    if (!header.hasPointerCapture(event.pointerId)) return;
+
+    const next = clampWindowPosition(
+      win,
+      originX + event.clientX - startX,
+      originY + event.clientY - startY
+    );
+
+    win.style.left = `${next.x}px`;
+    win.style.top = `${next.y}px`;
+  });
+
+  header.addEventListener('pointerup', event => {
+    if (!header.hasPointerCapture(event.pointerId)) return;
+    header.releasePointerCapture(event.pointerId);
+    win.classList.remove('moving');
+  });
 }
 
 function openWindow(title, content, isProgram = false) {
@@ -78,6 +132,7 @@ function openWindow(title, content, isProgram = false) {
   });
 
   windowLayer.appendChild(win);
+  enableWindowDrag(win);
 }
 
 function enableDragging(file) {
@@ -85,11 +140,9 @@ function enableDragging(file) {
   let startY = 0;
   let originX = 0;
   let originY = 0;
-  let moved = false;
 
   file.addEventListener('pointerdown', event => {
     selectFile(file);
-    moved = false;
     startX = event.clientX;
     startY = event.clientY;
     originX = parseInt(file.style.left, 10) || 0;
@@ -100,19 +153,14 @@ function enableDragging(file) {
 
   file.addEventListener('pointermove', event => {
     if (!file.hasPointerCapture(event.pointerId)) return;
-
     const dx = event.clientX - startX;
     const dy = event.clientY - startY;
-
-    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) moved = true;
-
     file.style.left = `${originX + dx}px`;
     file.style.top = `${originY + dy}px`;
   });
 
   file.addEventListener('pointerup', event => {
     if (!file.hasPointerCapture(event.pointerId)) return;
-
     file.releasePointerCapture(event.pointerId);
     file.classList.remove('dragging');
 
@@ -136,7 +184,10 @@ files.forEach(enableDragging);
 document.addEventListener('pointerdown', event => {
   if (!event.target.closest('.desktop-file')) {
     files.forEach(item => item.classList.remove('selected'));
-    selectedFile = null;
+  }
+
+  if (!event.target.closest('[data-start-menu]') && !event.target.closest('[data-start-button]')) {
+    startMenu?.classList.remove('open');
   }
 });
 
@@ -159,11 +210,20 @@ const recentsList = document.querySelector('[data-recents-list]');
 const historyStack = ['home'];
 const openScreens = new Set(['home']);
 
+const viewNames = {
+  home: 'Home',
+  notes: 'Notas',
+  'note-detail': 'Nota aberta',
+  'project-detail': 'Projeto aberto',
+  contact: 'Contato',
+  settings: 'Config'
+};
+
 function renderRecents() {
   recentsList.innerHTML = '';
   [...openScreens].forEach(screen => {
     const button = document.createElement('button');
-    button.textContent = screen;
+    button.textContent = viewNames[screen] || screen;
     button.addEventListener('click', () => {
       showMobileView(screen, false);
       recentsPanel.classList.remove('open');
@@ -185,6 +245,17 @@ function showMobileView(name, push = true) {
   renderRecents();
 }
 
+function goBack() {
+  recentsPanel.classList.remove('open');
+
+  if (historyStack.length > 1) {
+    historyStack.pop();
+    showMobileView(historyStack[historyStack.length - 1], false);
+  } else {
+    showMobileView('home', false);
+  }
+}
+
 document.querySelectorAll('[data-open-mobile]').forEach(button => {
   button.addEventListener('click', () => showMobileView(button.dataset.openMobile));
 });
@@ -204,21 +275,16 @@ document.querySelectorAll('[data-project]').forEach(button => {
   });
 });
 
+document.querySelectorAll('[data-mobile-back-inline]').forEach(button => {
+  button.addEventListener('click', goBack);
+});
+
 document.querySelector('[data-mobile-home-button]')?.addEventListener('click', () => {
   recentsPanel.classList.remove('open');
   showMobileView('home');
 });
 
-document.querySelector('[data-mobile-back-button]')?.addEventListener('click', () => {
-  recentsPanel.classList.remove('open');
-
-  if (historyStack.length > 1) {
-    historyStack.pop();
-    showMobileView(historyStack[historyStack.length - 1], false);
-  } else {
-    showMobileView('home', false);
-  }
-});
+document.querySelector('[data-mobile-back-button]')?.addEventListener('click', goBack);
 
 document.querySelector('[data-mobile-recents-button]')?.addEventListener('click', () => {
   recentsPanel.classList.toggle('open');
