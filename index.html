@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lorenzo OS | Currículo e Portfólio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="desktop-os" data-desktop-os>
+    <section class="desktop-wallpaper">
+      <div class="desktop-topbar">
+        <span>Lorenzo OS</span>
+        <span data-desktop-clock>00:00</span>
+      </div>
+
+      <div class="desktop-icons" data-desktop-icons>
+        <button class="desktop-file" data-file-id="sobre" data-title="Sobre.txt" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae lorem at neque gravida posuere. Integer non justo vitae ipsum posuere dignissim.">
+          <span class="file-icon">TXT</span>
+          <span class="file-name">Sobre.txt</span>
+        </button>
+
+        <button class="desktop-file" data-file-id="experiencia" data-title="Experiencia.txt" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames.">
+          <span class="file-icon">TXT</span>
+          <span class="file-name">Experiência.txt</span>
+        </button>
+
+        <button class="desktop-file" data-file-id="formacao" data-title="Formacao.txt" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel mi eu lectus fermentum gravida. Praesent cursus lorem sed massa pulvinar.">
+          <span class="file-icon">TXT</span>
+          <span class="file-name">Formação.txt</span>
+        </button>
+
+        <button class="desktop-file" data-file-id="skills" data-title="Skills.txt" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Branding, marketing digital, IA, automação, front-end, audiovisual e dados.">
+          <span class="file-icon">TXT</span>
+          <span class="file-name">Skills.txt</span>
+        </button>
+
+        <button class="desktop-file" data-file-id="contato" data-title="Contato.txt" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Email: exemplo@email.com | LinkedIn | GitHub | Instagram.">
+          <span class="file-icon">TXT</span>
+          <span class="file-name">Contato.txt</span>
+        </button>
+      </div>
+
+      <div class="window-layer" data-window-layer></div>
+
+      <nav class="desktop-taskbar">
+        <button class="start-button" data-start-button>Iniciar</button>
+        <div class="taskbar-apps" data-taskbar-apps></div>
+        <span class="taskbar-status">Portfólio interativo</span>
+      </nav>
+
+      <aside class="start-menu" data-start-menu>
+        <header>
+          <strong>Programas</strong>
+          <span>Portfolio</span>
+        </header>
+        <button data-open-program="F1 Visualizer">F1 Visualizer</button>
+        <button data-open-program="Agente IA WhatsApp">Agente IA WhatsApp</button>
+        <button data-open-program="Landing Pages">Landing Pages</button>
+        <button data-open-program="Branding Archive">Branding Archive</button>
+        <button data-open-program="Motion Lab">Motion Lab</button>
+      </aside>
+    </section>
+  </main>
+
+  <main class="mobile-os" data-mobile-os>
+    <section class="phone-screen">
+      <header class="mobile-statusbar">
+        <span data-mobile-clock>00:00</span>
+        <span>●●● 100%</span>
+      </header>
+
+      <section class="mobile-view active" data-mobile-view="home">
+        <div class="mobile-hero">
+          <span class="avatar-placeholder">LG</span>
+          <h1>Lorenzo OS</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+
+        <div class="mobile-app-grid">
+          <button class="mobile-app" data-open-mobile="notes">
+            <span>📝</span>
+            <small>Notas</small>
+          </button>
+          <button class="mobile-app" data-open-mobile="portfolio">
+            <span>▦</span>
+            <small>Apps</small>
+          </button>
+          <button class="mobile-app" data-open-mobile="contact">
+            <span>@</span>
+            <small>Contato</small>
+          </button>
+        </div>
+      </section>
+
+      <section class="mobile-view" data-mobile-view="notes">
+        <header class="app-header">
+          <h2>Notas</h2>
+          <p>Currículo em blocos de nota</p>
+        </header>
+        <div class="notes-list">
+          <button data-note="Sobre mim" data-note-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae lorem id lacus porta tincidunt.">Sobre mim</button>
+          <button data-note="Experiência" data-note-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.">Experiência</button>
+          <button data-note="Formação" data-note-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus ante dapibus diam.">Formação</button>
+          <button data-note="Skills" data-note-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. IA, automação, branding, conteúdo e interfaces.">Skills</button>
+          <button data-note="Contato" data-note-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. email@exemplo.com | LinkedIn | GitHub.">Contato</button>
+        </div>
+      </section>
+
+      <section class="mobile-view" data-mobile-view="note-detail">
+        <article class="note-paper">
+          <h2 data-note-title>Nota</h2>
+          <p data-note-body>Lorem ipsum dolor sit amet.</p>
+        </article>
+      </section>
+
+      <section class="mobile-view" data-mobile-view="portfolio">
+        <header class="app-header">
+          <h2>Apps</h2>
+          <p>Projetos e estudos</p>
+        </header>
+        <div class="mobile-app-grid portfolio-grid">
+          <button class="mobile-app project-app" data-project="F1 Visualizer"><span>🏎️</span><small>F1</small></button>
+          <button class="mobile-app project-app" data-project="Agente IA"><span>🤖</span><small>IA</small></button>
+          <button class="mobile-app project-app" data-project="Landing Pages"><span>⌁</span><small>Web</small></button>
+          <button class="mobile-app project-app" data-project="Branding"><span>◆</span><small>Brand</small></button>
+          <button class="mobile-app project-app" data-project="Motion"><span>▶</span><small>Motion</small></button>
+        </div>
+      </section>
+
+      <section class="mobile-view" data-mobile-view="project-detail">
+        <article class="project-screen">
+          <h2 data-project-title>Projeto</h2>
+          <div class="project-placeholder"></div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed nibh nec ipsum fermentum tincidunt.</p>
+        </article>
+      </section>
+
+      <section class="mobile-view" data-mobile-view="contact">
+        <article class="contact-card">
+          <h2>Contato</h2>
+          <p>Lorem ipsum dolor sit amet.</p>
+          <button>Email</button>
+          <button>LinkedIn</button>
+          <button>GitHub</button>
+        </article>
+      </section>
+
+      <section class="mobile-recents" data-mobile-recents>
+        <header>
+          <h2>Telas abertas</h2>
+        </header>
+        <div data-recents-list></div>
+      </section>
+
+      <nav class="mobile-nav">
+        <button data-mobile-recents-button aria-label="Telas abertas">▢</button>
+        <button data-mobile-home-button aria-label="Home">○</button>
+        <button data-mobile-back-button aria-label="Voltar">‹</button>
+      </nav>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
