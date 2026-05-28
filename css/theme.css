@@ -1,0 +1,20 @@
+:root{
+  --bg:#121722;
+  --bg-2:#1b2432;
+  --panel:rgba(22,29,42,.78);
+  --panel-solid:#171f2d;
+  --panel-2:rgba(33,43,60,.76);
+  --line:rgba(255,255,255,.12);
+  --line-soft:rgba(255,255,255,.07);
+  --text:#f6f1e6;
+  --muted:#aeb8c8;
+  --accent:#f0c978;
+  --accent-2:#96d5ff;
+  --danger:#ff6a67;
+  --shadow:0 30px 80px rgba(0,0,0,.45);
+  --shadow-soft:0 12px 30px rgba(0,0,0,.26);
+  --radius:22px;
+}
+body{background:var(--bg);color:var(--text)}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:999px}::-webkit-scrollbar-track{background:rgba(0,0,0,.12)}
+.content-file{line-height:1.65;color:var(--text)}.content-file h1,.content-file h2{margin:0 0 18px;color:var(--accent)}.content-file p{margin:0 0 12px}.content-file ul{padding-left:20px}.content-file li{margin:8px 0}.muted{color:var(--muted)}

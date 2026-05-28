@@ -1,204 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio OS Games POC</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lorenzo OS | Currículo e Portfólio</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/desktop.css" />
+  <link rel="stylesheet" href="css/windows.css" />
+  <link rel="stylesheet" href="css/mobile.css" />
+  <link rel="stylesheet" href="css/games.css" />
 </head>
 <body>
-  <main class="os-shell">
-    <section class="desktop-view" aria-label="Versão desktop">
-      <div class="desktop-wallpaper" aria-hidden="true">
-        <div class="wave-circle">
-          <div class="wave">∿</div>
-        </div>
+  <main class="desktop-os" id="desktopOs" aria-label="Versão desktop do portfólio">
+    <section class="desktop-wallpaper" id="desktopArea">
+      <div class="center-clock" aria-hidden="true">
+        <span id="desktopHeroHour">00</span>
+        <span id="desktopHeroMinute">00</span>
+        <small id="desktopHeroDate">LOADING</small>
       </div>
-
-      <section class="desktop-icons" data-desktop-icons>
-        <button class="desktop-icon desktop-text-file" data-open="about" data-col="0" data-row="0"><span>TXT</span><small>Sobre.txt</small></button>
-        <button class="desktop-icon desktop-text-file" data-open="experience" data-col="0" data-row="1"><span>TXT</span><small>Experiência.txt</small></button>
-        <button class="desktop-icon desktop-text-file" data-open="education" data-col="0" data-row="2"><span>TXT</span><small>Formação.txt</small></button>
-        <button class="desktop-icon desktop-text-file" data-open="skills" data-col="0" data-row="3"><span>TXT</span><small>Skills.txt</small></button>
-        <button class="desktop-icon desktop-text-file" data-open="contact" data-col="0" data-row="4"><span>TXT</span><small>Contato.txt</small></button>
-
-        <button class="desktop-icon desktop-folder" data-open="f1" data-anchor="right" data-col="0" data-row="0"><span></span><small>F1</small></button>
-        <button class="desktop-icon desktop-folder" data-open="ia" data-anchor="right" data-col="0" data-row="1"><span></span><small>IA</small></button>
-        <button class="desktop-icon desktop-folder" data-open="web" data-anchor="right" data-col="0" data-row="2"><span></span><small>Web</small></button>
-        <button class="desktop-icon desktop-folder" data-open="branding" data-anchor="right" data-col="0" data-row="3"><span></span><small>Branding</small></button>
-
-        <button class="desktop-icon desktop-game" data-open="snake" data-anchor="right" data-col="0" data-row="5"><span>🐍</span><small>Snake</small></button>
-        <button class="desktop-icon desktop-game" data-open="mines" data-anchor="right" data-col="0" data-row="6"><span>💣</span><small>Mines</small></button>
-        <button class="desktop-icon desktop-game" data-open="pong" data-anchor="right" data-col="0" data-row="7"><span>🏓</span><small>Pong</small></button>
-      </section>
-
-      <div class="window-layer" data-window-layer></div>
-
-      <footer class="taskbar">
-        <button class="start-button" data-start>◎ Application</button>
-        <nav class="taskbar-contact-icons" aria-label="Contatos">
-          <a href="mailto:guirellilorenzo1@gmail.com" title="Email">✉</a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" title="LinkedIn">in</a>
-          <a href="https://github.com/" target="_blank" rel="noreferrer" title="GitHub">⌘</a>
-          <a href="https://wa.me/5500000000000" target="_blank" rel="noreferrer" title="WhatsApp">☎</a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" title="Instagram">◎</a>
-        </nav>
-        <div class="taskbar-status system-clock-only" aria-label="Relógio do sistema">
-          <strong data-taskbar-clock>00:00</strong>
-        </div>
-      </footer>
+      <div id="desktopIcons" class="desktop-icons"></div>
+      <div id="windowLayer" class="window-layer"></div>
     </section>
 
-    <section class="mobile-view" aria-label="Versão mobile">
-      <div class="phone-frame">
-        <header class="phone-statusbar">
-          <span data-clock>00:00</span>
-          <span>● ● ●  64%</span>
-        </header>
-
-        <section class="phone-home" data-phone-home>
-          <button class="mobile-app" data-open-mobile="notes"><span>📝</span><small>Notas</small></button>
-          <button class="mobile-app" data-open-mobile="portfolio"><span>🖼</span><small>Portfolio</small></button>
-          <button class="mobile-folder" data-open-folder="games"><span class="folder-preview">🐍 💣 🏓</span><small>jogos</small></button>
-          <button class="mobile-app" data-open-mobile="contact"><span>☎</span><small>Contato</small></button>
-        </section>
-
-        <section class="folder-screen hidden" data-folder-screen>
-          <header>
-            <button data-close-folder>‹</button>
-            <strong>jogos</strong>
-          </header>
-          <div class="folder-grid">
-            <button class="mobile-app" data-open="snake"><span>🐍</span><small>Snake</small></button>
-            <button class="mobile-app" data-open="mines"><span>💣</span><small>Campo Minado</small></button>
-            <button class="mobile-app" data-open="pong"><span>🏓</span><small>Pong</small></button>
-          </div>
-        </section>
-
-        <section class="mobile-window hidden" data-mobile-window>
-          <header>
-            <button data-mobile-back>‹</button>
-            <strong data-mobile-title>App</strong>
-          </header>
-          <div class="mobile-window-body" data-mobile-body></div>
-        </section>
+    <nav class="desktop-topbar">
+      <button class="system-pill" id="appMenuBtn" type="button">Apps</button>
+      <div class="topbar-center" id="topbarClock">--:--</div>
+      <div class="topbar-status">
+        <span>pt</span><span>◐</span><span>▣</span><span>▰</span>
       </div>
+    </nav>
+
+    <aside class="app-menu" id="appMenu" aria-hidden="true">
+      <div class="app-menu-head">Aplicativos</div>
+      <div class="app-menu-grid" id="appMenuGrid"></div>
+    </aside>
+
+    <nav class="desktop-dock" aria-label="Contatos">
+      <a class="dock-icon" href="mailto:guirellilorenzo1@gmail.com" title="Email">✉</a>
+      <a class="dock-icon" href="https://www.linkedin.com/" target="_blank" rel="noreferrer" title="LinkedIn">in</a>
+      <a class="dock-icon" href="https://github.com/Lguirelli" target="_blank" rel="noreferrer" title="GitHub">GH</a>
+      <a class="dock-icon" href="https://www.instagram.com/" target="_blank" rel="noreferrer" title="Instagram">◎</a>
+      <button class="dock-icon" type="button" data-open-contact title="Contato">☎</button>
+    </nav>
+  </main>
+
+  <main class="mobile-os" id="mobileOs" aria-label="Versão mobile do portfólio">
+    <section class="phone-shell">
+      <header class="phone-statusbar">
+        <span id="mobileClock">--:--</span>
+        <span>▴ 4G ◉ 76</span>
+      </header>
+      <section class="phone-screen" id="mobileScreen"></section>
+      <nav class="mobile-nav" aria-label="Navegação mobile">
+        <button type="button" id="mobileTasks" aria-label="Telas abertas">▢</button>
+        <button type="button" id="mobileHome" aria-label="Home">○</button>
+        <button type="button" id="mobileBack" aria-label="Voltar">◀</button>
+      </nav>
     </section>
   </main>
 
-  <template id="snake-template">
-    <div class="game-shell snake-game">
-      <div class="game-head"><span>Pontos: <b data-score>0</b></span><button data-game-reset>Reset</button></div>
-      <canvas width="320" height="320" data-snake-canvas></canvas>
-      <div class="game-controls"><button data-dir="up">↑</button><button data-dir="left">←</button><button data-dir="down">↓</button><button data-dir="right">→</button></div>
-      <p class="game-tip">Use as setas do teclado ou os botões.</p>
-    </div>
-  </template>
-
-  <template id="mines-template">
-    <div class="game-shell mines-game">
-      <div class="game-head"><span>Bombas: <b data-mines-count>10</b></span><button data-game-reset>Reset</button></div>
-      <div class="mines-board" data-mines-board></div>
-      <p class="game-tip">Clique para revelar. Clique direito para marcar bandeira.</p>
-    </div>
-  </template>
-
-  <template id="pong-template">
-    <div class="game-shell pong-game">
-      <div class="game-head"><span><b data-player-score>0</b> : <b data-ai-score>0</b></span><button data-game-reset>Reset</button></div>
-      <canvas width="420" height="260" data-pong-canvas></canvas>
-      <p class="game-tip">Mova o mouse ou arraste na tela para controlar a barra.</p>
-    </div>
-  </template>
-
-  <template id="about-template">
-    <article class="text-file">
-      <h2>sobre.txt</h2>
-      <p>Este é um esqueleto de portfolio em formato de sistema operacional.</p>
-      <p>No desktop, os jogos abrem como janelas arrastáveis. No mobile, ficam dentro da pasta <strong>jogos</strong>.</p>
-    </article>
-  </template>
-
-  <template id="experience-template">
-    <article class="text-file">
-      <h2>experiência.txt</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.</p>
-      <p>Placeholder para experiências profissionais, entregas, responsabilidades e resultados.</p>
-    </article>
-  </template>
-
-  <template id="education-template">
-    <article class="text-file">
-      <h2>formação.txt</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <p>Placeholder para graduação, cursos, certificações e estudos complementares.</p>
-    </article>
-  </template>
-
-  <template id="skills-template">
-    <article class="text-file">
-      <h2>skills.txt</h2>
-      <p>IA, automação, marketing digital, branding, edição de vídeo, dados, front-end e integração com APIs.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </article>
-  </template>
-
-  <template id="contact-template">
-    <article class="text-file">
-      <h2>contato.txt</h2>
-      <p>Email: guirellilorenzo1@gmail.com</p>
-      <p>Placeholder para LinkedIn, GitHub, Instagram e WhatsApp.</p>
-    </article>
-  </template>
-
-  <template id="f1-template">
-    <article class="portfolio-folder">
-      <div class="folder-toolbar"><span>Home</span><span>Portfolio</span><strong>F1</strong></div>
-      <div class="folder-file-grid">
-        <button class="folder-file"><span class="file-thumb file-image"></span><small>preview.png</small></button>
-        <button class="folder-file"><span class="file-thumb file-doc"></span><small>dados.json</small></button>
-        <button class="folder-file"><span class="file-thumb file-app"></span><small>visualizer.app</small></button>
-        <button class="folder-file"><span class="file-thumb file-video"></span><small>replay.mp4</small></button>
-      </div>
-    </article>
-  </template>
-
-  <template id="ia-template">
-    <article class="portfolio-folder">
-      <div class="folder-toolbar"><span>Home</span><span>Portfolio</span><strong>IA</strong></div>
-      <div class="folder-file-grid">
-        <button class="folder-file"><span class="file-thumb file-doc"></span><small>fluxo.pdf</small></button>
-        <button class="folder-file"><span class="file-thumb file-image"></span><small>dashboard.png</small></button>
-        <button class="folder-file"><span class="file-thumb file-app"></span><small>agente.app</small></button>
-        <button class="folder-file"><span class="file-thumb file-doc"></span><small>prompt.md</small></button>
-      </div>
-    </article>
-  </template>
-
-  <template id="web-template">
-    <article class="portfolio-folder">
-      <div class="folder-toolbar"><span>Home</span><span>Portfolio</span><strong>Web</strong></div>
-      <div class="folder-file-grid">
-        <button class="folder-file"><span class="file-thumb file-image"></span><small>home.png</small></button>
-        <button class="folder-file"><span class="file-thumb file-doc"></span><small>copy.txt</small></button>
-        <button class="folder-file"><span class="file-thumb file-app"></span><small>landing.html</small></button>
-        <button class="folder-file"><span class="file-thumb file-doc"></span><small>style.css</small></button>
-      </div>
-    </article>
-  </template>
-
-  <template id="branding-template">
-    <article class="portfolio-folder">
-      <div class="folder-toolbar"><span>Home</span><span>Portfolio</span><strong>Branding</strong></div>
-      <div class="folder-file-grid">
-        <button class="folder-file"><span class="file-thumb file-image"></span><small>logo.png</small></button>
-        <button class="folder-file"><span class="file-thumb file-doc"></span><small>manual.pdf</small></button>
-        <button class="folder-file"><span class="file-thumb file-image"></span><small>paleta.png</small></button>
-        <button class="folder-file"><span class="file-thumb file-doc"></span><small>tom-de-voz.txt</small></button>
-      </div>
-    </article>
-  </template>
-
-  <script src="app.js"></script>
+  <script src="js/data/content.js"></script>
+  <script src="js/core/clock.js"></script>
+  <script src="js/core/windows.js"></script>
+  <script src="js/desktop/desktop-icons.js"></script>
+  <script src="js/mobile/mobile.js"></script>
+  <script src="js/games/snake.js"></script>
+  <script src="js/games/mines.js"></script>
+  <script src="js/games/pong.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

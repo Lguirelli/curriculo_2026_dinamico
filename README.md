@@ -1,26 +1,25 @@
-# Lorenzo OS Portfolio
+# Lorenzo OS — Portfólio modular dark
 
-Prova de conceito de currículo e portfólio em duas experiências.
+Projeto de prova de conceito para currículo e portfólio em formato de sistema operacional.
 
-## Desktop
+## Estrutura
 
-- Visual inspirado em desktop Linux/Cinnamon escuro.
-- Currículo em arquivos `.txt` na área de trabalho.
-- Arquivos com clique simples para selecionar, arrastar para mover, snap to grid e duplo clique para abrir.
-- Janelas de currículo e portfólio arrastáveis.
-- Menu `Application` com programas do portfólio.
-- Ícones centralizados na barra de tarefas para contatos.
-- Widgets à direita com relógio, data e clima funcionais.
-- Clima busca localização do navegador e usa fallback para Itajubá.
+- Desktop: área de trabalho com arquivos do currículo, pastas do portfólio e jogos.
+- Mobile: tela de celular com app de notas, apps soltos e pasta Jogos.
+- Conteúdos editáveis em `content/`.
+- Estilos separados em `css/`.
+- Scripts separados em `js/`.
 
-## Mobile
+## Como rodar
 
-- Visual dark mobile.
-- Currículo dentro do app Notas.
-- Portfólio em apps soltos na home.
-- Barra inferior com telas abertas, home e voltar.
-- Relógio funcional.
+Use um servidor local para o `fetch()` carregar os HTMLs:
 
-## Rodar
+```bash
+python -m http.server 8000
+```
 
-Abra `index.html` no navegador ou publique o diretório no GitHub Pages.
+Depois abra:
+
+```txt
+http://localhost:8000
+```
