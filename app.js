@@ -1,373 +1,562 @@
-const desktopClock = document.querySelector('[data-desktop-clock]');
-const desktopClockSmall = document.querySelector('[data-desktop-clock-small]');
-const desktopDay = document.querySelector('[data-desktop-day]');
-const desktopWeekday = document.querySelector('[data-desktop-weekday]');
-const desktopDate = document.querySelector('[data-desktop-date]');
-const taskbarDate = document.querySelector('[data-taskbar-date]');
-const mobileClock = document.querySelector('[data-mobile-clock]');
-const mobileClockSettings = document.querySelector('[data-mobile-clock-settings]');
-const weatherTemp = document.querySelector('[data-weather-temp]');
-const weatherDesc = document.querySelector('[data-weather-desc]');
-const weatherMeta = document.querySelector('[data-weather-meta]');
-const weatherIcon = document.querySelector('[data-weather-icon]');
-const taskbarWeather = document.querySelector('[data-taskbar-weather]');
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+const state = {
+  z: 30,
+  weatherTemp: "--",
+  weatherDesc: "Clima local",
+};
+
+function pad(n) {
+  return String(n).padStart(2, "0");
+}
 
 function updateClock() {
   const now = new Date();
-  const time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-  const weekday = now.toLocaleDateString('pt-BR', { weekday: 'long' });
-  const fullDate = now.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
-  const compactDate = now.toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short' });
-
-  if (desktopClock) desktopClock.textContent = time;
-  if (desktopClockSmall) desktopClockSmall.textContent = time;
-  if (desktopDay) desktopDay.textContent = String(now.getDate()).padStart(2, '0');
-  if (desktopWeekday) desktopWeekday.textContent = weekday;
-  if (desktopDate) desktopDate.textContent = fullDate;
-  if (taskbarDate) taskbarDate.textContent = compactDate;
-  if (mobileClock) mobileClock.textContent = time;
-  if (mobileClockSettings) mobileClockSettings.textContent = time;
+  const hhmm = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  $$('[data-clock]').forEach(el => el.textContent = hhmm);
+  $('[data-taskbar-clock]').textContent = hhmm;
+  $('[data-date-day]').textContent = pad(now.getDate());
+  $('[data-weekday]').textContent = now.toLocaleDateString('en-US', { weekday: 'long' });
+  $('[data-full-date]').textContent = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  $('[data-taskbar-date]').textContent = now.toLocaleDateString('en-US', { weekday: 'short', day: '2-digit', month: 'short' });
 }
 
-updateClock();
-setInterval(updateClock, 1000);
-
-const weatherCodes = {
-  0: ['☀', 'Céu limpo'],
-  1: ['🌤', 'Poucas nuvens'],
-  2: ['⛅', 'Parcialmente nublado'],
-  3: ['☁', 'Nublado'],
-  45: ['🌫', 'Nevoeiro'],
-  48: ['🌫', 'Nevoeiro'],
-  51: ['🌦', 'Garoa leve'],
-  53: ['🌦', 'Garoa'],
-  55: ['🌧', 'Garoa forte'],
-  61: ['🌧', 'Chuva leve'],
-  63: ['🌧', 'Chuva'],
-  65: ['🌧', 'Chuva forte'],
-  80: ['🌦', 'Pancadas leves'],
-  81: ['🌧', 'Pancadas'],
-  82: ['⛈', 'Pancadas fortes'],
-  95: ['⛈', 'Trovoadas']
-};
-
-function setWeatherFallback() {
-  if (weatherTemp) weatherTemp.textContent = '30°C';
-  if (weatherDesc) weatherDesc.textContent = 'Clima local';
-  if (weatherMeta) weatherMeta.textContent = 'Fallback visual';
-  if (weatherIcon) weatherIcon.textContent = '☁';
-  if (taskbarWeather) taskbarWeather.textContent = '30°C';
+function randomSystem() {
+  const cpu = Math.floor(22 + Math.random() * 48);
+  const ram = Math.floor(35 + Math.random() * 35);
+  $('[data-random-cpu]').textContent = `${cpu}%`;
+  $('[data-random-ram]').textContent = `${ram}%`;
+  $('[data-random-bar]').style.width = `${ram}%`;
+  $('[data-battery]').textContent = `${Math.floor(48 + Math.random() * 45)}%`;
 }
 
-async function fetchWeather(latitude = -22.4256, longitude = -45.4528, label = 'Itajubá') {
-  try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code,wind_speed_10m,relative_humidity_2m&timezone=auto`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('weather request failed');
-    const data = await response.json();
-    const current = data.current || {};
-    const temp = Math.round(current.temperature_2m);
-    const [icon, desc] = weatherCodes[current.weather_code] || ['☁', 'Clima local'];
-
-    if (weatherTemp) weatherTemp.textContent = `${temp}°C`;
-    if (weatherDesc) weatherDesc.textContent = desc;
-    if (weatherMeta) weatherMeta.textContent = `${label} · Vento ${Math.round(current.wind_speed_10m || 0)} km/h · Umidade ${current.relative_humidity_2m || '--'}%`;
-    if (weatherIcon) weatherIcon.textContent = icon;
-    if (taskbarWeather) taskbarWeather.textContent = `${temp}°C`;
-  } catch (error) {
-    setWeatherFallback();
-  }
-}
-
-function initWeather() {
-  if (!weatherTemp && !taskbarWeather) return;
-
-  if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(
-      position => fetchWeather(position.coords.latitude, position.coords.longitude, 'Local atual'),
-      () => fetchWeather(),
-      { timeout: 3500, maximumAge: 1000 * 60 * 30 }
-    );
-  } else {
-    fetchWeather();
-  }
-}
-
-initWeather();
-setInterval(initWeather, 1000 * 60 * 15);
-
-const GRID = {
-  startX: 34,
-  startY: 34,
-  colWidth: 96,
-  rowHeight: 108
-};
-
-const files = [...document.querySelectorAll('.desktop-file')];
-const windowLayer = document.querySelector('[data-window-layer]');
-const startButton = document.querySelector('[data-start-button]');
-const startMenu = document.querySelector('[data-start-menu]');
-let highestZ = 100;
-
-function snap(value, grid) {
-  return Math.round(value / grid) * grid;
-}
-
-function saveLayout() {
-  const layout = files.map(file => ({
-    id: file.dataset.fileId,
-    left: file.style.left,
-    top: file.style.top
-  }));
-  localStorage.setItem('lorenzo-os-desktop-layout-v3', JSON.stringify(layout));
-}
-
-function loadLayout() {
-  const saved = JSON.parse(localStorage.getItem('lorenzo-os-desktop-layout-v3') || 'null');
-
-  files.forEach((file, index) => {
-    const position = saved?.find(item => item.id === file.dataset.fileId);
-    file.style.left = position?.left || `${GRID.startX}px`;
-    file.style.top = position?.top || `${GRID.startY + index * GRID.rowHeight}px`;
-  });
-}
-
-function selectFile(file) {
-  files.forEach(item => item.classList.remove('selected'));
-  file.classList.add('selected');
-}
-
-function clampWindowPosition(win, x, y) {
-  const layerRect = windowLayer.getBoundingClientRect();
-  const winRect = win.getBoundingClientRect();
-  const maxX = Math.max(0, layerRect.width - winRect.width - 12);
-  const maxY = Math.max(0, layerRect.height - winRect.height - 12);
-
-  return {
-    x: Math.min(Math.max(12, x), maxX),
-    y: Math.min(Math.max(12, y), maxY)
+async function loadWeather() {
+  const setFallback = () => {
+    $('[data-weather-temp]').textContent = '30';
+    $('[data-weather-desc]').textContent = 'Few Clouds';
+    $('[data-weather-extra]').textContent = 'Clima demonstrativo';
+    $('[data-taskbar-weather]').textContent = '30°C';
   };
+
+  if (!navigator.geolocation) return setFallback();
+
+  navigator.geolocation.getCurrentPosition(async pos => {
+    try {
+      const { latitude, longitude } = pos.coords;
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code,wind_speed_10m,relative_humidity_2m`;
+      const res = await fetch(url);
+      const data = await res.json();
+      const temp = Math.round(data.current.temperature_2m);
+      const wind = data.current.wind_speed_10m;
+      const hum = data.current.relative_humidity_2m;
+      $('[data-weather-temp]').textContent = temp;
+      $('[data-weather-desc]').textContent = 'Local Weather';
+      $('[data-weather-extra]').textContent = `Wind: ${wind}km/h · Humidity: ${hum}%`;
+      $('[data-taskbar-weather]').textContent = `${temp}°C`;
+    } catch (error) {
+      setFallback();
+    }
+  }, setFallback, { timeout: 3000 });
 }
 
-function enableWindowDrag(win) {
-  const header = win.querySelector('.window-header');
-  let startX = 0;
-  let startY = 0;
-  let originX = 0;
-  let originY = 0;
+function makeWindow(appId, title, contentNode) {
+  const existing = document.querySelector(`[data-window="${appId}"]`);
+  if (existing) {
+    existing.style.zIndex = ++state.z;
+    return existing;
+  }
 
-  header.addEventListener('pointerdown', event => {
-    if (event.target.closest('button')) return;
-
-    win.style.zIndex = ++highestZ;
-    startX = event.clientX;
-    startY = event.clientY;
-    originX = parseInt(win.style.left, 10) || 0;
-    originY = parseInt(win.style.top, 10) || 0;
-
-    header.setPointerCapture(event.pointerId);
-    win.classList.add('moving');
-  });
-
-  header.addEventListener('pointermove', event => {
-    if (!header.hasPointerCapture(event.pointerId)) return;
-
-    const next = clampWindowPosition(
-      win,
-      originX + event.clientX - startX,
-      originY + event.clientY - startY
-    );
-
-    win.style.left = `${next.x}px`;
-    win.style.top = `${next.y}px`;
-  });
-
-  header.addEventListener('pointerup', event => {
-    if (!header.hasPointerCapture(event.pointerId)) return;
-    header.releasePointerCapture(event.pointerId);
-    win.classList.remove('moving');
-  });
-}
-
-function openWindow(title, content, isProgram = false) {
-  const win = document.createElement('article');
-  win.className = 'window';
-  win.style.left = `${320 + Math.random() * 120}px`;
-  win.style.top = `${120 + Math.random() * 90}px`;
-  win.style.zIndex = ++highestZ;
-
+  const win = document.createElement('section');
+  win.className = 'app-window';
+  win.dataset.window = appId;
+  win.style.left = `${Math.max(40, window.innerWidth * 0.5 - 280)}px`;
+  win.style.top = `${110 + Math.random() * 80}px`;
+  win.style.zIndex = ++state.z;
   win.innerHTML = `
-    <header class="window-header">
+    <header class="window-titlebar" data-drag-handle>
       <strong>${title}</strong>
-      <button type="button" aria-label="Fechar">×</button>
+      <div class="window-actions"><button data-close>close</button></div>
     </header>
-    <div class="window-content">
-      ${isProgram ? '<div class="program-placeholder"></div>' : ''}
-      <p>${content}</p>
-    </div>
+    <div class="window-body"></div>
   `;
-
-  win.querySelector('button').addEventListener('click', () => win.remove());
-  win.addEventListener('pointerdown', () => {
-    win.style.zIndex = ++highestZ;
-  });
-
-  windowLayer.appendChild(win);
-  enableWindowDrag(win);
+  $('.window-body', win).append(contentNode);
+  $('[data-window-layer]').append(win);
+  makeDraggable(win, $('[data-drag-handle]', win));
+  $('[data-close]', win).addEventListener('click', () => win.remove());
+  win.addEventListener('pointerdown', () => win.style.zIndex = ++state.z);
+  return win;
 }
 
-function enableDragging(file) {
+function makeDraggable(el, handle) {
   let startX = 0;
   let startY = 0;
   let originX = 0;
   let originY = 0;
+  let active = false;
 
-  file.addEventListener('pointerdown', event => {
-    selectFile(file);
-    startX = event.clientX;
-    startY = event.clientY;
-    originX = parseInt(file.style.left, 10) || 0;
-    originY = parseInt(file.style.top, 10) || 0;
-    file.setPointerCapture(event.pointerId);
-    file.classList.add('dragging');
+  handle.addEventListener('pointerdown', ev => {
+    active = true;
+    startX = ev.clientX;
+    startY = ev.clientY;
+    originX = el.offsetLeft;
+    originY = el.offsetTop;
+    handle.setPointerCapture(ev.pointerId);
   });
 
-  file.addEventListener('pointermove', event => {
-    if (!file.hasPointerCapture(event.pointerId)) return;
-    const dx = event.clientX - startX;
-    const dy = event.clientY - startY;
-    file.style.left = `${originX + dx}px`;
-    file.style.top = `${originY + dy}px`;
+  handle.addEventListener('pointermove', ev => {
+    if (!active) return;
+    const nextX = originX + ev.clientX - startX;
+    const nextY = originY + ev.clientY - startY;
+    el.style.left = `${Math.max(8, Math.min(nextX, window.innerWidth - el.offsetWidth - 8))}px`;
+    el.style.top = `${Math.max(8, Math.min(nextY, window.innerHeight - el.offsetHeight - 54))}px`;
   });
 
-  file.addEventListener('pointerup', event => {
-    if (!file.hasPointerCapture(event.pointerId)) return;
-    file.releasePointerCapture(event.pointerId);
-    file.classList.remove('dragging');
-
-    const x = parseInt(file.style.left, 10) || 0;
-    const y = parseInt(file.style.top, 10) || 0;
-
-    file.style.left = `${Math.max(GRID.startX, snap(x, GRID.colWidth))}px`;
-    file.style.top = `${Math.max(GRID.startY, snap(y, GRID.rowHeight))}px`;
-
-    saveLayout();
-  });
-
-  file.addEventListener('dblclick', () => {
-    openWindow(file.dataset.title, file.dataset.content);
+  handle.addEventListener('pointerup', ev => {
+    active = false;
+    try { handle.releasePointerCapture(ev.pointerId); } catch (_) {}
   });
 }
 
-loadLayout();
-files.forEach(enableDragging);
+function setupDesktopIcons() {
+  const desktop = $('[data-desktop-icons]');
+  const grid = {
+    startX: 26,
+    startY: 34,
+    cellX: 92,
+    cellY: 92,
+    iconW: 86,
+  };
 
-document.addEventListener('pointerdown', event => {
-  if (!event.target.closest('.desktop-file')) {
-    files.forEach(item => item.classList.remove('selected'));
+  function getInitialPosition(icon) {
+    const col = Number(icon.dataset.col || 0);
+    const row = Number(icon.dataset.row || 0);
+    const y = grid.startY + row * grid.cellY;
+    if (icon.dataset.anchor === 'right') {
+      return {
+        x: Math.max(grid.startX, desktop.clientWidth - grid.startX - grid.iconW - col * grid.cellX),
+        y,
+      };
+    }
+    return {
+      x: grid.startX + col * grid.cellX,
+      y,
+    };
   }
 
-  if (!event.target.closest('[data-start-menu]') && !event.target.closest('[data-start-button]')) {
-    startMenu?.classList.remove('open');
+  function snapX(value) {
+    const leftSnap = grid.startX + Math.round((value - grid.startX) / grid.cellX) * grid.cellX;
+    const rightStart = desktop.clientWidth - grid.startX - grid.iconW;
+    const rightSnap = rightStart - Math.round((rightStart - value) / grid.cellX) * grid.cellX;
+    return Math.abs(value - rightSnap) < Math.abs(value - leftSnap) ? rightSnap : leftSnap;
   }
-});
 
-startButton?.addEventListener('click', event => {
-  event.stopPropagation();
-  startMenu.classList.toggle('open');
-});
+  function snapY(value) {
+    return grid.startY + Math.round((value - grid.startY) / grid.cellY) * grid.cellY;
+  }
 
-document.querySelectorAll('[data-open-program]').forEach(button => {
-  button.addEventListener('click', () => {
-    const title = button.dataset.openProgram;
-    openWindow(title, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Esta janela representa um projeto do portfólio.', true);
-    startMenu?.classList.remove('open');
-  });
-});
+  function clamp(icon, x, y) {
+    return {
+      x: Math.max(0, Math.min(x, desktop.clientWidth - icon.offsetWidth)),
+      y: Math.max(0, Math.min(y, desktop.clientHeight - icon.offsetHeight)),
+    };
+  }
 
-const mobileViews = [...document.querySelectorAll('[data-mobile-view]')];
-const recentsPanel = document.querySelector('[data-mobile-recents]');
-const recentsList = document.querySelector('[data-recents-list]');
-const historyStack = ['home'];
-const openScreens = new Set(['home']);
+  $$('.desktop-icon').forEach(icon => {
+    const initial = getInitialPosition(icon);
+    icon.style.left = `${initial.x}px`;
+    icon.style.top = `${initial.y}px`;
 
-const viewNames = {
-  home: 'Home',
-  notes: 'Notas',
-  'note-detail': 'Nota aberta',
-  'project-detail': 'Projeto aberto',
-  contact: 'Contato',
-  settings: 'Config'
-};
+    let lastClick = 0;
+    let dragging = false;
+    let startX = 0;
+    let startY = 0;
+    let originX = 0;
+    let originY = 0;
+    let moved = false;
 
-function renderRecents() {
-  recentsList.innerHTML = '';
-  [...openScreens].forEach(screen => {
-    const button = document.createElement('button');
-    button.textContent = viewNames[screen] || screen;
-    button.addEventListener('click', () => {
-      showMobileView(screen, false);
-      recentsPanel.classList.remove('open');
+    icon.addEventListener('pointerdown', ev => {
+      $$('.desktop-icon.selected').forEach(item => item.classList.remove('selected'));
+      icon.classList.add('selected');
+      dragging = true;
+      moved = false;
+      startX = ev.clientX;
+      startY = ev.clientY;
+      originX = icon.offsetLeft;
+      originY = icon.offsetTop;
+      icon.setPointerCapture(ev.pointerId);
     });
-    recentsList.appendChild(button);
+
+    icon.addEventListener('pointermove', ev => {
+      if (!dragging) return;
+      const dx = ev.clientX - startX;
+      const dy = ev.clientY - startY;
+      if (Math.abs(dx) + Math.abs(dy) < 4) return;
+      moved = true;
+      const next = clamp(icon, originX + dx, originY + dy);
+      icon.style.left = `${next.x}px`;
+      icon.style.top = `${next.y}px`;
+    });
+
+    icon.addEventListener('pointerup', ev => {
+      if (!dragging) return;
+      dragging = false;
+      const snapped = clamp(icon, snapX(icon.offsetLeft), snapY(icon.offsetTop));
+      icon.style.left = `${snapped.x}px`;
+      icon.style.top = `${snapped.y}px`;
+      try { icon.releasePointerCapture(ev.pointerId); } catch (_) {}
+
+      const now = Date.now();
+      if (!moved && now - lastClick < 360) openApp(icon.dataset.open, 'desktop');
+      lastClick = now;
+    });
+  });
+
+  document.addEventListener('pointerdown', ev => {
+    if (!ev.target.closest('.desktop-icon')) {
+      $$('.desktop-icon.selected').forEach(item => item.classList.remove('selected'));
+    }
   });
 }
+function openApp(appId, mode = 'desktop') {
+  const titleMap = {
+    snake: 'snake.exe',
+    mines: 'minesweeper.exe',
+    pong: 'pong.exe',
+    about: 'sobre.txt',
+    experience: 'experiência.txt',
+    education: 'formação.txt',
+    skills: 'skills.txt',
+    contact: 'contato.txt',
+    f1: 'F1',
+    ia: 'IA',
+    web: 'Web',
+    branding: 'Branding',
+  };
+  const templateMap = {
+    snake: 'snake-template',
+    mines: 'mines-template',
+    pong: 'pong-template',
+    about: 'about-template',
+    experience: 'experience-template',
+    education: 'education-template',
+    skills: 'skills-template',
+    contact: 'contact-template',
+    f1: 'f1-template',
+    ia: 'ia-template',
+    web: 'web-template',
+    branding: 'branding-template',
+  };
+  const tpl = document.getElementById(templateMap[appId]);
+  if (!tpl) return;
+  const content = tpl.content.firstElementChild.cloneNode(true);
 
-function showMobileView(name, push = true) {
-  mobileViews.forEach(view => {
-    view.classList.toggle('active', view.dataset.mobileView === name);
-  });
-
-  if (push && historyStack[historyStack.length - 1] !== name) {
-    historyStack.push(name);
-  }
-
-  openScreens.add(name);
-  renderRecents();
-}
-
-function goBack() {
-  recentsPanel.classList.remove('open');
-
-  if (historyStack.length > 1) {
-    historyStack.pop();
-    showMobileView(historyStack[historyStack.length - 1], false);
+  if (mode === 'mobile') {
+    $('[data-mobile-title]').textContent = titleMap[appId] || appId;
+    const body = $('[data-mobile-body]');
+    body.innerHTML = '';
+    body.append(content);
+    $('[data-mobile-window]').classList.remove('hidden');
   } else {
-    showMobileView('home', false);
+    makeWindow(appId, titleMap[appId] || appId, content);
   }
+
+  if (appId === 'snake') initSnake(content);
+  if (appId === 'mines') initMines(content);
+  if (appId === 'pong') initPong(content);
 }
 
-document.querySelectorAll('[data-open-mobile]').forEach(button => {
-  button.addEventListener('click', () => showMobileView(button.dataset.openMobile));
-});
+function initSnake(root) {
+  const canvas = $('[data-snake-canvas]', root);
+  const ctx = canvas.getContext('2d');
+  const scoreEl = $('[data-score]', root);
+  const size = 16;
+  const cells = canvas.width / size;
+  let snake;
+  let food;
+  let dir;
+  let nextDir;
+  let score;
+  let timer;
 
-document.querySelectorAll('[data-note]').forEach(button => {
-  button.addEventListener('click', () => {
-    document.querySelector('[data-note-title]').textContent = button.dataset.note;
-    document.querySelector('[data-note-body]').textContent = button.dataset.noteContent;
-    showMobileView('note-detail');
+  function reset() {
+    snake = [{x: 9, y: 9}, {x: 8, y: 9}, {x: 7, y: 9}];
+    food = {x: 14, y: 9};
+    dir = {x: 1, y: 0};
+    nextDir = {...dir};
+    score = 0;
+    scoreEl.textContent = score;
+    clearInterval(timer);
+    timer = setInterval(tick, 110);
+  }
+
+  function placeFood() {
+    do {
+      food = {x: Math.floor(Math.random() * cells), y: Math.floor(Math.random() * cells)};
+    } while (snake.some(p => p.x === food.x && p.y === food.y));
+  }
+
+  function tick() {
+    dir = nextDir;
+    const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+    const hit = head.x < 0 || head.y < 0 || head.x >= cells || head.y >= cells || snake.some(p => p.x === head.x && p.y === head.y);
+    if (hit) return reset();
+    snake.unshift(head);
+    if (head.x === food.x && head.y === food.y) {
+      score += 10;
+      scoreEl.textContent = score;
+      placeFood();
+    } else {
+      snake.pop();
+    }
+    draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#111720';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = 'rgba(255,255,255,.04)';
+    for (let i = 0; i < cells; i++) {
+      ctx.beginPath();
+      ctx.moveTo(i * size, 0);
+      ctx.lineTo(i * size, canvas.height);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(0, i * size);
+      ctx.lineTo(canvas.width, i * size);
+      ctx.stroke();
+    }
+    ctx.fillStyle = '#e9c37f';
+    ctx.fillRect(food.x * size + 2, food.y * size + 2, size - 4, size - 4);
+    ctx.fillStyle = '#f6efe1';
+    snake.forEach((p, i) => {
+      ctx.globalAlpha = i === 0 ? 1 : .76;
+      ctx.fillRect(p.x * size + 2, p.y * size + 2, size - 4, size - 4);
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  function setDirection(name) {
+    const dirs = { up: {x: 0, y: -1}, down: {x: 0, y: 1}, left: {x: -1, y: 0}, right: {x: 1, y: 0} };
+    const nd = dirs[name];
+    if (!nd) return;
+    if (nd.x + dir.x === 0 && nd.y + dir.y === 0) return;
+    nextDir = nd;
+  }
+
+  root.addEventListener('click', ev => {
+    const btn = ev.target.closest('[data-dir]');
+    if (btn) setDirection(btn.dataset.dir);
   });
-});
-
-document.querySelectorAll('[data-project]').forEach(button => {
-  button.addEventListener('click', () => {
-    document.querySelector('[data-project-title]').textContent = button.dataset.project;
-    showMobileView('project-detail');
+  window.addEventListener('keydown', ev => {
+    const map = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
+    if (map[ev.key]) setDirection(map[ev.key]);
   });
-});
+  $('[data-game-reset]', root).addEventListener('click', reset);
+  reset();
+}
 
-document.querySelectorAll('[data-mobile-back-inline]').forEach(button => {
-  button.addEventListener('click', goBack);
-});
+function initMines(root) {
+  const board = $('[data-mines-board]', root);
+  const countEl = $('[data-mines-count]', root);
+  const width = 9;
+  const totalMines = 10;
+  let cells = [];
+  let ended = false;
 
-document.querySelector('[data-mobile-home-button]')?.addEventListener('click', () => {
-  recentsPanel.classList.remove('open');
-  showMobileView('home');
-});
+  function reset() {
+    ended = false;
+    board.innerHTML = '';
+    cells = Array.from({ length: width * width }, (_, id) => ({ id, mine: false, open: false, flag: false, near: 0 }));
+    let placed = 0;
+    while (placed < totalMines) {
+      const index = Math.floor(Math.random() * cells.length);
+      if (!cells[index].mine) {
+        cells[index].mine = true;
+        placed++;
+      }
+    }
+    cells.forEach(cell => cell.near = neighbors(cell.id).filter(n => cells[n].mine).length);
+    render();
+  }
 
-document.querySelector('[data-mobile-back-button]')?.addEventListener('click', goBack);
+  function neighbors(id) {
+    const x = id % width;
+    const y = Math.floor(id / width);
+    const list = [];
+    for (let yy = -1; yy <= 1; yy++) {
+      for (let xx = -1; xx <= 1; xx++) {
+        if (!xx && !yy) continue;
+        const nx = x + xx;
+        const ny = y + yy;
+        if (nx >= 0 && nx < width && ny >= 0 && ny < width) list.push(ny * width + nx);
+      }
+    }
+    return list;
+  }
 
-document.querySelector('[data-mobile-recents-button]')?.addEventListener('click', () => {
-  recentsPanel.classList.toggle('open');
-  renderRecents();
-});
+  function reveal(id) {
+    const cell = cells[id];
+    if (ended || cell.open || cell.flag) return;
+    cell.open = true;
+    if (cell.mine) {
+      ended = true;
+      cells.forEach(c => c.open = true);
+      render();
+      return;
+    }
+    if (cell.near === 0) neighbors(id).forEach(reveal);
+    const safeOpen = cells.filter(c => !c.mine && c.open).length;
+    if (safeOpen === cells.length - totalMines) ended = true;
+    render();
+  }
+
+  function flag(id) {
+    const cell = cells[id];
+    if (ended || cell.open) return;
+    cell.flag = !cell.flag;
+    render();
+  }
+
+  function render() {
+    board.innerHTML = '';
+    const flags = cells.filter(c => c.flag).length;
+    countEl.textContent = Math.max(0, totalMines - flags);
+    cells.forEach(cell => {
+      const btn = document.createElement('button');
+      btn.className = 'mine-cell';
+      if (cell.open) btn.classList.add('open');
+      if (cell.flag) btn.classList.add('flag');
+      btn.textContent = cell.open ? (cell.mine ? '💣' : (cell.near || '')) : (cell.flag ? '⚑' : '');
+      btn.addEventListener('click', () => reveal(cell.id));
+      btn.addEventListener('contextmenu', ev => {
+        ev.preventDefault();
+        flag(cell.id);
+      });
+      board.append(btn);
+    });
+  }
+
+  $('[data-game-reset]', root).addEventListener('click', reset);
+  reset();
+}
+
+function initPong(root) {
+  const canvas = $('[data-pong-canvas]', root);
+  const ctx = canvas.getContext('2d');
+  const playerEl = $('[data-player-score]', root);
+  const aiEl = $('[data-ai-score]', root);
+  let raf;
+  let playerScore = 0;
+  let aiScore = 0;
+  const paddle = { w: 10, h: 62 };
+  const player = { x: 22, y: 99 };
+  const ai = { x: canvas.width - 32, y: 99 };
+  const ball = { x: 210, y: 130, vx: 3.2, vy: 2.2, r: 6 };
+
+  function resetBall(direction = 1) {
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height / 2;
+    ball.vx = 3.2 * direction;
+    ball.vy = (Math.random() > .5 ? 1 : -1) * (1.8 + Math.random() * 1.6);
+  }
+
+  function reset() {
+    playerScore = 0;
+    aiScore = 0;
+    playerEl.textContent = playerScore;
+    aiEl.textContent = aiScore;
+    resetBall(Math.random() > .5 ? 1 : -1);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#111720';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = 'rgba(255,255,255,.15)';
+    ctx.setLineDash([8, 9]);
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, 0);
+    ctx.lineTo(canvas.width / 2, canvas.height);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#f6efe1';
+    ctx.fillRect(player.x, player.y, paddle.w, paddle.h);
+    ctx.fillRect(ai.x, ai.y, paddle.w, paddle.h);
+    ctx.fillStyle = '#e9c37f';
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function loop() {
+    ball.x += ball.vx;
+    ball.y += ball.vy;
+    if (ball.y < ball.r || ball.y > canvas.height - ball.r) ball.vy *= -1;
+
+    ai.y += (ball.y - (ai.y + paddle.h / 2)) * .065;
+    ai.y = Math.max(0, Math.min(canvas.height - paddle.h, ai.y));
+
+    const hitPlayer = ball.x - ball.r < player.x + paddle.w && ball.y > player.y && ball.y < player.y + paddle.h;
+    const hitAi = ball.x + ball.r > ai.x && ball.y > ai.y && ball.y < ai.y + paddle.h;
+    if (hitPlayer && ball.vx < 0) ball.vx *= -1.04;
+    if (hitAi && ball.vx > 0) ball.vx *= -1.04;
+
+    if (ball.x < 0) {
+      aiScore++;
+      aiEl.textContent = aiScore;
+      resetBall(1);
+    }
+    if (ball.x > canvas.width) {
+      playerScore++;
+      playerEl.textContent = playerScore;
+      resetBall(-1);
+    }
+    draw();
+    raf = requestAnimationFrame(loop);
+  }
+
+  function moveTo(clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const y = (clientY - rect.top) * (canvas.height / rect.height);
+    player.y = Math.max(0, Math.min(canvas.height - paddle.h, y - paddle.h / 2));
+  }
+
+  canvas.addEventListener('pointermove', ev => moveTo(ev.clientY));
+  canvas.addEventListener('pointerdown', ev => moveTo(ev.clientY));
+  $('[data-game-reset]', root).addEventListener('click', reset);
+  reset();
+  cancelAnimationFrame(raf);
+  loop();
+}
+
+function setupMobile() {
+  $('[data-open-folder="games"]').addEventListener('click', () => $('[data-folder-screen]').classList.remove('hidden'));
+  $('[data-close-folder]').addEventListener('click', () => $('[data-folder-screen]').classList.add('hidden'));
+  $('[data-mobile-back]').addEventListener('click', () => $('[data-mobile-window]').classList.add('hidden'));
+  $$('[data-folder-screen] [data-open]').forEach(btn => btn.addEventListener('click', () => openApp(btn.dataset.open, 'mobile')));
+
+  $('[data-open-mobile="notes"]').addEventListener('click', () => openTextMobile('Notas', '<h2>Currículo</h2><p>Card de nota para adaptar com experiências, habilidades e resumo profissional.</p>'));
+  $('[data-open-mobile="portfolio"]').addEventListener('click', () => openTextMobile('Portfolio', '<h2>Projetos</h2><p>Placeholder para projetos em formato de apps soltos na home.</p>'));
+  $('[data-open-mobile="contact"]').addEventListener('click', () => openTextMobile('Contato', '<h2>Contato</h2><p>Email: guirellilorenzo1@gmail.com</p><p>LinkedIn, GitHub, Instagram e WhatsApp podem ser ligados aqui.</p>'));
+}
+
+function openTextMobile(title, html) {
+  $('[data-mobile-title]').textContent = title;
+  $('[data-mobile-body]').innerHTML = `<article class="text-file">${html}</article>`;
+  $('[data-mobile-window]').classList.remove('hidden');
+}
+
+function boot() {
+  updateClock();
+  setInterval(updateClock, 1000);
+  randomSystem();
+  setInterval(randomSystem, 6000);
+  loadWeather();
+  setupDesktopIcons();
+  setupMobile();
+  $('[data-start]').addEventListener('click', () => openApp('about'));
+}
+
+boot();

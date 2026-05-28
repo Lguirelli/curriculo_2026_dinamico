@@ -3,212 +3,220 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lorenzo OS | Currículo e Portfólio</title>
+  <title>Portfolio OS Games POC</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="desktop-os" data-desktop-os>
-    <section class="desktop-wallpaper">
-      <div class="desktop-art" aria-hidden="true">
-        <div class="moon-disc"><div class="wave"></div></div>
-      </div>
-
-      <aside class="desktop-widgets" aria-label="Widgets funcionais">
-        <article class="desktop-widget clock-widget">
-          <strong data-desktop-clock>00:00</strong>
+  <main class="os-shell">
+    <section class="desktop-view" aria-label="Versão desktop">
+      <aside class="desktop-widgets">
+        <article class="widget time-widget">
+          <strong data-clock>00:00</strong>
           <span>Local time</span>
         </article>
 
-        <article class="desktop-widget weather-widget">
-          <div class="weather-row">
-            <span class="weather-icon" data-weather-icon>☁</span>
-            <strong data-weather-temp>--°C</strong>
-          </div>
-          <span data-weather-desc>Carregando clima...</span>
-          <small data-weather-meta>Local automático</small>
+        <article class="widget system-widget">
+          <strong>Hello Lorenzo</strong>
+          <span>WiFi: Portfolio OS</span>
+          <span>CPU: <b data-random-cpu>32%</b></span>
+          <div class="mini-chart"></div>
+          <span>RAM: <b data-random-ram>48%</b></span>
+          <div class="bar"><i data-random-bar></i></div>
         </article>
 
-        <article class="desktop-widget date-widget">
-          <strong data-desktop-day>--</strong>
+        <article class="widget weather-widget">
+          <div class="weather-icon">☁</div>
+          <strong><span data-weather-temp>--</span>°C</strong>
+          <span data-weather-desc>Carregando clima</span>
+          <small data-weather-extra>Detectando localização...</small>
+        </article>
+
+        <article class="widget date-widget">
+          <b data-date-day>00</b>
           <div>
-            <span data-desktop-weekday>Dia</span>
-            <small data-desktop-date>Data</small>
+            <strong data-weekday>Monday</strong>
+            <span data-full-date>January 2026</span>
           </div>
         </article>
       </aside>
 
-      <div class="desktop-icons" data-desktop-icons>
-        <button class="desktop-file" data-file-id="sobre" data-title="Sobre.txt" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae lorem at neque gravida posuere. Integer non justo vitae ipsum posuere dignissim.">
-          <span class="file-icon">TXT</span>
-          <span class="file-name">Sobre.txt</span>
-        </button>
-        <button class="desktop-file" data-file-id="experiencia" data-title="Experiencia.txt" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames.">
-          <span class="file-icon">TXT</span>
-          <span class="file-name">Experiência.txt</span>
-        </button>
-        <button class="desktop-file" data-file-id="formacao" data-title="Formacao.txt" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel mi eu lectus fermentum gravida. Praesent cursus lorem sed massa pulvinar.">
-          <span class="file-icon">TXT</span>
-          <span class="file-name">Formação.txt</span>
-        </button>
-        <button class="desktop-file" data-file-id="skills" data-title="Skills.txt" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Branding, marketing digital, IA, automação, front-end, audiovisual e dados.">
-          <span class="file-icon">TXT</span>
-          <span class="file-name">Skills.txt</span>
-        </button>
-        <button class="desktop-file" data-file-id="contato" data-title="Contato.txt" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Email: exemplo@email.com | LinkedIn | GitHub | Instagram.">
-          <span class="file-icon">TXT</span>
-          <span class="file-name">Contato.txt</span>
-        </button>
+      <div class="desktop-wallpaper" aria-hidden="true">
+        <div class="wave-circle">
+          <div class="wave">∿</div>
+        </div>
       </div>
 
-      <div class="desktop-side-folders" aria-label="Atalhos do portfólio">
-        <button data-open-program="F1 Visualizer"><span></span>F1</button>
-        <button data-open-program="Agente IA WhatsApp"><span></span>IA</button>
-        <button data-open-program="Landing Pages"><span></span>Web</button>
-        <button data-open-program="Branding Archive"><span></span>Branding</button>
-      </div>
+      <section class="desktop-icons" data-desktop-icons>
+        <button class="desktop-icon desktop-text-file" data-open="about" data-col="0" data-row="0"><span>TXT</span><small>Sobre.txt</small></button>
+        <button class="desktop-icon desktop-text-file" data-open="experience" data-col="0" data-row="1"><span>TXT</span><small>Experiência.txt</small></button>
+        <button class="desktop-icon desktop-text-file" data-open="education" data-col="0" data-row="2"><span>TXT</span><small>Formação.txt</small></button>
+        <button class="desktop-icon desktop-text-file" data-open="skills" data-col="0" data-row="3"><span>TXT</span><small>Skills.txt</small></button>
+        <button class="desktop-icon desktop-text-file" data-open="contact" data-col="0" data-row="4"><span>TXT</span><small>Contato.txt</small></button>
+
+        <button class="desktop-icon desktop-folder" data-open="f1" data-anchor="right" data-col="0" data-row="0"><span></span><small>F1</small></button>
+        <button class="desktop-icon desktop-folder" data-open="ia" data-anchor="right" data-col="0" data-row="1"><span></span><small>IA</small></button>
+        <button class="desktop-icon desktop-folder" data-open="web" data-anchor="right" data-col="0" data-row="2"><span></span><small>Web</small></button>
+        <button class="desktop-icon desktop-folder" data-open="branding" data-anchor="right" data-col="0" data-row="3"><span></span><small>Branding</small></button>
+
+        <button class="desktop-icon desktop-game" data-open="snake" data-anchor="right" data-col="0" data-row="5"><span>🐍</span><small>Snake</small></button>
+        <button class="desktop-icon desktop-game" data-open="mines" data-anchor="right" data-col="0" data-row="6"><span>💣</span><small>Mines</small></button>
+        <button class="desktop-icon desktop-game" data-open="pong" data-anchor="right" data-col="0" data-row="7"><span>🏓</span><small>Pong</small></button>
+      </section>
 
       <div class="window-layer" data-window-layer></div>
 
-      <nav class="desktop-taskbar">
-        <button class="start-button" data-start-button>
-          <span class="start-logo">◉</span>
-          <span>Application</span>
-        </button>
-
-        <div class="taskbar-center" aria-label="Contatos">
-          <a href="mailto:exemplo@email.com" aria-label="Email">✉</a>
-          <a href="#" aria-label="LinkedIn">in</a>
-          <a href="#" aria-label="GitHub">⌘</a>
-          <a href="#" aria-label="Instagram">◎</a>
-          <a href="#" aria-label="WhatsApp">☎</a>
-        </div>
-
-        <div class="taskbar-right">
+      <footer class="taskbar">
+        <button class="start-button" data-start>◎ Application</button>
+        <nav class="taskbar-contact-icons" aria-label="Contatos">
+          <a href="mailto:guirellilorenzo1@gmail.com" title="Email">✉</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" title="LinkedIn">in</a>
+          <a href="https://github.com/" target="_blank" rel="noreferrer" title="GitHub">⌘</a>
+          <a href="https://wa.me/5500000000000" target="_blank" rel="noreferrer" title="WhatsApp">☎</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" title="Instagram">◎</a>
+        </nav>
+        <div class="taskbar-status">
           <span>♫</span>
-          <span>⌁</span>
-          <span data-taskbar-date>--</span>
-          <strong data-desktop-clock-small>00:00</strong>
           <span data-taskbar-weather>--°C</span>
+          <span data-taskbar-date>---</span>
+          <span data-taskbar-clock>00:00</span>
+          <span>◖ <b data-battery>64%</b></span>
         </div>
-      </nav>
-
-      <aside class="start-menu" data-start-menu>
-        <header>
-          <strong>All Applications</strong>
-          <span>Portfólio</span>
-        </header>
-        <div class="start-grid">
-          <button data-open-program="F1 Visualizer"><span>🏎</span>F1 Visualizer</button>
-          <button data-open-program="Agente IA WhatsApp"><span>✦</span>Agente IA</button>
-          <button data-open-program="Landing Pages"><span>⌁</span>Landing Pages</button>
-          <button data-open-program="Dashboards para PMEs"><span>▣</span>Dashboards</button>
-          <button data-open-program="Branding Archive"><span>◆</span>Branding</button>
-          <button data-open-program="Motion Lab"><span>▶</span>Motion Lab</button>
-        </div>
-        <label class="start-search">
-          <span>⌕</span>
-          <input type="search" placeholder="Buscar projeto" />
-        </label>
-      </aside>
+      </footer>
     </section>
-  </main>
 
-  <main class="mobile-os" data-mobile-os>
-    <section class="phone-screen">
-      <header class="mobile-statusbar">
-        <span data-mobile-clock>00:00</span>
-        <span class="mobile-signal">◦◦◦ 4G ᯤ 54%</span>
-      </header>
+    <section class="mobile-view" aria-label="Versão mobile">
+      <div class="phone-frame">
+        <header class="phone-statusbar">
+          <span data-clock>00:00</span>
+          <span>● ● ●  64%</span>
+        </header>
 
-      <section class="mobile-view active" data-mobile-view="home">
-        <div class="mobile-wallpaper-stars"></div>
-        <div class="home-widget">
-          <span class="moon">◖</span>
-          <strong>Lorenzo OS</strong>
-          <small>Currículo, apps e projetos</small>
-        </div>
+        <section class="phone-home" data-phone-home>
+          <button class="mobile-app" data-open-mobile="notes"><span>📝</span><small>Notas</small></button>
+          <button class="mobile-app" data-open-mobile="portfolio"><span>🖼</span><small>Portfolio</small></button>
+          <button class="mobile-folder" data-open-folder="games"><span class="folder-preview">🐍 💣 🏓</span><small>jogos</small></button>
+          <button class="mobile-app" data-open-mobile="contact"><span>☎</span><small>Contato</small></button>
+        </section>
 
-        <div class="mobile-app-grid loose-apps">
-          <button class="mobile-app notes-app" data-open-mobile="notes"><span>✎</span><small>Notas</small></button>
-          <button class="mobile-app" data-project="F1 Visualizer"><span>🏎</span><small>F1</small></button>
-          <button class="mobile-app" data-project="Agente IA"><span>✦</span><small>IA</small></button>
-          <button class="mobile-app" data-project="Landing Pages"><span>⌁</span><small>Web</small></button>
-          <button class="mobile-app" data-project="Dashboards"><span>▣</span><small>Dados</small></button>
-          <button class="mobile-app" data-project="Branding"><span>◆</span><small>Brand</small></button>
-          <button class="mobile-app" data-project="Motion Lab"><span>▶</span><small>Motion</small></button>
-          <button class="mobile-app" data-open-mobile="contact"><span>@</span><small>Contato</small></button>
-          <button class="mobile-app" data-open-mobile="settings"><span>⚙</span><small>Config</small></button>
-        </div>
-      </section>
-
-      <section class="mobile-view" data-mobile-view="notes">
-        <header class="app-header notes-header">
-          <button class="app-back" data-mobile-back-inline>‹</button>
-          <div>
-            <h2>Notas</h2>
-            <p>Currículo organizado em anotações</p>
+        <section class="folder-screen hidden" data-folder-screen>
+          <header>
+            <button data-close-folder>‹</button>
+            <strong>jogos</strong>
+          </header>
+          <div class="folder-grid">
+            <button class="mobile-app" data-open="snake"><span>🐍</span><small>Snake</small></button>
+            <button class="mobile-app" data-open="mines"><span>💣</span><small>Campo Minado</small></button>
+            <button class="mobile-app" data-open="pong"><span>🏓</span><small>Pong</small></button>
           </div>
-        </header>
-        <div class="notes-list">
-          <button data-note="Sobre mim" data-note-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae lorem id lacus porta tincidunt."><strong>Sobre mim</strong><small>Resumo profissional e posicionamento.</small></button>
-          <button data-note="Experiência" data-note-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero."><strong>Experiência</strong><small>Histórico profissional e entregas.</small></button>
-          <button data-note="Formação" data-note-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus ante dapibus diam."><strong>Formação</strong><small>Educação, cursos e estudos.</small></button>
-          <button data-note="Skills" data-note-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. IA, automação, branding, conteúdo e interfaces."><strong>Skills</strong><small>Ferramentas, áreas e competências.</small></button>
-          <button data-note="Contato" data-note-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. email@exemplo.com | LinkedIn | GitHub."><strong>Contato</strong><small>Canais principais.</small></button>
-        </div>
-      </section>
+        </section>
 
-      <section class="mobile-view" data-mobile-view="note-detail">
-        <article class="note-paper">
-          <button class="app-back dark" data-mobile-back-inline>‹ Voltar</button>
-          <h2 data-note-title>Nota</h2>
-          <p data-note-body>Lorem ipsum dolor sit amet.</p>
-        </article>
-      </section>
-
-      <section class="mobile-view" data-mobile-view="project-detail">
-        <article class="project-screen">
-          <button class="app-back" data-mobile-back-inline>‹</button>
-          <h2 data-project-title>Projeto</h2>
-          <div class="project-placeholder"></div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed nibh nec ipsum fermentum tincidunt.</p>
-          <button class="project-cta">Abrir estudo</button>
-        </article>
-      </section>
-
-      <section class="mobile-view" data-mobile-view="contact">
-        <article class="contact-card">
-          <button class="app-back" data-mobile-back-inline>‹</button>
-          <h2>Contato</h2>
-          <p>Lorem ipsum dolor sit amet.</p>
-          <button>Email</button>
-          <button>LinkedIn</button>
-          <button>GitHub</button>
-        </article>
-      </section>
-
-      <section class="mobile-view" data-mobile-view="settings">
-        <article class="settings-card">
-          <button class="app-back" data-mobile-back-inline>‹</button>
-          <h2>Config</h2>
-          <div><span>Modo</span><strong>Portfolio OS</strong></div>
-          <div><span>Relógio</span><strong data-mobile-clock-settings>00:00</strong></div>
-          <div><span>Status</span><strong>Online</strong></div>
-        </article>
-      </section>
-
-      <section class="mobile-recents" data-mobile-recents>
-        <header><h2>Telas abertas</h2></header>
-        <div data-recents-list></div>
-      </section>
-
-      <nav class="mobile-nav">
-        <button data-mobile-recents-button aria-label="Telas abertas">■</button>
-        <button data-mobile-home-button aria-label="Home">○</button>
-        <button data-mobile-back-button aria-label="Voltar">◂</button>
-      </nav>
+        <section class="mobile-window hidden" data-mobile-window>
+          <header>
+            <button data-mobile-back>‹</button>
+            <strong data-mobile-title>App</strong>
+          </header>
+          <div class="mobile-window-body" data-mobile-body></div>
+        </section>
+      </div>
     </section>
   </main>
+
+  <template id="snake-template">
+    <div class="game-shell snake-game">
+      <div class="game-head"><span>Pontos: <b data-score>0</b></span><button data-game-reset>Reset</button></div>
+      <canvas width="320" height="320" data-snake-canvas></canvas>
+      <div class="game-controls"><button data-dir="up">↑</button><button data-dir="left">←</button><button data-dir="down">↓</button><button data-dir="right">→</button></div>
+      <p class="game-tip">Use as setas do teclado ou os botões.</p>
+    </div>
+  </template>
+
+  <template id="mines-template">
+    <div class="game-shell mines-game">
+      <div class="game-head"><span>Bombas: <b data-mines-count>10</b></span><button data-game-reset>Reset</button></div>
+      <div class="mines-board" data-mines-board></div>
+      <p class="game-tip">Clique para revelar. Clique direito para marcar bandeira.</p>
+    </div>
+  </template>
+
+  <template id="pong-template">
+    <div class="game-shell pong-game">
+      <div class="game-head"><span><b data-player-score>0</b> : <b data-ai-score>0</b></span><button data-game-reset>Reset</button></div>
+      <canvas width="420" height="260" data-pong-canvas></canvas>
+      <p class="game-tip">Mova o mouse ou arraste na tela para controlar a barra.</p>
+    </div>
+  </template>
+
+  <template id="about-template">
+    <article class="text-file">
+      <h2>sobre.txt</h2>
+      <p>Este é um esqueleto de portfolio em formato de sistema operacional.</p>
+      <p>No desktop, os jogos abrem como janelas arrastáveis. No mobile, ficam dentro da pasta <strong>jogos</strong>.</p>
+    </article>
+  </template>
+
+  <template id="experience-template">
+    <article class="text-file">
+      <h2>experiência.txt</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.</p>
+      <p>Placeholder para experiências profissionais, entregas, responsabilidades e resultados.</p>
+    </article>
+  </template>
+
+  <template id="education-template">
+    <article class="text-file">
+      <h2>formação.txt</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p>Placeholder para graduação, cursos, certificações e estudos complementares.</p>
+    </article>
+  </template>
+
+  <template id="skills-template">
+    <article class="text-file">
+      <h2>skills.txt</h2>
+      <p>IA, automação, marketing digital, branding, edição de vídeo, dados, front-end e integração com APIs.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </article>
+  </template>
+
+  <template id="contact-template">
+    <article class="text-file">
+      <h2>contato.txt</h2>
+      <p>Email: guirellilorenzo1@gmail.com</p>
+      <p>Placeholder para LinkedIn, GitHub, Instagram e WhatsApp.</p>
+    </article>
+  </template>
+
+  <template id="f1-template">
+    <article class="portfolio-file">
+      <h2>F1 Visualizer</h2>
+      <p>Placeholder de projeto para visualizador interativo de Fórmula 1.</p>
+      <div class="portfolio-placeholder">Preview / imagem / vídeo do projeto</div>
+    </article>
+  </template>
+
+  <template id="ia-template">
+    <article class="portfolio-file">
+      <h2>Agentes de IA</h2>
+      <p>Placeholder de projeto para automações, agentes de atendimento e fluxos com IA.</p>
+      <div class="portfolio-placeholder">Preview / fluxograma / dashboard</div>
+    </article>
+  </template>
+
+  <template id="web-template">
+    <article class="portfolio-file">
+      <h2>Web / Landing Pages</h2>
+      <p>Placeholder de projeto para páginas, interfaces e experiências digitais.</p>
+      <div class="portfolio-placeholder">Preview / mockup / URL</div>
+    </article>
+  </template>
+
+  <template id="branding-template">
+    <article class="portfolio-file">
+      <h2>Branding</h2>
+      <p>Placeholder de projeto para identidade visual, posicionamento e conteúdo.</p>
+      <div class="portfolio-placeholder">Preview / cases / peças</div>
+    </article>
+  </template>
 
   <script src="app.js"></script>
 </body>
