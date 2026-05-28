@@ -191,11 +191,9 @@ function renderDesktopIcons(){
 
     if (item.type === 'folder') {
       icon.innerHTML = `
-        <span class="portfolio-folder-icon glass-folder-mini" aria-hidden="true">
-          <span class="folder-core"></span>
-          <span class="folder-back"></span>
-          <span class="folder-front"></span>
-          <span class="folder-shine"></span>
+        <span class="portfolio-folder-icon" aria-hidden="true">
+          <span class="portfolio-folder-back"></span>
+          <span class="portfolio-folder-front"></span>
         </span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
