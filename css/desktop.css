@@ -1,3 +1,7 @@
+.desktop-os{--topbar:0px;}
+.top-panel{display:none !important;}
+.start-menu{display:none !important;}
+.desktop-area{inset:0 !important;}
 .desktop-os{
   position:relative;width:100vw;height:100vh;overflow:hidden;user-select:none;
   background:
