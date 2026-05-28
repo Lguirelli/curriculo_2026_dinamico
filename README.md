@@ -1,19 +1,26 @@
 # Lorenzo OS Portfolio
 
-Prova de conceito de currículo e portfólio em duas experiências:
+Prova de conceito de currículo e portfólio em duas experiências.
 
-- Desktop: sistema operacional com arquivos `.txt` arrastáveis, snap to grid, abertura por duplo clique e menu iniciar com programas do portfólio.
-- Mobile: interface visual inspirada em sistema mobile escuro, currículo no app de notas e projetos como apps soltos na home.
+## Desktop
 
-## Relógio funcional
+- Visual inspirado em desktop Linux/Cinnamon escuro.
+- Currículo em arquivos `.txt` na área de trabalho.
+- Arquivos com clique simples para selecionar, arrastar para mover, snap to grid e duplo clique para abrir.
+- Janelas de currículo e portfólio arrastáveis.
+- Menu `Application` com programas do portfólio.
+- Ícones centralizados na barra de tarefas para contatos.
+- Widgets à direita com relógio, data e clima funcionais.
+- Clima busca localização do navegador e usa fallback para Itajubá.
 
-O relógio é atualizado via JavaScript em:
+## Mobile
 
-- topo do desktop
-- barra inferior do desktop
-- status bar mobile
-- tela de configurações mobile
+- Visual dark mobile.
+- Currículo dentro do app Notas.
+- Portfólio em apps soltos na home.
+- Barra inferior com telas abertas, home e voltar.
+- Relógio funcional.
 
-## Rodar localmente
+## Rodar
 
-Abra `index.html` no navegador ou publique o diretório em um repositório com GitHub Pages.
+Abra `index.html` no navegador ou publique o diretório no GitHub Pages.

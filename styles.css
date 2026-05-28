@@ -1,13 +1,15 @@
 * { box-sizing: border-box; }
 
 :root {
-  --bg: #0d0f14;
-  --panel: rgba(18, 22, 31, 0.88);
-  --panel-strong: rgba(10, 13, 20, 0.96);
-  --line: rgba(255, 255, 255, 0.14);
-  --text: #f4f5f7;
-  --muted: #a9afbd;
-  --accent: #8f82ff;
+  --bg: #202734;
+  --desktop: #252d3b;
+  --panel: rgba(35, 40, 53, 0.92);
+  --panel-strong: rgba(24, 28, 38, 0.98);
+  --line: rgba(246, 206, 143, 0.16);
+  --text: #f3dfb5;
+  --muted: #b9ad9c;
+  --cream: #f2c985;
+  --dark: #161922;
   --grid-x: 96px;
   --grid-y: 108px;
 }
@@ -23,7 +25,11 @@ body {
   overflow: hidden;
 }
 
-button { font: inherit; color: inherit; }
+button,
+a,
+input { font: inherit; }
+button { color: inherit; }
+a { color: inherit; text-decoration: none; }
 .mobile-os { display: none; }
 .desktop-os { display: block; width: 100vw; height: 100vh; }
 
@@ -33,27 +39,109 @@ button { font: inherit; color: inherit; }
   height: 100%;
   overflow: hidden;
   background:
-    radial-gradient(circle at 20% 20%, rgba(140, 200, 255, 0.22), transparent 28%),
-    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.08), transparent 24%),
-    linear-gradient(135deg, #0d0f14, #111827 55%, #050608);
+    radial-gradient(circle at 52% 46%, rgba(246, 202, 132, 0.08), transparent 18%),
+    linear-gradient(145deg, #293241, #202735 70%, #1d2430);
 }
 
-.desktop-topbar {
+.desktop-wallpaper::before {
+  content: "";
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 18px;
-  background: rgba(0, 0, 0, 0.18);
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(18px);
-  z-index: 50;
-  font-size: 13px;
+  inset: 14px;
+  border: 1px solid rgba(246, 202, 132, .1);
+  border-radius: 20px;
+  pointer-events: none;
 }
 
-.desktop-icons { position: absolute; inset: 52px 0 56px 0; z-index: 5; }
+.desktop-art {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: .9;
+}
+
+.moon-disc {
+  position: relative;
+  width: min(34vw, 370px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background:
+    linear-gradient(130deg, rgba(55,48,42,.16), transparent 45%),
+    radial-gradient(circle at 40% 35%, #e4c482, #cda564 64%, #856d4d);
+  box-shadow: inset 0 0 30px rgba(25,20,15,.28), 0 26px 70px rgba(0,0,0,.18);
+}
+
+.wave {
+  position: absolute;
+  left: -12%;
+  bottom: 22%;
+  width: 126%;
+  height: 32%;
+  background:
+    radial-gradient(ellipse at 28% 100%, #eff5f7 0 17%, transparent 18%),
+    radial-gradient(ellipse at 39% 94%, #dcebf0 0 12%, transparent 13%),
+    linear-gradient(160deg, transparent 0 18%, #f7fbfb 19% 28%, #6f9fba 30% 46%, #244b67 48% 70%, transparent 72%);
+  transform: rotate(-10deg);
+  opacity: .95;
+}
+
+.desktop-widgets {
+  position: absolute;
+  right: 34px;
+  top: 34px;
+  width: 250px;
+  display: grid;
+  gap: 14px;
+  z-index: 12;
+}
+
+.desktop-widget {
+  min-height: 94px;
+  padding: 18px;
+  border: 1px solid rgba(0,0,0,.24);
+  border-radius: 12px;
+  background: #242b38;
+  color: var(--cream);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 8px 18px rgba(0,0,0,.32);
+}
+
+.clock-widget strong {
+  display: block;
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.clock-widget span,
+.weather-widget span,
+.date-widget small {
+  display: block;
+  margin-top: 8px;
+  color: #f4dcae;
+}
+
+.weather-widget { min-height: 118px; }
+.weather-row { display: flex; align-items: center; gap: 14px; }
+.weather-icon { font-size: 38px; margin: 0 !important; }
+.weather-widget strong { font-size: 38px; letter-spacing: -1.8px; }
+.weather-widget small { display: block; margin-top: 8px; color: rgba(244, 220, 174, .72); }
+
+.date-widget { display: flex; align-items: center; gap: 16px; min-height: 82px; }
+.date-widget > strong {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #f0f2f4;
+  color: #1d2531;
+  font-size: 28px;
+}
+.date-widget span { display: block; font-size: 24px; font-weight: 800; }
+
+.desktop-icons { position: absolute; inset: 28px 0 56px 0; z-index: 15; }
 
 .desktop-file {
   position: absolute;
@@ -65,7 +153,7 @@ button { font: inherit; color: inherit; }
   gap: 8px;
   padding: 8px 6px;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 10px;
   background: transparent;
   cursor: default;
   user-select: none;
@@ -73,47 +161,78 @@ button { font: inherit; color: inherit; }
 }
 
 .desktop-file:hover,
-.desktop-file.selected { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.18); }
-.desktop-file.dragging { opacity: .86; z-index: 80; }
+.desktop-file.selected {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(246,202,132,.15);
+}
+
+.desktop-file.dragging { opacity: .82; z-index: 60; }
 
 .file-icon {
   width: 46px;
-  height: 58px;
+  height: 54px;
   display: grid;
   place-items: center;
-  border-radius: 6px;
-  background: linear-gradient(180deg, #f7f7f7, #cfd6df);
-  color: #111827;
-  font-weight: 800;
-  font-size: 12px;
-  box-shadow: 0 8px 18px rgba(0,0,0,.24);
+  border-radius: 7px 7px 4px 4px;
+  color: #1f2632;
+  font-size: 10px;
+  font-weight: 900;
+  background: linear-gradient(180deg, #fff6dc, #d8b870);
+  box-shadow: 0 10px 20px rgba(0,0,0,.26);
 }
 
 .file-name {
-  width: 100%;
+  max-width: 82px;
+  color: #f7e7c6;
   text-align: center;
   font-size: 12px;
-  line-height: 1.2;
-  text-shadow: 0 1px 4px rgba(0,0,0,.8);
-  word-break: break-word;
+  text-shadow: 0 2px 6px rgba(0,0,0,.65);
 }
 
-.window-layer { position: absolute; inset: 40px 0 54px 0; pointer-events: none; z-index: 30; }
+.desktop-side-folders {
+  position: absolute;
+  right: 34px;
+  bottom: 90px;
+  display: grid;
+  gap: 22px;
+  z-index: 14;
+}
+
+.desktop-side-folders button {
+  width: 78px;
+  min-height: 72px;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: #f7e7c6;
+  font-size: 12px;
+  cursor: pointer;
+  text-shadow: 0 2px 6px rgba(0,0,0,.6);
+}
+
+.desktop-side-folders span {
+  width: 46px;
+  height: 34px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #6f7783, #3c4450);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.08), 0 8px 14px rgba(0,0,0,.28);
+}
+
+.window-layer { position: absolute; inset: 0 0 46px 0; z-index: 40; pointer-events: none; }
 
 .window {
   position: absolute;
   width: min(560px, 80vw);
-  min-height: 320px;
-  background: var(--panel-strong);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  box-shadow: 0 24px 70px rgba(0,0,0,.45);
+  min-height: 300px;
   overflow: hidden;
+  border-radius: 12px;
+  background: rgba(23, 27, 36, .95);
+  border: 1px solid rgba(246,202,132,.14);
+  box-shadow: 0 26px 80px rgba(0,0,0,.48);
   pointer-events: auto;
-  backdrop-filter: blur(20px);
 }
-
- .window.moving { opacity: .96; }
 
 .window-header {
   height: 42px;
@@ -121,73 +240,160 @@ button { font: inherit; color: inherit; }
   align-items: center;
   justify-content: space-between;
   padding: 0 12px 0 16px;
-  background: rgba(255,255,255,.06);
-  border-bottom: 1px solid var(--line);
+  background: #1c202b;
+  border-bottom: 1px solid rgba(246,202,132,.12);
   cursor: grab;
   user-select: none;
   touch-action: none;
 }
 
 .window.moving .window-header { cursor: grabbing; }
+.window-header strong { color: #f3d29c; font-size: 13px; }
 
 .window-header button {
   border: 0;
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background: rgba(255,255,255,.12);
+  background: #da4c59;
+  color: #1b1c22;
   cursor: pointer;
 }
 
-.window-content { padding: 22px; color: #e9edf5; line-height: 1.7; }
-.program-placeholder { height: 150px; margin: 16px 0; border: 1px dashed rgba(255,255,255,.22); border-radius: 12px; background: rgba(255,255,255,.06); }
+.window-content { padding: 22px; color: #f2e6cf; line-height: 1.7; }
+.program-placeholder {
+  height: 150px;
+  margin: 16px 0;
+  border: 1px dashed rgba(246,202,132,.24);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(246,202,132,.15), transparent 24%),
+    rgba(255,255,255,.04);
+}
 
 .desktop-taskbar {
   position: absolute;
   inset: auto 0 0 0;
-  height: 48px;
-  display: flex;
+  height: 46px;
+  display: grid;
+  grid-template-columns: 220px 1fr 300px;
   align-items: center;
-  gap: 12px;
-  padding: 0 12px;
-  background: rgba(7,9,13,.86);
-  border-top: 1px solid var(--line);
-  backdrop-filter: blur(22px);
+  padding: 0 10px;
+  background: rgba(23, 26, 34, .96);
+  border-top: 1px solid rgba(246,202,132,.13);
+  box-shadow: 0 -8px 22px rgba(0,0,0,.24);
   z-index: 100;
 }
 
-.start-button,
-.taskbar-apps button {
-  height: 32px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255,255,255,.08);
+.start-button {
+  justify-self: start;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  border: 1px solid rgba(246,202,132,.18);
+  border-radius: 7px;
+  background: #202632;
+  color: #f0d39c;
   cursor: pointer;
 }
+.start-logo { font-size: 14px; }
 
-.start-button { padding: 0 18px; }
-.taskbar-status { margin-left: auto; color: var(--muted); font-size: 12px; }
+.taskbar-center {
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.03);
+}
+
+.taskbar-center a {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  color: #1f2632;
+  background: linear-gradient(145deg, #fbefd1, #d2ab67);
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 12px rgba(0,0,0,.25);
+}
+
+.taskbar-right {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f4dcae;
+  font-size: 12px;
+}
+
+.taskbar-right strong { color: #fff2d4; }
 
 .start-menu {
   position: absolute;
   left: 12px;
-  bottom: 58px;
-  width: 280px;
+  bottom: 56px;
+  width: 460px;
+  min-height: 360px;
   padding: 14px;
   display: none;
   flex-direction: column;
-  gap: 8px;
-  background: var(--panel-strong);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  box-shadow: 0 24px 80px rgba(0,0,0,.5);
+  gap: 14px;
+  background: rgba(23, 27, 36, .96);
+  border: 1px solid rgba(246,202,132,.18);
+  border-radius: 10px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.55);
   z-index: 120;
 }
 
 .start-menu.open { display: flex; }
-.start-menu header { display: flex; justify-content: space-between; color: var(--muted); padding: 4px 4px 10px; }
-.start-menu button { padding: 12px; text-align: left; border: 1px solid transparent; border-radius: 10px; background: rgba(255,255,255,.07); cursor: pointer; }
-.start-menu button:hover { border-color: var(--line); background: rgba(255,255,255,.12); }
+.start-menu header { display: flex; justify-content: space-between; color: var(--muted); }
+.start-menu header strong { color: #f3d29c; }
+
+.start-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.start-grid button {
+  min-height: 82px;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 8px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid rgba(246,202,132,.1);
+  border-radius: 9px;
+  background: rgba(255,255,255,.04);
+  cursor: pointer;
+}
+.start-grid button:hover { background: rgba(246,202,132,.09); }
+.start-grid span { font-size: 24px; }
+
+.start-search {
+  margin-top: auto;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid rgba(246,202,132,.2);
+  border-radius: 18px;
+  background: rgba(255,255,255,.04);
+}
+.start-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: #f5dfb6;
+  background: transparent;
+}
 
 @media (max-width: 768px) {
   body { overflow: hidden; background: #1f222b; }

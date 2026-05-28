@@ -9,10 +9,33 @@
 <body>
   <main class="desktop-os" data-desktop-os>
     <section class="desktop-wallpaper">
-      <div class="desktop-topbar">
-        <span>Lorenzo OS</span>
-        <span data-desktop-clock>00:00</span>
+      <div class="desktop-art" aria-hidden="true">
+        <div class="moon-disc"><div class="wave"></div></div>
       </div>
+
+      <aside class="desktop-widgets" aria-label="Widgets funcionais">
+        <article class="desktop-widget clock-widget">
+          <strong data-desktop-clock>00:00</strong>
+          <span>Local time</span>
+        </article>
+
+        <article class="desktop-widget weather-widget">
+          <div class="weather-row">
+            <span class="weather-icon" data-weather-icon>☁</span>
+            <strong data-weather-temp>--°C</strong>
+          </div>
+          <span data-weather-desc>Carregando clima...</span>
+          <small data-weather-meta>Local automático</small>
+        </article>
+
+        <article class="desktop-widget date-widget">
+          <strong data-desktop-day>--</strong>
+          <div>
+            <span data-desktop-weekday>Dia</span>
+            <small data-desktop-date>Data</small>
+          </div>
+        </article>
+      </aside>
 
       <div class="desktop-icons" data-desktop-icons>
         <button class="desktop-file" data-file-id="sobre" data-title="Sobre.txt" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae lorem at neque gravida posuere. Integer non justo vitae ipsum posuere dignissim.">
@@ -37,24 +60,55 @@
         </button>
       </div>
 
+      <div class="desktop-side-folders" aria-label="Atalhos do portfólio">
+        <button data-open-program="F1 Visualizer"><span></span>F1</button>
+        <button data-open-program="Agente IA WhatsApp"><span></span>IA</button>
+        <button data-open-program="Landing Pages"><span></span>Web</button>
+        <button data-open-program="Branding Archive"><span></span>Branding</button>
+      </div>
+
       <div class="window-layer" data-window-layer></div>
 
       <nav class="desktop-taskbar">
-        <button class="start-button" data-start-button>Iniciar</button>
-        <div class="taskbar-apps" data-taskbar-apps></div>
-        <span class="taskbar-status" data-desktop-clock-small>00:00</span>
+        <button class="start-button" data-start-button>
+          <span class="start-logo">◉</span>
+          <span>Application</span>
+        </button>
+
+        <div class="taskbar-center" aria-label="Contatos">
+          <a href="mailto:exemplo@email.com" aria-label="Email">✉</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="GitHub">⌘</a>
+          <a href="#" aria-label="Instagram">◎</a>
+          <a href="#" aria-label="WhatsApp">☎</a>
+        </div>
+
+        <div class="taskbar-right">
+          <span>♫</span>
+          <span>⌁</span>
+          <span data-taskbar-date>--</span>
+          <strong data-desktop-clock-small>00:00</strong>
+          <span data-taskbar-weather>--°C</span>
+        </div>
       </nav>
 
       <aside class="start-menu" data-start-menu>
         <header>
-          <strong>Programas</strong>
+          <strong>All Applications</strong>
           <span>Portfólio</span>
         </header>
-        <button data-open-program="F1 Visualizer">F1 Visualizer</button>
-        <button data-open-program="Agente IA WhatsApp">Agente IA WhatsApp</button>
-        <button data-open-program="Landing Pages">Landing Pages</button>
-        <button data-open-program="Branding Archive">Branding Archive</button>
-        <button data-open-program="Motion Lab">Motion Lab</button>
+        <div class="start-grid">
+          <button data-open-program="F1 Visualizer"><span>🏎</span>F1 Visualizer</button>
+          <button data-open-program="Agente IA WhatsApp"><span>✦</span>Agente IA</button>
+          <button data-open-program="Landing Pages"><span>⌁</span>Landing Pages</button>
+          <button data-open-program="Dashboards para PMEs"><span>▣</span>Dashboards</button>
+          <button data-open-program="Branding Archive"><span>◆</span>Branding</button>
+          <button data-open-program="Motion Lab"><span>▶</span>Motion Lab</button>
+        </div>
+        <label class="start-search">
+          <span>⌕</span>
+          <input type="search" placeholder="Buscar projeto" />
+        </label>
       </aside>
     </section>
   </main>
