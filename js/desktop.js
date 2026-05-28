@@ -10,7 +10,7 @@ const GRID = {
   maxCellH: 118
 };
 
-const LS_KEY = 'lorenzo_os_desktop_positions_responsive_grid_v2';
+const LS_KEY = 'lorenzo_os_desktop_positions_responsive_grid_v3_side_aware';
 let resizeTimer = null;
 
 function clamp(value, min, max){
@@ -50,10 +50,12 @@ function savePosition(id, cellIndex){
   localStorage.setItem(LS_KEY, JSON.stringify(pos));
 }
 
-function getCellIndexFromPosition(x, y){
+function getCellIndexFromPosition(x, y, side = 'left'){
   const m = getGridMetrics();
-  const col = clamp(Math.round((x - m.marginX) / m.cellW), 0, m.maxCols - 1);
-  const row = Math.max(0, Math.round((y - m.topY) / m.cellH));
+  const col = side === 'right'
+    ? clamp(Math.round((m.width - m.marginX - GRID.iconW - x) / m.cellW), 0, m.maxCols - 1)
+    : clamp(Math.round((x - m.marginX) / m.cellW), 0, m.maxCols - 1);
+  const row = clamp(Math.round((y - m.topY) / m.cellH), 0, m.maxRows - 1);
   return col * m.maxRows + row;
 }
 
@@ -80,15 +82,16 @@ function positionFromIndex(index){
 
 function defaultPosition(item, defaultIndex){
   const m = getGridMetrics();
-  const col = Math.floor(defaultIndex / m.maxRows);
-  const row = defaultIndex % m.maxRows;
+  const normalized = normalizeIndex(defaultIndex);
+  const col = Math.floor(normalized / m.maxRows);
+  const row = normalized % m.maxRows;
 
   if(item.side === 'right'){
     const x = m.width - m.marginX - GRID.iconW - col * m.cellW;
     return {
       x: clamp(x, m.marginX, m.width - m.marginX - GRID.iconW),
       y: m.topY + row * m.cellH,
-      index: defaultIndex,
+      index: normalized,
       col,
       row
     };
@@ -97,7 +100,7 @@ function defaultPosition(item, defaultIndex){
   return {
     x: m.marginX + col * m.cellW,
     y: m.topY + row * m.cellH,
-    index: defaultIndex,
+    index: normalized,
     col,
     row
   };
@@ -107,11 +110,11 @@ function migrateOldPosition(saved, item){
   if(!saved) return null;
 
   if(saved.mode === 'cell-index' && Number.isFinite(saved.index)){
-    return positionFromIndex(saved.index);
+    return defaultPosition(item, saved.index);
   }
 
   if(Number.isFinite(saved.x) && Number.isFinite(saved.y)){
-    return positionFromIndex(getCellIndexFromPosition(saved.x, saved.y));
+    return defaultPosition(item, getCellIndexFromPosition(saved.x, saved.y, item.side));
   }
 
   return null;
@@ -145,8 +148,9 @@ function findFreePosition(proposed, item, occupied){
   return proposed;
 }
 
-function snapToResponsiveGrid(x, y){
-  return positionFromIndex(getCellIndexFromPosition(x, y));
+function snapToResponsiveGrid(x, y, side = 'left'){
+  const item = { side };
+  return defaultPosition(item, getCellIndexFromPosition(x, y, side));
 }
 
 function clearSelection(){
@@ -229,7 +233,7 @@ function makeDesktopIconInteractive(icon, item){
     drag = false;
     icon.classList.remove('dragging');
 
-    const snapped = snapToResponsiveGrid(icon.offsetLeft, icon.offsetTop);
+    const snapped = snapToResponsiveGrid(icon.offsetLeft, icon.offsetTop, item.side);
     icon.style.left = `${snapped.x}px`;
     icon.style.top = `${snapped.y}px`;
     savePosition(item.id, snapped.index);
