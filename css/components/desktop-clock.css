@@ -1,3 +1,5 @@
+/* Componente editável do relógio central do desktop */
+
 .desktop-clock-mount {
   position: absolute;
   left: 50%;
@@ -18,67 +20,57 @@
   display: grid;
   place-items: center;
   align-content: center;
-  gap: 12px;
+  gap: clamp(10px, 1.4vw, 20px);
   text-align: center;
-  border-radius: 38px;
   color: rgba(255, 255, 255, 0.92);
-  background:
-    radial-gradient(circle at 74% 18%, rgba(255, 255, 255, 0.22), transparent 16%),
-    radial-gradient(circle at 18% 78%, rgba(255, 255, 255, 0.14), transparent 18%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.035));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 42px 120px rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  overflow: hidden;
+
+  /* Fundo transparente: mantém só a área do componente para alinhamento */
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  overflow: visible;
 }
 
 .desktop-clock-widget::before,
 .desktop-clock-widget::after {
-  content: "";
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(14px);
-  pointer-events: none;
+  content: none;
 }
 
-.desktop-clock-widget::before {
-  width: 220px;
-  height: 220px;
-  left: -70px;
-  bottom: -80px;
-  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.88) 0%, rgba(226,236,255,.48) 24%, rgba(168,195,235,.08) 54%, transparent 72%);
-}
-
-.desktop-clock-widget::after {
-  width: 180px;
-  height: 180px;
-  right: -30px;
-  top: -30px;
-  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.68) 0%, rgba(220,229,244,.34) 30%, transparent 72%);
+.desktop-clock-weekday {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(18px, 2.4vw, 38px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.64);
+  text-transform: capitalize;
+  text-shadow: 0 12px 32px rgba(255, 255, 255, 0.08);
 }
 
 .desktop-clock-time {
   position: relative;
   z-index: 1;
-  font-size: clamp(58px, 9vw, 142px);
-  font-weight: 200;
-  line-height: 0.92;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.88);
-  text-shadow: 0 10px 36px rgba(255, 255, 255, 0.10);
+  font-size: clamp(76px, 11vw, 180px);
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: 0.015em;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow:
+    0 8px 28px rgba(255, 255, 255, 0.10),
+    0 24px 80px rgba(0, 0, 0, 0.22);
 }
 
 .desktop-clock-date {
   position: relative;
   z-index: 1;
-  font-size: clamp(16px, 2vw, 30px);
-  font-weight: 400;
-  line-height: 1.2;
+  font-size: clamp(18px, 2.3vw, 34px);
+  font-weight: 600;
+  line-height: 1.15;
   letter-spacing: 0.01em;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.56);
   text-transform: capitalize;
   text-shadow: 0 8px 28px rgba(255, 255, 255, 0.06);
 }
@@ -95,5 +87,9 @@
     top: 43%;
     width: min(58vw, 680px);
     height: min(36vw, 360px);
+  }
+
+  .desktop-clock-time {
+    font-size: clamp(64px, 9vw, 132px);
   }
 }

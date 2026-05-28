@@ -165,6 +165,34 @@ function getInitialItems(){
   ];
 }
 
+
+function createPortfolioFolderIcon(label){
+  const safeLabel = String(label || 'Code');
+  const letter = safeLabel.trim().charAt(0).toUpperCase() || 'D';
+
+  return `
+    <div class="code-folder desktop-code-folder" aria-hidden="true">
+      <div class="folder-back">
+        <div class="window-dots"><span></span><span></span><span></span></div>
+        <div class="folder-letter">${letter}</div>
+      </div>
+      <div class="folder-front">
+        <div class="folder-label">${safeLabel}</div>
+        <div class="code-lines">
+          <span class="line short"></span>
+          <span class="line medium"></span>
+          <span class="line long"></span>
+          <span class="line color"></span>
+          <span class="line medium"></span>
+        </div>
+        <div class="code-symbol">&lt;/&gt;</div>
+        <div class="folder-brand">N</div>
+      </div>
+    </div>
+    <span>${safeLabel}</span>
+  `;
+}
+
 function renderDesktopIcons(){
   const wrap = document.getElementById('desktopIcons');
   const saved = loadPositions();
@@ -188,7 +216,9 @@ function renderDesktopIcons(){
     icon.dataset.side = item.side;
     icon.style.left = `${finalPos.x}px`;
     icon.style.top = `${finalPos.y}px`;
-    icon.innerHTML = `<span class="icon-glyph">${item.type === 'txt' ? 'TXT' : item.type === 'game' ? 'GAME' : 'DIR'}</span><span>${item.label}</span>`;
+    icon.innerHTML = item.type === 'folder'
+      ? createPortfolioFolderIcon(item.label)
+      : `<span class="icon-glyph">${item.type === 'txt' ? 'TXT' : item.type === 'game' ? 'GAME' : 'DIR'}</span><span>${item.label}</span>`;
 
     wrap.appendChild(icon);
     makeDesktopIconInteractive(icon, item);

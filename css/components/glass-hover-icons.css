@@ -1,0 +1,126 @@
+/* Efeito glass hover aplicado aos itens clicáveis do sistema */
+
+.icon-glyph,
+.desktop-code-folder,
+.folder-file,
+.dock-icon,
+.start-menu-grid button,
+.mobile-app span {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.icon-glyph::before,
+.desktop-code-folder::after,
+.folder-file::before,
+.dock-icon::before,
+.start-menu-grid button::before,
+.mobile-app span::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(0, 0, 0, 0.86) 0 9%, rgba(0, 0, 0, 0.48) 13%, transparent 28%),
+    radial-gradient(circle at calc(var(--mouse-x) - 18%) calc(var(--mouse-y) + 28%), rgba(255, 178, 65, 0.88) 0 13%, rgba(255, 178, 65, 0.38) 24%, transparent 44%),
+    radial-gradient(circle at calc(var(--mouse-x) + 32%) calc(var(--mouse-y) - 12%), rgba(124, 239, 255, 0.68) 0 10%, rgba(124, 239, 255, 0.24) 22%, transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+  filter: blur(2px) saturate(1.22);
+  transition: opacity 240ms ease;
+}
+
+.icon-glyph::before,
+.desktop-code-folder::after,
+.mobile-app span::before {
+  border-radius: inherit;
+}
+
+.folder-file::before,
+.start-menu-grid button::before {
+  border-radius: inherit;
+}
+
+.desktop-code-folder::after {
+  z-index: 6;
+  mix-blend-mode: screen;
+}
+
+.icon-glyph > *,
+.desktop-code-folder > *,
+.folder-file > *,
+.dock-icon > *,
+.start-menu-grid button > *,
+.mobile-app span > * {
+  position: relative;
+  z-index: 2;
+}
+
+.icon-glyph,
+.dock-icon,
+.start-menu-grid button,
+.mobile-app span {
+  transition:
+    transform 260ms ease,
+    border-color 260ms ease,
+    box-shadow 260ms ease,
+    background 260ms ease,
+    filter 260ms ease;
+}
+
+.desktop-icon:hover .icon-glyph,
+.desktop-icon.selected .icon-glyph,
+.dock-icon:hover,
+.start-menu-grid button:hover,
+.mobile-app:hover span,
+.mobile-app:focus-visible span {
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.26),
+    inset 0 -20px 50px rgba(255, 255, 255, 0.05),
+    0 22px 72px rgba(0, 0, 0, 0.42),
+    0 0 42px rgba(255, 177, 75, 0.14),
+    0 0 48px rgba(121, 232, 255, 0.10);
+}
+
+.desktop-icon:hover .icon-glyph::before,
+.desktop-icon.selected .icon-glyph::before,
+.desktop-icon.folder:hover .desktop-code-folder::after,
+.desktop-icon.folder.selected .desktop-code-folder::after,
+.folder-file:hover::before,
+.folder-file.selected::before,
+.dock-icon:hover::before,
+.start-menu-grid button:hover::before,
+.mobile-app:hover span::before,
+.mobile-app:focus-visible span::before {
+  opacity: 1;
+}
+
+.folder-file,
+.start-menu-grid button {
+  transition:
+    transform 260ms ease,
+    border-color 260ms ease,
+    box-shadow 260ms ease,
+    background 260ms ease;
+}
+
+.folder-file:hover,
+.folder-file.selected,
+.start-menu-grid button:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.20),
+    0 22px 60px rgba(0, 0, 0, 0.32),
+    0 0 38px rgba(255, 177, 75, 0.10),
+    0 0 42px rgba(121, 232, 255, 0.08);
+}
+
+.desktop-code-folder .folder-front,
+.desktop-code-folder .folder-back {
+  z-index: 2;
+}
