@@ -1,25 +1,19 @@
-# Lorenzo OS — Portfólio modular dark
+# Lorenzo OS — Portfolio POC
 
-Projeto de prova de conceito para currículo e portfólio em formato de sistema operacional.
+Projeto de currículo e portfólio em formato de sistema operacional.
 
-## Estrutura
+## Como editar conteúdo
+- Currículo desktop/mobile: `content/curriculo/*.html`
+- Portfólio: `content/portfolio/*/*.html`
+- CSS desktop: `css/desktop.css`
+- Janelas: `css/windows.css` e `js/windows.js`
+- Mobile: `css/mobile.css` e `js/mobile.js`
 
-- Desktop: área de trabalho com arquivos do currículo, pastas do portfólio e jogos.
-- Mobile: tela de celular com app de notas, apps soltos e pasta Jogos.
-- Conteúdos editáveis em `content/`.
-- Estilos separados em `css/`.
-- Scripts separados em `js/`.
-
-## Como rodar
-
-Use um servidor local para o `fetch()` carregar os HTMLs:
-
-```bash
-python -m http.server 8000
-```
-
-Depois abra:
-
-```txt
-http://localhost:8000
-```
+## Interações desktop
+- 1 clique seleciona ícone
+- Arrastar move ícone
+- Soltar aplica snap to grid
+- 2 cliques abre arquivo/pasta
+- TXT abre como janela pequena
+- Botão amarelo alterna tela cheia
+- Botão vermelho fecha

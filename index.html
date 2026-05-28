@@ -3,71 +3,89 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lorenzo OS | Currículo e Portfólio</title>
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/theme.css" />
+  <title>Lorenzo OS — Currículo e Portfólio</title>
+  <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/desktop.css" />
   <link rel="stylesheet" href="css/windows.css" />
   <link rel="stylesheet" href="css/mobile.css" />
   <link rel="stylesheet" href="css/games.css" />
 </head>
 <body>
-  <main class="desktop-os" id="desktopOs" aria-label="Versão desktop do portfólio">
-    <section class="desktop-wallpaper" id="desktopArea">
-      <div class="center-clock" aria-hidden="true">
-        <span id="desktopHeroHour">00</span>
-        <span id="desktopHeroMinute">00</span>
-        <small id="desktopHeroDate">LOADING</small>
-      </div>
+  <main id="desktopOS" class="desktop-os" aria-label="Desktop portfolio">
+    <section id="desktopArea" class="desktop-area">
+      <div class="wallpaper-orb" aria-hidden="true"></div>
       <div id="desktopIcons" class="desktop-icons"></div>
-      <div id="windowLayer" class="window-layer"></div>
     </section>
 
-    <nav class="desktop-topbar">
-      <button class="system-pill" id="appMenuBtn" type="button">Apps</button>
-      <div class="topbar-center" id="topbarClock">--:--</div>
-      <div class="topbar-status">
-        <span>pt</span><span>◐</span><span>▣</span><span>▰</span>
+    <nav class="taskbar" aria-label="Barra do sistema">
+      <button id="startButton" class="start-button" type="button">Apps</button>
+      <div class="contact-dock" aria-label="Contatos">
+        <a href="#" class="dock-icon" title="Email">✉</a>
+        <a href="#" class="dock-icon" title="LinkedIn">in</a>
+        <a href="#" class="dock-icon" title="GitHub">⌘</a>
+        <a href="#" class="dock-icon" title="Instagram">◎</a>
+        <a href="#" class="dock-icon" title="WhatsApp">☏</a>
       </div>
+      <div id="systemClock" class="system-clock">00:00</div>
     </nav>
 
-    <aside class="app-menu" id="appMenu" aria-hidden="true">
-      <div class="app-menu-head">Aplicativos</div>
-      <div class="app-menu-grid" id="appMenuGrid"></div>
+    <aside id="startMenu" class="start-menu" aria-label="Menu de aplicativos">
+      <h2>Applications</h2>
+      <button data-open-folder="f1">F1</button>
+      <button data-open-folder="ia">IA</button>
+      <button data-open-folder="web">Web</button>
+      <button data-open-folder="branding">Branding</button>
+      <button data-open-game="snake">Snake</button>
+      <button data-open-game="mines">Campo Minado</button>
+      <button data-open-game="pong">Pong</button>
     </aside>
 
-    <nav class="desktop-dock" aria-label="Contatos">
-      <a class="dock-icon" href="mailto:guirellilorenzo1@gmail.com" title="Email">✉</a>
-      <a class="dock-icon" href="https://www.linkedin.com/" target="_blank" rel="noreferrer" title="LinkedIn">in</a>
-      <a class="dock-icon" href="https://github.com/Lguirelli" target="_blank" rel="noreferrer" title="GitHub">GH</a>
-      <a class="dock-icon" href="https://www.instagram.com/" target="_blank" rel="noreferrer" title="Instagram">◎</a>
-      <button class="dock-icon" type="button" data-open-contact title="Contato">☎</button>
-    </nav>
+    <section id="windowsLayer" class="windows-layer" aria-label="Janelas abertas"></section>
   </main>
 
-  <main class="mobile-os" id="mobileOs" aria-label="Versão mobile do portfólio">
-    <section class="phone-shell">
-      <header class="phone-statusbar">
-        <span id="mobileClock">--:--</span>
-        <span>▴ 4G ◉ 76</span>
+  <main id="mobileOS" class="mobile-os" aria-label="Mobile portfolio">
+    <section class="phone-screen">
+      <header class="mobile-status">
+        <span id="mobileClock">00:00</span>
+        <span>▮▮ 5G ◔</span>
       </header>
-      <section class="phone-screen" id="mobileScreen"></section>
-      <nav class="mobile-nav" aria-label="Navegação mobile">
-        <button type="button" id="mobileTasks" aria-label="Telas abertas">▢</button>
-        <button type="button" id="mobileHome" aria-label="Home">○</button>
-        <button type="button" id="mobileBack" aria-label="Voltar">◀</button>
+
+      <section id="mobileHome" class="mobile-page active">
+        <div class="mobile-hero">
+          <span class="moon">☾</span>
+          <h1>Lorenzo OS</h1>
+          <p>Currículo, portfólio e experimentos digitais.</p>
+        </div>
+        <div class="mobile-app-grid">
+          <button class="mobile-app" data-mobile-open="notes"><span>📝</span><small>Notas</small></button>
+          <button class="mobile-app" data-mobile-open="f1"><span>🏎</span><small>F1</small></button>
+          <button class="mobile-app" data-mobile-open="ia"><span>🤖</span><small>IA</small></button>
+          <button class="mobile-app" data-mobile-open="web"><span>🌐</span><small>Web</small></button>
+          <button class="mobile-app" data-mobile-open="branding"><span>✦</span><small>Branding</small></button>
+          <button class="mobile-app folder" data-mobile-open="games"><span>🎮</span><small>Jogos</small></button>
+          <button class="mobile-app"><span>✉</span><small>Email</small></button>
+          <button class="mobile-app"><span>⌘</span><small>GitHub</small></button>
+        </div>
+      </section>
+
+      <section id="mobileAppView" class="mobile-page mobile-app-view">
+        <header class="mobile-app-header"><button id="mobileBackTop">‹</button><h2 id="mobileAppTitle">App</h2></header>
+        <div id="mobileAppContent" class="mobile-app-content"></div>
+      </section>
+
+      <nav class="mobile-nav">
+        <button id="mobileScreens" aria-label="Telas abertas">▢</button>
+        <button id="mobileHomeBtn" aria-label="Home">○</button>
+        <button id="mobileBack" aria-label="Voltar">◂</button>
       </nav>
     </section>
   </main>
 
-  <script src="js/data/content.js"></script>
-  <script src="js/core/clock.js"></script>
-  <script src="js/core/windows.js"></script>
-  <script src="js/desktop/desktop-icons.js"></script>
-  <script src="js/mobile/mobile.js"></script>
-  <script src="js/games/snake.js"></script>
-  <script src="js/games/mines.js"></script>
-  <script src="js/games/pong.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/windows.js"></script>
+  <script src="js/desktop.js"></script>
+  <script src="js/mobile.js"></script>
+  <script src="js/games.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
