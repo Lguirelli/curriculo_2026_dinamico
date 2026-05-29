@@ -216,11 +216,7 @@ function renderDesktopIcons(){
       `;
     } else if (item.type === 'txt') {
       icon.innerHTML = `
-        <span class="txt-file-icon" aria-hidden="true">
-          <span class="txt-file-sheet"></span>
-          <span class="txt-file-corner"></span>
-          <span class="txt-file-text">TXT</span>
-        </span>
+        <span class="txt-file-icon" aria-hidden="true"></span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
     } else if (item.type === 'game') {

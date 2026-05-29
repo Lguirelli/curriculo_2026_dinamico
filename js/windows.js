@@ -26,6 +26,7 @@ function createWindow({title, html, kind='default', x=null, y=null}){
       <strong class="window-title">${title}</strong>
     </header>
     <div class="window-body">${html}</div>
+    <span class="window-resize-handle" aria-hidden="true"></span>
   `;
   layer.appendChild(win);
   win.addEventListener('pointerdown',()=> win.style.zIndex = ++topZ);
@@ -33,8 +34,44 @@ function createWindow({title, html, kind='default', x=null, y=null}){
   win.querySelector('.window-full').addEventListener('click',(e)=>{e.stopPropagation();win.classList.toggle('fullscreen');});
   win.querySelector('.window-min').addEventListener('click',(e)=>{e.stopPropagation();win.style.transform='scale(.92)';win.style.opacity='0';setTimeout(()=>win.remove(),160);});
   makeDraggableWindow(win, win.querySelector('.window-header'));
+  makeResizableWindow(win, win.querySelector('.window-resize-handle'));
   return win;
 }
+
+function makeResizableWindow(win, handle){
+  if(!handle) return;
+  let startX=0,startY=0,startW=0,startH=0,resizing=false;
+
+  handle.addEventListener('pointerdown', e=>{
+    if(win.classList.contains('fullscreen')) return;
+    resizing=true;
+    startX=e.clientX;
+    startY=e.clientY;
+    startW=win.offsetWidth;
+    startH=win.offsetHeight;
+    handle.setPointerCapture(e.pointerId);
+    win.style.zIndex=++topZ;
+    e.preventDefault();
+    e.stopPropagation();
+  });
+
+  handle.addEventListener('pointermove', e=>{
+    if(!resizing) return;
+    const minW = win.classList.contains('text-window') ? 320 : 360;
+    const minH = win.classList.contains('text-window') ? 220 : 260;
+    const maxW = window.innerWidth - win.offsetLeft - 18;
+    const maxH = window.innerHeight - win.offsetTop - 18;
+    const nextW = Math.max(minW, Math.min(maxW, startW + e.clientX - startX));
+    const nextH = Math.max(minH, Math.min(maxH, startH + e.clientY - startY));
+    win.style.width = `${nextW}px`;
+    win.style.height = `${nextH}px`;
+  });
+
+  handle.addEventListener('pointerup', ()=>{
+    resizing=false;
+  });
+}
+
 function makeDraggableWindow(win, handle){
   let startX=0,startY=0,baseX=0,baseY=0,drag=false;
   handle.addEventListener('pointerdown', e=>{

@@ -62,6 +62,48 @@
 .icon-glyph::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 28% 20%, rgba(255,255,255,.72), transparent 26%), linear-gradient(180deg, rgba(255,255,255,.12), transparent 55%)}
 .desktop-icon.game .icon-glyph{color:#0d1b2e;background:linear-gradient(180deg,#edf6ff 0%,#b9d2ef 48%,#647e9e 100%)}
 
+/* TXT icon: SVG direto, sem construção por CSS */
+.txt-file-icon{
+  position:relative;
+  width:58px;
+  height:66px;
+  display:block;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  overflow:visible;
+  filter:drop-shadow(0 10px 18px rgba(0,0,0,.16));
+  transition:transform .18s ease, filter .18s ease;
+}
+.txt-file-icon::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  display:block;
+  background-color:var(--text-1);
+  opacity:.98;
+  -webkit-mask-image:url("../assets/icons/txt-file.svg");
+  -webkit-mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  -webkit-mask-size:100% 100%;
+  mask-image:url("../assets/icons/txt-file.svg");
+  mask-repeat:no-repeat;
+  mask-position:center;
+  mask-size:100% 100%;
+}
+.desktop-icon:hover .txt-file-icon,
+.desktop-icon.selected .txt-file-icon{
+  transform:translateY(-2px);
+  filter:drop-shadow(0 14px 24px rgba(0,0,0,.20));
+}
+@media (max-height:760px){
+  .txt-file-icon{
+    width:54px;
+    height:62px;
+  }
+}
+
+
 .game-cover-icon{
   width:60px;
   height:60px;
@@ -91,301 +133,3 @@
   box-shadow:0 8px 16px rgba(0,0,0,.18);
 }
 
-.txt-file-icon{
-  position:relative;
-  width:58px;
-  height:66px;
-  display:block;
-  background:transparent;
-  border:0;
-  box-shadow:none;
-  overflow:visible;
-  filter:drop-shadow(0 10px 18px rgba(0,0,0,.16));
-  transition:transform .18s ease, filter .18s ease;
-}
-.txt-file-sheet{
-  position:absolute;
-  inset:0;
-  display:block;
-  background:rgba(255,255,255,.96);
-  -webkit-mask-image:url("../assets/icons/txt-file.svg");
-  -webkit-mask-repeat:no-repeat;
-  -webkit-mask-position:center;
-  -webkit-mask-size:100% 100%;
-  mask-image:url("../assets/icons/txt-file.svg");
-  mask-repeat:no-repeat;
-  mask-position:center;
-  mask-size:100% 100%;
-}
-.txt-file-corner{
-  position:absolute;
-  top:7px;
-  right:6px;
-  width:16px;
-  height:16px;
-  display:block;
-  background:linear-gradient(135deg, rgba(212,218,228,.98), rgba(156,165,178,.96));
-  clip-path:polygon(0 0, 100% 0, 100% 100%);
-  box-shadow:inset 1px 1px 0 rgba(255,255,255,.44), 0 1px 2px rgba(0,0,0,.08);
-  z-index:2;
-}
-.txt-file-text{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding-top:6px;
-  font-size:15px;
-  font-weight:900;
-  letter-spacing:.03em;
-  color:rgba(18,24,35,.94);
-  z-index:3;
-}
-.desktop-icon:hover .txt-file-icon,
-.desktop-icon.selected .txt-file-icon{
-  transform:translateY(-2px);
-  filter:drop-shadow(0 14px 24px rgba(0,0,0,.20));
-}
-
-
-.portfolio-folder-icon.glass-folder-mini{
-  position:relative;
-  display:block;
-  width:64px;
-  height:48px;
-  perspective:900px;
-  transform-style:preserve-3d;
-  transition:transform 320ms ease, filter 320ms ease;
-  filter:drop-shadow(0 10px 16px rgba(0,0,0,.14));
-}
-.portfolio-folder-icon.glass-folder-mini .folder-core,
-.portfolio-folder-icon.glass-folder-mini .folder-back,
-.portfolio-folder-icon.glass-folder-mini .folder-front,
-.portfolio-folder-icon.glass-folder-mini .folder-shine{
-  position:absolute;
-  display:block;
-  pointer-events:none;
-}
-.portfolio-folder-icon.glass-folder-mini .folder-core{
-  left:6px;
-  top:2px;
-  width:52px;
-  height:32px;
-  border-radius:14px 20px 8px 8px;
-  background:linear-gradient(180deg, rgba(252,210,198,.98), rgba(239,173,158,.96));
-  border:1px solid rgba(235,176,163,.96);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.42), 0 7px 12px rgba(0,0,0,.10);
-  transform:translateZ(-8px);
-  overflow:hidden;
-}
-.portfolio-folder-icon.glass-folder-mini .folder-core::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:-1px;
-  width:22px;
-  height:8px;
-  border-radius:10px 7px 0 0;
-  background:linear-gradient(180deg, rgba(249,197,183,.98), rgba(237,162,146,.96));
-  border:1px solid rgba(235,176,163,.95);
-  border-bottom:0;
-}
-.portfolio-folder-icon.glass-folder-mini .folder-core::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at 64% 55%, rgba(255,224,216,.55), transparent 38%);
-  opacity:.8;
-}
-.portfolio-folder-icon.glass-folder-mini .folder-back{
-  inset:0;
-  border-radius:15px;
-  background:transparent;
-}
-.portfolio-folder-icon.glass-folder-mini .folder-front{
-  left:3px;
-  right:3px;
-  bottom:1px;
-  height:31px;
-  border-radius:12px;
-  background:linear-gradient(180deg, rgba(255,255,255,.72), rgba(248,242,241,.52));
-  border:1px solid rgba(255,255,255,.72);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.85),
-    inset 0 -12px 18px rgba(223,198,196,.22),
-    0 8px 16px rgba(0,0,0,.14);
-  backdrop-filter:blur(10px) saturate(120%);
-  -webkit-backdrop-filter:blur(10px) saturate(120%);
-  transform-origin:bottom center;
-  transform:translateZ(8px);
-  overflow:hidden;
-  transition:transform 360ms ease, box-shadow 360ms ease;
-}
-.portfolio-folder-icon.glass-folder-mini .folder-front::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 58% 55%, rgba(241,176,161,.50), transparent 46%),
-    linear-gradient(180deg, rgba(255,255,255,.32), transparent 46%);
-  opacity:.9;
-}
-.portfolio-folder-icon.glass-folder-mini .folder-front::after{
-  content:"";
-  position:absolute;
-  left:6px;
-  top:4px;
-  width:65%;
-  height:34%;
-  border-radius:999px;
-  background:linear-gradient(180deg, rgba(255,255,255,.48), rgba(255,255,255,0));
-  filter:blur(1px);
-  opacity:.55;
-}
-.portfolio-folder-icon.glass-folder-mini .folder-shine{
-  inset:0;
-  overflow:hidden;
-  border-radius:14px;
-  transform:translateZ(10px);
-}
-.portfolio-folder-icon.glass-folder-mini .folder-shine::before{
-  content:"";
-  position:absolute;
-  width:34px;
-  height:80px;
-  left:-50px;
-  top:-16px;
-  background:linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
-  transform:rotate(18deg);
-  opacity:0;
-  transition:left 620ms ease, opacity 260ms ease;
-}
-.desktop-icon.folder:hover .portfolio-folder-icon.glass-folder-mini,
-.desktop-icon.folder.selected .portfolio-folder-icon.glass-folder-mini{
-  transform:translateY(-2px);
-  filter:drop-shadow(0 12px 18px rgba(0,0,0,.16));
-}
-.desktop-icon.folder:hover .portfolio-folder-icon.glass-folder-mini .folder-front,
-.desktop-icon.folder.selected .portfolio-folder-icon.glass-folder-mini .folder-front{
-  transform:rotateX(-14deg) translateY(2px) translateZ(10px);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.85),
-    inset 0 -12px 18px rgba(223,198,196,.20),
-    0 12px 18px rgba(0,0,0,.18);
-}
-.desktop-icon.folder:hover .portfolio-folder-icon.glass-folder-mini .folder-shine::before,
-.desktop-icon.folder.selected .portfolio-folder-icon.glass-folder-mini .folder-shine::before{
-  left:72px;
-  opacity:1;
-}
-
-
-
-
-@media (max-height: 760px){.portfolio-folder-icon.glass-folder-mini{width:60px;height:45px}.portfolio-folder-icon.glass-folder-mini .folder-core{width:49px;height:30px}.portfolio-folder-icon.glass-folder-mini .folder-front{height:29px}}
-@media (max-width: 1180px){.portfolio-folder-icon.glass-folder-mini{width:62px;height:47px}}
-
-
-
-.dock{
-  position:absolute;
-  left:50%;
-  bottom:18px;
-  transform:translateX(-50%);
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  border-radius:22px;
-  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.10);
-  box-shadow:
-    0 18px 30px rgba(0,0,0,.16),
-    inset 0 1px 0 rgba(255,255,255,.09);
-}
-
-.dock-icon{
-  position:relative;
-  width:44px;
-  height:44px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
-  border:1px solid rgba(255,255,255,.10);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 10px 18px rgba(0,0,0,.12);
-  overflow:hidden;
-  transition:transform .18s ease, background .18s ease, box-shadow .18s ease;
-}
-
-.dock-icon:hover{
-  transform:translateY(-3px);
-  background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.20), 0 14px 24px rgba(0,0,0,.16);
-}
-
-.dock-icon-svg{
-  position:absolute;
-  inset:6px;
-  display:block;
-  background-color:var(--text-1);
-  opacity:.94;
-  transition:opacity .18s ease, transform .18s ease, background-color .18s ease;
-  -webkit-mask-repeat:no-repeat;
-  -webkit-mask-position:center;
-  -webkit-mask-size:100% 100%;
-  mask-repeat:no-repeat;
-  mask-position:center;
-  mask-size:100% 100%;
-}
-
-.dock-icon:hover .dock-icon-svg{
-  opacity:1;
-  transform:scale(1.05);
-  background-color:var(--accent);
-}
-
-
-.icon-email{
-  -webkit-mask-image:url("../assets/icons/email.svg");
-  mask-image:url("../assets/icons/email.svg");
-}
-.icon-linkedin{
-  -webkit-mask-image:url("../assets/icons/linkedin.svg");
-  mask-image:url("../assets/icons/linkedin.svg");
-}
-.icon-github{
-  -webkit-mask-image:url("../assets/icons/github.svg");
-  mask-image:url("../assets/icons/github.svg");
-}
-.icon-instagram{
-  -webkit-mask-image:url("../assets/icons/instagram.svg");
-  mask-image:url("../assets/icons/instagram.svg");
-}
-.icon-whatsapp{
-  -webkit-mask-image:url("../assets/icons/whatsapp.svg");
-  mask-image:url("../assets/icons/whatsapp.svg");
-}
-
-@media (max-width:760px){
-  .dock{
-    gap:10px;
-    padding:10px 14px;
-    bottom:14px;
-  }
-  .dock-icon{
-    width:40px;
-    height:40px;
-    border-radius:13px;
-  }
-  .dock-icon-svg{
-    inset:5px;
-    width:auto;
-    height:auto;
-  }
-}
-
-@media (max-height: 760px){.txt-file-icon{width:54px;height:62px}.txt-file-corner{top:7px;right:6px;width:15px;height:15px}.txt-file-text{font-size:14px}}

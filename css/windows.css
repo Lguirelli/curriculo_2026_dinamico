@@ -149,3 +149,122 @@
   .window-body .cv-columns-2{grid-template-columns:1fr;gap:24px}
   .window-body .cv-tool-grid{grid-template-columns:repeat(4, minmax(0, 1fr));max-width:none}
 }
+
+/* Notepad-style TXT windows */
+.os-window.text-window{
+  width:520px;
+  height:360px;
+  min-width:320px;
+  min-height:220px;
+  resize:none;
+  overflow:hidden;
+  border-radius:24px;
+  background:rgba(22,26,36,.48);
+}
+
+.text-window .window-header{
+  height:42px;
+  background:rgba(18,22,31,.62);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.text-window .window-title{
+  font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.01em;
+}
+
+.text-window .window-body{
+  padding:0;
+  overflow:auto;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      rgba(255,255,255,.024) 0,
+      rgba(255,255,255,.024) 1px,
+      transparent 1px,
+      transparent 30px
+    ),
+    rgba(248,250,252,.96);
+  color:#3f485b;
+  font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size:15px;
+  line-height:1.9;
+  white-space:normal;
+  word-break:normal;
+  overflow-wrap:anywhere;
+}
+
+.notepad-document{
+  min-height:100%;
+  padding:28px 30px 36px;
+  color:#4f5b72;
+}
+
+.notepad-document p{
+  margin:0 0 20px;
+  color:#4f5b72;
+  line-height:1.9;
+}
+
+.notepad-document strong{
+  color:#1f2634;
+  font-weight:800;
+}
+
+.notepad-document ul{
+  margin:0 0 22px;
+  padding-left:22px;
+}
+
+.notepad-document li{
+  margin:0 0 10px;
+  color:#4f5b72;
+  line-height:1.8;
+}
+
+.window-resize-handle{
+  position:absolute;
+  right:8px;
+  bottom:8px;
+  width:18px;
+  height:18px;
+  z-index:8;
+  cursor:nwse-resize;
+  opacity:.55;
+  background:
+    linear-gradient(135deg, transparent 0 48%, rgba(255,255,255,.42) 49% 53%, transparent 54%),
+    linear-gradient(135deg, transparent 0 66%, rgba(255,255,255,.28) 67% 71%, transparent 72%);
+  border-radius:4px;
+}
+
+.os-window.fullscreen .window-resize-handle{
+  display:none;
+}
+
+/* Remove old paper/card curriculum styling inside TXT windows */
+.text-window .cv-sheet,
+.text-window .cv-sheet::before{
+  all:unset;
+}
+
+.text-window .cv-sheet{
+  display:block;
+}
+
+@media (max-width:760px){
+  .os-window.text-window{
+    width:calc(100vw - 28px);
+    height:calc(100vh - 110px);
+  }
+
+  .notepad-document{
+    padding:22px 20px 32px;
+  }
+
+  .text-window .window-body{
+    font-size:14px;
+    line-height:1.8;
+  }
+}
