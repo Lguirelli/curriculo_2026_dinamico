@@ -77,6 +77,7 @@ function makeDraggableWindow(win, handle){
 }
 
 function makeResizableWindow(win){
+  if(win.classList.contains('game-window')) return;
   const handles = win.querySelectorAll('[data-resize]');
   handles.forEach(handle=>{
     let startX=0,startY=0,startW=0,startH=0,resizing=false;

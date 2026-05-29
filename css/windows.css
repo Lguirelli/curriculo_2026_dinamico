@@ -306,3 +306,5 @@
     line-height:1.8;
   }
 }
+
+.game-window .window-resize-edge{display:none!important;}
