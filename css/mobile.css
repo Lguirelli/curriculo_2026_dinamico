@@ -89,3 +89,34 @@
   fill:rgba(255,255,255,.39);
   stroke:rgba(255,255,255,.56);
 }
+
+/* Folder icon no-line fix */
+.mobile-folder-icon .portfolio-folder-back,
+.mobile-folder-icon .portfolio-folder-front{
+  stroke:none !important;
+}
+
+.mobile-folder-icon .portfolio-folder-back{
+  clip-path:inset(0 0 62% 0) !important;
+  opacity:.82 !important;
+  fill:rgba(255,255,255,.10) !important;
+  filter:
+    drop-shadow(0 8px 18px rgba(0,0,0,.14))
+    brightness(1.02) !important;
+}
+
+.mobile-folder-icon .portfolio-folder-front{
+  opacity:1 !important;
+  fill:rgba(255,255,255,.42) !important;
+}
+
+.mobile-portfolio-folder:hover .portfolio-folder-back,
+.mobile-portfolio-folder:focus-visible .portfolio-folder-back{
+  clip-path:inset(0 0 62% 0) !important;
+  fill:rgba(255,255,255,.12) !important;
+}
+
+.mobile-portfolio-folder:hover .portfolio-folder-front,
+.mobile-portfolio-folder:focus-visible .portfolio-folder-front{
+  fill:rgba(255,255,255,.48) !important;
+}

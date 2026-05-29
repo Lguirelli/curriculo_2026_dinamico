@@ -449,3 +449,34 @@
     height:52px;
   }
 }
+
+/* Folder icon no-line fix */
+.portfolio-folder-back,
+.portfolio-folder-front{
+  stroke:none !important;
+}
+
+.portfolio-folder-back{
+  clip-path:inset(0 0 62% 0) !important;
+  opacity:.82 !important;
+  fill:rgba(255,255,255,.10) !important;
+  filter:
+    drop-shadow(0 8px 18px rgba(0,0,0,.14))
+    brightness(1.02) !important;
+}
+
+.portfolio-folder-front{
+  opacity:1 !important;
+  fill:rgba(255,255,255,.42) !important;
+}
+
+.desktop-icon.folder:hover .portfolio-folder-back,
+.desktop-icon.folder.selected .portfolio-folder-back{
+  clip-path:inset(0 0 62% 0) !important;
+  fill:rgba(255,255,255,.12) !important;
+}
+
+.desktop-icon.folder:hover .portfolio-folder-front,
+.desktop-icon.folder.selected .portfolio-folder-front{
+  fill:rgba(255,255,255,.48) !important;
+}
