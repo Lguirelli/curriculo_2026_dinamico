@@ -90,18 +90,20 @@
   stroke:rgba(255,255,255,.56);
 }
 
-/* Folder icon no-line fix */
+/* Folder icon no-line + no-gap fix */
 .mobile-folder-icon .portfolio-folder-back,
 .mobile-folder-icon .portfolio-folder-front{
   stroke:none !important;
 }
 
 .mobile-folder-icon .portfolio-folder-back{
-  clip-path:inset(0 0 62% 0) !important;
-  opacity:.82 !important;
-  fill:rgba(255,255,255,.10) !important;
+  clip-path:inset(0 0 82% 0) !important;
+  opacity:.88 !important;
+  fill:rgba(255,255,255,.11) !important;
+  transform:translateY(5px) translateZ(-3px) scale(1.008) !important;
+  transform-origin:center top !important;
   filter:
-    drop-shadow(0 8px 18px rgba(0,0,0,.14))
+    drop-shadow(0 6px 14px rgba(0,0,0,.10))
     brightness(1.02) !important;
 }
 
@@ -112,11 +114,46 @@
 
 .mobile-portfolio-folder:hover .portfolio-folder-back,
 .mobile-portfolio-folder:focus-visible .portfolio-folder-back{
-  clip-path:inset(0 0 62% 0) !important;
-  fill:rgba(255,255,255,.12) !important;
+  clip-path:inset(0 0 82% 0) !important;
+  transform:translateY(4px) translateZ(-5px) rotateX(-1deg) scale(1.01) !important;
+  fill:rgba(255,255,255,.13) !important;
 }
 
 .mobile-portfolio-folder:hover .portfolio-folder-front,
 .mobile-portfolio-folder:focus-visible .portfolio-folder-front{
   fill:rgba(255,255,255,.48) !important;
+}
+
+
+/* Mobile folder backdrop blur enhancement */
+.mobile-folder-icon{
+  position:relative;
+  isolation:isolate;
+  overflow:visible;
+}
+
+.mobile-folder-icon::before{
+  content:"";
+  position:absolute;
+  inset:1px 1px 1px 1px;
+  clip-path:polygon(5% 28%, 29% 28%, 36% 14%, 95% 14%, 95% 86%, 5% 86%);
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 10px 18px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.13);
+  backdrop-filter:blur(12px) saturate(120%);
+  -webkit-backdrop-filter:blur(12px) saturate(120%);
+  border-radius:14px;
+  z-index:0;
+}
+
+.mobile-folder-icon .portfolio-folder-svg{
+  position:relative;
+  z-index:1;
+}
+
+.mobile-portfolio-folder:hover .mobile-folder-icon::before,
+.mobile-portfolio-folder:focus-visible .mobile-folder-icon::before{
+  background:rgba(255,255,255,.13);
+  border-color:rgba(255,255,255,.18);
+  box-shadow:0 12px 22px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.16);
 }
