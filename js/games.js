@@ -33,15 +33,15 @@ function getGameHint(id) {
 
 function openGameWindow(id, label) {
   const shell = gameShell(id, label);
+  const initialWidth = Math.min(980, Math.max(720, Math.floor(window.innerWidth * 0.68)));
+  const initialHeight = Math.min(760, Math.max(520, Math.floor((window.innerHeight - 90) * 0.72)));
   const win = createWindow({
     title: label,
     html: shell.html,
     kind: 'game',
-    x: 18,
-    y: 16
+    x: Math.max(24, Math.round((window.innerWidth - initialWidth) / 2)),
+    y: Math.max(20, Math.round((window.innerHeight - initialHeight) / 2) - 16)
   });
-
-  win.classList.add('fullscreen', 'game-fixed-window');
 
   setTimeout(() => initGame(id, shell.uid), 40);
   return win;
@@ -137,6 +137,17 @@ function makeCanvas(uid, ratio = 1) {
   canvas.focus();
 
   return canvas;
+}
+
+function observeGameScale(stage, callback) {
+  if (!stage || typeof ResizeObserver === 'undefined') return null;
+  let raf = 0;
+  const ro = new ResizeObserver(() => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => callback());
+  });
+  ro.observe(stage);
+  return ro;
 }
 
 function getCSSColor(name, fallback) {
@@ -312,6 +323,10 @@ function initSnake(uid) {
     if (!canvas.isConnected) return;
     reset(!running);
   });
+  observeGameScale(stageOf(uid), () => {
+    if (!canvas.isConnected) return;
+    reset(!running);
+  });
 
   reset(true);
 }
@@ -424,6 +439,10 @@ function initPong(uid) {
   canvas.addEventListener('pointermove', e => movePaddle(e.clientY));
   canvas.addEventListener('pointerdown', e => { movePaddle(e.clientY); start(); });
   window.addEventListener('resize', () => {
+    if (!canvas.isConnected) return;
+    reset(!running);
+  });
+  observeGameScale(stageOf(uid), () => {
     if (!canvas.isConnected) return;
     reset(!running);
   });

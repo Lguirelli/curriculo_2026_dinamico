@@ -308,3 +308,5 @@
 }
 
 .game-window .window-resize-edge{display:none!important;}
+
+.windows-layer{z-index:90}
