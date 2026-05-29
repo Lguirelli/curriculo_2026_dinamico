@@ -442,3 +442,31 @@
 .start-menu-grid button .folder-glass-icon{
   margin-bottom:8px;
 }
+
+
+/* Folder curvature fix */
+.folder-glass-icon::before{
+  inset:0 !important;
+  border-radius:0 !important;
+  clip-path:path("M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z") !important;
+  background:rgba(255,255,255,.10) !important;
+  border:none !important;
+  box-shadow:0 10px 22px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.14) !important;
+  backdrop-filter:blur(var(--folder-blur)) saturate(130%) !important;
+  -webkit-backdrop-filter:blur(var(--folder-blur)) saturate(130%) !important;
+}
+
+.folder-back-path{
+  fill:#798390 !important;
+  filter:brightness(.95) !important;
+}
+
+.folder-front-path{
+  fill:#eef2f7 !important;
+}
+
+.desktop-icon.folder:hover .folder-back-path,
+.desktop-icon.folder.selected .folder-back-path,
+.start-menu-grid button:hover .folder-back-path{
+  fill:#6e7987 !important;
+}
