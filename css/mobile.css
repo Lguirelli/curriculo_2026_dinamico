@@ -21,3 +21,71 @@
 .mobile-content-card .notepad-document strong{
   color:rgba(255,255,255,.96);
 }
+
+/* Mobile portfolio folder glass icon */
+.mobile-portfolio-folder{
+  background:transparent;
+}
+
+.mobile-folder-icon{
+  width:58px;
+  height:52px;
+  border-radius:0;
+  margin:0 auto 7px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:720px;
+  transform-style:preserve-3d;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  overflow:visible;
+}
+
+.mobile-folder-icon .portfolio-folder-svg{
+  width:100%;
+  height:100%;
+  display:block;
+  overflow:visible;
+  filter:
+    drop-shadow(0 12px 20px rgba(0,0,0,.20))
+    drop-shadow(0 0 12px rgba(255,255,255,.08));
+}
+
+.mobile-folder-icon .portfolio-folder-back,
+.mobile-folder-icon .portfolio-folder-front{
+  stroke:rgba(255,255,255,.36);
+  stroke-width:10px;
+  vector-effect:non-scaling-stroke;
+  transition:
+    transform .34s cubic-bezier(.2,.8,.2,1),
+    fill .34s ease,
+    stroke .34s ease,
+    filter .34s ease;
+}
+
+.mobile-folder-icon .portfolio-folder-back{
+  fill:rgba(255,255,255,.15);
+  transform-origin:center bottom;
+  transform-box:fill-box;
+}
+
+.mobile-folder-icon .portfolio-folder-front{
+  fill:rgba(255,255,255,.31);
+  transform-origin:center bottom;
+  transform-box:fill-box;
+  transform:translateZ(8px) rotateX(0deg);
+}
+
+.mobile-portfolio-folder:hover .mobile-folder-icon,
+.mobile-portfolio-folder:focus-visible .mobile-folder-icon{
+  transform:scale(1.06) translateY(-2px);
+}
+
+.mobile-portfolio-folder:hover .portfolio-folder-front,
+.mobile-portfolio-folder:focus-visible .portfolio-folder-front{
+  transform:translateY(9px) translateZ(20px) rotateX(-32deg) scaleY(.93);
+  fill:rgba(255,255,255,.39);
+  stroke:rgba(255,255,255,.56);
+}
