@@ -54,7 +54,7 @@
 .mist-a{width:60%;height:26%;left:-12%;top:26%}
 .mist-b{width:48%;height:22%;right:-8%;top:62%;opacity:.18}
 .desktop-icon{position:absolute;width:92px;height:98px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:18px;color:var(--text-1);font-size:12px;font-weight:700;text-align:center;line-height:1.14;text-shadow:0 2px 8px rgba(0,0,0,.52);touch-action:none;background:transparent;transition:background .12s ease,border-color .12s ease,transform .12s ease,box-shadow .12s ease}
-.desktop-icon:hover{background:rgba(255,255,255,.04)}
+.desktop-icon:hover{background:rgba(255,255,255,.025)}
 .desktop-icon.selected{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.03),0 14px 34px rgba(0,0,0,.18)}
 .desktop-icon.dragging{opacity:.98;z-index:999;transform:scale(1.03)}
 .desktop-icon-label{max-width:82px;white-space:normal;word-break:break-word;font-size:12px;font-weight:700;line-height:1.14;text-shadow:0 2px 8px rgba(0,0,0,.52)}
@@ -64,14 +64,14 @@
 
 .txt-file-icon{
   position:relative;
-  width:54px;
-  height:60px;
+  width:58px;
+  height:66px;
   display:block;
   background:transparent;
   border:0;
   box-shadow:none;
   overflow:visible;
-  filter:drop-shadow(0 10px 20px rgba(0,0,0,.18));
+  filter:drop-shadow(0 10px 18px rgba(0,0,0,.16));
   transition:transform .18s ease, filter .18s ease;
 }
 .txt-file-icon::before{
@@ -79,7 +79,7 @@
   position:absolute;
   inset:0;
   background-color:var(--text-1);
-  opacity:.96;
+  opacity:.98;
   -webkit-mask-image:url("../assets/icons/txt-file.svg");
   -webkit-mask-repeat:no-repeat;
   -webkit-mask-position:center;
@@ -92,20 +92,21 @@
 .txt-file-icon::after{
   content:"";
   position:absolute;
-  top:7px;
-  right:7px;
-  width:16px;
-  height:16px;
+  top:8px;
+  right:8px;
+  width:15px;
+  height:15px;
   background:linear-gradient(135deg, rgba(214,220,230,.98), rgba(154,164,178,.95));
   clip-path:polygon(0 0, 100% 0, 100% 100%);
-  box-shadow:inset 1px 1px 0 rgba(255,255,255,.42), 0 1px 2px rgba(0,0,0,.10);
+  box-shadow:inset 1px 1px 0 rgba(255,255,255,.42), 0 1px 2px rgba(0,0,0,.08);
   pointer-events:none;
 }
 .desktop-icon:hover .txt-file-icon,
 .desktop-icon.selected .txt-file-icon{
   transform:translateY(-2px);
-  filter:drop-shadow(0 14px 24px rgba(0,0,0,.22));
+  filter:drop-shadow(0 14px 24px rgba(0,0,0,.20));
 }
+
 
 .portfolio-folder-icon.glass-folder-mini{
   position:relative;
@@ -253,8 +254,8 @@
   transform:translateX(-50%);
   display:flex;
   align-items:center;
-  gap:12px;
-  padding:12px 16px;
+  gap:10px;
+  padding:10px 14px;
   border-radius:22px;
   background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
   backdrop-filter:blur(14px);
@@ -266,27 +267,31 @@
 }
 
 .dock-icon{
-  width:42px;
-  height:42px;
+  position:relative;
+  width:44px;
+  height:44px;
   border-radius:14px;
   display:grid;
   place-items:center;
-  background:transparent;
-  border:0;
-  box-shadow:none;
-  transition:transform .18s ease, opacity .18s ease;
+  background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 10px 18px rgba(0,0,0,.12);
+  overflow:hidden;
+  transition:transform .18s ease, background .18s ease, box-shadow .18s ease;
 }
 
 .dock-icon:hover{
   transform:translateY(-3px);
+  background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.20), 0 14px 24px rgba(0,0,0,.16);
 }
 
 .dock-icon-svg{
-  width:100%;
-  height:100%;
+  position:absolute;
+  inset:8px;
   display:block;
   background-color:var(--text-1);
-  opacity:.92;
+  opacity:.94;
   transition:opacity .18s ease, transform .18s ease, background-color .18s ease;
   -webkit-mask-repeat:no-repeat;
   -webkit-mask-position:center;
@@ -298,9 +303,10 @@
 
 .dock-icon:hover .dock-icon-svg{
   opacity:1;
-  transform:scale(1.04);
+  transform:scale(1.05);
   background-color:var(--accent);
 }
+
 
 .icon-email{
   -webkit-mask-image:url("../assets/icons/email.svg");
@@ -335,9 +341,10 @@
     border-radius:13px;
   }
   .dock-icon-svg{
-    width:100%;
-    height:100%;
+    inset:7px;
+    width:auto;
+    height:auto;
   }
 }
 
-@media (max-height: 760px){.txt-file-icon{width:50px;height:56px}}
+@media (max-height: 760px){.txt-file-icon{width:54px;height:60px}}

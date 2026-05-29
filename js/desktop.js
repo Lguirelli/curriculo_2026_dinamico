@@ -10,7 +10,7 @@ const GRID = {
   maxCellH: 118
 };
 
-const LS_KEY = 'lorenzo_os_desktop_positions_responsive_grid_v3_side_aware';
+const LS_KEY = 'lorenzo_os_desktop_positions_responsive_grid_v4_side_aware';
 let resizeTimer = null;
 
 function clamp(value, min, max){
