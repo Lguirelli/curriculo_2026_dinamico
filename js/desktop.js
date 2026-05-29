@@ -10,7 +10,7 @@ const GRID = {
   maxCellH: 106
 };
 
-const LS_KEY = 'lorenzo_os_desktop_positions_v8_final_grid_no_contact';
+const LS_KEY = 'lorenzo_os_desktop_positions_v9_txt_drag_fixed';
 let resizeTimer = null;
 
 function clamp(value, min, max){
@@ -226,7 +226,7 @@ function renderDesktopIcons(){
       `;
     } else if (item.type === 'txt') {
       icon.innerHTML = `
-        <img class="txt-file-icon" src="assets/icons/txt-file.svg" alt="" aria-hidden="true" />
+        <img class="txt-file-icon" src="assets/icons/txt-file.svg" alt="" aria-hidden="true" draggable="false" />
         <span class="desktop-icon-label">${item.label}</span>
       `;
     } else if (item.type === 'game') {
@@ -255,6 +255,7 @@ function makeDesktopIconInteractive(icon, item){
   let moved = false;
 
   icon.addEventListener('pointerdown', e => {
+    e.preventDefault();
     drag = true;
     moved = false;
     startX = e.clientX;

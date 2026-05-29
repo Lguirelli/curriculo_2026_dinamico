@@ -4,7 +4,7 @@ window.OS_DATA = {
     { id:'formacao', label:'Formação.txt', type:'txt', path:'content/curriculo/formacao.html' },
     { id:'cursos', label:'Cursos.txt', type:'txt', path:'content/curriculo/cursos.html' },
     { id:'experiencia', label:'Experiência.txt', type:'txt', path:'content/curriculo/experiencia.html' },
-    { id:'habilidades', label:'Habilidades.txt', type:'txt', path:'content/curriculo/habilidades.html' },
+    { id:'habilidades', label:'Habilidades.txt', type:'txt', path:'content/curriculo/habilidades.html' }
   ],
   portfolio: [
     { id:'f1', label:'F1', type:'folder', path:'content/portfolio/f1/index.html', files:[
