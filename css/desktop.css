@@ -1,3 +1,4 @@
+/* Desktop-specific icon styling */
 .desktop-os{--topbar:0px;}
 .top-panel{display:none !important;}
 .start-menu{display:none !important;}
@@ -66,42 +67,44 @@
   width:54px;
   height:60px;
   display:block;
-  border-radius:14px;
-  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 12px 24px rgba(0,0,0,.18);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  overflow:hidden;
-  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  overflow:visible;
+  filter:drop-shadow(0 10px 20px rgba(0,0,0,.18));
+  transition:transform .18s ease, filter .18s ease;
 }
 .txt-file-icon::before{
   content:"";
   position:absolute;
   inset:0;
   background-color:var(--text-1);
-  opacity:.88;
+  opacity:.96;
   -webkit-mask-image:url("../assets/icons/txt-file.svg");
   -webkit-mask-repeat:no-repeat;
   -webkit-mask-position:center;
-  -webkit-mask-size:78% 78%;
+  -webkit-mask-size:100% 100%;
   mask-image:url("../assets/icons/txt-file.svg");
   mask-repeat:no-repeat;
   mask-position:center;
-  mask-size:78% 78%;
+  mask-size:100% 100%;
 }
 .txt-file-icon::after{
   content:"";
   position:absolute;
-  inset:0;
-  background:radial-gradient(circle at 28% 18%, rgba(255,255,255,.38), transparent 26%), linear-gradient(180deg, rgba(255,255,255,.08), transparent 44%);
+  top:7px;
+  right:7px;
+  width:16px;
+  height:16px;
+  background:linear-gradient(135deg, rgba(214,220,230,.98), rgba(154,164,178,.95));
+  clip-path:polygon(0 0, 100% 0, 100% 100%);
+  box-shadow:inset 1px 1px 0 rgba(255,255,255,.42), 0 1px 2px rgba(0,0,0,.10);
   pointer-events:none;
 }
 .desktop-icon:hover .txt-file-icon,
 .desktop-icon.selected .txt-file-icon{
   transform:translateY(-2px);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.26), 0 16px 28px rgba(0,0,0,.22);
-  background:linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.08));
+  filter:drop-shadow(0 14px 24px rgba(0,0,0,.22));
 }
 
 .portfolio-folder-icon.glass-folder-mini{
@@ -268,35 +271,29 @@
   border-radius:14px;
   display:grid;
   place-items:center;
-  background:linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
-  border:1px solid rgba(255,255,255,.10);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.18),
-    0 10px 18px rgba(0,0,0,.12);
-  transition:transform .18s ease, background .18s ease, box-shadow .18s ease;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  transition:transform .18s ease, opacity .18s ease;
 }
 
 .dock-icon:hover{
   transform:translateY(-3px);
-  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.08));
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.22),
-    0 14px 24px rgba(0,0,0,.16);
 }
 
 .dock-icon-svg{
-  width:18px;
-  height:18px;
+  width:100%;
+  height:100%;
   display:block;
   background-color:var(--text-1);
   opacity:.92;
   transition:opacity .18s ease, transform .18s ease, background-color .18s ease;
   -webkit-mask-repeat:no-repeat;
   -webkit-mask-position:center;
-  -webkit-mask-size:contain;
+  -webkit-mask-size:100% 100%;
   mask-repeat:no-repeat;
   mask-position:center;
-  mask-size:contain;
+  mask-size:100% 100%;
 }
 
 .dock-icon:hover .dock-icon-svg{
@@ -338,8 +335,8 @@
     border-radius:13px;
   }
   .dock-icon-svg{
-    width:17px;
-    height:17px;
+    width:100%;
+    height:100%;
   }
 }
 
