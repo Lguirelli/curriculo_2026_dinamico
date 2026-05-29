@@ -9,3 +9,15 @@
 .mobile-game-item{display:flex;align-items:center;gap:14px;}
 .mobile-game-thumb{width:52px;height:52px;flex:0 0 52px;border-radius:16px;background-position:center;background-repeat:no-repeat;background-size:cover;box-shadow:0 12px 20px rgba(0,0,0,.18);}
 .mobile-game-item span:last-child{font-size:14px;font-weight:700;color:#fff;}
+
+.mobile-content-card .notepad-document{
+  padding:0;
+  color:rgba(255,255,255,.88);
+}
+.mobile-content-card .notepad-document p,
+.mobile-content-card .notepad-document li{
+  color:rgba(255,255,255,.82);
+}
+.mobile-content-card .notepad-document strong{
+  color:rgba(255,255,255,.96);
+}

@@ -5,7 +5,6 @@ window.OS_DATA = {
     { id:'cursos', label:'Cursos.txt', type:'txt', path:'content/curriculo/cursos.html' },
     { id:'experiencia', label:'Experiência.txt', type:'txt', path:'content/curriculo/experiencia.html' },
     { id:'habilidades', label:'Habilidades.txt', type:'txt', path:'content/curriculo/habilidades.html' },
-    { id:'contato', label:'Contato.txt', type:'txt', path:'content/curriculo/contato.html' }
   ],
   portfolio: [
     { id:'f1', label:'F1', type:'folder', path:'content/portfolio/f1/index.html', files:[

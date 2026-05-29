@@ -1,7 +1,7 @@
 const GRID = {
   marginX: 28,
   topY: 28,
-  bottomSafe: 74,
+  bottomSafe: 112,
   iconW: 90,
   iconH: 98,
   minCellW: 94,
@@ -10,7 +10,7 @@ const GRID = {
   maxCellH: 106
 };
 
-const LS_KEY = 'lorenzo_os_desktop_positions_responsive_grid_v7_cv_games';
+const LS_KEY = 'lorenzo_os_desktop_positions_v8_final_grid_no_contact';
 let resizeTimer = null;
 
 function clamp(value, min, max){
@@ -22,13 +22,17 @@ function getGridMetrics(){
   const height = window.innerHeight;
   const marginX = width < 980 ? 18 : GRID.marginX;
   const topY = GRID.topY;
-  const bottomSafe = width < 980 ? 74 : GRID.bottomSafe;
+  const bottomSafe = width < 980 ? 96 : GRID.bottomSafe;
   const cellW = clamp(Math.round(width / 16), GRID.minCellW, GRID.maxCellW);
   const cellH = clamp(Math.round(height / 8), GRID.minCellH, GRID.maxCellH);
   const maxRows = Math.max(1, Math.floor((height - topY - bottomSafe) / cellH));
+
+  const centerGap = width < 1080 ? 120 : 180;
+  const usableSideWidth = Math.max(GRID.iconW, (width - marginX * 2 - centerGap) / 2);
+  const maxColsPerSide = Math.max(1, Math.floor((usableSideWidth - GRID.iconW) / cellW) + 1);
   const maxCols = Math.max(1, Math.floor((width - marginX * 2 - GRID.iconW) / cellW) + 1);
 
-  return { width, height, marginX, topY, bottomSafe, cellW, cellH, maxRows, maxCols };
+  return { width, height, marginX, topY, bottomSafe, cellW, cellH, maxRows, maxCols, maxColsPerSide, centerGap };
 }
 
 function loadPositions(){
@@ -52,16 +56,17 @@ function savePosition(id, cellIndex){
 
 function getCellIndexFromPosition(x, y, side = 'left'){
   const m = getGridMetrics();
+  const sideCols = m.maxColsPerSide || m.maxCols;
   const col = side === 'right'
-    ? clamp(Math.round((m.width - m.marginX - GRID.iconW - x) / m.cellW), 0, m.maxCols - 1)
-    : clamp(Math.round((x - m.marginX) / m.cellW), 0, m.maxCols - 1);
+    ? clamp(Math.round((m.width - m.marginX - GRID.iconW - x) / m.cellW), 0, sideCols - 1)
+    : clamp(Math.round((x - m.marginX) / m.cellW), 0, sideCols - 1);
   const row = clamp(Math.round((y - m.topY) / m.cellH), 0, m.maxRows - 1);
   return col * m.maxRows + row;
 }
 
 function normalizeIndex(index){
   const m = getGridMetrics();
-  const maxCells = m.maxCols * m.maxRows;
+  const maxCells = (m.maxColsPerSide || m.maxCols) * m.maxRows;
   return clamp(index, 0, maxCells - 1);
 }
 
@@ -82,24 +87,29 @@ function positionFromIndex(index){
 
 function defaultPosition(item, defaultIndex){
   const m = getGridMetrics();
-  const normalized = normalizeIndex(defaultIndex);
+  const sideCols = m.maxColsPerSide || m.maxCols;
+  const maxCells = sideCols * m.maxRows;
+  const normalized = clamp(defaultIndex, 0, maxCells - 1);
   const col = Math.floor(normalized / m.maxRows);
   const row = normalized % m.maxRows;
+  const y = clamp(m.topY + row * m.cellH, m.topY, m.height - m.bottomSafe - GRID.iconH);
 
   if(item.side === 'right'){
     const x = m.width - m.marginX - GRID.iconW - col * m.cellW;
+    const minRightX = Math.ceil(m.width / 2 + m.centerGap / 2);
     return {
-      x: clamp(x, m.marginX, m.width - m.marginX - GRID.iconW),
-      y: m.topY + row * m.cellH,
+      x: clamp(x, minRightX, m.width - m.marginX - GRID.iconW),
+      y,
       index: normalized,
       col,
       row
     };
   }
 
+  const maxLeftX = Math.floor(m.width / 2 - m.centerGap / 2 - GRID.iconW);
   return {
-    x: m.marginX + col * m.cellW,
-    y: m.topY + row * m.cellH,
+    x: clamp(m.marginX + col * m.cellW, m.marginX, Math.max(m.marginX, maxLeftX)),
+    y,
     index: normalized,
     col,
     row
@@ -216,7 +226,7 @@ function renderDesktopIcons(){
       `;
     } else if (item.type === 'txt') {
       icon.innerHTML = `
-        <span class="txt-file-icon" aria-hidden="true"></span>
+        <img class="txt-file-icon" src="assets/icons/txt-file.svg" alt="" aria-hidden="true" />
         <span class="desktop-icon-label">${item.label}</span>
       `;
     } else if (item.type === 'game') {

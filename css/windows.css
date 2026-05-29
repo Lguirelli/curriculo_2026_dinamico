@@ -150,21 +150,30 @@
   .window-body .cv-tool-grid{grid-template-columns:repeat(4, minmax(0, 1fr));max-width:none}
 }
 
-/* Notepad-style TXT windows */
+/* Notepad-style TXT windows: dark glassmorphism */
 .os-window.text-window{
   width:520px;
   height:360px;
   min-width:320px;
   min-height:220px;
-  resize:none;
   overflow:hidden;
   border-radius:24px;
-  background:rgba(22,26,36,.48);
+  background:rgba(18,22,32,.46);
+  border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 24px 70px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+.os-window.text-window::before{
+  background:
+    radial-gradient(circle at 72% 12%, rgba(255,255,255,.10), transparent 18%),
+    radial-gradient(circle at 15% 85%, rgba(171,206,255,.08), transparent 22%);
 }
 
 .text-window .window-header{
   height:42px;
-  background:rgba(18,22,31,.62);
+  background:rgba(13,17,27,.56);
   border-bottom:1px solid rgba(255,255,255,.08);
 }
 
@@ -173,6 +182,7 @@
   font-size:12px;
   font-weight:800;
   letter-spacing:.01em;
+  color:rgba(255,255,255,.92);
 }
 
 .text-window .window-body{
@@ -181,13 +191,13 @@
   background:
     repeating-linear-gradient(
       180deg,
-      rgba(255,255,255,.024) 0,
-      rgba(255,255,255,.024) 1px,
+      rgba(255,255,255,.028) 0,
+      rgba(255,255,255,.028) 1px,
       transparent 1px,
       transparent 30px
     ),
-    rgba(248,250,252,.96);
-  color:#3f485b;
+    rgba(10,14,24,.30);
+  color:rgba(255,255,255,.88);
   font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size:15px;
   line-height:1.9;
@@ -199,17 +209,17 @@
 .notepad-document{
   min-height:100%;
   padding:28px 30px 36px;
-  color:#4f5b72;
+  color:rgba(255,255,255,.86);
 }
 
 .notepad-document p{
   margin:0 0 20px;
-  color:#4f5b72;
+  color:rgba(255,255,255,.84);
   line-height:1.9;
 }
 
 .notepad-document strong{
-  color:#1f2634;
+  color:rgba(255,255,255,.96);
   font-weight:800;
 }
 
@@ -220,17 +230,39 @@
 
 .notepad-document li{
   margin:0 0 10px;
-  color:#4f5b72;
+  color:rgba(255,255,255,.82);
   line-height:1.8;
 }
 
-.window-resize-handle{
+.window-resize-edge{
   position:absolute;
-  right:8px;
-  bottom:8px;
+  z-index:12;
+  display:block;
+  opacity:0;
+  background:transparent;
+}
+
+.window-resize-right{
+  top:44px;
+  right:0;
+  width:10px;
+  bottom:14px;
+  cursor:ew-resize;
+}
+
+.window-resize-bottom{
+  left:14px;
+  right:14px;
+  bottom:0;
+  height:10px;
+  cursor:ns-resize;
+}
+
+.window-resize-corner{
+  right:0;
+  bottom:0;
   width:18px;
   height:18px;
-  z-index:8;
   cursor:nwse-resize;
   opacity:.55;
   background:
@@ -239,11 +271,17 @@
   border-radius:4px;
 }
 
-.os-window.fullscreen .window-resize-handle{
+.window-resize-right:hover,
+.window-resize-bottom:hover{
+  opacity:.18;
+  background:rgba(255,255,255,.35);
+}
+
+.os-window.fullscreen .window-resize-edge{
   display:none;
 }
 
-/* Remove old paper/card curriculum styling inside TXT windows */
+/* Disable previous paper/card curriculum visual in TXT windows */
 .text-window .cv-sheet,
 .text-window .cv-sheet::before{
   all:unset;
