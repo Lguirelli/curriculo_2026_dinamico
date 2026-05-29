@@ -335,331 +335,102 @@
   }
 }
 
-/* Portfolio folder icon glassmorphism 3D */
-.portfolio-folder-icon,
-.start-folder-icon{
-  width:64px;
-  height:56px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  perspective:760px;
-  transform-style:preserve-3d;
-  background:transparent;
-  border:0;
-  box-shadow:none;
-  pointer-events:none;
+
+
+/* Original SVG folder icon glassmorphism */
+.folder-glass-icon{
+  --folder-blur: 14px;
+  --folder-radius: 14px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  isolation: isolate;
+  perspective: 880px;
+  transform-style: preserve-3d;
+  transition: transform .28s ease, filter .28s ease;
+  pointer-events: none;
 }
 
-.portfolio-folder-svg{
-  width:100%;
-  height:100%;
-  display:block;
-  overflow:visible;
-  transform-style:preserve-3d;
-  transform-origin:center center;
-  filter:
-    drop-shadow(0 12px 22px rgba(0,0,0,.22))
-    drop-shadow(0 0 14px rgba(255,255,255,.06));
+.folder-glass-icon::before{
+  content: "";
+  position: absolute;
+  inset: 1px;
+  clip-path: path("M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z");
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 10px 24px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(var(--folder-blur)) saturate(130%);
+  -webkit-backdrop-filter: blur(var(--folder-blur)) saturate(130%);
+  opacity: .98;
+  z-index: 0;
 }
 
-.portfolio-folder-back,
-.portfolio-folder-front{
-  transition:
-    transform .36s cubic-bezier(.2,.8,.2,1),
-    filter .36s ease,
-    opacity .36s ease,
-    fill .36s ease,
-    stroke .36s ease;
-  stroke:rgba(255,255,255,.36);
-  stroke-width:10px;
-  vector-effect:non-scaling-stroke;
+.folder-glass-svg{
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.14));
 }
 
-.portfolio-folder-back{
-  fill:rgba(255,255,255,.15);
-  opacity:.9;
-  transform-origin:center bottom;
-  transform-box:fill-box;
-  filter:
-    drop-shadow(0 8px 18px rgba(0,0,0,.16))
-    brightness(1.03);
+.folder-back-path,
+.folder-front-path{
+  stroke: none;
+  transition: transform .34s cubic-bezier(.2,.8,.2,1), fill .34s ease, opacity .34s ease, filter .34s ease;
+  transform-origin: center center;
+  transform-box: fill-box;
 }
 
-.portfolio-folder-front{
-  fill:rgba(255,255,255,.30);
-  opacity:.96;
-  transform-origin:center bottom;
-  transform-box:fill-box;
-  transform:translateZ(8px) rotateX(0deg);
-  filter:
-    drop-shadow(0 -8px 18px rgba(255,255,255,.09))
-    drop-shadow(0 10px 18px rgba(0,0,0,.14))
-    brightness(1.06);
+.folder-back-path{
+  fill: rgba(255,255,255,.24);
+  opacity: .94;
+  filter: brightness(1.02);
 }
 
-.desktop-icon.folder{
-  perspective:760px;
-  transform-style:preserve-3d;
+.folder-front-path{
+  fill: rgba(255,255,255,.70);
+  opacity: .98;
+  transform: translateZ(6px);
+  filter: brightness(1.04);
 }
 
-.desktop-icon.folder:hover .portfolio-folder-icon,
-.desktop-icon.folder.selected .portfolio-folder-icon{
-  transform:scale(1.07) translateY(-2px);
-  filter:
-    drop-shadow(0 14px 26px rgba(0,0,0,.22))
-    drop-shadow(0 0 18px rgba(255,255,255,.10));
-}
-
-.desktop-icon.folder:hover .portfolio-folder-back,
-.desktop-icon.folder.selected .portfolio-folder-back{
-  transform:translateY(-3px) translateZ(-4px) rotateX(-2deg);
-  fill:rgba(255,255,255,.19);
-  stroke:rgba(255,255,255,.46);
-}
-
-.desktop-icon.folder:hover .portfolio-folder-front,
-.desktop-icon.folder.selected .portfolio-folder-front{
-  transform:translateY(10px) translateZ(22px) rotateX(-34deg) scaleY(.93);
-  fill:rgba(255,255,255,.38);
-  stroke:rgba(255,255,255,.56);
-  filter:
-    drop-shadow(0 -10px 22px rgba(255,255,255,.13))
-    drop-shadow(0 15px 22px rgba(0,0,0,.20))
-    brightness(1.12);
+.desktop-folder-icon{
+  width: 64px;
+  height: 52px;
 }
 
 .start-folder-icon{
-  width:32px;
-  height:28px;
-  pointer-events:none;
+  width: 34px;
+  height: 28px;
 }
 
+.desktop-icon.folder:hover .desktop-folder-icon,
+.desktop-icon.folder.selected .desktop-folder-icon,
 .start-menu-grid button:hover .start-folder-icon{
-  transform:scale(1.06) translateY(-1px);
+  transform: scale(1.06) translateY(-2px);
+  filter: drop-shadow(0 14px 24px rgba(0,0,0,.12));
 }
 
-.start-menu-grid button:hover .portfolio-folder-front{
-  transform:translateY(5px) translateZ(12px) rotateX(-28deg) scaleY(.95);
+.desktop-icon.folder:hover .folder-front-path,
+.desktop-icon.folder.selected .folder-front-path,
+.start-menu-grid button:hover .folder-front-path{
+  transform: translateY(7px) translateZ(16px) rotateX(-24deg);
+  fill: rgba(255,255,255,.76);
 }
 
-@media (max-height:760px){
-  .portfolio-folder-icon{
-    width:60px;
-    height:52px;
-  }
+.desktop-icon.folder:hover .folder-back-path,
+.desktop-icon.folder.selected .folder-back-path,
+.start-menu-grid button:hover .folder-back-path{
+  transform: translateZ(-2px);
+  fill: rgba(255,255,255,.28);
 }
 
-/* Folder icon no-line + no-gap fix */
-.portfolio-folder-back,
-.portfolio-folder-front{
-  stroke:none !important;
-}
-
-.portfolio-folder-back{
-  clip-path:inset(0 0 82% 0) !important;
-  opacity:.88 !important;
-  fill:rgba(255,255,255,.11) !important;
-  transform:translateY(5px) translateZ(-3px) scale(1.008) !important;
-  transform-origin:center top !important;
-  filter:
-    drop-shadow(0 6px 14px rgba(0,0,0,.10))
-    brightness(1.02) !important;
-}
-
-.portfolio-folder-front{
-  opacity:1 !important;
-  fill:rgba(255,255,255,.42) !important;
-}
-
-.desktop-icon.folder:hover .portfolio-folder-back,
-.desktop-icon.folder.selected .portfolio-folder-back{
-  clip-path:inset(0 0 82% 0) !important;
-  transform:translateY(4px) translateZ(-5px) rotateX(-1deg) scale(1.01) !important;
-  fill:rgba(255,255,255,.13) !important;
-}
-
-.desktop-icon.folder:hover .portfolio-folder-front,
-.desktop-icon.folder.selected .portfolio-folder-front{
-  fill:rgba(255,255,255,.48) !important;
-}
-
-
-/* TXT + folder backdrop blur enhancement */
-.txt-file-shell{
-  position:relative !important;
-  width:46px !important;
-  height:54px !important;
-  max-width:46px !important;
-  max-height:54px !important;
-  min-width:0 !important;
-  min-height:0 !important;
-  display:block !important;
-  flex:0 0 54px !important;
-  background:transparent !important;
-  border:0 !important;
-  box-shadow:none !important;
-  overflow:visible !important;
-  isolation:isolate !important;
-  pointer-events:none !important;
-}
-
-.txt-file-shell::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  clip-path:polygon(0% 0%, 72% 0%, 100% 20%, 100% 100%, 0% 100%);
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.16);
-  box-shadow:0 10px 18px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.14);
-  backdrop-filter:blur(12px) saturate(120%);
-  -webkit-backdrop-filter:blur(12px) saturate(120%);
-  border-radius:10px;
-  z-index:0;
-}
-
-.txt-file-icon{
-  position:relative !important;
-  z-index:1 !important;
-  width:46px !important;
-  height:54px !important;
-  max-width:46px !important;
-  max-height:54px !important;
-  min-width:0 !important;
-  min-height:0 !important;
-  display:block !important;
-  object-fit:contain !important;
-  object-position:center !important;
-  background:transparent !important;
-  border:0 !important;
-  box-shadow:none !important;
-  border-radius:0 !important;
-  padding:0 !important;
-  margin:0 !important;
-  flex:0 0 54px !important;
-  pointer-events:none !important;
-  user-select:none !important;
-  -webkit-user-drag:none !important;
-  filter:drop-shadow(0 8px 14px rgba(0,0,0,.16)) !important;
-  transition:transform .18s ease, filter .18s ease !important;
-}
-
-.desktop-icon:hover .txt-file-shell::before,
-.desktop-icon.selected .txt-file-shell::before{
-  background:rgba(255,255,255,.13);
-  border-color:rgba(255,255,255,.20);
-  box-shadow:0 12px 20px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.18);
-}
-
-.desktop-icon:hover .txt-file-icon,
-.desktop-icon.selected .txt-file-icon{
-  transform:translateY(-1px) !important;
-  filter:drop-shadow(0 10px 18px rgba(0,0,0,.20)) !important;
-}
-
-.portfolio-folder-icon,
-.start-folder-icon{
-  position:relative;
-  isolation:isolate;
-  overflow:visible;
-}
-
-.portfolio-folder-icon::before,
-.start-folder-icon::before{
-  content:"";
-  position:absolute;
-  inset:1px 1px 1px 1px;
-  clip-path:polygon(5% 28%, 29% 28%, 36% 14%, 95% 14%, 95% 86%, 5% 86%);
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 10px 18px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.13);
-  backdrop-filter:blur(12px) saturate(120%);
-  -webkit-backdrop-filter:blur(12px) saturate(120%);
-  border-radius:14px;
-  z-index:0;
-}
-
-.portfolio-folder-svg{
-  position:relative;
-  z-index:1;
-}
-
-.desktop-icon.folder:hover .portfolio-folder-icon::before,
-.desktop-icon.folder.selected .portfolio-folder-icon::before,
-.start-menu-grid button:hover .start-folder-icon::before{
-  background:rgba(255,255,255,.13);
-  border-color:rgba(255,255,255,.18);
-  box-shadow:0 12px 22px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.16);
-}
-
-
-/* Final folder glass override: total transparency on the whole icon */
-
-.portfolio-folder-icon,
-.start-folder-icon{
-  position:relative !important;
-  isolation:isolate !important;
-  overflow:visible !important;
-  opacity:.96 !important;
-}
-
-.portfolio-folder-icon::before,
-.start-folder-icon::before{
-  content:"" !important;
-  position:absolute !important;
-  inset:2px 1px 1px 1px !important;
-  clip-path:polygon(5% 28%, 29% 28%, 36% 14%, 95% 14%, 95% 86%, 5% 86%) !important;
-  background:rgba(255,255,255,.12) !important;
-  border:1px solid rgba(255,255,255,.16) !important;
-  border-radius:14px !important;
-  box-shadow:0 10px 18px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.16) !important;
-  backdrop-filter:blur(14px) saturate(120%) !important;
-  -webkit-backdrop-filter:blur(14px) saturate(120%) !important;
-  z-index:0 !important;
-}
-
-.portfolio-folder-svg{
-  position:relative !important;
-  z-index:1 !important;
-}
-
-.portfolio-folder-back,
-.portfolio-folder-front{
-  clip-path:none !important;
-  stroke:none !important;
-  opacity:1 !important;
-  transform-box:fill-box !important;
-  transform-origin:center bottom !important;
-}
-
-.portfolio-folder-back{
-  fill:rgba(255,255,255,.28) !important;
-  transform:none !important;
-  filter:drop-shadow(0 4px 10px rgba(0,0,0,.08)) brightness(1.02) !important;
-}
-
-.portfolio-folder-front{
-  fill:rgba(255,255,255,.72) !important;
-  transform:translateZ(6px) rotateX(0deg) !important;
-  filter:drop-shadow(0 8px 14px rgba(0,0,0,.10)) brightness(1.03) !important;
-}
-
-.desktop-icon.folder:hover .portfolio-folder-icon,
-.desktop-icon.folder.selected .portfolio-folder-icon,
-.start-menu-grid button:hover .start-folder-icon{
-  transform:scale(1.05) translateY(-1px) !important;
-}
-
-.desktop-icon.folder:hover .portfolio-folder-back,
-.desktop-icon.folder.selected .portfolio-folder-back,
-.start-menu-grid button:hover .portfolio-folder-back{
-  transform:translateZ(-2px) !important;
-  fill:rgba(255,255,255,.30) !important;
-}
-
-.desktop-icon.folder:hover .portfolio-folder-front,
-.desktop-icon.folder.selected .portfolio-folder-front,
-.start-menu-grid button:hover .portfolio-folder-front{
-  transform:translateY(5px) translateZ(16px) rotateX(-28deg) scaleY(.96) !important;
-  fill:rgba(255,255,255,.78) !important;
+.start-menu-grid button .folder-glass-icon{
+  margin-bottom: 8px;
 }

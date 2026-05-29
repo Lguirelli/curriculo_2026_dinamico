@@ -22,205 +22,74 @@
   color:rgba(255,255,255,.96);
 }
 
-/* Mobile portfolio folder glass icon */
-.mobile-portfolio-folder{
-  background:transparent;
+
+
+/* Original SVG folder icon glassmorphism - mobile */
+.mobile-folder-app{
+  background: transparent;
 }
 
 .mobile-folder-icon{
-  width:58px;
-  height:52px;
-  border-radius:0;
-  margin:0 auto 7px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  perspective:720px;
-  transform-style:preserve-3d;
-  background:transparent !important;
-  border:0 !important;
-  box-shadow:none !important;
-  overflow:visible;
-}
-
-.mobile-folder-icon .portfolio-folder-svg{
-  width:100%;
-  height:100%;
-  display:block;
-  overflow:visible;
-  filter:
-    drop-shadow(0 12px 20px rgba(0,0,0,.20))
-    drop-shadow(0 0 12px rgba(255,255,255,.08));
-}
-
-.mobile-folder-icon .portfolio-folder-back,
-.mobile-folder-icon .portfolio-folder-front{
-  stroke:rgba(255,255,255,.36);
-  stroke-width:10px;
-  vector-effect:non-scaling-stroke;
-  transition:
-    transform .34s cubic-bezier(.2,.8,.2,1),
-    fill .34s ease,
-    stroke .34s ease,
-    filter .34s ease;
-}
-
-.mobile-folder-icon .portfolio-folder-back{
-  fill:rgba(255,255,255,.15);
-  transform-origin:center bottom;
-  transform-box:fill-box;
-}
-
-.mobile-folder-icon .portfolio-folder-front{
-  fill:rgba(255,255,255,.31);
-  transform-origin:center bottom;
-  transform-box:fill-box;
-  transform:translateZ(8px) rotateX(0deg);
-}
-
-.mobile-portfolio-folder:hover .mobile-folder-icon,
-.mobile-portfolio-folder:focus-visible .mobile-folder-icon{
-  transform:scale(1.06) translateY(-2px);
-}
-
-.mobile-portfolio-folder:hover .portfolio-folder-front,
-.mobile-portfolio-folder:focus-visible .portfolio-folder-front{
-  transform:translateY(9px) translateZ(20px) rotateX(-32deg) scaleY(.93);
-  fill:rgba(255,255,255,.39);
-  stroke:rgba(255,255,255,.56);
-}
-
-/* Folder icon no-line + no-gap fix */
-.mobile-folder-icon .portfolio-folder-back,
-.mobile-folder-icon .portfolio-folder-front{
-  stroke:none !important;
-}
-
-.mobile-folder-icon .portfolio-folder-back{
-  clip-path:inset(0 0 82% 0) !important;
-  opacity:.88 !important;
-  fill:rgba(255,255,255,.11) !important;
-  transform:translateY(5px) translateZ(-3px) scale(1.008) !important;
-  transform-origin:center top !important;
-  filter:
-    drop-shadow(0 6px 14px rgba(0,0,0,.10))
-    brightness(1.02) !important;
-}
-
-.mobile-folder-icon .portfolio-folder-front{
-  opacity:1 !important;
-  fill:rgba(255,255,255,.42) !important;
-}
-
-.mobile-portfolio-folder:hover .portfolio-folder-back,
-.mobile-portfolio-folder:focus-visible .portfolio-folder-back{
-  clip-path:inset(0 0 82% 0) !important;
-  transform:translateY(4px) translateZ(-5px) rotateX(-1deg) scale(1.01) !important;
-  fill:rgba(255,255,255,.13) !important;
-}
-
-.mobile-portfolio-folder:hover .portfolio-folder-front,
-.mobile-portfolio-folder:focus-visible .portfolio-folder-front{
-  fill:rgba(255,255,255,.48) !important;
-}
-
-
-/* Mobile folder backdrop blur enhancement */
-.mobile-folder-icon{
-  position:relative;
-  isolation:isolate;
-  overflow:visible;
+  width: 58px;
+  height: 48px;
+  margin: 0 auto 8px;
 }
 
 .mobile-folder-icon::before{
-  content:"";
-  position:absolute;
-  inset:1px 1px 1px 1px;
-  clip-path:polygon(5% 28%, 29% 28%, 36% 14%, 95% 14%, 95% 86%, 5% 86%);
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 10px 18px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.13);
-  backdrop-filter:blur(12px) saturate(120%);
-  -webkit-backdrop-filter:blur(12px) saturate(120%);
-  border-radius:14px;
-  z-index:0;
+  content: "";
+  position: absolute;
+  inset: 1px;
+  clip-path: path("M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z");
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 10px 24px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  opacity: .98;
+  z-index: 0;
 }
 
-.mobile-folder-icon .portfolio-folder-svg{
-  position:relative;
-  z-index:1;
+.mobile-folder-icon .folder-glass-svg{
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.14));
 }
 
-.mobile-portfolio-folder:hover .mobile-folder-icon::before,
-.mobile-portfolio-folder:focus-visible .mobile-folder-icon::before{
-  background:rgba(255,255,255,.13);
-  border-color:rgba(255,255,255,.18);
-  box-shadow:0 12px 22px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.16);
+.mobile-folder-icon .folder-back-path,
+.mobile-folder-icon .folder-front-path{
+  stroke: none;
+  transition: transform .34s cubic-bezier(.2,.8,.2,1), fill .34s ease, opacity .34s ease, filter .34s ease;
+  transform-origin: center center;
+  transform-box: fill-box;
 }
 
-
-/* Final folder glass override: total transparency on the whole icon */
-
-.mobile-folder-icon{
-  position:relative !important;
-  isolation:isolate !important;
-  overflow:visible !important;
-  opacity:.96 !important;
+.mobile-folder-icon .folder-back-path{
+  fill: rgba(255,255,255,.24);
+  opacity: .94;
 }
 
-.mobile-folder-icon::before{
-  content:"" !important;
-  position:absolute !important;
-  inset:2px 1px 1px 1px !important;
-  clip-path:polygon(5% 28%, 29% 28%, 36% 14%, 95% 14%, 95% 86%, 5% 86%) !important;
-  background:rgba(255,255,255,.12) !important;
-  border:1px solid rgba(255,255,255,.16) !important;
-  border-radius:14px !important;
-  box-shadow:0 10px 18px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.16) !important;
-  backdrop-filter:blur(14px) saturate(120%) !important;
-  -webkit-backdrop-filter:blur(14px) saturate(120%) !important;
-  z-index:0 !important;
+.mobile-folder-icon .folder-front-path{
+  fill: rgba(255,255,255,.70);
+  opacity: .98;
+  transform: translateZ(6px);
 }
 
-.mobile-folder-icon .portfolio-folder-svg{
-  position:relative !important;
-  z-index:1 !important;
+.mobile-folder-app:hover .mobile-folder-icon,
+.mobile-folder-app:focus-visible .mobile-folder-icon{
+  transform: scale(1.05) translateY(-2px);
 }
 
-.mobile-folder-icon .portfolio-folder-back,
-.mobile-folder-icon .portfolio-folder-front{
-  clip-path:none !important;
-  stroke:none !important;
-  opacity:1 !important;
-  transform-box:fill-box !important;
-  transform-origin:center bottom !important;
+.mobile-folder-app:hover .folder-front-path,
+.mobile-folder-app:focus-visible .folder-front-path{
+  transform: translateY(7px) translateZ(16px) rotateX(-24deg);
+  fill: rgba(255,255,255,.76);
 }
 
-.mobile-folder-icon .portfolio-folder-back{
-  fill:rgba(255,255,255,.28) !important;
-  transform:none !important;
-  filter:drop-shadow(0 4px 10px rgba(0,0,0,.08)) brightness(1.02) !important;
-}
-
-.mobile-folder-icon .portfolio-folder-front{
-  fill:rgba(255,255,255,.72) !important;
-  transform:translateZ(6px) rotateX(0deg) !important;
-  filter:drop-shadow(0 8px 14px rgba(0,0,0,.10)) brightness(1.03) !important;
-}
-
-.mobile-portfolio-folder:hover .mobile-folder-icon,
-.mobile-portfolio-folder:focus-visible .mobile-folder-icon{
-  transform:scale(1.05) translateY(-1px) !important;
-}
-
-.mobile-portfolio-folder:hover .portfolio-folder-back,
-.mobile-portfolio-folder:focus-visible .portfolio-folder-back{
-  transform:translateZ(-2px) !important;
-  fill:rgba(255,255,255,.30) !important;
-}
-
-.mobile-portfolio-folder:hover .portfolio-folder-front,
-.mobile-portfolio-folder:focus-visible .portfolio-folder-front{
-  transform:translateY(5px) translateZ(16px) rotateX(-28deg) scaleY(.96) !important;
-  fill:rgba(255,255,255,.78) !important;
+.mobile-folder-app:hover .folder-back-path,
+.mobile-folder-app:focus-visible .folder-back-path{
+  transform: translateZ(-2px);
+  fill: rgba(255,255,255,.28);
 }
