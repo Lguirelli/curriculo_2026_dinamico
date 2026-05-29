@@ -132,19 +132,19 @@ function initSnake(uid) {
 
   function draw(gameOver = false) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'rgba(4,10,18,.62)';
+    ctx.fillStyle = 'rgba(5,4,3,.96)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = 'rgba(255,255,255,.035)';
+    ctx.strokeStyle = 'rgba(255,176,76,.18)';
     for (let i = 0; i <= cells; i++) {
       ctx.beginPath(); ctx.moveTo(i * size, 0); ctx.lineTo(i * size, canvas.height); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(0, i * size); ctx.lineTo(canvas.width, i * size); ctx.stroke();
     }
-    ctx.fillStyle = '#f0b35f';
+    ctx.fillStyle = '#ffb347';
     ctx.beginPath();
     ctx.roundRect(food.x * size + 3, food.y * size + 3, size - 6, size - 6, 5);
     ctx.fill();
     snake.forEach((p, i) => {
-      ctx.fillStyle = i === 0 ? '#f5f7fb' : '#7bb7ff';
+      ctx.fillStyle = i === 0 ? '#ffe0a0' : '#ffb347';
       ctx.beginPath();
       ctx.roundRect(p.x * size + 2, p.y * size + 2, size - 4, size - 4, 5);
       ctx.fill();
@@ -306,17 +306,17 @@ function initPong(uid) {
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'rgba(4,10,18,.62)';
+    ctx.fillStyle = 'rgba(5,4,3,.96)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = 'rgba(255,255,255,.12)';
+    ctx.strokeStyle = 'rgba(255,176,76,.28)';
     ctx.setLineDash([6, 10]);
     ctx.beginPath(); ctx.moveTo(canvas.width / 2, 0); ctx.lineTo(canvas.width / 2, canvas.height); ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle = '#f5f7fb';
+    ctx.fillStyle = '#ffe0a0';
     ctx.beginPath(); ctx.roundRect(player.x, player.y, player.w, player.h, 6); ctx.fill();
-    ctx.fillStyle = '#7bb7ff';
+    ctx.fillStyle = '#ffb347';
     ctx.beginPath(); ctx.roundRect(ai.x, ai.y, ai.w, ai.h, 6); ctx.fill();
-    ctx.fillStyle = '#f0b35f';
+    ctx.fillStyle = '#ffb347';
     ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2); ctx.fill();
     if (!running && playerScore === 0 && aiScore === 0) overlayText(ctx, canvas, 'PONG', 'Clique em Iniciar');
   }
@@ -337,14 +337,14 @@ function initPong(uid) {
 
 function overlayText(ctx, canvas, title, subtitle) {
   ctx.save();
-  ctx.fillStyle = 'rgba(0,0,0,.34)';
+  ctx.fillStyle = 'rgba(0,0,0,.56)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.textAlign = 'center';
-  ctx.fillStyle = '#f5f7fb';
-  ctx.font = '800 30px system-ui, sans-serif';
+  ctx.fillStyle = '#ffe0a0';
+  ctx.font = '800 28px Courier New, monospace';
   ctx.fillText(title, canvas.width / 2, canvas.height / 2 - 10);
-  ctx.fillStyle = '#c7d2e3';
-  ctx.font = '500 14px system-ui, sans-serif';
+  ctx.fillStyle = '#ffcf86';
+  ctx.font = '700 14px Courier New, monospace';
   ctx.fillText(subtitle, canvas.width / 2, canvas.height / 2 + 20);
   ctx.restore();
 }

@@ -1,16 +1,16 @@
 const GRID = {
   marginX: 28,
-  topY: 44,
-  bottomSafe: 112,
+  topY: 28,
+  bottomSafe: 74,
   iconW: 90,
   iconH: 98,
   minCellW: 94,
   maxCellW: 112,
-  minCellH: 104,
-  maxCellH: 118
+  minCellH: 100,
+  maxCellH: 106
 };
 
-const LS_KEY = 'lorenzo_os_desktop_positions_responsive_grid_v4_side_aware';
+const LS_KEY = 'lorenzo_os_desktop_positions_responsive_grid_v7_cv_games';
 let resizeTimer = null;
 
 function clamp(value, min, max){
@@ -22,7 +22,7 @@ function getGridMetrics(){
   const height = window.innerHeight;
   const marginX = width < 980 ? 18 : GRID.marginX;
   const topY = GRID.topY;
-  const bottomSafe = width < 980 ? 96 : GRID.bottomSafe;
+  const bottomSafe = width < 980 ? 74 : GRID.bottomSafe;
   const cellW = clamp(Math.round(width / 16), GRID.minCellW, GRID.maxCellW);
   const cellH = clamp(Math.round(height / 8), GRID.minCellH, GRID.maxCellH);
   const maxRows = Math.max(1, Math.floor((height - topY - bottomSafe) / cellH));
@@ -153,6 +153,21 @@ function snapToResponsiveGrid(x, y, side = 'left'){
   return defaultPosition(item, getCellIndexFromPosition(x, y, side));
 }
 
+function getOccupiedPositionKeys(excludeElement){
+  const occupied = new Set();
+  document.querySelectorAll('.desktop-icon').forEach(el => {
+    if(el === excludeElement) return;
+    occupied.add(physicalKey(el.offsetLeft, el.offsetTop));
+  });
+  return occupied;
+}
+
+function getAvailableSnappedPosition(icon, item){
+  const snapped = snapToResponsiveGrid(icon.offsetLeft, icon.offsetTop, item.side);
+  const occupied = getOccupiedPositionKeys(icon);
+  return findFreePosition(snapped, item, occupied);
+}
+
 function clearSelection(){
   document.querySelectorAll('.desktop-icon.selected').forEach(i => i.classList.remove('selected'));
 }
@@ -201,12 +216,21 @@ function renderDesktopIcons(){
       `;
     } else if (item.type === 'txt') {
       icon.innerHTML = `
-        <span class="txt-file-icon" aria-hidden="true"></span>
+        <span class="txt-file-icon" aria-hidden="true">
+          <span class="txt-file-sheet"></span>
+          <span class="txt-file-corner"></span>
+          <span class="txt-file-text">TXT</span>
+        </span>
+        <span class="desktop-icon-label">${item.label}</span>
+      `;
+    } else if (item.type === 'game') {
+      icon.innerHTML = `
+        <span class="game-cover-icon" aria-hidden="true" style="background-image:url('${item.icon || ''}')"></span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
     } else {
       icon.innerHTML = `
-        <span class="icon-glyph">${item.type === 'game' ? 'GAME' : 'DIR'}</span>
+        <span class="icon-glyph">DIR</span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
     }
@@ -245,7 +269,7 @@ function makeDesktopIconInteractive(icon, item){
 
     const m = getGridMetrics();
     icon.style.left = `${clamp(baseX + dx, 0, m.width - GRID.iconW)}px`;
-    icon.style.top = `${clamp(baseY + dy, m.topY, m.height - m.bottomSafe)}px`;
+    icon.style.top = `${clamp(baseY + dy, m.topY, m.height - m.bottomSafe - GRID.iconH)}px`;
   });
 
   icon.addEventListener('pointerup', () => {
@@ -254,7 +278,7 @@ function makeDesktopIconInteractive(icon, item){
     drag = false;
     icon.classList.remove('dragging');
 
-    const snapped = snapToResponsiveGrid(icon.offsetLeft, icon.offsetTop, item.side);
+    const snapped = getAvailableSnappedPosition(icon, item);
     icon.style.left = `${snapped.x}px`;
     icon.style.top = `${snapped.y}px`;
     savePosition(item.id, snapped.index);

@@ -11,7 +11,7 @@ function initMobile(){
       return;
     }
     if(id==='games'){
-      showMobileApp('Jogos', `<div class="mobile-file-list">${OS_DATA.games.map(g=>`<button class="mobile-file-item" data-mobile-game="${g.id}" data-title="${g.label}">${g.label}</button>`).join('')}</div>`);
+      showMobileApp('Jogos', `<div class="mobile-file-list mobile-game-list">${OS_DATA.games.map(g=>`<button class="mobile-file-item mobile-game-item" data-mobile-game="${g.id}" data-title="${g.label}"><span class="mobile-game-thumb" style="background-image:url('${g.icon || ''}')"></span><span>${g.label}</span></button>`).join('')}</div>`);
       document.querySelectorAll('[data-mobile-game]').forEach(g=>g.addEventListener('click',()=>openMobileGame(g.dataset.mobileGame,g.dataset.title)));
       return;
     }

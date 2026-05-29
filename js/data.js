@@ -1,9 +1,10 @@
 window.OS_DATA = {
   curriculum: [
-    { id:'sobre', label:'Sobre.txt', type:'txt', path:'content/curriculo/sobre.html' },
-    { id:'experiencia', label:'Experiência.txt', type:'txt', path:'content/curriculo/experiencia.html' },
+    { id:'resumo', label:'Resumo.txt', type:'txt', path:'content/curriculo/resumo.html' },
     { id:'formacao', label:'Formação.txt', type:'txt', path:'content/curriculo/formacao.html' },
-    { id:'skills', label:'Skills.txt', type:'txt', path:'content/curriculo/skills.html' },
+    { id:'cursos', label:'Cursos.txt', type:'txt', path:'content/curriculo/cursos.html' },
+    { id:'experiencia', label:'Experiência.txt', type:'txt', path:'content/curriculo/experiencia.html' },
+    { id:'habilidades', label:'Habilidades.txt', type:'txt', path:'content/curriculo/habilidades.html' },
     { id:'contato', label:'Contato.txt', type:'txt', path:'content/curriculo/contato.html' }
   ],
   portfolio: [
@@ -29,8 +30,8 @@ window.OS_DATA = {
     ]}
   ],
   games: [
-    { id:'snake', label:'Snake' },
-    { id:'mines', label:'Campo Minado' },
-    { id:'pong', label:'Pong' }
+    { id:'snake', label:'Snake', icon:'assets/icons/game-snake.png' },
+    { id:'mines', label:'Campo Minado', icon:'assets/icons/game-mines.png' },
+    { id:'pong', label:'Pong', icon:'assets/icons/game-pong.png' }
   ]
 };
