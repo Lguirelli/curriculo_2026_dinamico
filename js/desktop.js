@@ -357,27 +357,25 @@ function getSearchItems(){
 }
 
 function setupDesktopSearch(){
-  const panel = document.getElementById('desktopSearchPanel');
+  const dock = document.querySelector('[data-dock]');
   const input = document.getElementById('desktopSearchInput');
   const results = document.getElementById('desktopSearchResults');
   const form = document.querySelector('[data-search-form]');
-  const toggles = document.querySelectorAll('[data-search-toggle]');
+  const toggle = document.querySelector('[data-search-toggle]');
 
-  if(!panel || !input || !results || !form || !toggles.length) return;
+  if(!dock || !input || !results || !form || !toggle) return;
 
   const items = getSearchItems();
 
   function closeSearch(){
-    panel.classList.remove('open', 'has-results');
-    panel.setAttribute('aria-hidden', 'true');
+    dock.classList.remove('search-open', 'has-results');
     results.innerHTML = '';
     input.value = '';
   }
 
   function openSearch(){
-    panel.classList.add('open');
-    panel.setAttribute('aria-hidden', 'false');
-    window.setTimeout(() => input.focus(), 40);
+    dock.classList.add('search-open');
+    window.setTimeout(() => input.focus(), 60);
   }
 
   function renderResults(){
@@ -385,7 +383,7 @@ function setupDesktopSearch(){
     results.innerHTML = '';
 
     if(!query){
-      panel.classList.remove('has-results');
+      dock.classList.remove('has-results');
       return;
     }
 
@@ -394,7 +392,7 @@ function setupDesktopSearch(){
       .slice(0, 7);
 
     if(!filtered.length){
-      panel.classList.add('has-results');
+      dock.classList.add('has-results');
       results.innerHTML = '<div class="search-result-item"><strong>Nenhum resultado</strong><small>Digite outro termo</small></div>';
       return;
     }
@@ -411,15 +409,24 @@ function setupDesktopSearch(){
       results.appendChild(button);
     });
 
-    panel.classList.add('has-results');
+    dock.classList.add('has-results');
   }
 
-  toggles.forEach(toggle => {
-    toggle.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      panel.classList.contains('open') ? closeSearch() : openSearch();
-    });
+  toggle.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if(dock.classList.contains('search-open')){
+      if(input.value.trim()){
+        input.value = '';
+        renderResults();
+        input.focus();
+      }else{
+        closeSearch();
+      }
+    }else{
+      openSearch();
+    }
   });
 
   input.addEventListener('input', renderResults);
@@ -434,16 +441,16 @@ function setupDesktopSearch(){
     }
   });
 
-  panel.addEventListener('click', e => e.stopPropagation());
+  dock.addEventListener('click', e => e.stopPropagation());
 
   document.addEventListener('keydown', e => {
-    if(e.key === 'Escape' && panel.classList.contains('open')){
+    if(e.key === 'Escape' && dock.classList.contains('search-open')){
       closeSearch();
     }
   });
 
   document.addEventListener('click', e => {
-    if(panel.classList.contains('open') && !panel.contains(e.target) && !e.target.closest('[data-search-toggle]')){
+    if(dock.classList.contains('search-open') && !dock.contains(e.target)){
       closeSearch();
     }
   });

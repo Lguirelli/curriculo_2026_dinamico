@@ -52,33 +52,32 @@
       </div>
     </aside>
 
-    <nav class="dock" aria-label="Contatos e pesquisa">
-  <button type="button" class="dock-icon dock-search-toggle" title="Pesquisar" aria-label="Pesquisar" data-search-toggle>
-    <img class="dock-icon-img" src="assets/icons/search.svg" alt="" aria-hidden="true" draggable="false" />
-  </button>
-  <a href="#" class="dock-icon" title="Email" aria-label="Email">
-    <img class="dock-icon-img" src="assets/icons/email.svg" alt="" aria-hidden="true" draggable="false" />
-  </a>
-  <a href="#" class="dock-icon" title="LinkedIn" aria-label="LinkedIn">
-    <img class="dock-icon-img" src="assets/icons/linkedin.svg" alt="" aria-hidden="true" draggable="false" />
-  </a>
-  <a href="#" class="dock-icon" title="Instagram" aria-label="Instagram">
-    <img class="dock-icon-img" src="assets/icons/instagram.svg" alt="" aria-hidden="true" draggable="false" />
-  </a>
-  <a href="#" class="dock-icon" title="WhatsApp" aria-label="WhatsApp">
-    <img class="dock-icon-img" src="assets/icons/whatsapp.svg" alt="" aria-hidden="true" draggable="false" />
-  </a>
-</nav>
-
-<div id="desktopSearchPanel" class="desktop-search-panel" aria-hidden="true">
-  <form class="desktop-search-box" data-search-form>
-    <input id="desktopSearchInput" type="search" autocomplete="off" placeholder="Search..." aria-label="Pesquisar no portfólio" />
-    <button type="submit" aria-label="Pesquisar">
+    <nav class="dock" aria-label="Contatos e pesquisa" data-dock>
+  <form class="dock-search-form" data-search-form>
+    <button type="button" class="dock-icon dock-search-toggle" title="Pesquisar" aria-label="Pesquisar" data-search-toggle>
+      <img class="dock-icon-img" src="assets/icons/search.svg" alt="" aria-hidden="true" draggable="false" />
+    </button>
+    <input id="desktopSearchInput" class="dock-search-input" type="search" autocomplete="off" placeholder="Search..." aria-label="Pesquisar no portfólio" />
+    <button type="submit" class="dock-search-submit" aria-label="Pesquisar">
       <img src="assets/icons/search.svg" alt="" aria-hidden="true" draggable="false" />
     </button>
   </form>
-  <div id="desktopSearchResults" class="desktop-search-results" aria-live="polite"></div>
-</div>
+
+  <a href="#" class="dock-icon dock-contact-icon" title="Email" aria-label="Email">
+    <img class="dock-icon-img" src="assets/icons/email.svg" alt="" aria-hidden="true" draggable="false" />
+  </a>
+  <a href="#" class="dock-icon dock-contact-icon" title="LinkedIn" aria-label="LinkedIn">
+    <img class="dock-icon-img" src="assets/icons/linkedin.svg" alt="" aria-hidden="true" draggable="false" />
+  </a>
+  <a href="#" class="dock-icon dock-contact-icon" title="Instagram" aria-label="Instagram">
+    <img class="dock-icon-img" src="assets/icons/instagram.svg" alt="" aria-hidden="true" draggable="false" />
+  </a>
+  <a href="#" class="dock-icon dock-contact-icon" title="WhatsApp" aria-label="WhatsApp">
+    <img class="dock-icon-img" src="assets/icons/whatsapp.svg" alt="" aria-hidden="true" draggable="false" />
+  </a>
+
+  <div id="desktopSearchResults" class="dock-search-results" aria-live="polite"></div>
+</nav>
 
     <section id="windowsLayer" class="windows-layer" aria-label="Janelas abertas"></section>
   </main>
