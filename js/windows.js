@@ -139,7 +139,10 @@ function openFolder(folder){
   win.querySelectorAll('[data-file-path]').forEach(btn=>{
     btn.addEventListener('dblclick', async ()=>{
       const html = await fetchHTML(btn.dataset.filePath);
-      createWindow({title:btn.dataset.fileTitle, html, kind:'default', x:Math.round(window.innerWidth*.28), y:Math.round(window.innerHeight*.16)});
+      const win = createWindow({title:btn.dataset.fileTitle, html, kind:'default', x:Math.round(window.innerWidth*.16), y:Math.round(window.innerHeight*.08)});
+      if(btn.dataset.fileTitle.toLowerCase().includes('landing page editavel')){
+        win.classList.add('project-preview-window');
+      }
     });
     btn.addEventListener('click', ()=>{
       win.querySelectorAll('.folder-file').forEach(b=>b.classList.remove('selected'));

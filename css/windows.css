@@ -302,3 +302,23 @@
 .game-window .window-resize-edge{display:none!important;}
 
 .windows-layer{z-index:90}
+
+
+/* Project preview window */
+.os-window.project-preview-window{
+  width:min(1180px, calc(100vw - 80px));
+  height:min(820px, calc(100vh - 80px));
+}
+
+.os-window.project-preview-window .window-body{
+  padding:18px;
+  overflow:auto;
+}
+
+.os-window.project-preview-window .content-section{
+  height:100%;
+}
+
+.os-window.project-preview-window .project-iframe-shell{
+  height:calc(100% - 84px) !important;
+}

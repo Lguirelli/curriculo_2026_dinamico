@@ -7,25 +7,18 @@ window.OS_DATA = {
     { id:'habilidades', label:'Habilidades.txt', type:'txt', path:'content/curriculo/habilidades.html' }
   ],
   portfolio: [
-    { id:'f1', label:'F1', type:'folder', path:'content/portfolio/f1/index.html', files:[
-      { label:'visualizador.html', path:'content/portfolio/f1/visualizador.html' },
-      { label:'dados.html', path:'content/portfolio/f1/dados.html' },
-      { label:'replay.html', path:'content/portfolio/f1/replay.html' }
+    { id:'design', label:'Design', type:'folder', path:'content/portfolio/design/index.html', files:[
+      { label:'landing page editavel.html', path:'content/portfolio/design/landing-page-editavel.html' },
+      { label:'interfaces.html', path:'content/portfolio/design/interfaces.html' },
+      { label:'identidade visual.html', path:'content/portfolio/design/identidade-visual.html' }
     ]},
-    { id:'ia', label:'IA', type:'folder', path:'content/portfolio/ia/index.html', files:[
-      { label:'fluxo.html', path:'content/portfolio/ia/fluxo.html' },
-      { label:'dashboard.html', path:'content/portfolio/ia/dashboard.html' },
-      { label:'agente.html', path:'content/portfolio/ia/agente.html' }
+    { id:'fotografia', label:'Fotografia', type:'folder', path:'content/portfolio/fotografia/index.html', files:[
+      { label:'editorial.html', path:'content/portfolio/fotografia/editorial.html' },
+      { label:'tratamento de imagem.html', path:'content/portfolio/fotografia/tratamento-de-imagem.html' }
     ]},
-    { id:'web', label:'Web', type:'folder', path:'content/portfolio/web/index.html', files:[
-      { label:'landing.html', path:'content/portfolio/web/landing.html' },
-      { label:'home.html', path:'content/portfolio/web/home.html' },
-      { label:'style.html', path:'content/portfolio/web/style.html' }
-    ]},
-    { id:'branding', label:'Branding', type:'folder', path:'content/portfolio/branding/index.html', files:[
-      { label:'logo.html', path:'content/portfolio/branding/logo.html' },
-      { label:'manual.html', path:'content/portfolio/branding/manual.html' },
-      { label:'tom-de-voz.html', path:'content/portfolio/branding/tom-de-voz.html' }
+    { id:'videos', label:'Vídeos', type:'folder', path:'content/portfolio/videos/index.html', files:[
+      { label:'edicao.html', path:'content/portfolio/videos/edicao.html' },
+      { label:'motion.html', path:'content/portfolio/videos/motion.html' }
     ]}
   ],
   games: [
