@@ -10,7 +10,7 @@ const GRID = {
   maxCellH: 106
 };
 
-const LS_KEY = 'lorenzo_os_desktop_positions_v10_unified_grid';
+const LS_KEY = 'lorenzo_os_desktop_positions_v11_unified_grid_right_seed';
 let resizeTimer = null;
 
 function clamp(value, min, max){
@@ -154,6 +154,10 @@ function clearSelection(){
 }
 
 function getInitialItems(){
+  const m = getGridMetrics();
+  const rows = Math.max(1, m.maxRows);
+  const cols = Math.max(1, m.maxCols);
+
   const curriculum = OS_DATA.curriculum.map((it, i) => ({
     ...it,
     group: 'curriculo',
@@ -161,24 +165,31 @@ function getInitialItems(){
     defaultIndex: i
   }));
 
-  const portfolioOffset = curriculum.length;
-  const portfolio = OS_DATA.portfolio.map((it, i) => ({
-    ...it,
-    group: 'portfolio',
-    side: 'grid',
-    defaultIndex: portfolioOffset + i
-  }));
+  const rightItems = [
+    ...OS_DATA.portfolio.map((it, i) => ({
+      ...it,
+      group: 'portfolio',
+      side: 'grid',
+      defaultRightOrder: i
+    })),
+    ...OS_DATA.games.map((it, i) => ({
+      ...it,
+      group: 'game',
+      type: 'game',
+      side: 'grid',
+      defaultRightOrder: OS_DATA.portfolio.length + i
+    }))
+  ].map((item, order) => {
+    const colFromRight = Math.floor(order / rows);
+    const row = order % rows;
+    const col = Math.max(0, (cols - 1) - colFromRight);
+    return {
+      ...item,
+      defaultIndex: col * rows + row
+    };
+  });
 
-  const gamesOffset = portfolioOffset + portfolio.length;
-  const games = OS_DATA.games.map((it, i) => ({
-    ...it,
-    group: 'game',
-    type: 'game',
-    side: 'grid',
-    defaultIndex: gamesOffset + i
-  }));
-
-  return [...curriculum, ...portfolio, ...games];
+  return [...curriculum, ...rightItems];
 }
 
 function renderDesktopIcons(){
