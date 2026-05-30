@@ -10,7 +10,7 @@ const GRID = {
   maxCellH: 106
 };
 
-const LS_KEY = 'lorenzo_os_desktop_positions_v11_unified_grid_right_seed';
+const LS_KEY = 'lorenzo_os_desktop_positions_v9_txt_drag_fixed';
 let resizeTimer = null;
 
 function clamp(value, min, max){
@@ -26,9 +26,13 @@ function getGridMetrics(){
   const cellW = clamp(Math.round(width / 16), GRID.minCellW, GRID.maxCellW);
   const cellH = clamp(Math.round(height / 8), GRID.minCellH, GRID.maxCellH);
   const maxRows = Math.max(1, Math.floor((height - topY - bottomSafe) / cellH));
+
+  const centerGap = width < 1080 ? 120 : 180;
+  const usableSideWidth = Math.max(GRID.iconW, (width - marginX * 2 - centerGap) / 2);
+  const maxColsPerSide = Math.max(1, Math.floor((usableSideWidth - GRID.iconW) / cellW) + 1);
   const maxCols = Math.max(1, Math.floor((width - marginX * 2 - GRID.iconW) / cellW) + 1);
 
-  return { width, height, marginX, topY, bottomSafe, cellW, cellH, maxRows, maxCols };
+  return { width, height, marginX, topY, bottomSafe, cellW, cellH, maxRows, maxCols, maxColsPerSide, centerGap };
 }
 
 function loadPositions(){
@@ -50,16 +54,19 @@ function savePosition(id, cellIndex){
   localStorage.setItem(LS_KEY, JSON.stringify(pos));
 }
 
-function getCellIndexFromPosition(x, y){
+function getCellIndexFromPosition(x, y, side = 'left'){
   const m = getGridMetrics();
-  const col = clamp(Math.round((x - m.marginX) / m.cellW), 0, m.maxCols - 1);
+  const sideCols = m.maxColsPerSide || m.maxCols;
+  const col = side === 'right'
+    ? clamp(Math.round((m.width - m.marginX - GRID.iconW - x) / m.cellW), 0, sideCols - 1)
+    : clamp(Math.round((x - m.marginX) / m.cellW), 0, sideCols - 1);
   const row = clamp(Math.round((y - m.topY) / m.cellH), 0, m.maxRows - 1);
   return col * m.maxRows + row;
 }
 
 function normalizeIndex(index){
   const m = getGridMetrics();
-  const maxCells = m.maxCols * m.maxRows;
+  const maxCells = (m.maxColsPerSide || m.maxCols) * m.maxRows;
   return clamp(index, 0, maxCells - 1);
 }
 
@@ -80,14 +87,29 @@ function positionFromIndex(index){
 
 function defaultPosition(item, defaultIndex){
   const m = getGridMetrics();
-  const maxCells = m.maxCols * m.maxRows;
+  const sideCols = m.maxColsPerSide || m.maxCols;
+  const maxCells = sideCols * m.maxRows;
   const normalized = clamp(defaultIndex, 0, maxCells - 1);
   const col = Math.floor(normalized / m.maxRows);
   const row = normalized % m.maxRows;
+  const y = clamp(m.topY + row * m.cellH, m.topY, m.height - m.bottomSafe - GRID.iconH);
 
+  if(item.side === 'right'){
+    const x = m.width - m.marginX - GRID.iconW - col * m.cellW;
+    const minRightX = Math.ceil(m.width / 2 + m.centerGap / 2);
+    return {
+      x: clamp(x, minRightX, m.width - m.marginX - GRID.iconW),
+      y,
+      index: normalized,
+      col,
+      row
+    };
+  }
+
+  const maxLeftX = Math.floor(m.width / 2 - m.centerGap / 2 - GRID.iconW);
   return {
-    x: clamp(m.marginX + col * m.cellW, m.marginX, m.width - m.marginX - GRID.iconW),
-    y: clamp(m.topY + row * m.cellH, m.topY, m.height - m.bottomSafe - GRID.iconH),
+    x: clamp(m.marginX + col * m.cellW, m.marginX, Math.max(m.marginX, maxLeftX)),
+    y,
     index: normalized,
     col,
     row
@@ -102,7 +124,7 @@ function migrateOldPosition(saved, item){
   }
 
   if(Number.isFinite(saved.x) && Number.isFinite(saved.y)){
-    return defaultPosition(item, getCellIndexFromPosition(saved.x, saved.y));
+    return defaultPosition(item, getCellIndexFromPosition(saved.x, saved.y, item.side));
   }
 
   return null;
@@ -121,7 +143,14 @@ function findFreePosition(proposed, item, occupied){
   }
 
   for(let step = 1; step < maxAttempts; step++){
-    const candidate = defaultPosition(item, proposed.index + step);
+    let candidate;
+
+    if(item.side === 'right' && !item.wasManuallyMoved){
+      candidate = defaultPosition(item, proposed.index + step);
+    }else{
+      candidate = positionFromIndex(proposed.index + step);
+    }
+
     const key = physicalKey(candidate.x, candidate.y);
     if(!occupied.has(key)) return candidate;
   }
@@ -129,9 +158,9 @@ function findFreePosition(proposed, item, occupied){
   return proposed;
 }
 
-function snapToResponsiveGrid(x, y){
-  const item = {};
-  return defaultPosition(item, getCellIndexFromPosition(x, y));
+function snapToResponsiveGrid(x, y, side = 'left'){
+  const item = { side };
+  return defaultPosition(item, getCellIndexFromPosition(x, y, side));
 }
 
 function getOccupiedPositionKeys(excludeElement){
@@ -144,7 +173,7 @@ function getOccupiedPositionKeys(excludeElement){
 }
 
 function getAvailableSnappedPosition(icon, item){
-  const snapped = snapToResponsiveGrid(icon.offsetLeft, icon.offsetTop);
+  const snapped = snapToResponsiveGrid(icon.offsetLeft, icon.offsetTop, item.side);
   const occupied = getOccupiedPositionKeys(icon);
   return findFreePosition(snapped, item, occupied);
 }
@@ -154,42 +183,11 @@ function clearSelection(){
 }
 
 function getInitialItems(){
-  const m = getGridMetrics();
-  const rows = Math.max(1, m.maxRows);
-  const cols = Math.max(1, m.maxCols);
-
-  const curriculum = OS_DATA.curriculum.map((it, i) => ({
-    ...it,
-    group: 'curriculo',
-    side: 'grid',
-    defaultIndex: i
-  }));
-
-  const rightItems = [
-    ...OS_DATA.portfolio.map((it, i) => ({
-      ...it,
-      group: 'portfolio',
-      side: 'grid',
-      defaultRightOrder: i
-    })),
-    ...OS_DATA.games.map((it, i) => ({
-      ...it,
-      group: 'game',
-      type: 'game',
-      side: 'grid',
-      defaultRightOrder: OS_DATA.portfolio.length + i
-    }))
-  ].map((item, order) => {
-    const colFromRight = Math.floor(order / rows);
-    const row = order % rows;
-    const col = Math.max(0, (cols - 1) - colFromRight);
-    return {
-      ...item,
-      defaultIndex: col * rows + row
-    };
-  });
-
-  return [...curriculum, ...rightItems];
+  return [
+    ...OS_DATA.curriculum.map((it, i) => ({...it, group: 'curriculo', side: 'left', defaultIndex: i})),
+    ...OS_DATA.portfolio.map((it, i) => ({...it, group: 'portfolio', side: 'right', defaultIndex: i})),
+    ...OS_DATA.games.map((it, i) => ({...it, group: 'game', type: 'game', side: 'right', defaultIndex: OS_DATA.portfolio.length + i}))
+  ];
 }
 
 function renderDesktopIcons(){
@@ -218,10 +216,12 @@ function renderDesktopIcons(){
 
     if (item.type === 'folder') {
       icon.innerHTML = `
-        <span class="folder-glass-icon desktop-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
-  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
-  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
-</svg></span>
+        <span class="portfolio-folder-icon glass-folder-mini" aria-hidden="true">
+          <span class="folder-core"></span>
+          <span class="folder-back"></span>
+          <span class="folder-front"></span>
+          <span class="folder-shine"></span>
+        </span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
     } else if (item.type === 'txt') {
@@ -334,6 +334,121 @@ function setupStartMenu(){
   }));
 }
 
+function getSearchItems(){
+  const curriculum = OS_DATA.curriculum.map(item => ({
+    label: item.label,
+    typeLabel: 'Currículo',
+    action: () => openTextFile(item)
+  }));
+
+  const portfolio = OS_DATA.portfolio.map(item => ({
+    label: item.label,
+    typeLabel: 'Portfólio',
+    action: () => openFolder(item)
+  }));
+
+  const games = OS_DATA.games.map(item => ({
+    label: item.label,
+    typeLabel: 'Jogo',
+    action: () => openGameWindow(item.id, item.label)
+  }));
+
+  return [...curriculum, ...portfolio, ...games];
+}
+
+function setupDesktopSearch(){
+  const panel = document.getElementById('desktopSearchPanel');
+  const input = document.getElementById('desktopSearchInput');
+  const results = document.getElementById('desktopSearchResults');
+  const form = document.querySelector('[data-search-form]');
+  const toggles = document.querySelectorAll('[data-search-toggle]');
+
+  if(!panel || !input || !results || !form || !toggles.length) return;
+
+  const items = getSearchItems();
+
+  function closeSearch(){
+    panel.classList.remove('open', 'has-results');
+    panel.setAttribute('aria-hidden', 'true');
+    results.innerHTML = '';
+    input.value = '';
+  }
+
+  function openSearch(){
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden', 'false');
+    window.setTimeout(() => input.focus(), 40);
+  }
+
+  function renderResults(){
+    const query = input.value.trim().toLowerCase();
+    results.innerHTML = '';
+
+    if(!query){
+      panel.classList.remove('has-results');
+      return;
+    }
+
+    const filtered = items
+      .filter(item => item.label.toLowerCase().includes(query) || item.typeLabel.toLowerCase().includes(query))
+      .slice(0, 7);
+
+    if(!filtered.length){
+      panel.classList.add('has-results');
+      results.innerHTML = '<div class="search-result-item"><strong>Nenhum resultado</strong><small>Digite outro termo</small></div>';
+      return;
+    }
+
+    filtered.forEach(item => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'search-result-item';
+      button.innerHTML = `<strong>${item.label}</strong><small>${item.typeLabel}</small>`;
+      button.addEventListener('click', () => {
+        item.action();
+        closeSearch();
+      });
+      results.appendChild(button);
+    });
+
+    panel.classList.add('has-results');
+  }
+
+  toggles.forEach(toggle => {
+    toggle.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      panel.classList.contains('open') ? closeSearch() : openSearch();
+    });
+  });
+
+  input.addEventListener('input', renderResults);
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const query = input.value.trim().toLowerCase();
+    const match = items.find(item => item.label.toLowerCase().includes(query));
+    if(match){
+      match.action();
+      closeSearch();
+    }
+  });
+
+  panel.addEventListener('click', e => e.stopPropagation());
+
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && panel.classList.contains('open')){
+      closeSearch();
+    }
+  });
+
+  document.addEventListener('click', e => {
+    if(panel.classList.contains('open') && !panel.contains(e.target) && !e.target.closest('[data-search-toggle]')){
+      closeSearch();
+    }
+  });
+}
+
 function updateDesktopClock(){
   const el = document.getElementById('topPanelClock');
   if(!el) return;
@@ -347,6 +462,7 @@ function updateDesktopClock(){
 function initDesktop(){
   renderDesktopIcons();
   setupStartMenu();
+  setupDesktopSearch();
   updateDesktopClock();
   setInterval(updateDesktopClock, 1000);
 
