@@ -32,16 +32,41 @@ function getGameHint(id) {
 
 function openGameWindow(id, label) {
   const shell = gameShell(id, label);
-  const initialWidth = Math.min(980, Math.max(720, Math.floor(window.innerWidth * 0.68)));
-  const initialHeight = Math.min(740, Math.max(500, Math.floor((window.innerHeight - 90) * 0.72)));
+
+  const presets = {
+    snake: {
+      w: Math.min(660, Math.max(560, Math.floor(window.innerHeight * .72))),
+      h: Math.min(720, Math.max(620, Math.floor(window.innerHeight * .78)))
+    },
+    mines: {
+      w: Math.min(700, Math.max(600, Math.floor(window.innerHeight * .76))),
+      h: Math.min(740, Math.max(640, Math.floor(window.innerHeight * .80)))
+    },
+    pong: {
+      w: Math.min(920, Math.max(760, Math.floor(window.innerWidth * .64))),
+      h: Math.min(600, Math.max(500, Math.floor(window.innerHeight * .60)))
+    }
+  };
+
+  const preset = presets[id] || {
+    w: Math.min(920, Math.max(720, Math.floor(window.innerWidth * .62))),
+    h: Math.min(680, Math.max(520, Math.floor(window.innerHeight * .68)))
+  };
+
+  const initialWidth = Math.min(preset.w, window.innerWidth - 40);
+  const initialHeight = Math.min(preset.h, window.innerHeight - 56);
 
   const win = createWindow({
     title: label,
     html: shell.html,
     kind: 'game',
-    x: Math.max(24, Math.round((window.innerWidth - initialWidth) / 2)),
-    y: Math.max(20, Math.round((window.innerHeight - initialHeight) / 2) - 16)
+    x: Math.max(16, Math.round((window.innerWidth - initialWidth) / 2)),
+    y: Math.max(16, Math.round((window.innerHeight - initialHeight) / 2) - 10)
   });
+
+  win.classList.add(`game-window-${id}`);
+  win.style.width = `${initialWidth}px`;
+  win.style.height = `${initialHeight}px`;
 
   setTimeout(() => initGame(id, shell.uid), 40);
   return win;
@@ -107,7 +132,7 @@ function fitCanvasToStage(canvas, ratio = 1) {
   const stage = canvas.closest('.game-stage');
   const rect = stage.getBoundingClientRect();
   const reservedTop = 0;
-  const pad = rect.width < 720 ? 4 : 6;
+  const pad = rect.width < 720 ? 2 : 4;
   const w = Math.max(260, Math.floor(rect.width - pad * 2));
   const h = Math.max(220, Math.floor(rect.height - pad * 2 - reservedTop));
 
@@ -172,8 +197,8 @@ function drawNeonBackground(ctx, canvas, opts = {}) {
     Math.max(canvas.width, canvas.height) * .72
   );
   radial.addColorStop(0, 'rgba(24,246,255,.10)');
-  radial.addColorStop(.48, 'rgba(3,8,18,.42)');
-  radial.addColorStop(1, 'rgba(1,3,10,.74)');
+  radial.addColorStop(.48, 'rgba(3,8,18,.38)');
+  radial.addColorStop(1, 'rgba(1,3,10,.66)');
   ctx.fillStyle = radial;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -183,26 +208,29 @@ function drawNeonBackground(ctx, canvas, opts = {}) {
   if (opts.grid) {
     const step = opts.gridStep || 28;
     ctx.save();
-    ctx.globalAlpha = .11;
-    ctx.strokeStyle = cyan;
-    ctx.lineWidth = 1;
-    for (let x = 0; x <= canvas.width; x += step) {
-      ctx.beginPath();
-      ctx.moveTo(x + .5, 0);
-      ctx.lineTo(x + .5, canvas.height);
-      ctx.stroke();
-    }
-    for (let y = 0; y <= canvas.height; y += step) {
-      ctx.beginPath();
-      ctx.moveTo(0, y + .5);
-      ctx.lineTo(canvas.width, y + .5);
-      ctx.stroke();
+    ctx.globalAlpha = .95;
+    for (let y = 0; y < canvas.height; y += step) {
+      for (let x = 0; x < canvas.width; x += step) {
+        const inset = Math.max(1.5, step * .08);
+        const size = step - inset * 2;
+
+        ctx.fillStyle = 'rgba(24,246,255,.026)';
+        ctx.strokeStyle = 'rgba(24,246,255,.13)';
+        ctx.shadowColor = 'rgba(24,246,255,.10)';
+        ctx.shadowBlur = 4;
+        ctx.lineWidth = 1;
+
+        ctx.beginPath();
+        ctx.roundRect(x + inset, y + inset, size, size, Math.max(3, step * .16));
+        ctx.fill();
+        ctx.stroke();
+      }
     }
     ctx.restore();
   }
 
   ctx.save();
-  ctx.globalAlpha = .13;
+  ctx.globalAlpha = .10;
   ctx.strokeStyle = magenta;
   ctx.lineWidth = 1;
   ctx.beginPath();
@@ -338,6 +366,30 @@ function initSnake(uid) {
     ctx.beginPath();
     ctx.arc(food.x * size + size * .62, food.y * size + size * .32, Math.max(2, size * .08), 0, Math.PI * 2);
     ctx.fill();
+    ctx.restore();
+
+    ctx.save();
+    ctx.shadowBlur = 14;
+    ctx.shadowColor = cyan;
+    ctx.fillStyle = 'rgba(3,8,18,.50)';
+    ctx.strokeStyle = 'rgba(24,246,255,.30)';
+    ctx.lineWidth = 1;
+    const scoreText = String(score).padStart(4, '0');
+    const boxW = 72;
+    const boxH = 28;
+    const boxX = canvas.width - boxW - 10;
+    const boxY = 10;
+    ctx.beginPath();
+    ctx.roundRect(boxX, boxY, boxW, boxH, 10);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.shadowBlur = 10;
+    ctx.fillStyle = cyan;
+    ctx.font = '800 12px "IBM Plex Mono", "Courier New", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(scoreText, boxX + boxW / 2, boxY + boxH / 2 + 1);
     ctx.restore();
 
     ctx.shadowBlur = 0;
