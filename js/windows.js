@@ -193,13 +193,15 @@ function openFolder(folder){
   win.querySelectorAll('[data-file-index]').forEach(btn=>{
     const file = folder.files[Number(btn.dataset.fileIndex)];
 
-    btn.addEventListener('dblclick', async ()=>{
-      await openPortfolioFolderItem(file);
-    });
-
-    btn.addEventListener('click', ()=>{
+    btn.addEventListener('click', async ()=>{
+      const alreadySelected = btn.classList.contains('selected');
       win.querySelectorAll('.folder-file').forEach(b=>b.classList.remove('selected'));
       btn.classList.add('selected');
+      if(alreadySelected) await openPortfolioFolderItem(file);
+    });
+
+    btn.addEventListener('dblclick', async ()=>{
+      await openPortfolioFolderItem(file);
     });
   });
 }
