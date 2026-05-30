@@ -139,9 +139,10 @@ function portfolioFolderIconMarkup(){
 }
 
 function openPortfolioProject(file){
+  const projectPath = file.projectPath || file.path;
   const html = `
     <section class="project-preview-content">
-      <iframe class="project-preview-frame" src="${file.projectPath}" title="${file.label}"></iframe>
+      <iframe class="project-preview-frame" src="${projectPath}" title="${file.label}"></iframe>
     </section>
   `;
 
@@ -157,7 +158,7 @@ function openPortfolioProject(file){
 }
 
 async function openPortfolioFolderItem(file){
-  if(file.projectPath){
+  if(file.type === 'project-folder' || file.projectPath){
     openPortfolioProject(file);
     return;
   }

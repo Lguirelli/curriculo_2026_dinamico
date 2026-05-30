@@ -8,7 +8,7 @@ window.OS_DATA = {
   ],
   portfolio: [
     { id:'design', label:'Design', type:'folder', path:'content/portfolio/design/index.html', files:[
-      { id:'landing-page-editavel', label:'landing page editavel', type:'project-folder', projectPath:'content/portfolio/design/landing-page-editavel/index.html' },
+      { id:'landing-page-editavel', label:'landing page editavel', type:'project-folder', path:'content/portfolio/design/landing-page-editavel/index.html', projectPath:'content/portfolio/design/landing-page-editavel/index.html' },
       { id:'interfaces', label:'interfaces', type:'folder-file', path:'content/portfolio/design/interfaces.html' },
       { id:'identidade-visual', label:'identidade visual', type:'folder-file', path:'content/portfolio/design/identidade-visual.html' }
     ]},
