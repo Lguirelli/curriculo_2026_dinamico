@@ -707,3 +707,165 @@
     top:18px !important;
   }
 }
+
+
+/* Final clean transparent game fixes */
+.game-window,
+.game-window-snake,
+.game-window-mines,
+.game-window-pong{
+  background:rgba(8,14,28,.26) !important;
+  box-shadow:
+    0 22px 62px rgba(0,0,0,.26),
+    0 0 30px rgba(24,246,255,.07),
+    inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+.game-stage,
+.game-window-snake .game-stage,
+.game-window-mines .game-stage,
+.game-window-pong .game-stage{
+  background:
+    radial-gradient(circle at 48% 44%, rgba(24,246,255,.045), transparent 42%),
+    radial-gradient(circle at 82% 78%, rgba(255,79,216,.035), transparent 30%),
+    rgba(8,14,28,.12) !important;
+  box-shadow:
+    inset 0 0 26px rgba(24,246,255,.028),
+    inset 0 0 38px rgba(0,0,0,.14) !important;
+  backdrop-filter:blur(18px) saturate(120%) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(120%) !important;
+}
+
+.game-stage::before,
+.game-stage::after{
+  background:none !important;
+  opacity:0 !important;
+  display:none !important;
+}
+
+.game-canvas{
+  background:rgba(3,8,18,.08) !important;
+  box-shadow:
+    0 0 22px rgba(24,246,255,.10),
+    inset 0 0 28px rgba(24,246,255,.025),
+    inset 0 0 44px rgba(0,0,0,.16) !important;
+}
+
+/* Snake sem sobras laterais e sem meia célula */
+.game-window-snake{
+  width:min(520px, calc(100vw - 36px)) !important;
+  height:min(620px, calc(100vh - 36px)) !important;
+  min-width:500px !important;
+  min-height:590px !important;
+}
+
+.game-window-snake .game-stage{
+  padding:0 !important;
+}
+
+.game-snake .game-canvas{
+  max-width:calc(100% - 8px) !important;
+  max-height:calc(100% - 8px) !important;
+  border-radius:16px !important;
+}
+
+/* Pong: placar abaixo do campo */
+.game-pong .game-stage{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+  padding:8px !important;
+  box-sizing:border-box !important;
+}
+
+.game-pong .game-canvas{
+  order:0 !important;
+  max-width:calc(100% - 4px) !important;
+  max-height:calc(100% - 58px) !important;
+}
+
+.game-pong .game-hud-pong{
+  order:1 !important;
+  position:relative !important;
+  inset:auto !important;
+  width:min(260px, 54%) !important;
+  height:40px !important;
+  flex:0 0 40px !important;
+  margin:0 auto !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius:16px !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.035)),
+    rgba(3,8,18,.50) !important;
+  border:1px solid rgba(24,246,255,.32) !important;
+  box-shadow:
+    0 0 22px rgba(24,246,255,.16),
+    inset 0 1px 0 rgba(255,255,255,.12) !important;
+  backdrop-filter:blur(10px) saturate(120%) !important;
+  -webkit-backdrop-filter:blur(10px) saturate(120%) !important;
+}
+
+/* Campo Minado: marcador mais visível */
+.game-mines .game-hud-mines{
+  right:calc(50% - min(calc(100% - 16px), calc(100vh - 160px), 650px) / 2 + 8px) !important;
+  top:calc(50% - min(calc(100% - 16px), calc(100vh - 160px), 650px) / 2 + 8px) !important;
+}
+
+.game-hud-mines span,
+.game-mines .game-hud-mines span{
+  height:32px !important;
+  min-width:78px !important;
+  padding:0 12px !important;
+  font-size:12px !important;
+  font-weight:900 !important;
+  color:#eafcff !important;
+  background:
+    linear-gradient(135deg, rgba(24,246,255,.24), rgba(255,79,216,.10)),
+    rgba(3,8,18,.72) !important;
+  border:1px solid rgba(24,246,255,.48) !important;
+  box-shadow:
+    0 0 20px rgba(24,246,255,.28),
+    0 0 28px rgba(255,79,216,.10),
+    inset 0 1px 0 rgba(255,255,255,.16) !important;
+  text-shadow:0 0 10px rgba(24,246,255,.55) !important;
+}
+
+.mines-grid{
+  width:min(calc(100% - 16px), calc(100vh - 160px), 650px) !important;
+}
+
+.mine-cell{
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.024)),
+    rgba(6,14,28,.22) !important;
+}
+
+@media(max-width:760px){
+  .game-window-snake,
+  .game-window-mines,
+  .game-window-pong{
+    width:calc(100vw - 24px) !important;
+    height:min(680px, calc(100vh - 36px)) !important;
+    min-width:0 !important;
+    min-height:0 !important;
+  }
+
+  .game-pong .game-hud-pong{
+    width:min(220px, 64%) !important;
+    height:36px !important;
+    flex-basis:36px !important;
+  }
+
+  .game-pong .game-canvas{
+    max-height:calc(100% - 52px) !important;
+  }
+
+  .game-mines .game-hud-mines{
+    right:18px !important;
+    top:18px !important;
+  }
+}

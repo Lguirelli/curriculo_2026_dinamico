@@ -184,7 +184,6 @@ function observeGameScale(stage, callback) {
 function drawNeonBackground(ctx, canvas, opts = {}) {
   const cyan = getCSSColor('--game-cyan', '#18f6ff');
   const magenta = getCSSColor('--game-magenta', '#ff4fd8');
-  const bg = getCSSColor('--game-bg', 'rgba(3,8,18,.68)');
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -196,47 +195,47 @@ function drawNeonBackground(ctx, canvas, opts = {}) {
     canvas.height * .45,
     Math.max(canvas.width, canvas.height) * .72
   );
-  radial.addColorStop(0, 'rgba(24,246,255,.10)');
-  radial.addColorStop(.48, 'rgba(3,8,18,.38)');
-  radial.addColorStop(1, 'rgba(1,3,10,.66)');
+  radial.addColorStop(0, 'rgba(24,246,255,.06)');
+  radial.addColorStop(.54, 'rgba(8,14,28,.16)');
+  radial.addColorStop(1, 'rgba(8,14,28,.08)');
   ctx.fillStyle = radial;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = bg;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   if (opts.grid) {
     const step = opts.gridStep || 28;
     ctx.save();
-    ctx.globalAlpha = .95;
-    for (let y = 0; y < canvas.height; y += step) {
-      for (let x = 0; x < canvas.width; x += step) {
-        const inset = Math.max(1.5, step * .08);
-        const size = step - inset * 2;
 
-        ctx.fillStyle = 'rgba(24,246,255,.026)';
-        ctx.strokeStyle = 'rgba(24,246,255,.13)';
+    for (let y = 0; y + step <= canvas.height; y += step) {
+      for (let x = 0; x + step <= canvas.width; x += step) {
+        const inset = Math.max(2, step * .08);
+        const tile = step - inset * 2;
+
+        ctx.globalAlpha = .92;
+        ctx.fillStyle = 'rgba(24,246,255,.030)';
+        ctx.strokeStyle = 'rgba(24,246,255,.17)';
         ctx.shadowColor = 'rgba(24,246,255,.10)';
-        ctx.shadowBlur = 4;
+        ctx.shadowBlur = 3;
         ctx.lineWidth = 1;
 
         ctx.beginPath();
-        ctx.roundRect(x + inset, y + inset, size, size, Math.max(3, step * .16));
+        ctx.roundRect(x + inset, y + inset, tile, tile, Math.max(4, step * .18));
         ctx.fill();
         ctx.stroke();
       }
     }
+
     ctx.restore();
   }
 
   ctx.save();
-  ctx.globalAlpha = .10;
-  ctx.strokeStyle = magenta;
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(canvas.width * .72, 0);
-  ctx.lineTo(canvas.width, canvas.height * .28);
-  ctx.stroke();
+  ctx.globalAlpha = .12;
+  const gloss = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  gloss.addColorStop(0, 'rgba(255,255,255,.10)');
+  gloss.addColorStop(.28, 'rgba(255,255,255,0)');
+  gloss.addColorStop(.72, 'rgba(255,255,255,0)');
+  gloss.addColorStop(1, 'rgba(255,79,216,.08)');
+  ctx.fillStyle = gloss;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.restore();
 }
 
@@ -257,8 +256,11 @@ function initSnake(uid) {
 
   function recalc() {
     fitCanvasToStage(canvas, 1);
-    size = Math.max(14, Math.floor(canvas.width / 22));
-    cells = Math.floor(canvas.width / size);
+    cells = 22;
+    size = Math.floor(Math.min(canvas.width, canvas.height) / cells);
+    size = Math.max(14, size);
+    canvas.width = size * cells;
+    canvas.height = size * cells;
   }
 
   function reset(paused = true) {
@@ -438,7 +440,7 @@ function initPong(uid) {
 
   const ctx = canvas.getContext('2d');
   let raf, running = false;
-  let player, ai, ball, playerScore, aiScore, aiMistake = 0;
+  let player, ai, ball, playerScore, aiScore, aiMistake = 0, ballTrail = [];
 
   function reset(paused = true) {
     fitCanvasToStage(canvas, 16/9);
@@ -448,6 +450,7 @@ function initPong(uid) {
     ai = {x:canvas.width-41, y:canvas.height/2-48, w:13, h:96};
     playerScore = 0;
     aiScore = 0;
+    ballTrail = [];
     serve(Math.random() > .5 ? 1 : -1);
     setScore(uid, formatPongScore());
     draw();
@@ -478,6 +481,9 @@ function initPong(uid) {
   }
 
   function update() {
+    ballTrail.push({x: ball.x, y: ball.y, r: ball.r});
+    if (ballTrail.length > 10) ballTrail.shift();
+
     ball.x += ball.vx;
     ball.y += ball.vy;
 
@@ -573,18 +579,31 @@ function initPong(uid) {
     ctx.roundRect(ai.x, ai.y, ai.w, ai.h, 7);
     ctx.fill();
 
+    ctx.save();
+    ballTrail.forEach((p, i) => {
+      const a = (i + 1) / ballTrail.length;
+      ctx.globalAlpha = Math.max(.08, a * .34);
+      ctx.fillStyle = cyan;
+      ctx.shadowColor = cyan;
+      ctx.shadowBlur = 16 * a;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, Math.max(2, p.r * (.25 + a * .55)), 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.restore();
+
     neonFill(ctx, text, 24);
     ctx.beginPath();
     ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.save();
-    ctx.globalAlpha = .82;
+    ctx.globalAlpha = .92;
     ctx.fillStyle = cyan;
     ctx.shadowColor = cyan;
-    ctx.shadowBlur = 18;
+    ctx.shadowBlur = 20;
     ctx.beginPath();
-    ctx.arc(ball.x - ball.vx * 1.4, ball.y - ball.vy * 1.4, Math.max(2, ball.r * .52), 0, Math.PI * 2);
+    ctx.arc(ball.x - ball.vx * 1.15, ball.y - ball.vy * 1.15, Math.max(2, ball.r * .46), 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
 
