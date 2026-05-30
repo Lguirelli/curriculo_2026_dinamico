@@ -1,10 +1,499 @@
-function updateClock(){
-  const now = new Date();
-  const hh = String(now.getHours()).padStart(2,'0');
-  const mm = String(now.getMinutes()).padStart(2,'0');
-  const text = `${hh}:${mm}`;
-  const desk=document.getElementById('systemClock'); if(desk) desk.textContent=text;
-  const mob=document.getElementById('mobileClock'); if(mob) mob.textContent=text;
+const HEADER_MOBILE_QUERY = "(max-width: 1100px)";
+const EDITOR_COMPACT_QUERY = "(max-width: 1180px)";
+
+function initSmoothScroll() {
+  if (window.__smoothScrollInitialized) return;
+  window.__smoothScrollInitialized = true;
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const href = link.getAttribute("href");
+    if (!href || href === "#") return;
+
+    const target = document.querySelector(href);
+    if (!target) return;
+
+    event.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    closeHeaderMenu();
+  });
 }
-updateClock(); setInterval(updateClock,1000);
-window.addEventListener('DOMContentLoaded',()=>{ initDesktop(); initMobile(); });
+
+function initEditableText() {
+  const editableItems = document.querySelectorAll(".editable-text");
+
+  editableItems.forEach((item) => {
+    item.setAttribute("tabindex", "0");
+    item.setAttribute("title", "Dê dois cliques para editar");
+
+    function startEditing(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      item.setAttribute("contenteditable", "true");
+      item.classList.add("is-editing");
+      item.focus();
+
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(item);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    item.addEventListener("dblclick", startEditing);
+
+    let lastTapTime = 0;
+    item.addEventListener("touchend", (event) => {
+      const now = Date.now();
+
+      if (now - lastTapTime < 320) {
+        startEditing(event);
+      }
+
+      lastTapTime = now;
+    }, { passive: false });
+
+    item.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" || (event.key === "Enter" && (event.ctrlKey || event.metaKey))) {
+        event.preventDefault();
+        item.blur();
+      }
+    });
+
+    item.addEventListener("blur", () => {
+      item.removeAttribute("contenteditable");
+      item.classList.remove("is-editing");
+      syncAllSectionLabels();
+      renderHeaderNav();
+    });
+  });
+}
+
+function getSectionDisplayName(sectionName) {
+  const section = document.querySelector(`[data-editable-section="${sectionName}"]`);
+  const kicker = section?.querySelector(".section-kicker.editable-text");
+  const title = section?.querySelector(".section-title.editable-text, .hero-title.editable-text");
+  const text = (kicker?.textContent || title?.textContent || "").trim();
+
+  return text || sectionName;
+}
+
+function syncSectionLabels(sectionName) {
+  const label = getSectionDisplayName(sectionName);
+
+  document.querySelectorAll(`[data-section-menu-label-for="${sectionName}"]`).forEach((item) => {
+    item.textContent = label;
+  });
+
+  document.querySelectorAll(`[data-nav-label-for="${sectionName}"]`).forEach((item) => {
+    item.textContent = label;
+  });
+}
+
+function syncAllSectionLabels() {
+  document.querySelectorAll("[data-editable-section]").forEach((section) => {
+    syncSectionLabels(section.dataset.editableSection);
+  });
+}
+
+function getVisibleSectionsForNav() {
+  return [...document.querySelectorAll("[data-editable-section]")]
+    .filter((section) => !section.hidden)
+    .filter((section) => section.dataset.editableSection !== "hero")
+    .map((section) => ({
+      id: section.id,
+      key: section.dataset.editableSection,
+      label: getSectionDisplayName(section.dataset.editableSection)
+    }));
+}
+
+function buildHeaderLink(section) {
+  const link = document.createElement("a");
+  link.href = `#${section.id}`;
+  link.textContent = section.label;
+  link.dataset.navLabelFor = section.key;
+  link.className = "header-nav-link";
+  return link;
+}
+
+function buildHeaderActionButton(sourceButton) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = sourceButton.className;
+  button.textContent = sourceButton.textContent.trim();
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  });
+  return button;
+}
+
+function closeHeaderMenu() {
+  const button = document.querySelector("[data-header-menu-button]");
+  const menu = document.querySelector("[data-header-more-menu]");
+
+  if (!button || !menu) return;
+
+  button.setAttribute("aria-expanded", "false");
+  menu.classList.remove("is-open");
+}
+
+function openHeaderMenu() {
+  const button = document.querySelector("[data-header-menu-button]");
+  const menu = document.querySelector("[data-header-more-menu]");
+
+  if (!button || !menu) return;
+
+  button.setAttribute("aria-expanded", "true");
+  menu.classList.add("is-open");
+}
+
+function toggleHeaderMenu() {
+  const button = document.querySelector("[data-header-menu-button]");
+  const menu = document.querySelector("[data-header-more-menu]");
+
+  if (!button || !menu) return;
+
+  if (menu.classList.contains("is-open")) {
+    closeHeaderMenu();
+  } else {
+    openHeaderMenu();
+  }
+}
+
+function ensureHeaderMenuEvents() {
+  const button = document.querySelector("[data-header-menu-button]");
+
+  if (!button || button.dataset.menuReady === "true") return;
+
+  button.dataset.menuReady = "true";
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    toggleHeaderMenu();
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest("[data-header-more]")) {
+      closeHeaderMenu();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeHeaderMenu();
+    }
+  });
+}
+
+function renderHeaderNav() {
+  const nav = document.querySelector("#siteNav, .site-header .nav");
+  const moreWrapper = document.querySelector("[data-header-more]");
+  const moreButton = document.querySelector("[data-header-menu-button]");
+  const moreMenu = document.querySelector("[data-header-more-menu]");
+  const actions = document.querySelector("[data-header-actions]");
+
+  if (!nav || !moreWrapper || !moreButton || !moreMenu) return;
+
+  ensureHeaderMenuEvents();
+
+  const sections = getVisibleSectionsForNav();
+  const isHeaderMobile = window.matchMedia(HEADER_MOBILE_QUERY).matches;
+
+  document.body.classList.toggle("is-header-mobile", isHeaderMobile);
+  nav.innerHTML = "";
+  moreMenu.innerHTML = "";
+  moreWrapper.classList.remove("has-items");
+  closeHeaderMenu();
+
+  if (isHeaderMobile) {
+    moreButton.textContent = "☰";
+    moreButton.setAttribute("aria-label", "Abrir menu da página");
+
+    sections.forEach((section) => {
+      moreMenu.appendChild(buildHeaderLink(section));
+    });
+
+    if (actions) {
+      const actionGroup = document.createElement("div");
+      actionGroup.className = "header-more-actions";
+      actions.querySelectorAll("button").forEach((button) => {
+        actionGroup.appendChild(buildHeaderActionButton(button));
+      });
+      moreMenu.appendChild(actionGroup);
+    }
+
+    moreWrapper.classList.add("has-items");
+    return;
+  }
+
+  moreButton.textContent = "Mais";
+  moreButton.setAttribute("aria-label", "Abrir mais seções");
+
+  sections.forEach((section) => {
+    nav.appendChild(buildHeaderLink(section));
+  });
+
+  window.requestAnimationFrame(() => adjustDesktopHeaderNav());
+}
+
+function adjustDesktopHeaderNav() {
+  const nav = document.querySelector("#siteNav, .site-header .nav");
+  const moreWrapper = document.querySelector("[data-header-more]");
+  const moreMenu = document.querySelector("[data-header-more-menu]");
+
+  if (!nav || !moreWrapper || !moreMenu) return;
+  if (window.matchMedia(HEADER_MOBILE_QUERY).matches) return;
+
+  moreMenu.innerHTML = "";
+  moreWrapper.classList.remove("has-items");
+
+  const moveLastLinkToMore = () => {
+    const links = [...nav.querySelectorAll("a")];
+    const lastLink = links.at(-1);
+    if (!lastLink) return false;
+    moreMenu.prepend(lastLink);
+    moreWrapper.classList.add("has-items");
+    return true;
+  };
+
+  let safety = 0;
+  while (nav.scrollWidth > nav.clientWidth + 2 && safety < 40) {
+    if (!moveLastLinkToMore()) break;
+    safety += 1;
+  }
+
+  if (!moreMenu.children.length) {
+    moreWrapper.classList.remove("has-items");
+  }
+}
+
+function initHeaderNav() {
+  renderHeaderNav();
+
+  window.addEventListener("resize", () => {
+    window.requestAnimationFrame(renderHeaderNav);
+  }, { passive: true });
+
+  if (window.ResizeObserver) {
+    const header = document.querySelector(".site-header .header-inner");
+    if (header) {
+      const observer = new ResizeObserver(() => renderHeaderNav());
+      observer.observe(header);
+    }
+  }
+}
+
+function initSectionControls() {
+  const toggles = document.querySelectorAll("[data-section-toggle]");
+
+  toggles.forEach((toggle) => {
+    const sectionName = toggle.dataset.sectionToggle;
+    const section = document.querySelector(`[data-editable-section="${sectionName}"]`);
+
+    if (!section) return;
+
+    function applyVisibility() {
+      section.hidden = !toggle.checked;
+      section.classList.toggle("is-section-hidden", !toggle.checked);
+      syncAllSectionLabels();
+      renderHeaderNav();
+    }
+
+    toggle.addEventListener("change", applyVisibility);
+    applyVisibility();
+  });
+
+  syncAllSectionLabels();
+}
+
+function initSectionDragAndDrop() {
+  const editorGroup = [...document.querySelectorAll(".editor-group")]
+    .find((group) => group.querySelector("[data-section-toggle]"));
+
+  if (!editorGroup) return;
+
+  const getRows = () => [...editorGroup.querySelectorAll(".section-toggle[data-draggable-section]")];
+
+  editorGroup.querySelectorAll(".section-toggle").forEach((row) => {
+    const input = row.querySelector("[data-section-toggle]");
+    if (!input) return;
+
+    row.dataset.draggableSection = input.dataset.sectionToggle;
+    row.draggable = true;
+    row.setAttribute("title", "Arraste para reordenar esta seção");
+
+    row.addEventListener("dragstart", (event) => {
+      if (event.target.matches("input")) {
+        event.preventDefault();
+        return;
+      }
+
+      row.classList.add("is-dragging");
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", input.dataset.sectionToggle);
+    });
+
+    row.addEventListener("dragend", () => {
+      row.classList.remove("is-dragging");
+      getRows().forEach((item) => item.classList.remove("is-drop-target"));
+      reorderLandingSectionsFromPanel();
+      renderHeaderNav();
+    });
+  });
+
+  editorGroup.addEventListener("dragover", (event) => {
+    event.preventDefault();
+    const dragging = editorGroup.querySelector(".is-dragging");
+    const target = event.target.closest(".section-toggle[data-draggable-section]");
+
+    if (!dragging || !target || dragging === target) return;
+
+    getRows().forEach((item) => item.classList.remove("is-drop-target"));
+    target.classList.add("is-drop-target");
+
+    const targetRect = target.getBoundingClientRect();
+    const shouldPlaceAfter = event.clientY > targetRect.top + targetRect.height / 2;
+
+    editorGroup.insertBefore(dragging, shouldPlaceAfter ? target.nextSibling : target);
+  });
+
+  editorGroup.addEventListener("drop", (event) => {
+    event.preventDefault();
+    getRows().forEach((item) => item.classList.remove("is-drop-target"));
+    reorderLandingSectionsFromPanel();
+    renderHeaderNav();
+  });
+}
+
+function reorderLandingSectionsFromPanel() {
+  const main = document.querySelector(".editable-main");
+  if (!main) return;
+
+  const orderedKeys = [...document.querySelectorAll(".section-toggle [data-section-toggle]")]
+    .map((input) => input.dataset.sectionToggle);
+
+  orderedKeys.forEach((key) => {
+    const section = document.querySelector(`[data-editable-section="${key}"]`);
+    if (section) {
+      main.appendChild(section);
+    }
+  });
+}
+
+function initColorControls() {
+  const colorInputs = document.querySelectorAll("[data-color-var]");
+
+  colorInputs.forEach((input) => {
+    input.dataset.defaultValue = input.value;
+
+    input.addEventListener("input", () => {
+      const cssVar = input.dataset.colorVar;
+      document.body.style.setProperty(cssVar, input.value);
+
+      if (cssVar === "--accent") {
+        document.body.style.setProperty("--accent-2", input.value);
+      }
+    });
+  });
+}
+
+function setEditableTheme(theme) {
+  const toggle = document.querySelector("#themeToggle");
+  const label = document.querySelector("[data-theme-label]");
+  const nextTheme = theme === "light" ? "light" : "dark";
+
+  document.body.dataset.theme = nextTheme;
+
+  if (toggle) {
+    toggle.setAttribute("aria-pressed", nextTheme === "light" ? "true" : "false");
+    toggle.setAttribute("aria-label", nextTheme === "light" ? "Alterar para modo escuro" : "Alterar para modo claro");
+  }
+
+  if (label) {
+    label.textContent = nextTheme === "light" ? "Claro" : "Escuro";
+  }
+}
+
+function initThemeToggle() {
+  const toggle = document.querySelector("#themeToggle");
+
+  if (!toggle) return;
+
+  toggle.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const currentTheme = document.body.dataset.theme === "light" ? "light" : "dark";
+    setEditableTheme(currentTheme === "light" ? "dark" : "light");
+  });
+
+  setEditableTheme(document.body.dataset.theme || "dark");
+}
+
+function initResetButton() {
+  const resetButton = document.querySelector("[data-reset-editor]");
+
+  if (!resetButton) return;
+
+  resetButton.addEventListener("click", () => {
+    document.body.removeAttribute("style");
+    setEditableTheme("dark");
+
+    document.querySelectorAll("[data-color-var]").forEach((input) => {
+      input.value = input.dataset.defaultValue || input.getAttribute("value") || input.value;
+    });
+
+    document.querySelectorAll("[data-section-toggle]").forEach((toggle) => {
+      toggle.checked = true;
+      const section = document.querySelector(`[data-editable-section="${toggle.dataset.sectionToggle}"]`);
+      if (section) {
+        section.hidden = false;
+        section.classList.remove("is-section-hidden");
+      }
+    });
+
+    reorderLandingSectionsFromPanel();
+    syncAllSectionLabels();
+    renderHeaderNav();
+  });
+}
+
+function initStaticButtons() {
+  document.querySelectorAll(".editable-main .btn, .site-header .btn, .site-footer .btn").forEach((button) => {
+    button.removeAttribute("href");
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+  });
+}
+
+function initEditorCompactMode() {
+  const update = () => {
+    document.body.classList.toggle("is-editor-compact", window.matchMedia(EDITOR_COMPACT_QUERY).matches);
+  };
+
+  update();
+  window.addEventListener("resize", update, { passive: true });
+}
+
+function initEditableLandingPage() {
+  initSmoothScroll();
+  initEditableText();
+  initEditorCompactMode();
+  initThemeToggle();
+  initColorControls();
+  initSectionControls();
+  initSectionDragAndDrop();
+  initHeaderNav();
+  initResetButton();
+  initStaticButtons();
+  syncAllSectionLabels();
+  renderHeaderNav();
+}
+
+document.addEventListener("DOMContentLoaded", initEditableLandingPage);
