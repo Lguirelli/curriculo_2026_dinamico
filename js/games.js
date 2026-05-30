@@ -106,8 +106,8 @@ function getCSSColor(name, fallback) {
 function fitCanvasToStage(canvas, ratio = 1) {
   const stage = canvas.closest('.game-stage');
   const rect = stage.getBoundingClientRect();
-  const reservedTop = ratio === 1 ? 18 : 8;
-  const pad = rect.width < 720 ? 10 : 14;
+  const reservedTop = 0;
+  const pad = rect.width < 720 ? 4 : 6;
   const w = Math.max(260, Math.floor(rect.width - pad * 2));
   const h = Math.max(220, Math.floor(rect.height - pad * 2 - reservedTop));
 
