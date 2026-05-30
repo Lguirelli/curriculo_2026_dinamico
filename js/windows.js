@@ -127,7 +127,7 @@ async function openTextFile(item){
   createWindow({title:item.label, html, kind:'text', x:150 + textWindowOffset*24, y:72 + textWindowOffset*18});
 }
 
-function portfolioHtmlIconMarkup(){
+function htmlFileIconMarkup(){
   return `
     <span class="portfolio-html-file-icon" aria-hidden="true">
       <span class="portfolio-html-file-corner"></span>
@@ -136,22 +136,24 @@ function portfolioHtmlIconMarkup(){
   `;
 }
 
-function openPortfolioProject(file){
-  const projectPath = file.projectPath || file.path;
-  const html = `
+function createBrowserFrameHTML(title, url){
+  return `
     <section class="project-browser-content">
       <div class="project-browser-bar">
         <span class="browser-dot red"></span>
         <span class="browser-dot yellow"></span>
         <span class="browser-dot green"></span>
-        <span class="browser-address">${projectPath}</span>
+        <span class="browser-address">${url}</span>
       </div>
-      <iframe class="project-browser-frame" src="${projectPath}" title="${file.label}"></iframe>
+      <iframe class="project-browser-frame" src="${url}" title="${title}"></iframe>
     </section>
   `;
+}
 
+function openHtmlApp(item){
+  const html = createBrowserFrameHTML(item.label, item.appPath || item.projectPath || item.path);
   const win = createWindow({
-    title:file.label,
+    title:item.label,
     html,
     kind:'default',
     x:Math.round(window.innerWidth * .06),
@@ -162,8 +164,11 @@ function openPortfolioProject(file){
 }
 
 async function openPortfolioFolderItem(file){
-  if(file.type === 'html-project' || file.projectPath){
-    openPortfolioProject(file);
+  if(file.type === 'html-project' || file.projectPath || file.appPath){
+    openHtmlApp({
+      label:file.label,
+      appPath:file.appPath || file.projectPath || file.path
+    });
     return;
   }
 
@@ -180,7 +185,7 @@ async function openPortfolioFolderItem(file){
 function openFolder(folder){
   const files = (folder.files || []).map((file, index) => `
     <button class="folder-file portfolio-html-file" type="button" data-file-index="${index}" title="${file.label}">
-      ${portfolioHtmlIconMarkup()}
+      ${htmlFileIconMarkup()}
       <small>${file.label}</small>
     </button>
   `).join('');

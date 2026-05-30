@@ -7,8 +7,8 @@ window.OS_DATA = {
     { id:'habilidades', label:'Habilidades.txt', type:'txt', path:'content/curriculo/habilidades.html' }
   ],
   portfolio: [
+    { id:'landing-page-editavel', label:'landing page editavel', type:'html-app', icon:'html', appPath:'content/apps/landing-page-editavel/index.html' },
     { id:'design', label:'Design', type:'folder', path:'content/portfolio/design/index.html', files:[
-      { id:'landing-page-editavel', label:'landing page editavel.html', type:'html-project', icon:'html', path:'content/portfolio/design/landing-page-editavel/index.html', projectPath:'content/portfolio/design/landing-page-editavel/index.html' },
       { id:'interfaces', label:'interfaces.html', type:'html-file', icon:'html', path:'content/portfolio/design/interfaces.html' },
       { id:'identidade-visual', label:'identidade visual.html', type:'html-file', icon:'html', path:'content/portfolio/design/identidade-visual.html' }
     ]},

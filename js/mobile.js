@@ -17,18 +17,18 @@ function initMobile(){
     }
     const folder=OS_DATA.portfolio.find(f=>f.id===id);
     if(folder){
-      showMobileApp(folder.label, `<div class="mobile-file-list">${folder.files.map(f=>`<button class="mobile-file-item" data-mfile="${f.path || ''}" data-project-path="${f.projectPath || ''}" data-title="${f.label}">${f.label}</button>`).join('')}</div>`);
-      document.querySelectorAll('[data-mfile]').forEach(f=>f.addEventListener('click',()=>{
-        if(f.dataset.projectPath){
-          showMobileApp(f.dataset.title, `<iframe class="mobile-project-frame" src="${f.dataset.projectPath}" title="${f.dataset.title}"></iframe>`);
-        }else{
-          loadMobileFile(f.dataset.title,f.dataset.mfile);
-        }
-      }));
+      showMobileApp(folder.label, `<div class="mobile-file-list">${folder.files.map(f=>`<button class="mobile-file-item" data-mfile="${f.path}" data-title="${f.label}">${f.label}</button>`).join('')}</div>`);
+      document.querySelectorAll('[data-mfile]').forEach(f=>f.addEventListener('click',()=>loadMobileFile(f.dataset.title,f.dataset.mfile)));
     }
   }));
   document.getElementById('mobileHomeBtn').addEventListener('click',showMobileHome);
   document.getElementById('mobileBack').addEventListener('click',showMobileHome);
   document.getElementById('mobileBackTop').addEventListener('click',showMobileHome);
   document.getElementById('mobileScreens').addEventListener('click',()=>showMobileApp('Telas abertas','<div class="mobile-content-card">Nenhuma tela fixa. Use os apps para navegar.</div>'));
+}
+
+
+function openMobileHtmlApp(item){
+  const url = item.appPath || item.projectPath || item.path;
+  showMobileApp(item.label, `<iframe class="mobile-project-frame" src="${url}" title="${item.label}"></iframe>`);
 }

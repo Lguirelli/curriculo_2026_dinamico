@@ -214,7 +214,16 @@ function renderDesktopIcons(){
     icon.style.left = `${finalPos.x}px`;
     icon.style.top = `${finalPos.y}px`;
 
-    if (item.type === 'folder') {
+    if (item.type === 'html-app') {
+      icon.innerHTML = `
+        <span class="desktop-html-app-icon" aria-hidden="true">
+          <span class="desktop-html-app-corner"></span>
+          <strong>HTML</strong>
+        </span>
+        <span class="desktop-icon-label">${item.label}</span>
+      `;
+    }
+    else if (item.type === 'folder') {
       icon.innerHTML = `
         <span class="folder-glass-icon desktop-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
   <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
@@ -222,7 +231,8 @@ function renderDesktopIcons(){
 </svg></span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
-    } else if (item.type === 'txt') {
+    }
+    else if (item.type === 'txt') {
       icon.innerHTML = `
         <span class="txt-file-shell" aria-hidden="true">
           <img class="txt-file-icon" src="assets/icons/txt-file.svg" alt="" aria-hidden="true" draggable="false" />
@@ -343,7 +353,7 @@ function getSearchItems(){
   const portfolio = OS_DATA.portfolio.map(item => ({
     label: item.label,
     typeLabel: 'Portfólio',
-    action: () => openFolder(item)
+    action: () => item.type === 'html-app' ? openHtmlApp(item) : openFolder(item)
   }));
   const games = OS_DATA.games.map(item => ({
     label: item.label,
