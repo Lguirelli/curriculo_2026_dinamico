@@ -216,17 +216,17 @@ function renderDesktopIcons(){
 
     if (item.type === 'folder') {
       icon.innerHTML = `
-        <span class="portfolio-folder-icon glass-folder-mini" aria-hidden="true">
-          <span class="folder-core"></span>
-          <span class="folder-back"></span>
-          <span class="folder-front"></span>
-          <span class="folder-shine"></span>
-        </span>
+        <span class="folder-glass-icon desktop-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
+  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
+  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
+</svg></span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
     } else if (item.type === 'txt') {
       icon.innerHTML = `
-        <img class="txt-file-icon" src="assets/icons/txt-file.svg" alt="" aria-hidden="true" draggable="false" />
+        <span class="txt-file-shell" aria-hidden="true">
+          <img class="txt-file-icon" src="assets/icons/txt-file.svg" alt="" aria-hidden="true" draggable="false" />
+        </span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
     } else if (item.type === 'game') {
@@ -340,19 +340,16 @@ function getSearchItems(){
     typeLabel: 'Currículo',
     action: () => openTextFile(item)
   }));
-
   const portfolio = OS_DATA.portfolio.map(item => ({
     label: item.label,
     typeLabel: 'Portfólio',
     action: () => openFolder(item)
   }));
-
   const games = OS_DATA.games.map(item => ({
     label: item.label,
     typeLabel: 'Jogo',
     action: () => openGameWindow(item.id, item.label)
   }));
-
   return [...curriculum, ...portfolio, ...games];
 }
 
@@ -362,9 +359,7 @@ function setupDesktopSearch(){
   const results = document.getElementById('desktopSearchResults');
   const form = document.querySelector('[data-search-form]');
   const toggle = document.querySelector('[data-search-toggle]');
-
   if(!dock || !input || !results || !form || !toggle) return;
-
   const items = getSearchItems();
 
   function closeSearch(){
@@ -381,22 +376,18 @@ function setupDesktopSearch(){
   function renderResults(){
     const query = input.value.trim().toLowerCase();
     results.innerHTML = '';
-
     if(!query){
       dock.classList.remove('has-results');
       return;
     }
-
     const filtered = items
       .filter(item => item.label.toLowerCase().includes(query) || item.typeLabel.toLowerCase().includes(query))
       .slice(0, 7);
-
     if(!filtered.length){
       dock.classList.add('has-results');
       results.innerHTML = '<div class="search-result-item"><strong>Nenhum resultado</strong><small>Digite outro termo</small></div>';
       return;
     }
-
     filtered.forEach(item => {
       const button = document.createElement('button');
       button.type = 'button';
@@ -408,14 +399,12 @@ function setupDesktopSearch(){
       });
       results.appendChild(button);
     });
-
     dock.classList.add('has-results');
   }
 
   toggle.addEventListener('click', e => {
     e.preventDefault();
     e.stopPropagation();
-
     if(dock.classList.contains('search-open')){
       if(input.value.trim()){
         input.value = '';
@@ -430,7 +419,6 @@ function setupDesktopSearch(){
   });
 
   input.addEventListener('input', renderResults);
-
   form.addEventListener('submit', e => {
     e.preventDefault();
     const query = input.value.trim().toLowerCase();
@@ -440,19 +428,12 @@ function setupDesktopSearch(){
       closeSearch();
     }
   });
-
   dock.addEventListener('click', e => e.stopPropagation());
-
   document.addEventListener('keydown', e => {
-    if(e.key === 'Escape' && dock.classList.contains('search-open')){
-      closeSearch();
-    }
+    if(e.key === 'Escape' && dock.classList.contains('search-open')) closeSearch();
   });
-
   document.addEventListener('click', e => {
-    if(dock.classList.contains('search-open') && !dock.contains(e.target)){
-      closeSearch();
-    }
+    if(dock.classList.contains('search-open') && !dock.contains(e.target)) closeSearch();
   });
 }
 

@@ -1,417 +1,153 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Landing page editável com controle de seções, cores e modo claro ou escuro." />
-  <title>Landing Page Editável</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lorenzo OS — Currículo e Portfólio</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/desktop.css" />
+  <link rel="stylesheet" href="css/windows.css" />
+  <link rel="stylesheet" href="css/mobile.css" />
+  <link rel="stylesheet" href="css/games.css" />
+  <link rel="stylesheet" href="css/components/desktop-clock.css" />
 </head>
-<body data-theme="dark">
-  <a class="skip-link" href="#main">Pular para o conteúdo</a>
-
-  <aside class="editor-panel" aria-label="Painel de edição da landing page">
-    <div class="editor-group">
-      <button class="theme-toggle-button" id="themeToggle" type="button" aria-pressed="false">
-        <span class="theme-toggle-track" aria-hidden="true">
-          <span class="theme-toggle-dot"></span>
-        </span>
-        <span class="theme-switch-text" data-theme-label>Escuro</span>
-      </button>
-      <p class="mobile-editor-notice">Para testar a versão completa do editor, abra esta página em um computador.</p>
-    </div>
-
-    <div class="editor-group">
-      <span class="editor-group-title">Cores principais</span>
-      <label class="color-control">
-        <span>Destaque</span>
-        <input type="color" data-color-var="--accent" value="#ffd84d" />
-      </label>
-      <label class="color-control">
-        <span>Fundo</span>
-        <input type="color" data-color-var="--bg" value="#0b0d12" />
-      </label>
-      <label class="color-control">
-        <span>Cards</span>
-        <input type="color" data-color-var="--surface" value="#141821" />
-      </label>
-      <label class="color-control">
-        <span>Texto</span>
-        <input type="color" data-color-var="--text" value="#f5f7fb" />
-      </label>
-    </div>
-
-    <div class="editor-group">
-      <span class="editor-group-title">Seções visíveis</span>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="hero" checked /> <span data-section-menu-label-for="hero">Apresentação principal</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="trust" checked /> <span data-section-menu-label-for="trust">Confiança</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="problem" checked /> <span data-section-menu-label-for="problem">Problema</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="benefits" checked /> <span data-section-menu-label-for="benefits">Benefícios</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="services" checked /> <span data-section-menu-label-for="services">Serviços</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="pricing" checked /> <span data-section-menu-label-for="pricing">Preços</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="how" checked /> <span data-section-menu-label-for="how">Como funciona</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="features" checked /> <span data-section-menu-label-for="features">Recursos</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="comparison" checked /> <span data-section-menu-label-for="comparison">Comparação</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="case" checked /> <span data-section-menu-label-for="case">Caso de uso</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="proof" checked /> <span data-section-menu-label-for="proof">Provas</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="lead" checked /> <span data-section-menu-label-for="lead">Qualificação</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="faq" checked /> <span data-section-menu-label-for="faq">FAQ</span></label>
-      <label class="section-toggle"><input type="checkbox" data-section-toggle="cta" checked /> <span data-section-menu-label-for="cta">Chamada final</span></label>
-    </div>
-
-    <button class="editor-reset" type="button" data-reset-editor>Restaurar padrão visual</button>
-  </aside>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="logo" href="#main" aria-label="Início">
-        <span class="logo-mark"></span>
-        <span class="editable-text">Marca</span>
-      </a>
-
-      <nav class="nav" id="siteNav" aria-label="Navegação principal"></nav>
-
-      <div class="header-actions" data-header-actions>
-        <button class="btn btn-secondary" type="button"><span class="editable-text">Contato</span></button>
-        <button class="btn btn-accent" type="button"><span class="editable-text">Começar</span></button>
+<body>
+  <main id="desktopOS" class="desktop-os" aria-label="Desktop portfolio">
+    <header class="top-panel">
+      <button id="startButton" class="top-apps-button" type="button">Apps</button>
+      <div id="topPanelClock" class="top-panel-clock">quinta, 28 de maio 00:00</div>
+      <div class="top-panel-status">
+        <span>pt</span>
+        <span>◔</span>
+        <span>⌁</span>
+        <span>▣</span>
       </div>
+    </header>
 
-      <div class="header-more" data-header-more>
-        <button class="header-menu-button" type="button" aria-expanded="false" aria-controls="headerMoreMenu" data-header-menu-button>Mais</button>
-        <div class="header-more-menu" id="headerMoreMenu" data-header-more-menu></div>
+    <section id="desktopArea" class="desktop-area">
+      <div class="wallpaper-scene" aria-hidden="true">
+        <div class="wallpaper-moon"></div>
+        <div class="wallpaper-mist mist-a"></div>
+        <div class="wallpaper-mist mist-b"></div>
       </div>
-    </div>
-  </header>
-
-  <main id="main" class="editable-main">
-    <section class="hero editable-section" id="hero" data-editable-section="hero">
-      <div class="container grid-2">
-        <div class="section-copy">
-          <span class="section-kicker editable-text">Apresentação principal</span>
-          <h1 class="hero-title editable-text">Título forte da landing page</h1>
-          <p class="hero-lead editable-text">Explique de forma clara o que é a oferta, para quem ela serve e qual transformação ela entrega.</p>
-          <div class="btn-row">
-            <button class="btn btn-accent" type="button"><span class="editable-text">Quero começar</span></button>
-            <button class="btn btn-secondary" type="button"><span class="editable-text">Ver serviços</span></button>
-          </div>
-          <p class="microcopy editable-text">Frase curta de reforço para reduzir dúvida e incentivar o próximo clique.</p>
-          <div class="hero-proof" aria-label="Provas rápidas">
-            <span class="editable-text">★★★★★ Prova social</span>
-            <span class="editable-text">+000 atendimentos</span>
-            <span class="editable-text">00% de melhoria</span>
-          </div>
-        </div>
-
-        <div class="placeholder visual-card" aria-label="Placeholder visual não editável">
-          <div>
-            <span class="section-kicker">Área visual principal</span>
-            <p>Placeholder para imagem, mockup, vídeo, print, produto ou ilustração da solução.</p>
-          </div>
-        </div>
-      </div>
+      <div id="desktopClockMount" class="desktop-clock-mount" aria-label="Relógio e data do sistema"></div>
+      <div id="desktopIcons" class="desktop-icons"></div>
     </section>
 
-    <section class="section section-tight editable-section" id="trust" data-editable-section="trust">
-      <div class="container">
-        <span class="section-kicker editable-text">Confiança</span>
-        <h2 class="section-title small-title editable-text">Espaço para marcas, parceiros ou clientes atendidos.</h2>
-        <div class="logo-strip" aria-label="Placeholders de logos não editáveis">
-          <div class="logo-box">Logo 01</div>
-          <div class="logo-box">Logo 02</div>
-          <div class="logo-box">Logo 03</div>
-          <div class="logo-box">Logo 04</div>
-          <div class="logo-box">Logo 05</div>
-        </div>
+    <aside id="startMenu" class="start-menu" aria-label="Menu de aplicativos">
+      <div class="start-menu-sidebar">
+        <strong>All Applications</strong>
+        <span>Currículo</span>
+        <span>Portfólio</span>
+        <span>Jogos</span>
       </div>
-    </section>
+      <div class="start-menu-grid">
+        <button data-open-folder="f1"><span class="folder-glass-icon start-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
+  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
+  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
+</svg></span><small>F1</small></button>
+        <button data-open-folder="ia"><span class="folder-glass-icon start-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
+  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
+  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
+</svg></span><small>IA</small></button>
+        <button data-open-folder="web"><span class="folder-glass-icon start-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
+  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
+  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
+</svg></span><small>Web</small></button>
+        <button data-open-folder="branding"><span class="folder-glass-icon start-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
+  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
+  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
+</svg></span><small>Branding</small></button>
+        <button data-open-game="snake" class="start-game-button"><span class="start-game-thumb" style="background-image:url('assets/icons/game-snake.png')"></span><small>Snake</small></button>
+        <button data-open-game="mines" class="start-game-button"><span class="start-game-thumb" style="background-image:url('assets/icons/game-mines.png')"></span><small>Campo Minado</small></button>
+        <button data-open-game="pong" class="start-game-button"><span class="start-game-thumb" style="background-image:url('assets/icons/game-pong.png')"></span><small>Pong</small></button>
+      </div>
+    </aside>
 
-    <section class="section editable-section" id="problem" data-editable-section="problem">
-      <div class="container grid-2">
-        <div class="card card-soft">
-          <h3 class="editable-text">Resumo do problema</h3>
-          <p class="editable-text">Descreva a dor que o visitante enfrenta antes de encontrar a sua solução.</p>
-        </div>
-        <div class="section-copy">
-          <span class="section-kicker editable-text">Problema</span>
-          <h2 class="section-title editable-text">Mostre o que precisa ser resolvido.</h2>
-          <p class="section-lead editable-text">Use esta seção para gerar identificação e deixar claro por que a solução é necessária.</p>
-        </div>
-      </div>
-    </section>
+    <nav class="dock" aria-label="Contatos e pesquisa" data-dock>
+  <form class="dock-search-form" data-search-form>
+    <button type="button" class="dock-icon dock-search-toggle" title="Pesquisar" aria-label="Pesquisar" data-search-toggle>
+      <img class="dock-icon-img" src="assets/icons/search.svg" alt="" aria-hidden="true" draggable="false" />
+    </button>
+    <input id="desktopSearchInput" class="dock-search-input" type="search" autocomplete="off" placeholder="Search..." aria-label="Pesquisar no portfólio" />
+    <button type="submit" class="dock-search-submit" aria-label="Pesquisar">
+      <img src="assets/icons/search.svg" alt="" aria-hidden="true" draggable="false" />
+    </button>
+  </form>
+  <a href="#" class="dock-icon dock-contact-icon" title="Email" aria-label="Email">
+    <img class="dock-icon-img" src="assets/icons/email.svg" alt="" aria-hidden="true" draggable="false" />
+  </a>
+  <a href="#" class="dock-icon dock-contact-icon" title="LinkedIn" aria-label="LinkedIn">
+    <img class="dock-icon-img" src="assets/icons/linkedin.svg" alt="" aria-hidden="true" draggable="false" />
+  </a>
+  <a href="#" class="dock-icon dock-contact-icon" title="Instagram" aria-label="Instagram">
+    <img class="dock-icon-img" src="assets/icons/instagram.svg" alt="" aria-hidden="true" draggable="false" />
+  </a>
+  <a href="#" class="dock-icon dock-contact-icon" title="WhatsApp" aria-label="WhatsApp">
+    <img class="dock-icon-img" src="assets/icons/whatsapp.svg" alt="" aria-hidden="true" draggable="false" />
+  </a>
+  <div id="desktopSearchResults" class="dock-search-results" aria-live="polite"></div>
+</nav>
 
-    <section class="section editable-section" id="benefits" data-editable-section="benefits">
-      <div class="container grid-2">
-        <div class="section-copy">
-          <span class="section-kicker editable-text">Benefícios</span>
-          <h2 class="section-title editable-text">Transforme a solução em ganhos claros.</h2>
-          <p class="section-lead editable-text">Explique o que melhora para o cliente depois que ele usa a oferta.</p>
-        </div>
-        <div class="benefit-list">
-          <article class="card benefit-item">
-            <div class="icon-placeholder">01</div>
-            <div>
-              <h3 class="editable-text">Benefício direto</h3>
-              <p class="editable-text">Descreva um ganho objetivo, como tempo, organização, vendas ou redução de erros.</p>
-            </div>
-          </article>
-          <article class="card benefit-item">
-            <div class="icon-placeholder">02</div>
-            <div>
-              <h3 class="editable-text">Benefício operacional</h3>
-              <p class="editable-text">Mostre como a solução simplifica o processo ou melhora a rotina.</p>
-            </div>
-          </article>
-          <article class="card benefit-item">
-            <div class="icon-placeholder">03</div>
-            <div>
-              <h3 class="editable-text">Benefício estratégico</h3>
-              <p class="editable-text">Mostre impacto em crescimento, decisão, atendimento ou experiência.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+    <section id="windowsLayer" class="windows-layer" aria-label="Janelas abertas"></section>
+  </main>
 
-    <section class="section editable-section" id="services" data-editable-section="services">
-      <div class="container">
-        <span class="section-kicker editable-text">Serviços</span>
-        <h2 class="section-title editable-text">Liste as principais ofertas da página.</h2>
-        <p class="section-lead editable-text">Use esta área para organizar produtos, pacotes, serviços ou módulos.</p>
-        <div class="grid-3 service-grid-static">
-          <article class="card">
-            <div class="icon-placeholder">01</div>
-            <h3 class="editable-text">Oferta principal</h3>
-            <p class="editable-text">Explique o serviço central, o problema que resolve e o resultado esperado.</p>
-          </article>
-          <article class="card">
-            <div class="icon-placeholder">02</div>
-            <h3 class="editable-text">Oferta complementar</h3>
-            <p class="editable-text">Mostre uma solução adicional que aumenta o valor da oferta principal.</p>
-          </article>
-          <article class="card">
-            <div class="icon-placeholder">03</div>
-            <h3 class="editable-text">Oferta avançada</h3>
-            <p class="editable-text">Use este espaço para uma entrega premium, personalizada ou estratégica.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+  <main id="mobileOS" class="mobile-os" aria-label="Mobile portfolio">
+    <section class="phone-screen">
+      <header class="mobile-status">
+        <span id="mobileClock">00:00</span>
+        <span>▮▮ 5G ◔</span>
+      </header>
 
-    <section class="section editable-section" id="pricing" data-editable-section="pricing">
-      <div class="container price-section-model">
-        <span class="section-kicker editable-text">Preços</span>
-        <h2 class="section-title editable-text">Escolha o formato ideal para começar.</h2>
-        <p class="section-lead editable-text">Use esta seção para apresentar planos, pacotes ou níveis de entrega com comparação simples.</p>
-        <div class="grid-3 price-grid">
-          <article class="card price-card">
-            <span class="section-kicker editable-text">Básico</span>
-            <h3 class="editable-text">Plano inicial</h3>
-            <p class="price editable-text">R$ 000</p>
-            <p class="editable-text">Indicado para uma página objetiva, com estrutura simples e poucas seções.</p>
-            <ul class="price-list">
-              <li class="editable-text">Item incluso no plano</li>
-              <li class="editable-text">Limite ou condição do plano</li>
-              <li class="editable-text">Entrega principal resumida</li>
-            </ul>
-          </article>
-          <article class="card price-card featured">
-            <span class="section-kicker editable-text">Editável</span>
-            <h3 class="editable-text">Plano recomendado</h3>
-            <p class="price editable-text">R$ 000</p>
-            <p class="editable-text">Indicado para quem precisa alterar textos, cores e seções com mais autonomia.</p>
-            <ul class="price-list">
-              <li class="editable-text">Editor visual disponível</li>
-              <li class="editable-text">Seções configuráveis</li>
-              <li class="editable-text">Personalização de identidade</li>
-            </ul>
-          </article>
-          <article class="card price-card">
-            <span class="section-kicker editable-text">Premium</span>
-            <h3 class="editable-text">Plano completo</h3>
-            <p class="price editable-text">R$ 000</p>
-            <p class="editable-text">Indicado para uma entrega mais personalizada, estratégica e com suporte de ajustes.</p>
-            <ul class="price-list">
-              <li class="editable-text">Personalização avançada</li>
-              <li class="editable-text">Ajustes sob demanda</li>
-              <li class="editable-text">Acompanhamento comercial</li>
-            </ul>
-          </article>
+      <section id="mobileHome" class="mobile-page active">
+        <div class="mobile-hero">
+          <span class="moon">☾</span>
+          <h1>Lorenzo OS</h1>
+          <p>Currículo, portfólio e experimentos digitais.</p>
         </div>
-      </div>
-    </section>
+        <div class="mobile-app-grid">
+          <button class="mobile-app" data-mobile-open="notes"><span>📝</span><small>Notas</small></button>
+          <button class="mobile-app mobile-folder-app" data-mobile-open="f1"><span class="folder-glass-icon mobile-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
+  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
+  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
+</svg></span><small>F1</small></button>
+          <button class="mobile-app mobile-folder-app" data-mobile-open="ia"><span class="folder-glass-icon mobile-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
+  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
+  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
+</svg></span><small>IA</small></button>
+          <button class="mobile-app mobile-folder-app" data-mobile-open="web"><span class="folder-glass-icon mobile-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
+  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
+  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
+</svg></span><small>Web</small></button>
+          <button class="mobile-app mobile-folder-app" data-mobile-open="branding"><span class="folder-glass-icon mobile-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
+  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
+  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
+</svg></span><small>Branding</small></button>
+          <button class="mobile-app folder" data-mobile-open="games"><span>🎮</span><small>Jogos</small></button>
+          <button class="mobile-app"><span>✉</span><small>Email</small></button>
+          <button class="mobile-app"><span>⌘</span><small>GitHub</small></button>
+        </div>
+      </section>
 
-    <section class="section editable-section" id="how" data-editable-section="how">
-      <div class="container">
-        <span class="section-kicker editable-text">Como funciona</span>
-        <h2 class="section-title editable-text">Explique o processo em etapas simples.</h2>
-        <p class="section-lead editable-text">Mostre o caminho entre o primeiro contato e a entrega final.</p>
-        <div class="grid-3 service-grid-static">
-          <article class="card">
-            <span class="section-kicker">01</span>
-            <h3 class="editable-text">Primeiro passo</h3>
-            <p class="editable-text">Explique o que acontece no início do processo.</p>
-          </article>
-          <article class="card">
-            <span class="section-kicker">02</span>
-            <h3 class="editable-text">Segundo passo</h3>
-            <p class="editable-text">Mostre como a solução é construída, configurada ou planejada.</p>
-          </article>
-          <article class="card">
-            <span class="section-kicker">03</span>
-            <h3 class="editable-text">Terceiro passo</h3>
-            <p class="editable-text">Explique a entrega, validação, acompanhamento ou próximo ciclo.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+      <section id="mobileAppView" class="mobile-page mobile-app-view">
+        <header class="mobile-app-header"><button id="mobileBackTop">‹</button><h2 id="mobileAppTitle">App</h2></header>
+        <div id="mobileAppContent" class="mobile-app-content"></div>
+      </section>
 
-    <section class="section editable-section" id="features" data-editable-section="features">
-      <div class="container grid-2">
-        <div class="placeholder visual-card" aria-label="Placeholder de recurso não editável">
-          <div>
-            <span class="section-kicker">Área de recurso</span>
-            <p>Placeholder para imagem, diagrama, fluxo, print ou demonstração de funcionalidade.</p>
-          </div>
-        </div>
-        <div class="section-copy">
-          <span class="section-kicker editable-text">Recursos</span>
-          <h2 class="section-title editable-text">Destaque funcionalidades importantes.</h2>
-          <p class="section-lead editable-text">Explique os recursos que sustentam a promessa da página e ajudam o visitante a entender o valor.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section editable-section" id="comparison" data-editable-section="comparison">
-      <div class="container">
-        <span class="section-kicker editable-text">Comparação</span>
-        <h2 class="section-title editable-text">Compare o antes e o depois.</h2>
-        <p class="section-lead editable-text">Use esta seção para mostrar por que sua solução é melhor do que o cenário atual.</p>
-        <div class="comparison-grid">
-          <article class="card">
-            <h3 class="editable-text">Sem a solução</h3>
-            <p class="editable-text">Descreva a dificuldade, o retrabalho, a demora ou o custo do modelo atual.</p>
-          </article>
-          <article class="card featured-card">
-            <h3 class="editable-text">Com a solução</h3>
-            <p class="editable-text">Mostre o ganho de clareza, velocidade, organização, venda ou experiência.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section editable-section" id="case" data-editable-section="case">
-      <div class="container grid-2">
-        <div class="section-copy">
-          <span class="section-kicker editable-text">Caso de uso</span>
-          <h2 class="section-title editable-text">Mostre uma aplicação prática.</h2>
-          <p class="section-lead editable-text">Explique como a oferta pode funcionar em uma situação real, com contexto, ação e resultado.</p>
-        </div>
-        <div class="card">
-          <h3 class="editable-text">Exemplo de aplicação</h3>
-          <p class="editable-text">Use este card para resumir uma situação comum do cliente e o resultado gerado pela solução.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section editable-section" id="proof" data-editable-section="proof">
-      <div class="container grid-2">
-        <div class="section-copy">
-          <span class="section-kicker editable-text">Provas</span>
-          <h2 class="section-title editable-text">Apresente evidências de confiança.</h2>
-          <p class="section-lead editable-text">Adicione depoimentos, números, resultados, prints, garantias ou estudos de caso.</p>
-        </div>
-        <div class="card">
-          <h3 class="editable-text">Depoimento ou resultado</h3>
-          <p class="editable-text">Este espaço pode receber uma frase de cliente, um dado relevante ou uma história curta de transformação.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section editable-section" id="lead" data-editable-section="lead">
-      <div class="container grid-2">
-        <div class="section-copy">
-          <span class="section-kicker editable-text">Qualificação</span>
-          <h2 class="section-title editable-text">Prepare o visitante para o contato.</h2>
-          <p class="section-lead editable-text">Explique o que será analisado, respondido ou enviado depois que ele demonstrar interesse.</p>
-        </div>
-        <form class="card lead-form" aria-label="Formulário demonstrativo não funcional">
-          <label>
-            <span>Nome</span>
-            <input type="text" placeholder="Seu nome" />
-          </label>
-          <label>
-            <span>Contato</span>
-            <input type="text" placeholder="Email ou WhatsApp" />
-          </label>
-          <label>
-            <span>Mensagem</span>
-            <textarea rows="4" placeholder="Conte rapidamente o que você procura"></textarea>
-          </label>
-          <button class="btn btn-accent" type="button"><span class="editable-text">Enviar interesse</span></button>
-        </form>
-      </div>
-    </section>
-
-    <section class="section editable-section" id="faq" data-editable-section="faq">
-      <div class="container">
-        <span class="section-kicker editable-text">FAQ</span>
-        <h2 class="section-title editable-text">Responda dúvidas frequentes.</h2>
-        <div class="faq-list">
-          <details open>
-            <summary class="editable-text">Para quem é essa solução?</summary>
-            <p class="editable-text">Explique o perfil ideal de cliente, negócio ou situação em que a oferta faz mais sentido.</p>
-          </details>
-          <details>
-            <summary class="editable-text">Como funciona a contratação?</summary>
-            <p class="editable-text">Explique o próximo passo, a conversa inicial, os prazos e o formato de entrega.</p>
-          </details>
-          <details>
-            <summary class="editable-text">O que está incluso?</summary>
-            <p class="editable-text">Liste os principais itens do pacote, evitando detalhes técnicos demais.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="section editable-section" id="cta" data-editable-section="cta">
-      <div class="container final-cta-box">
-        <span class="section-kicker editable-text">Chamada final</span>
-        <h2 class="section-title editable-text">Convide o visitante para o próximo passo.</h2>
-        <p class="section-lead editable-text">Use uma frase objetiva para reforçar o valor e reduzir a dúvida antes do clique.</p>
-        <div class="btn-row">
-          <button class="btn btn-accent" type="button"><span class="editable-text">Quero falar agora</span></button>
-          <button class="btn btn-secondary" type="button"><span class="editable-text">Rever serviços</span></button>
-        </div>
-      </div>
+      <nav class="mobile-nav">
+        <button id="mobileScreens" aria-label="Telas abertas">▢</button>
+        <button id="mobileHomeBtn" aria-label="Home">○</button>
+        <button id="mobileBack" aria-label="Voltar">◂</button>
+      </nav>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <a class="logo" href="#main">
-          <span class="logo-mark"></span>
-          <span class="editable-text">Marca</span>
-        </a>
-        <p class="editable-text">Texto curto de rodapé para reforçar posicionamento, contato ou promessa da marca.</p>
-      </div>
-      <div>
-        <strong class="editable-text">Links</strong>
-        <a href="#benefits" data-nav-label-for="benefits">Benefícios</a>
-        <a href="#services" data-nav-label-for="services">Serviços</a>
-        <a href="#faq" data-nav-label-for="faq">FAQ</a>
-      </div>
-      <div>
-        <strong class="editable-text">Contato</strong>
-        <p class="editable-text">email@exemplo.com</p>
-        <p class="editable-text">WhatsApp ou canal de atendimento</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js" defer></script>
+  <script src="js/data.js"></script>
+  <script src="js/windows.js"></script>
+  <script src="js/desktop.js"></script>
+  <script src="js/mobile.js"></script>
+  <script src="js/games.js"></script>
+  <script src="js/components/desktop-clock.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
