@@ -7,19 +7,19 @@ window.OS_DATA = {
     { id:'habilidades', label:'Habilidades.txt', type:'txt', path:'content/curriculo/habilidades.html' }
   ],
   portfolio: [
-    { id:'landing-page-editavel', label:'landing page editavel', type:'html-app', icon:'html', appPath:'content/apps/landing-page-editavel/index.html' },
     { id:'design', label:'Design', type:'folder', path:'content/portfolio/design/index.html', files:[
-      { id:'interfaces', label:'interfaces.html', type:'html-file', icon:'html', path:'content/portfolio/design/interfaces.html' },
-      { id:'identidade-visual', label:'identidade visual.html', type:'html-file', icon:'html', path:'content/portfolio/design/identidade-visual.html' }
+      { id:'interfaces', label:'interfaces', type:'folder-file', path:'content/portfolio/design/interfaces.html' },
+      { id:'identidade-visual', label:'identidade visual', type:'folder-file', path:'content/portfolio/design/identidade-visual.html' }
     ]},
     { id:'fotografia', label:'Fotografia', type:'folder', path:'content/portfolio/fotografia/index.html', files:[
-      { id:'editorial', label:'editorial.html', type:'html-file', icon:'html', path:'content/portfolio/fotografia/editorial.html' },
-      { id:'tratamento-imagem', label:'tratamento de imagem.html', type:'html-file', icon:'html', path:'content/portfolio/fotografia/tratamento-de-imagem.html' }
+      { id:'editorial', label:'editorial', type:'folder-file', path:'content/portfolio/fotografia/editorial.html' },
+      { id:'tratamento-imagem', label:'tratamento de imagem', type:'folder-file', path:'content/portfolio/fotografia/tratamento-de-imagem.html' }
     ]},
     { id:'videos', label:'Vídeos', type:'folder', path:'content/portfolio/videos/index.html', files:[
-      { id:'edicao', label:'edição.html', type:'html-file', icon:'html', path:'content/portfolio/videos/edicao.html' },
-      { id:'motion', label:'motion.html', type:'html-file', icon:'html', path:'content/portfolio/videos/motion.html' }
-    ]}
+      { id:'edicao', label:'edição', type:'folder-file', path:'content/portfolio/videos/edicao.html' },
+      { id:'motion', label:'motion', type:'folder-file', path:'content/portfolio/videos/motion.html' }
+    ]},
+    { id:'landing-page-editavel', label:'landing page editavel', type:'html-app', icon:'html', appPath:'content/apps/landing-page-editavel/index.html' }
   ],
   games: [
     { id:'snake', label:'Snake', icon:'assets/icons/game-snake.png' },
