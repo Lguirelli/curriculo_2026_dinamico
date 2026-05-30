@@ -570,3 +570,60 @@
     transform:scale(.9);
   }
 }
+
+/* Dock expanded search spacing fix */
+.dock.search-open{
+  width:auto !important;
+  min-width:0 !important;
+  max-width:calc(100vw - 48px) !important;
+  padding:8px 10px !important;
+  gap:8px !important;
+}
+
+.dock.search-open .dock-search-form{
+  width:min(360px, calc(100vw - 300px)) !important;
+  min-width:260px !important;
+  grid-template-columns:1fr 40px !important;
+}
+
+.dock.search-open .dock-search-toggle{
+  width:0 !important;
+  min-width:0 !important;
+  max-width:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  opacity:0 !important;
+  overflow:hidden !important;
+  pointer-events:none !important;
+}
+
+.dock.search-open .dock-search-toggle .dock-icon-img{
+  display:none !important;
+}
+
+.dock.search-open .dock-search-input{
+  padding:0 10px 0 16px !important;
+}
+
+.dock.search-open .dock-search-submit{
+  margin-right:0 !important;
+}
+
+@media (max-width:760px){
+  .dock.search-open{
+    width:auto !important;
+    max-width:calc(100vw - 28px) !important;
+    padding:8px 9px !important;
+    gap:7px !important;
+  }
+
+  .dock.search-open .dock-search-form{
+    width:min(280px, calc(100vw - 230px)) !important;
+    min-width:170px !important;
+  }
+
+  .dock.search-open .dock-search-input{
+    padding-left:12px !important;
+  }
+}
