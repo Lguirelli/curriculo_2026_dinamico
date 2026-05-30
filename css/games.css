@@ -1,11 +1,11 @@
 :root{
-  --game-bg:rgba(3,8,18,.66);
-  --game-panel:rgba(9,17,32,.46);
-  --game-cyan:#22f4ff;
-  --game-teal:#18dcc8;
+  --game-bg:rgba(3,8,18,.68);
+  --game-panel:rgba(9,17,32,.48);
+  --game-cyan:#18f6ff;
+  --game-teal:#14dfc4;
   --game-magenta:#ff4fd8;
-  --game-border:rgba(34,244,255,.32);
-  --game-glow:rgba(34,244,255,.24);
+  --game-border:rgba(24,246,255,.34);
+  --game-glow:rgba(24,246,255,.26);
   --game-text:#eafcff;
 }
 
@@ -18,10 +18,10 @@
   min-height:500px !important;
   border-radius:28px !important;
   background:rgba(8,14,28,.44) !important;
-  border:1px solid rgba(34,244,255,.16) !important;
+  border:1px solid rgba(24,246,255,.18) !important;
   box-shadow:
     0 24px 70px rgba(0,0,0,.34),
-    0 0 34px rgba(34,244,255,.08),
+    0 0 34px rgba(24,246,255,.08),
     inset 0 1px 0 rgba(255,255,255,.08) !important;
   backdrop-filter:blur(18px) saturate(120%) !important;
   -webkit-backdrop-filter:blur(18px) saturate(120%) !important;
@@ -46,7 +46,7 @@
   inset:0 !important;
   pointer-events:none !important;
   background:
-    radial-gradient(circle at 18% 22%, rgba(34,244,255,.10), transparent 23%),
+    radial-gradient(circle at 18% 22%, rgba(24,246,255,.10), transparent 23%),
     radial-gradient(circle at 86% 78%, rgba(255,79,216,.09), transparent 21%) !important;
   z-index:0 !important;
 }
@@ -54,7 +54,7 @@
 .game-window .window-header{
   height:42px !important;
   background:rgba(8,14,28,.52) !important;
-  border-bottom:1px solid rgba(34,244,255,.12) !important;
+  border-bottom:1px solid rgba(24,246,255,.14) !important;
   position:relative !important;
   z-index:2 !important;
 }
@@ -62,7 +62,7 @@
 .game-window .window-title{
   font-family:"IBM Plex Mono", "Courier New", monospace !important;
   color:var(--game-text) !important;
-  text-shadow:0 0 12px rgba(34,244,255,.22) !important;
+  text-shadow:0 0 12px rgba(24,246,255,.24) !important;
   letter-spacing:.04em !important;
 }
 
@@ -80,272 +80,277 @@
 }
 
 .game-box{
-  position:relative;
-  flex:1;
-  width:100%;
-  height:100%;
-  min-height:0;
-  display:block;
-  font-family:"IBM Plex Mono", "Courier New", monospace;
-  color:var(--game-text);
+  position:relative !important;
+  flex:1 !important;
+  width:100% !important;
+  height:100% !important;
+  min-height:0 !important;
+  display:block !important;
+  font-family:"IBM Plex Mono", "Courier New", monospace !important;
+  color:var(--game-text) !important;
 }
 
 .game-stage{
-  position:relative;
-  width:100%;
-  height:100%;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  border-radius:0 0 28px 28px;
+  position:relative !important;
+  width:100% !important;
+  height:100% !important;
+  display:grid !important;
+  place-items:center !important;
+  overflow:hidden !important;
+  border-radius:0 0 28px 28px !important;
   background:
     linear-gradient(135deg, rgba(255,255,255,.045), transparent 33%),
-    radial-gradient(circle at 50% 45%, rgba(34,244,255,.07), transparent 42%),
-    var(--game-panel);
-  border:0;
+    radial-gradient(circle at 50% 45%, rgba(24,246,255,.07), transparent 42%),
+    var(--game-panel) !important;
+  border:0 !important;
   box-shadow:
-    inset 0 0 38px rgba(34,244,255,.045),
+    inset 0 0 38px rgba(24,246,255,.045),
     inset 0 0 42px rgba(255,79,216,.035),
-    inset 0 0 70px rgba(0,0,0,.36);
-  backdrop-filter:blur(16px) saturate(118%);
-  -webkit-backdrop-filter:blur(16px) saturate(118%);
+    inset 0 0 70px rgba(0,0,0,.36) !important;
+  backdrop-filter:blur(16px) saturate(118%) !important;
+  -webkit-backdrop-filter:blur(16px) saturate(118%) !important;
 }
 
 .game-stage::before,
 .game-stage::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:10;
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  pointer-events:none !important;
+  z-index:10 !important;
 }
 
 .game-stage::before{
   background:
     linear-gradient(135deg, rgba(255,255,255,.12), transparent 22%, transparent 70%, rgba(255,255,255,.04)),
-    radial-gradient(circle at 12% 18%, rgba(34,244,255,.12), transparent 20%),
-    radial-gradient(circle at 88% 74%, rgba(255,79,216,.10), transparent 22%);
-  opacity:.54;
+    radial-gradient(circle at 12% 18%, rgba(24,246,255,.12), transparent 20%),
+    radial-gradient(circle at 88% 74%, rgba(255,79,216,.10), transparent 22%) !important;
+  opacity:.54 !important;
 }
 
 .game-stage::after{
-  background:
-    linear-gradient(90deg, rgba(255,79,216,.018), rgba(34,244,255,.018), rgba(255,79,216,.018));
-  mix-blend-mode:screen;
+  background:linear-gradient(90deg, rgba(255,79,216,.018), rgba(24,246,255,.018), rgba(255,79,216,.018)) !important;
+  mix-blend-mode:screen !important;
 }
 
 .game-canvas{
-  position:relative;
-  z-index:2;
-  display:block;
-  max-width:calc(100% - 24px);
-  max-height:calc(100% - 24px);
-  width:auto;
-  height:auto;
-  border-radius:20px;
-  border:1px solid var(--game-border);
-  background:rgba(3,8,18,.30);
+  position:relative !important;
+  z-index:2 !important;
+  display:block !important;
+  max-width:calc(100% - 16px) !important;
+  max-height:calc(100% - 16px) !important;
+  width:auto !important;
+  height:auto !important;
+  border-radius:20px !important;
+  border:1px solid var(--game-border) !important;
+  background:rgba(3,8,18,.30) !important;
   box-shadow:
-    0 0 26px rgba(34,244,255,.12),
+    0 0 26px rgba(24,246,255,.12),
     0 0 48px rgba(255,79,216,.05),
-    inset 0 0 28px rgba(34,244,255,.035),
-    inset 0 0 72px rgba(0,0,0,.38);
-  image-rendering:pixelated;
-  filter:saturate(1.14) contrast(1.06);
-  outline:none;
-  touch-action:none;
+    inset 0 0 28px rgba(24,246,255,.035),
+    inset 0 0 72px rgba(0,0,0,.38) !important;
+  image-rendering:pixelated !important;
+  filter:saturate(1.14) contrast(1.06) !important;
+  outline:none !important;
+  touch-action:none !important;
 }
 
 .game-hud{
-  position:absolute;
-  z-index:12;
-  top:18px;
-  left:20px;
-  right:20px;
-  display:flex;
-  align-items:center;
-  pointer-events:none;
-  color:var(--game-text);
-  text-shadow:0 0 14px rgba(34,244,255,.28);
+  position:absolute !important;
+  z-index:12 !important;
+  top:18px !important;
+  left:20px !important;
+  right:20px !important;
+  display:flex !important;
+  align-items:center !important;
+  pointer-events:none !important;
+  color:var(--game-text) !important;
+  text-shadow:0 0 14px rgba(24,246,255,.28) !important;
+}
+
+.game-hud strong,
+.game-hud::before{
+  display:none !important;
+  content:none !important;
 }
 
 .game-hud span{
-  font-weight:900;
-  letter-spacing:.12em;
-  color:var(--game-text);
+  font-weight:900 !important;
+  letter-spacing:.12em !important;
+  color:var(--game-text) !important;
 }
 
 .game-hud-snake,
 .game-hud-mines{
-  justify-content:flex-end;
+  justify-content:flex-end !important;
 }
 
 .game-hud-snake span,
 .game-hud-mines span{
-  min-width:86px;
-  text-align:right;
-  font-size:13px;
-  color:var(--game-cyan);
+  min-width:86px !important;
+  text-align:right !important;
+  font-size:13px !important;
+  color:var(--game-cyan) !important;
 }
 
 .game-hud-pong{
-  justify-content:center;
-  top:16px;
+  justify-content:center !important;
+  top:16px !important;
 }
 
 .game-hud-pong span{
-  min-width:180px;
-  text-align:center;
-  font-size:34px;
-  line-height:1;
-  color:var(--game-text);
+  min-width:180px !important;
+  text-align:center !important;
+  font-size:34px !important;
+  line-height:1 !important;
+  color:var(--game-text) !important;
   text-shadow:
-    0 0 18px rgba(34,244,255,.38),
-    0 0 30px rgba(255,79,216,.16);
+    0 0 18px rgba(24,246,255,.38),
+    0 0 30px rgba(255,79,216,.16) !important;
 }
 
 .game-overlay{
-  position:absolute;
-  inset:0;
-  z-index:14;
-  display:none;
-  place-items:center;
-  padding:24px;
-  background:rgba(3,8,18,.22);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
+  position:absolute !important;
+  inset:0 !important;
+  z-index:14 !important;
+  display:none !important;
+  place-items:center !important;
+  padding:24px !important;
+  background:rgba(3,8,18,.22) !important;
+  backdrop-filter:blur(8px) !important;
+  -webkit-backdrop-filter:blur(8px) !important;
 }
 
 .game-overlay.active{
-  display:grid;
+  display:grid !important;
 }
 
 .game-overlay-card{
-  width:min(390px, 86%);
-  padding:26px 28px;
-  border-radius:24px;
-  text-align:center;
+  width:min(390px, 86%) !important;
+  padding:26px 28px !important;
+  border-radius:24px !important;
+  text-align:center !important;
   background:
     linear-gradient(135deg, rgba(255,255,255,.11), rgba(255,255,255,.035)),
-    rgba(9,17,32,.60);
-  border:1px solid rgba(34,244,255,.22);
+    rgba(9,17,32,.60) !important;
+  border:1px solid rgba(24,246,255,.24) !important;
   box-shadow:
     0 24px 70px rgba(0,0,0,.34),
-    0 0 32px rgba(34,244,255,.12),
-    inset 0 1px 0 rgba(255,255,255,.12);
-  color:var(--game-text);
+    0 0 32px rgba(24,246,255,.12),
+    inset 0 1px 0 rgba(255,255,255,.12) !important;
+  color:var(--game-text) !important;
 }
 
 .game-overlay-card h3{
-  margin:0 0 12px;
-  font-size:24px;
-  line-height:1.05;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--game-text);
-  text-shadow:0 0 18px rgba(34,244,255,.22);
+  margin:0 0 12px !important;
+  font-size:24px !important;
+  line-height:1.05 !important;
+  letter-spacing:.08em !important;
+  text-transform:uppercase !important;
+  color:var(--game-text) !important;
+  text-shadow:0 0 18px rgba(24,246,255,.22) !important;
 }
 
 .game-overlay-card p{
-  margin:0 0 20px;
-  font-size:13px;
-  line-height:1.6;
-  color:rgba(234,252,255,.72);
+  margin:0 0 20px !important;
+  font-size:13px !important;
+  line-height:1.6 !important;
+  color:rgba(234,252,255,.72) !important;
 }
 
 .game-overlay-card button{
-  height:38px;
-  padding:0 18px;
-  border-radius:999px;
-  border:1px solid rgba(34,244,255,.28);
-  background:linear-gradient(180deg, rgba(34,244,255,.18), rgba(255,79,216,.09));
-  color:var(--game-text);
-  font-family:inherit;
-  font-weight:900;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  cursor:pointer;
+  height:38px !important;
+  padding:0 18px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(24,246,255,.30) !important;
+  background:linear-gradient(180deg, rgba(24,246,255,.18), rgba(255,79,216,.09)) !important;
+  color:var(--game-text) !important;
+  font-family:inherit !important;
+  font-weight:900 !important;
+  letter-spacing:.08em !important;
+  text-transform:uppercase !important;
+  cursor:pointer !important;
   box-shadow:
     0 12px 24px rgba(0,0,0,.18),
-    0 0 18px rgba(34,244,255,.12),
-    inset 0 1px 0 rgba(255,255,255,.12);
+    0 0 18px rgba(24,246,255,.12),
+    inset 0 1px 0 rgba(255,255,255,.12) !important;
 }
 
 .game-overlay-card button:hover{
-  transform:translateY(-1px);
+  transform:translateY(-1px) !important;
   box-shadow:
     0 16px 28px rgba(0,0,0,.22),
     0 0 24px rgba(255,79,216,.18),
-    inset 0 1px 0 rgba(255,255,255,.16);
+    inset 0 1px 0 rgba(255,255,255,.16) !important;
 }
 
 .mines-grid{
-  position:relative;
-  z-index:2;
-  display:grid;
-  grid-template-columns:repeat(var(--cols), minmax(28px, 1fr));
-  gap:7px;
-  width:min(calc(100% - 36px), calc(100vh - 190px), 620px);
-  aspect-ratio:1/1;
-  align-content:center;
-  justify-content:center;
+  position:relative !important;
+  z-index:2 !important;
+  display:grid !important;
+  grid-template-columns:repeat(var(--cols), minmax(28px, 1fr)) !important;
+  gap:7px !important;
+  width:min(calc(100% - 36px), calc(100vh - 190px), 620px) !important;
+  aspect-ratio:1/1 !important;
+  align-content:center !important;
+  justify-content:center !important;
 }
 
 .mine-cell{
-  aspect-ratio:1/1;
-  width:100%;
-  border-radius:10px;
-  border:1px solid rgba(34,244,255,.24);
+  aspect-ratio:1/1 !important;
+  width:100% !important;
+  border-radius:10px !important;
+  border:1px solid rgba(24,246,255,.24) !important;
   background:
     linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.025)),
-    rgba(9,17,32,.42);
-  color:var(--game-text);
-  font-family:"IBM Plex Mono", "Courier New", monospace;
-  font-weight:900;
-  cursor:pointer;
-  text-shadow:0 0 12px rgba(34,244,255,.18);
+    rgba(9,17,32,.42) !important;
+  color:var(--game-text) !important;
+  font-family:"IBM Plex Mono", "Courier New", monospace !important;
+  font-weight:900 !important;
+  cursor:pointer !important;
+  text-shadow:0 0 12px rgba(24,246,255,.18) !important;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.08),
-    0 0 14px rgba(34,244,255,.045);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
+    0 0 14px rgba(24,246,255,.045) !important;
+  backdrop-filter:blur(8px) !important;
+  -webkit-backdrop-filter:blur(8px) !important;
 }
 
 .mine-cell:hover{
-  border-color:rgba(34,244,255,.48);
+  border-color:rgba(24,246,255,.48) !important;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.12),
-    0 0 18px rgba(34,244,255,.18);
+    0 0 18px rgba(24,246,255,.18) !important;
 }
 
 .mine-cell.open{
-  background:rgba(3,8,18,.30);
-  border-color:rgba(234,252,255,.12);
-  color:var(--game-cyan);
-  box-shadow:inset 0 0 18px rgba(0,0,0,.28);
+  background:rgba(3,8,18,.30) !important;
+  border-color:rgba(234,252,255,.12) !important;
+  color:var(--game-cyan) !important;
+  box-shadow:inset 0 0 18px rgba(0,0,0,.28) !important;
 }
 
 .mine-cell.flag{
-  color:var(--game-magenta);
-  border-color:rgba(255,79,216,.42);
-  text-shadow:0 0 14px rgba(255,79,216,.42);
+  color:var(--game-magenta) !important;
+  border-color:rgba(255,79,216,.42) !important;
+  text-shadow:0 0 14px rgba(255,79,216,.42) !important;
 }
 
 .mine-cell.mine{
-  color:var(--game-magenta);
-  border-color:rgba(255,79,216,.56);
-  background:rgba(255,79,216,.12);
-  text-shadow:0 0 16px rgba(255,79,216,.62);
+  color:var(--game-magenta) !important;
+  border-color:rgba(255,79,216,.56) !important;
+  background:rgba(255,79,216,.12) !important;
+  text-shadow:0 0 16px rgba(255,79,216,.62) !important;
 }
 
 .mobile-app-content .game-box{
-  height:calc(100vh - 176px);
-  min-height:420px;
+  height:calc(100vh - 176px) !important;
+  min-height:420px !important;
 }
 
 .mobile-app-content .game-stage{
-  min-height:420px;
-  border-radius:22px;
+  min-height:420px !important;
+  border-radius:22px !important;
 }
 
 @media(max-width:900px){
@@ -357,40 +362,36 @@
 }
 
 @media(max-width:768px){
-  .game-window .window-body{
-    padding:0 !important;
-  }
-
   .game-stage{
-    border-radius:0 0 22px 22px;
+    border-radius:0 0 22px 22px !important;
   }
 
   .game-canvas{
-    max-width:calc(100% - 12px);
-    max-height:calc(100% - 12px);
-    border-radius:16px;
+    max-width:calc(100% - 12px) !important;
+    max-height:calc(100% - 12px) !important;
+    border-radius:16px !important;
   }
 
   .game-hud-pong span{
-    font-size:24px;
-    min-width:136px;
+    font-size:24px !important;
+    min-width:136px !important;
   }
 
   .game-overlay-card{
-    padding:24px 22px;
+    padding:24px 22px !important;
   }
 
   .game-overlay-card h3{
-    font-size:20px;
+    font-size:20px !important;
   }
 
   .mines-grid{
-    width:min(calc(100% - 18px), 420px);
-    gap:4px;
+    width:min(calc(100% - 18px), 420px) !important;
+    gap:4px !important;
   }
 
   .mine-cell{
-    border-radius:7px;
-    font-size:12px;
+    border-radius:7px !important;
+    font-size:12px !important;
   }
 }
