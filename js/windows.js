@@ -152,8 +152,8 @@ function openProjectFolder(file){
     title:file.label,
     html,
     kind:'default',
-    x:Math.round(window.innerWidth*.10),
-    y:Math.round(window.innerHeight*.06)
+    x:Math.round(window.innerWidth*.08),
+    y:Math.round(window.innerHeight*.05)
   });
   win.classList.add('project-preview-window');
 }

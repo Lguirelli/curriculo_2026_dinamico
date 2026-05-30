@@ -17,8 +17,15 @@ function initMobile(){
     }
     const folder=OS_DATA.portfolio.find(f=>f.id===id);
     if(folder){
-      showMobileApp(folder.label, `<div class="mobile-file-list">${folder.files.map(f=>`<button class="mobile-file-item" data-mfile="${f.path}" data-title="${f.label}">${f.label}</button>`).join('')}</div>`);
-      document.querySelectorAll('[data-mfile]').forEach(f=>f.addEventListener('click',()=>loadMobileFile(f.dataset.title,f.dataset.mfile)));
+      showMobileApp(folder.label, `<div class="mobile-file-list">${folder.files.map(f=>`<button class="mobile-file-item" data-mfile="${f.path || ''}" data-project-path="${f.projectPath || ''}" data-title="${f.label}">${f.label}</button>`).join('')}</div>`);
+      document.querySelectorAll('[data-mfile]').forEach(f=>f.addEventListener('click',()=>{
+        const projectPath = f.dataset.projectPath;
+        if(projectPath){
+          showMobileApp(f.dataset.title, `<iframe class="mobile-project-frame" src="${projectPath}" title="${f.dataset.title}"></iframe>`);
+        }else{
+          loadMobileFile(f.dataset.title,f.dataset.mfile);
+        }
+      }));
     }
   }));
   document.getElementById('mobileHomeBtn').addEventListener('click',showMobileHome);
