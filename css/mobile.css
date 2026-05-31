@@ -433,151 +433,385 @@
   text-align:center;
 }
 
-/* Mobile home: relógio + busca aberta */
-.mobile-search-hero{
-  margin:14px 0 22px !important;
-  padding:18px !important;
-  border-radius:26px !important;
-  background:linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.035)) !important;
-  border:1px solid rgba(255,255,255,.10) !important;
-  box-shadow:var(--shadow-lg) !important;
+/* Mobile desktop visual sync */
+.mobile-os{
+  width:100vw !important;
+  height:100vh !important;
+  background:
+    radial-gradient(circle at 14% 86%, rgba(255,255,255,.20), transparent 8%),
+    radial-gradient(circle at 88% 22%, rgba(172,205,246,.18), transparent 11%),
+    linear-gradient(145deg, #0d1421, #182334 52%, #111a28) !important;
+  overflow:hidden !important;
+  color:var(--text-1, #f4f7fb) !important;
 }
 
-.mobile-hero-clock-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:14px;
-}
-
-.mobile-hero-clock{
-  font-size:42px;
-  line-height:1;
-  letter-spacing:-.04em;
-  color:rgba(255,255,255,.96);
-  text-shadow:0 10px 28px rgba(0,0,0,.34);
-}
-
-.mobile-search-form{
-  min-height:44px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:0 14px;
-  border-radius:18px;
-  background:rgba(255,255,255,.09);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 12px 24px rgba(0,0,0,.14);
-}
-
-.mobile-search-form img{
-  width:17px;
-  height:17px;
-  opacity:.72;
-  filter:invert(1) brightness(1.35);
-}
-
-.mobile-search-form input{
-  width:100%;
-  min-width:0;
-  border:0;
-  outline:0;
-  background:transparent;
-  color:rgba(255,255,255,.96);
-  font:800 14px/1 var(--font-main, system-ui, sans-serif);
-}
-
-.mobile-search-form input::placeholder{
-  color:rgba(255,255,255,.54);
-}
-
-.mobile-search-results{
-  display:none;
-  margin-top:10px;
-  gap:8px;
-}
-
-.mobile-search-results.active{
-  display:grid;
-}
-
-.mobile-search-results button,
-.mobile-search-results p{
-  width:100%;
-  padding:10px 12px;
-  border-radius:14px;
-  background:rgba(255,255,255,.075);
-  border:1px solid rgba(255,255,255,.10);
-  color:rgba(255,255,255,.92);
-  text-align:left;
-}
-
-.mobile-search-results strong,
-.mobile-search-results small{
-  display:block;
-}
-
-.mobile-search-results strong{
-  font-size:13px;
-  line-height:1.15;
-}
-
-.mobile-search-results small{
-  margin-top:3px;
-  font-size:10px;
-  color:rgba(255,255,255,.56);
-}
-
-/* Ícones de contato mobile puxando o visual global */
-.mobile-contact-app span{
-  background:linear-gradient(160deg, rgba(255,255,255,.20), rgba(255,255,255,.06)) !important;
-  border:1px solid rgba(255,255,255,.12) !important;
-  box-shadow:0 12px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.10) !important;
-  overflow:hidden;
-}
-
-.mobile-contact-app span img{
-  width:68%;
-  height:68%;
-  object-fit:contain;
-  filter:invert(1) brightness(1.25) drop-shadow(0 8px 12px rgba(0,0,0,.22));
-  opacity:.86;
-}
-
-.mobile-contact-app:hover span,
-.mobile-contact-app:focus-visible span{
-  transform:translateY(-2px) scale(1.04);
-  background:linear-gradient(160deg, rgba(255,255,255,.25), rgba(255,255,255,.08)) !important;
-}
-
-.mobile-game-fullscreen{
-  height:calc(100vh - 154px);
-  min-height:420px;
-  display:flex;
-}
-
-.mobile-game-fullscreen .game-box{
+.phone-screen{
+  position:relative !important;
   width:100% !important;
   height:100% !important;
+  background:
+    radial-gradient(circle at 14% 86%, rgba(255,255,255,.17), transparent 7%),
+    radial-gradient(circle at 88% 22%, rgba(171,206,255,.15), transparent 12%),
+    linear-gradient(145deg, #0d1421, #182334 52%, #111a28) !important;
+  overflow:hidden !important;
 }
 
-.mobile-game-fullscreen .game-stage{
-  border-radius:22px !important;
+.phone-screen::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:18px !important;
+  border-radius:32px !important;
+  background:
+    radial-gradient(circle at 80% 10%, rgba(255,255,255,.08), transparent 18%),
+    rgba(255,255,255,.025) !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  box-shadow:0 24px 80px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.08) !important;
+  backdrop-filter:blur(8px) saturate(116%) !important;
+  -webkit-backdrop-filter:blur(8px) saturate(116%) !important;
+  pointer-events:none !important;
 }
 
-@media (max-width:520px){
+.mobile-status{
+  position:relative !important;
+  height:34px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  padding:0 20px !important;
+  color:rgba(255,255,255,.95) !important;
+  font-weight:850 !important;
+  font-size:14px !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.55) !important;
+  z-index:2 !important;
+}
+
+.mobile-page{
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  top:34px !important;
+  bottom:64px !important;
+  padding:22px 22px !important;
+  overflow:auto !important;
+  display:none !important;
+  z-index:1 !important;
+}
+
+.mobile-page.active{
+  display:block !important;
+}
+
+.mobile-hero{
+  position:relative !important;
+  min-height:150px !important;
+  margin:0 0 22px !important;
+  padding:24px 22px !important;
+  border-radius:30px !important;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255,255,255,.08), transparent 28%),
+    linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025)) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  box-shadow:0 18px 46px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.08) !important;
+  backdrop-filter:blur(16px) saturate(120%) !important;
+  -webkit-backdrop-filter:blur(16px) saturate(120%) !important;
+  display:grid !important;
+  grid-template-columns:1fr auto !important;
+  grid-template-areas:
+    "moon clock"
+    "search search" !important;
+  gap:18px 14px !important;
+  align-items:center !important;
+}
+
+.mobile-hero .moon{
+  grid-area:moon !important;
+  width:auto !important;
+  height:auto !important;
+  display:block !important;
+  margin:0 !important;
+  font-size:38px !important;
+  line-height:1 !important;
+  color:rgba(255,255,255,.92) !important;
+  text-shadow:0 0 18px rgba(255,255,255,.28), 0 2px 10px rgba(0,0,0,.35) !important;
+}
+
+.mobile-hero h1{
+  grid-area:clock !important;
+  margin:0 !important;
+  justify-self:end !important;
+  font-size:44px !important;
+  line-height:.9 !important;
+  letter-spacing:-.06em !important;
+  font-weight:900 !important;
+  color:rgba(255,255,255,.98) !important;
+  text-shadow:0 2px 10px rgba(0,0,0,.36) !important;
+}
+
+.mobile-hero p{
+  grid-area:search !important;
+  height:46px !important;
+  margin:0 !important;
+  padding:0 18px 0 48px !important;
+  border-radius:18px !important;
+  display:flex !important;
+  align-items:center !important;
+  position:relative !important;
+  color:rgba(255,255,255,.62) !important;
+  font-size:0 !important;
+  font-weight:850 !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.035)),
+    rgba(20,26,36,.42) !important;
+  border:1px solid rgba(255,255,255,.13) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 10px 24px rgba(0,0,0,.12) !important;
+  backdrop-filter:blur(14px) !important;
+  -webkit-backdrop-filter:blur(14px) !important;
+}
+
+.mobile-hero p::before{
+  content:"" !important;
+  position:absolute !important;
+  left:17px !important;
+  top:50% !important;
+  width:18px !important;
+  height:18px !important;
+  transform:translateY(-50%) !important;
+  border:2px solid rgba(255,255,255,.64) !important;
+  border-radius:50% !important;
+  box-sizing:border-box !important;
+}
+
+.mobile-hero p::after{
+  content:"Pesquisar..." !important;
+  font-size:15px !important;
+  letter-spacing:-.01em !important;
+  color:rgba(255,255,255,.58) !important;
+}
+
+.mobile-hero p span{
+  display:none !important;
+}
+
+.mobile-hero p::selection{
+  background:transparent !important;
+}
+
+.mobile-app-grid{
+  position:relative !important;
+  display:grid !important;
+  grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+  gap:24px 18px !important;
+  padding:0 8px 18px !important;
+}
+
+.mobile-app{
+  min-width:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  color:#fff !important;
+  text-align:center !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  gap:8px !important;
+  padding:0 !important;
+  appearance:none !important;
+  -webkit-appearance:none !important;
+}
+
+.mobile-app span{
+  width:58px !important;
+  height:58px !important;
+  margin:0 auto !important;
+  border-radius:18px !important;
+  display:grid !important;
+  place-items:center !important;
+  font-size:24px !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.035)),
+    rgba(255,255,255,.055) !important;
+  border:1px solid rgba(255,255,255,.11) !important;
+  box-shadow:
+    0 14px 24px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.14) !important;
+  backdrop-filter:blur(12px) saturate(116%) !important;
+  -webkit-backdrop-filter:blur(12px) saturate(116%) !important;
+  overflow:hidden !important;
+}
+
+.mobile-app.mobile-folder-app span,
+.mobile-folder-icon{
+  width:66px !important;
+  height:52px !important;
+  margin:3px auto 3px !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:0 0 0 transparent !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  overflow:visible !important;
+}
+
+.mobile-folder-icon .folder-glass-svg,
+.mobile-app.mobile-folder-app .folder-glass-svg{
+  width:100% !important;
+  height:100% !important;
+  display:block !important;
+  overflow:visible !important;
+  filter:drop-shadow(0 10px 16px rgba(0,0,0,.22)) !important;
+}
+
+.mobile-folder-icon .folder-back-path,
+.mobile-app.mobile-folder-app .folder-back-path{
+  fill:rgba(112,126,142,.94) !important;
+}
+
+.mobile-folder-icon .folder-front-path,
+.mobile-app.mobile-folder-app .folder-front-path{
+  fill:rgba(229,236,244,.96) !important;
+}
+
+.mobile-image-app span,
+.mobile-contact-app span{
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.035)),
+    rgba(255,255,255,.055) !important;
+  border:1px solid rgba(255,255,255,.11) !important;
+  border-radius:18px !important;
+  box-shadow:
+    0 14px 24px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.14) !important;
+  backdrop-filter:blur(12px) saturate(116%) !important;
+  -webkit-backdrop-filter:blur(12px) saturate(116%) !important;
+}
+
+.mobile-image-app span img,
+.mobile-contact-app span img{
+  width:76% !important;
+  height:76% !important;
+  display:block !important;
+  object-fit:contain !important;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.24)) !important;
+}
+
+.mobile-image-app[data-mobile-open="landing-page-editavel"] span,
+.mobile-image-app[data-mobile-open="ranking"] span{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+.mobile-image-app[data-mobile-open="landing-page-editavel"] span img,
+.mobile-image-app[data-mobile-open="ranking"] span img{
+  width:100% !important;
+  height:100% !important;
+  opacity:.92 !important;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.18)) !important;
+}
+
+.mobile-app small{
+  max-width:82px !important;
+  font-size:13px !important;
+  line-height:1.12 !important;
+  font-weight:900 !important;
+  color:rgba(255,255,255,.96) !important;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,.95),
+    0 0 6px rgba(0,0,0,.80),
+    0 0 10px rgba(0,0,0,.55) !important;
+  letter-spacing:-.02em !important;
+  word-break:normal !important;
+  overflow-wrap:break-word !important;
+}
+
+.mobile-nav{
+  position:absolute !important;
+  left:20px !important;
+  right:20px !important;
+  bottom:12px !important;
+  height:52px !important;
+  display:grid !important;
+  grid-template-columns:1fr 1fr 1fr !important;
+  place-items:center !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.035)),
+    rgba(20,26,36,.42) !important;
+  backdrop-filter:blur(18px) saturate(120%) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(120%) !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+  border-radius:18px !important;
+  box-shadow:0 18px 38px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+
+.mobile-nav button{
+  width:54px !important;
+  height:44px !important;
+  background:transparent !important;
+  color:rgba(255,255,255,.92) !important;
+  font-size:25px !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.6) !important;
+}
+
+.mobile-app-header{
+  display:flex !important;
+  align-items:center !important;
+  gap:12px !important;
+  min-height:48px !important;
+  margin-bottom:16px !important;
+}
+
+.mobile-app-header button{
+  width:38px !important;
+  height:38px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.10) !important;
+  color:#fff !important;
+  font-size:24px !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+}
+
+.mobile-app-header h2{
+  margin:0 !important;
+  font-size:24px !important;
+  line-height:1 !important;
+  color:rgba(255,255,255,.97) !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.7) !important;
+}
+
+@media(max-width:420px){
+  .mobile-page{
+    padding:18px 14px !important;
+  }
+
+  .mobile-hero{
+    min-height:140px !important;
+    padding:22px 18px !important;
+  }
+
+  .mobile-hero h1{
+    font-size:40px !important;
+  }
+
   .mobile-app-grid{
-    grid-template-columns:repeat(3, 1fr);
-    gap:18px 12px;
+    gap:22px 10px !important;
+    padding:0 4px 18px !important;
   }
 
-  .mobile-hero-clock{
-    font-size:38px;
+  .mobile-app span{
+    width:56px !important;
+    height:56px !important;
   }
 
-  .mobile-game-fullscreen{
-    height:calc(100vh - 148px);
-    min-height:360px;
+  .mobile-app.mobile-folder-app span,
+  .mobile-folder-icon{
+    width:64px !important;
+    height:50px !important;
+  }
+
+  .mobile-app small{
+    font-size:12px !important;
   }
 }
