@@ -338,6 +338,10 @@ function initMobile(){
   }));
 
   
+    document.querySelectorAll('[data-mobile-game]').forEach(btn => {
+    btn.addEventListener('click', () => openMobileGame(btn.dataset.mobileGame, btn.dataset.title || btn.textContent.trim()));
+  });
+
   document.querySelectorAll('[data-mobile-contact]').forEach(btn => {
     btn.addEventListener('click', () => openMobileContact(btn.dataset.mobileContact));
   });

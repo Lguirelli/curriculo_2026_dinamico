@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/desktop.css?v=ranking-name-icon-fullscreen-1" />
   <link rel="stylesheet" href="css/windows.css?v=clean-conflict-rules-1" />
-  <link rel="stylesheet" href="css/mobile.css?v=mobile-search-open-desktop-style-1" />
+  <link rel="stylesheet" href="css/mobile.css?v=mobile-home-grid-contact-dock-1" />
   <link rel="stylesheet" href="css/games.css?v=mobile-games-controls-1" />
   <link rel="stylesheet" href="css/components/desktop-clock.css" />
 </head>
@@ -102,7 +102,7 @@
           <p>Currículo, portfólio e experimentos digitais.</p>
         </div>
         <div class="mobile-app-grid">
-          <button class="mobile-app mobile-notes-app" data-mobile-open="notes"><span>📄</span><small>Currículo</small></button>
+          <button class="mobile-app mobile-notes-app mobile-txt-app" data-mobile-open="notes"><span><img src="assets/icons/txt-file.svg" alt="" /></span><small>Currículo</small></button>
           <button class="mobile-app mobile-folder-app" data-mobile-open="design"><span class="folder-glass-icon mobile-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
   <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
   <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
@@ -115,13 +115,11 @@
   <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
   <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
 </svg></span><small>Vídeos</small></button>
-          <button class="mobile-app folder" data-mobile-open="games"><span>🎮</span><small>Jogos</small></button>
           <button class="mobile-app mobile-image-app" data-mobile-open="landing-page-editavel"><span><img src="assets/icons/landing-duck.svg" alt="" /></span><small>Landing</small></button>
           <button class="mobile-app mobile-image-app" data-mobile-open="ranking"><span><img src="assets/icons/ranking-trophy.svg" alt="" /></span><small>Ranking</small></button>
-          <button class="mobile-app mobile-contact-app" data-mobile-contact="email"><span><img src="assets/icons/email.svg" alt="" /></span><small>Email</small></button>
-          <button class="mobile-app mobile-contact-app" data-mobile-contact="linkedin"><span><img src="assets/icons/linkedin.svg" alt="" /></span><small>LinkedIn</small></button>
-          <button class="mobile-app mobile-contact-app" data-mobile-contact="instagram"><span><img src="assets/icons/instagram.svg" alt="" /></span><small>Instagram</small></button>
-          <button class="mobile-app mobile-contact-app" data-mobile-contact="whatsapp"><span><img src="assets/icons/whatsapp.svg" alt="" /></span><small>WhatsApp</small></button>
+          <button class="mobile-app mobile-game-home-app" data-mobile-game="snake" data-title="Snake"><span><img src="assets/icons/game-snake.png" alt="" /></span><small>Snake</small></button>
+          <button class="mobile-app mobile-game-home-app" data-mobile-game="mines" data-title="Campo Minado"><span><img src="assets/icons/game-mines.png" alt="" /></span><small>Campo Minado</small></button>
+          <button class="mobile-app mobile-game-home-app" data-mobile-game="pong" data-title="Pong"><span><img src="assets/icons/game-pong.png" alt="" /></span><small>Pong</small></button>
         </div>
       </section>
 
@@ -129,6 +127,13 @@
         <header class="mobile-app-header"><button id="mobileBackTop">‹</button><h2 id="mobileAppTitle">App</h2></header>
         <div id="mobileAppContent" class="mobile-app-content"></div>
       </section>
+
+      <div class="mobile-contact-dock" aria-label="Contatos">
+        <button type="button" data-mobile-contact="email" aria-label="Email"><img src="assets/icons/email.svg" alt="" /></button>
+        <button type="button" data-mobile-contact="linkedin" aria-label="LinkedIn"><img src="assets/icons/linkedin.svg" alt="" /></button>
+        <button type="button" data-mobile-contact="instagram" aria-label="Instagram"><img src="assets/icons/instagram.svg" alt="" /></button>
+        <button type="button" data-mobile-contact="whatsapp" aria-label="WhatsApp"><img src="assets/icons/whatsapp.svg" alt="" /></button>
+      </div>
 
       <nav class="mobile-nav">
         <button id="mobileScreens" aria-label="Telas abertas">▢</button>
@@ -141,7 +146,7 @@
   <script src="js/data.js?v=ranking-name-icon-fullscreen-1"></script>
   <script src="js/windows.js?v=clean-conflict-rules-1"></script>
   <script src="js/desktop.js?v=clean-conflict-rules-1"></script>
-  <script src="js/mobile.js?v=mobile-clock-date-search-style-1"></script>
+  <script src="js/mobile.js?v=mobile-home-grid-contact-dock-1"></script>
   <script src="js/games.js?v=mobile-games-controls-1"></script>
   <script src="js/components/desktop-clock.js"></script>
   <script src="js/main.js"></script>
