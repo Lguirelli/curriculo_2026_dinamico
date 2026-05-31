@@ -1,0 +1,277 @@
+/* Optional CRT/Bloom Retro Theme
+   Activated by adding .crt-theme to <html>.
+   It does not replace the current layout. It only overlays a global visual skin.
+*/
+
+html.crt-theme{
+  --crt-green:#31ff7a;
+  --crt-cyan:#2dfcff;
+  --crt-blue:#37a7ff;
+  --crt-red:#ff394e;
+  --crt-amber:#ffd95c;
+  --crt-pink:#ff4fd8;
+  --crt-bg:#020706;
+  --crt-panel:rgba(1,14,11,.72);
+  --crt-line:rgba(49,255,122,.72);
+  --crt-line-soft:rgba(49,255,122,.24);
+  --crt-glow:0 0 8px rgba(49,255,122,.58), 0 0 22px rgba(49,255,122,.28), 0 0 42px rgba(45,252,255,.10);
+  --crt-text:#d9ffe8;
+}
+
+html.crt-theme,
+html.crt-theme body{
+  background:#020706 !important;
+  color:var(--crt-text) !important;
+  text-shadow:0 0 6px rgba(49,255,122,.38) !important;
+}
+
+html.crt-theme body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:99997;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(255,255,255,.035) 50%, rgba(0,0,0,.20) 50%),
+    linear-gradient(90deg, rgba(255,0,0,.035), rgba(0,255,0,.020), rgba(0,0,255,.035));
+  background-size:100% 4px, 6px 100%;
+  mix-blend-mode:screen;
+  opacity:.46;
+}
+
+html.crt-theme body::after{
+  content:"";
+  position:fixed;
+  inset:-10%;
+  z-index:99996;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 58%, rgba(0,0,0,.26) 78%, rgba(0,0,0,.58) 100%),
+    radial-gradient(circle at 50% 50%, rgba(49,255,122,.055), transparent 52%);
+  opacity:.92;
+}
+
+html.crt-theme .desktop-os,
+html.crt-theme .mobile-os,
+html.crt-theme .phone-screen{
+  background:
+    radial-gradient(circle at 18% 20%, rgba(49,255,122,.10), transparent 25%),
+    radial-gradient(circle at 84% 76%, rgba(45,252,255,.08), transparent 22%),
+    linear-gradient(145deg, #020706, #06110e 48%, #010304) !important;
+}
+
+html.crt-theme .desktop-clock,
+html.crt-theme .center-clock,
+html.crt-theme .mobile-hero-timeblock,
+html.crt-theme .window-title,
+html.crt-theme .desktop-icon-label,
+html.crt-theme .mobile-app small,
+html.crt-theme .portfolio-folder-file small{
+  color:var(--crt-text) !important;
+  text-shadow:var(--crt-glow) !important;
+  filter:saturate(1.2) contrast(1.08);
+}
+
+html.crt-theme .desktop-clock h1,
+html.crt-theme #mobileHeroClock{
+  color:#effff4 !important;
+  text-shadow:
+    0 0 8px rgba(49,255,122,.75),
+    0 0 28px rgba(49,255,122,.34),
+    0 0 50px rgba(45,252,255,.18) !important;
+}
+
+html.crt-theme .desktop-icon,
+html.crt-theme .mobile-app{
+  filter:saturate(1.28) contrast(1.08);
+}
+
+html.crt-theme .desktop-folder-icon,
+html.crt-theme .mobile-folder-icon,
+html.crt-theme .portfolio-window-folder-icon,
+html.crt-theme .desktop-txt-icon,
+html.crt-theme .mobile-txt-app span img{
+  filter:
+    drop-shadow(0 0 7px rgba(49,255,122,.44))
+    drop-shadow(0 0 18px rgba(45,252,255,.16))
+    saturate(1.25) !important;
+}
+
+html.crt-theme .window,
+html.crt-theme .os-window,
+html.crt-theme .mobile-app-header,
+html.crt-theme .mobile-note-card,
+html.crt-theme .mobile-content-card,
+html.crt-theme .portfolio-gallery-card,
+html.crt-theme .game-window{
+  background:
+    linear-gradient(180deg, rgba(49,255,122,.035), rgba(49,255,122,.010)),
+    rgba(1,14,11,.70) !important;
+  border:1px solid var(--crt-line) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(49,255,122,.08),
+    0 0 0 1px rgba(49,255,122,.14),
+    0 0 18px rgba(49,255,122,.22),
+    0 0 44px rgba(45,252,255,.08) !important;
+  backdrop-filter:blur(10px) saturate(140%) !important;
+  -webkit-backdrop-filter:blur(10px) saturate(140%) !important;
+}
+
+html.crt-theme .window-header,
+html.crt-theme .window-titlebar,
+html.crt-theme .mobile-app-header{
+  border-bottom:1px solid var(--crt-line-soft) !important;
+  background:rgba(2,10,8,.72) !important;
+}
+
+html.crt-theme .desktop-search,
+html.crt-theme .search-expanded,
+html.crt-theme .mobile-search-form,
+html.crt-theme .contact-dock,
+html.crt-theme .mobile-contact-dock{
+  background:rgba(1,10,8,.74) !important;
+  border:1px solid var(--crt-line) !important;
+  box-shadow:
+    0 0 0 1px rgba(49,255,122,.18),
+    0 0 18px rgba(49,255,122,.28),
+    0 0 34px rgba(45,252,255,.10),
+    inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+html.crt-theme .mobile-search-form input,
+html.crt-theme .desktop-search input,
+html.crt-theme .search-expanded input{
+  color:#eaffef !important;
+  text-shadow:0 0 7px rgba(49,255,122,.42) !important;
+  caret-color:var(--crt-green) !important;
+}
+
+html.crt-theme .mobile-search-form input::placeholder,
+html.crt-theme .desktop-search input::placeholder,
+html.crt-theme .search-expanded input::placeholder{
+  color:rgba(217,255,232,.68) !important;
+}
+
+html.crt-theme .mobile-search-form button,
+html.crt-theme .search-expanded button,
+html.crt-theme .search-button{
+  background:
+    linear-gradient(180deg, rgba(49,255,122,.18), rgba(49,255,122,.06)),
+    rgba(1,15,11,.80) !important;
+  border:1px solid rgba(49,255,122,.76) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 0 14px rgba(49,255,122,.35) !important;
+}
+
+html.crt-theme .mobile-search-form button img,
+html.crt-theme .search-expanded button img,
+html.crt-theme .contact-dock img,
+html.crt-theme .mobile-contact-dock img{
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(77%)
+    sepia(97%)
+    saturate(496%)
+    hue-rotate(76deg)
+    brightness(109%)
+    contrast(104%)
+    drop-shadow(0 0 6px rgba(49,255,122,.52)) !important;
+}
+
+html.crt-theme .desktop-ranking-app-icon img,
+html.crt-theme .mobile-image-app[data-mobile-open="ranking"] img{
+  filter:
+    drop-shadow(0 0 8px rgba(255,217,92,.70))
+    drop-shadow(0 0 20px rgba(255,217,92,.26))
+    saturate(1.18) !important;
+}
+
+html.crt-theme .mobile-image-app[data-mobile-open="landing-page-editavel"] img{
+  filter:
+    drop-shadow(0 0 8px rgba(255,217,92,.68))
+    drop-shadow(0 0 18px rgba(255,217,92,.28))
+    saturate(1.15) !important;
+}
+
+html.crt-theme .game-stage,
+html.crt-theme .game-canvas,
+html.crt-theme .mobile-project-frame,
+html.crt-theme .project-browser-frame{
+  border-color:var(--crt-line) !important;
+  box-shadow:
+    inset 0 0 30px rgba(49,255,122,.08),
+    0 0 16px rgba(49,255,122,.22),
+    0 0 42px rgba(45,252,255,.08) !important;
+  filter:saturate(1.25) contrast(1.07);
+}
+
+html.crt-theme .portfolio-gallery-card img,
+html.crt-theme .mobile-gallery-card img{
+  filter:saturate(1.22) contrast(1.08) brightness(.96);
+}
+
+html.crt-theme button,
+html.crt-theme a,
+html.crt-theme input{
+  font-family:"IBM Plex Mono", "Courier New", monospace !important;
+}
+
+html.crt-theme .crt-theme-toggle{
+  border-color:var(--crt-line) !important;
+  color:var(--crt-text) !important;
+  background:rgba(1,14,11,.78) !important;
+  box-shadow:var(--crt-glow) !important;
+}
+
+/* Toggle button - exists in both normal and CRT modes */
+.crt-theme-toggle{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:99999;
+  min-width:54px;
+  height:36px;
+  padding:0 12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(20,26,36,.52);
+  color:rgba(255,255,255,.92);
+  font:900 12px/1 "IBM Plex Mono", "Courier New", monospace;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  backdrop-filter:blur(14px) saturate(120%);
+  -webkit-backdrop-filter:blur(14px) saturate(120%);
+  box-shadow:0 14px 30px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.10);
+  cursor:pointer;
+}
+
+.crt-theme-toggle::before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:rgba(255,255,255,.56);
+  box-shadow:0 0 10px rgba(255,255,255,.22);
+}
+
+html.crt-theme .crt-theme-toggle::before{
+  background:var(--crt-green);
+  box-shadow:0 0 8px rgba(49,255,122,.92), 0 0 18px rgba(49,255,122,.46);
+}
+
+@media(max-width:820px){
+  .crt-theme-toggle{
+    right:14px;
+    bottom:76px;
+    height:34px;
+    min-width:50px;
+    font-size:11px;
+    padding:0 10px;
+  }
+}
