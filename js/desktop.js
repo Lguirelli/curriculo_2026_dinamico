@@ -216,9 +216,8 @@ function renderDesktopIcons(){
 
     if (item.type === 'html-app') {
       icon.innerHTML = `
-        <span class="desktop-html-app-icon" aria-hidden="true">
-          <span class="desktop-html-app-corner"></span>
-          <strong>HTML</strong>
+        <span class="desktop-duck-app-icon" aria-hidden="true">
+          <img src="assets/icons/landing-duck.svg" alt="" draggable="false" />
         </span>
         <span class="desktop-icon-label">${item.label}</span>
       `;

@@ -594,3 +594,63 @@
     linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.05)),
     rgba(255,255,255,.075);
 }
+
+/* Duck app icon and TXT shadow removal */
+.desktop-duck-app-icon{
+  width:58px !important;
+  height:58px !important;
+  display:grid !important;
+  place-items:center !important;
+  border-radius:18px !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.025)),
+    rgba(255,255,255,.045) !important;
+  border:1px solid rgba(255,255,255,.09) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10) !important;
+  backdrop-filter:blur(10px) saturate(118%) !important;
+  -webkit-backdrop-filter:blur(10px) saturate(118%) !important;
+  overflow:hidden !important;
+  transition:transform .22s ease, background .22s ease !important;
+}
+
+.desktop-duck-app-icon img{
+  width:84% !important;
+  height:84% !important;
+  object-fit:contain !important;
+  display:block !important;
+  opacity:.84 !important;
+  filter:none !important;
+  pointer-events:none !important;
+  user-select:none !important;
+  -webkit-user-drag:none !important;
+}
+
+.desktop-icon:hover .desktop-duck-app-icon,
+.desktop-icon.selected .desktop-duck-app-icon{
+  transform:translateY(-2px) scale(1.04) !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.04)),
+    rgba(255,255,255,.06) !important;
+}
+
+/* remove the visible glow/shadow box behind TXT icons */
+.txt-file-shell{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  filter:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+.txt-file-shell::before,
+.txt-file-shell::after{
+  display:none !important;
+  content:none !important;
+}
+
+.txt-file-icon{
+  filter:none !important;
+  box-shadow:none !important;
+  background:transparent !important;
+}

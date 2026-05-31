@@ -692,3 +692,97 @@
   display:block;
   background:#0b0d12;
 }
+
+/* Invisible boxes for portfolio subfolders */
+.portfolio-folder-file{
+  background:transparent !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+  padding:8px 6px !important;
+}
+
+.portfolio-folder-file:hover,
+.portfolio-folder-file.selected{
+  background:rgba(255,255,255,.035) !important;
+  border-color:rgba(255,255,255,.06) !important;
+  box-shadow:none !important;
+}
+
+.portfolio-folder-grid{
+  gap:18px !important;
+}
+
+.portfolio-folder-item-icon{
+  filter:none !important;
+}
+
+.portfolio-folder-file:hover .portfolio-folder-item-icon,
+.portfolio-folder-file.selected .portfolio-folder-item-icon{
+  filter:none !important;
+}
+
+/* browser window support for landing app */
+.os-window.project-browser-window{
+  width:min(1240px, calc(100vw - 72px)) !important;
+  height:min(860px, calc(100vh - 72px)) !important;
+}
+
+.os-window.project-browser-window .window-body{
+  padding:0 !important;
+  overflow:hidden !important;
+}
+
+.project-browser-content{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-rows:42px 1fr;
+  background:#0b0d12;
+}
+
+.project-browser-bar{
+  height:42px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:0 14px;
+  border-bottom:1px solid rgba(255,255,255,.10);
+  background:rgba(8,12,20,.92);
+}
+
+.browser-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  display:block;
+  flex:0 0 auto;
+}
+
+.browser-dot.red{background:#ff5f57;}
+.browser-dot.yellow{background:#ffbd2e;}
+.browser-dot.green{background:#28c840;}
+
+.browser-address{
+  min-width:0;
+  flex:1;
+  height:24px;
+  display:flex;
+  align-items:center;
+  padding:0 12px;
+  margin-left:8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.62);
+  font-size:11px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.project-browser-frame{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+  background:#0b0d12;
+}
