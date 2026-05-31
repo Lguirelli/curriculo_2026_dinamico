@@ -1611,3 +1611,84 @@
   padding:0 !important;
   overflow:hidden !important;
 }
+
+/* Landing fullscreen fix */
+.os-window.landing-app-window{
+  width:min(1240px, calc(100vw - 72px)) !important;
+  height:min(860px, calc(100vh - 72px)) !important;
+  min-width:520px !important;
+  min-height:360px !important;
+}
+
+.os-window.landing-app-window .window-body{
+  padding:0 !important;
+  overflow:hidden !important;
+}
+
+.os-window.landing-app-window .project-browser-content,
+.os-window.landing-app-window .project-browser-frame{
+  width:100% !important;
+  height:100% !important;
+  min-height:100% !important;
+  display:block !important;
+  border:0 !important;
+}
+
+.os-window.landing-app-window.maximized,
+.os-window.landing-app-window.fullscreen,
+.os-window.landing-app-window.is-fullscreen,
+.os-window.landing-app-window.window-fullscreen,
+.os-window.landing-app-window.is-maximized,
+.os-window.landing-app-window.window-maximized{
+  inset:12px !important;
+  left:12px !important;
+  top:12px !important;
+  right:auto !important;
+  bottom:auto !important;
+  width:calc(100vw - 24px) !important;
+  height:calc(100vh - 24px) !important;
+  max-width:none !important;
+  max-height:none !important;
+  transform:none !important;
+}
+
+.os-window.landing-app-window.maximized .window-body,
+.os-window.landing-app-window.fullscreen .window-body,
+.os-window.landing-app-window.is-fullscreen .window-body,
+.os-window.landing-app-window.window-fullscreen .window-body,
+.os-window.landing-app-window.is-maximized .window-body,
+.os-window.landing-app-window.window-maximized .window-body{
+  height:calc(100% - 44px) !important;
+  padding:0 !important;
+  overflow:hidden !important;
+}
+
+/* aplica também em qualquer app iframe, para evitar conflito entre landing/ranking */
+.os-window.project-browser-window.maximized,
+.os-window.project-browser-window.fullscreen,
+.os-window.project-browser-window.is-fullscreen,
+.os-window.project-browser-window.window-fullscreen,
+.os-window.project-browser-window.is-maximized,
+.os-window.project-browser-window.window-maximized{
+  inset:12px !important;
+  left:12px !important;
+  top:12px !important;
+  right:auto !important;
+  bottom:auto !important;
+  width:calc(100vw - 24px) !important;
+  height:calc(100vh - 24px) !important;
+  max-width:none !important;
+  max-height:none !important;
+  transform:none !important;
+}
+
+.os-window.project-browser-window.maximized .window-body,
+.os-window.project-browser-window.fullscreen .window-body,
+.os-window.project-browser-window.is-fullscreen .window-body,
+.os-window.project-browser-window.window-fullscreen .window-body,
+.os-window.project-browser-window.is-maximized .window-body,
+.os-window.project-browser-window.window-maximized .window-body{
+  height:calc(100% - 44px) !important;
+  padding:0 !important;
+  overflow:hidden !important;
+}

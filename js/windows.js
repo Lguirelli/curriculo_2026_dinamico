@@ -159,6 +159,10 @@ function openHtmlApp(item){
     win.classList.add('ranking-app-window');
   }
 
+  if(item.id === 'landing-page-editavel' || item.label === 'landing page editavel'){
+    win.classList.add('landing-app-window');
+  }
+
   const frame = win.querySelector('.project-browser-frame');
   if(frame && fallbackUrl){
     frame.addEventListener('error', () => {
