@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lorenzo OS — Currículo e Portfólio</title>
   <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/desktop.css?v=ranking-name-icon-fullscreen-1" />
+  <link rel="stylesheet" href="css/desktop.css?v=desktop-crt-switch-bottom-right-1" />
   <link rel="stylesheet" href="css/windows.css?v=clean-conflict-rules-1" />
-  <link rel="stylesheet" href="css/mobile.css?v=mobile-functional-search-1" />
+  <link rel="stylesheet" href="css/mobile.css?v=desktop-crt-switch-bottom-right-1" />
   <link rel="stylesheet" href="css/games.css?v=mobile-games-controls-1" />
   <link rel="stylesheet" href="css/components/desktop-clock.css" />
-  <link rel="stylesheet" href="css/theme-crt.css?v=crt-switch-2" />
 </head>
 <body>
   <main id="desktopOS" class="desktop-os" aria-label="Desktop portfolio">
@@ -34,6 +33,9 @@
       <div id="desktopClockMount" class="desktop-clock-mount" aria-label="Relógio e data do sistema"></div>
       <div id="desktopIcons" class="desktop-icons"></div>
     </section>
+      <button type="button" class="desktop-crt-switch" data-crt-toggle aria-pressed="true" aria-label="Alternar efeito CRT">
+        <span>CRT</span>
+      </button>
 
     <aside id="startMenu" class="start-menu" aria-label="Menu de aplicativos">
       <div class="start-menu-sidebar">
@@ -100,13 +102,7 @@
         <div class="mobile-hero">
           <span class="moon">☾</span>
           <div class="mobile-hero-timeblock"><span id="mobileHeroWeekday">Sábado</span><h1 id="mobileHeroClock">00:00</h1><strong id="mobileHeroDate">30 De Maio De 2026</strong></div>
-          
-          <form class="mobile-search-form" id="mobileSearchForm" role="search" autocomplete="off">
-            <input id="mobileSearchInput" type="search" placeholder="Search..." aria-label="Pesquisar no portfólio" />
-            <button id="mobileSearchButton" type="submit" aria-label="Pesquisar">
-              <img src="assets/icons/search.svg" alt="" />
-            </button>
-          </form>
+          <p class="mobile-search-open"><span>Search...</span><button type="button" class="mobile-search-button" aria-label="Pesquisar"><img src="assets/icons/search.svg" alt="" /></button></p>
         </div>
         <div class="mobile-app-grid">
           <button class="mobile-app mobile-notes-app mobile-txt-app" data-mobile-open="notes"><span><img src="assets/icons/txt-file.svg" alt="" /></span><small>Currículo</small></button>
@@ -152,11 +148,10 @@
 
   <script src="js/data.js?v=ranking-name-icon-fullscreen-1"></script>
   <script src="js/windows.js?v=clean-conflict-rules-1"></script>
-  <script src="js/desktop.js?v=clean-conflict-rules-1"></script>
-  <script src="js/mobile.js?v=mobile-functional-search-1"></script>
+  <script src="js/desktop.js?v=desktop-crt-switch-bottom-right-1"></script>
+  <script src="js/mobile.js?v=mobile-home-grid-contact-dock-1"></script>
   <script src="js/games.js?v=mobile-games-controls-1"></script>
   <script src="js/components/desktop-clock.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/theme-toggle.js?v=crt-switch-2"></script>
 </body>
 </html>

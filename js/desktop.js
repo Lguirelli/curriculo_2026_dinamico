@@ -514,3 +514,25 @@ function initDesktop(){
     resizeTimer = window.setTimeout(renderDesktopIcons, 120);
   });
 }
+
+
+function setupCrtSwitch(){
+  const crtSwitch = document.querySelector('[data-crt-toggle]');
+  if(!crtSwitch) return;
+
+  const applyState = (enabled) => {
+    document.body.classList.toggle('crt-disabled', !enabled);
+    crtSwitch.classList.toggle('is-off', !enabled);
+    crtSwitch.setAttribute('aria-pressed', String(enabled));
+    localStorage.setItem('lorenzo_os_crt_enabled', enabled ? '1' : '0');
+  };
+
+  const saved = localStorage.getItem('lorenzo_os_crt_enabled');
+  applyState(saved !== '0');
+
+  crtSwitch.addEventListener('click', () => {
+    applyState(crtSwitch.getAttribute('aria-pressed') !== 'true');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', setupCrtSwitch);
