@@ -1974,17 +1974,3 @@
     height:19px !important;
   }
 }
-
-/* Hide desktop CRT switch on mobile */
-@media(max-width:820px){
-  .desktop-crt-switch,
-  [data-crt-toggle],
-  .crt-switch,
-  .crt-toggle,
-  .theme-crt-switch,
-  .theme-crt-toggle{
-    display:none !important;
-    visibility:hidden !important;
-    pointer-events:none !important;
-  }
-}
