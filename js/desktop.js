@@ -346,17 +346,56 @@ function setupStartMenu(){
   }));
 }
 
+function flattenPortfolioItems(items, parentLabel=''){
+  return items.flatMap(item => {
+    const label = parentLabel ? `${parentLabel} / ${item.label}` : item.label;
+
+    if(item.type === 'folder' && Array.isArray(item.files)){
+      return [
+        {
+          label,
+          typeLabel:'Pasta',
+          action:() => openFolder(item)
+        },
+        ...flattenPortfolioItems(item.files, label)
+      ];
+    }
+
+    if(item.type === 'project'){
+      return [{
+        label,
+        typeLabel:'Projeto',
+        action:() => openPortfolioProject(item)
+      }];
+    }
+
+    if(item.type === 'html-app'){
+      return [{
+        label,
+        typeLabel:'App',
+        action:() => openHtmlApp(item)
+      }];
+    }
+
+    if(item.path){
+      return [{
+        label,
+        typeLabel:'Arquivo',
+        action:() => openPortfolioFolderItem(item)
+      }];
+    }
+
+    return [];
+  });
+}
+
 function getSearchItems(){
   const curriculum = OS_DATA.curriculum.map(item => ({
     label: item.label,
     typeLabel: 'Currículo',
     action: () => openTextFile(item)
   }));
-  const portfolio = OS_DATA.portfolio.map(item => ({
-    label: item.label,
-    typeLabel: 'Portfólio',
-    action: () => item.type === 'html-app' ? openHtmlApp(item) : openFolder(item)
-  }));
+  const portfolio = flattenPortfolioItems(OS_DATA.portfolio);
   const games = OS_DATA.games.map(item => ({
     label: item.label,
     typeLabel: 'Jogo',

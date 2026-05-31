@@ -136,74 +136,6 @@ function htmlFileIconMarkup(){
   `;
 }
 
-function portfolioFolderItemIconMarkup(){
-  return `
-    <span class="folder-glass-icon desktop-folder-icon portfolio-subfolder-icon" aria-hidden="true">
-      <svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
-        <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
-        <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
-      </svg>
-    </span>
-  `;
-}
-
-async function openPortfolioFolderItem(file){
-  if(file.type === 'html-project' || file.projectPath || file.appPath){
-    openHtmlApp({
-      label:file.label,
-      appPath:file.appPath || file.projectPath || file.path,
-      fallbackAppPath:file.fallbackAppPath || ''
-    });
-    return;
-  }
-
-  const html = await fetchHTML(file.path);
-  createWindow({
-    title:file.label,
-    html,
-    kind:'default',
-    x:Math.round(window.innerWidth * .22),
-    y:Math.round(window.innerHeight * .12)
-  });
-}
-
-function openFolder(folder){
-  const files = (folder.files || []).map((file, index) => `
-    <button class="folder-file portfolio-folder-file" type="button" data-file-index="${index}" title="${file.label}">
-      ${portfolioFolderItemIconMarkup()}
-      <small>${file.label}</small>
-    </button>
-  `).join('');
-
-  const html = `<div class="folder-grid portfolio-folder-grid">${files}</div>`;
-
-  const win = createWindow({
-    title:folder.label,
-    html,
-    kind:'folder-window',
-    x:Math.round(window.innerWidth * .24),
-    y:Math.round(window.innerHeight * .12)
-  });
-
-  win.querySelectorAll('[data-file-index]').forEach(btn => {
-    const file = folder.files[Number(btn.dataset.fileIndex)];
-
-    btn.addEventListener('click', async () => {
-      const selected = btn.classList.contains('selected');
-      win.querySelectorAll('.folder-file').forEach(el => el.classList.remove('selected'));
-      btn.classList.add('selected');
-
-      if(selected){
-        await openPortfolioFolderItem(file);
-      }
-    });
-
-    btn.addEventListener('dblclick', async () => {
-      await openPortfolioFolderItem(file);
-    });
-  });
-}
-
 function createBrowserFrameHTML(title, url, fallbackUrl=''){
   return `
     <section class="project-browser-content">
@@ -232,11 +164,146 @@ function openHtmlApp(item){
   });
 
   win.classList.add('project-browser-window');
+}
 
-  const frame = win.querySelector('.project-browser-frame');
-  if(frame && fallbackUrl){
-    frame.addEventListener('error', () => {
-      frame.src = fallbackUrl;
-    }, { once:true });
+function portfolioFolderItemIconMarkup(){
+  return `
+    <span class="folder-glass-icon desktop-folder-icon portfolio-subfolder-icon" aria-hidden="true">
+      <svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
+        <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
+      </svg>
+    </span>
+  `;
+}
+
+function portfolioProjectIconMarkup(item){
+  const first = item.assets?.[0] || '';
+  if(first){
+    return `
+      <span class="portfolio-project-thumb" aria-hidden="true">
+        <img src="${first}" alt="" draggable="false" />
+      </span>
+    `;
   }
+
+  return portfolioFolderItemIconMarkup();
+}
+
+function escapeHTML(value){
+  return String(value || '').replace(/[&<>"']/g, char => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#039;'
+  }[char]));
+}
+
+function buildTagList(tags=[]){
+  if(!tags.length) return '';
+  return `<div class="portfolio-tags">${tags.map(tag => `<span>${escapeHTML(tag)}</span>`).join('')}</div>`;
+}
+
+function buildProjectGalleryHTML(project){
+  const images = (project.assets || []).map((src, index) => `
+    <figure class="portfolio-gallery-card">
+      <img src="${src}" alt="${escapeHTML(project.label)} ${index + 1}" loading="lazy" />
+    </figure>
+  `).join('');
+
+  return `
+    <section class="portfolio-project-view">
+      <header class="portfolio-project-header">
+        <span class="section-kicker">Portfólio</span>
+        <h2>${escapeHTML(project.label)}</h2>
+        ${project.description ? `<p>${escapeHTML(project.description)}</p>` : ''}
+        ${buildTagList(project.tags)}
+      </header>
+      <div class="portfolio-gallery-grid">${images}</div>
+    </section>
+  `;
+}
+
+function openPortfolioProject(project){
+  const html = buildProjectGalleryHTML(project);
+  const win = createWindow({
+    title:project.label,
+    html,
+    kind:'default',
+    x:Math.round(window.innerWidth * .12),
+    y:Math.round(window.innerHeight * .08)
+  });
+
+  win.classList.add('portfolio-project-window');
+}
+
+async function openPortfolioFolderItem(file){
+  if(file.type === 'folder'){
+    openFolder(file);
+    return;
+  }
+
+  if(file.type === 'project'){
+    openPortfolioProject(file);
+    return;
+  }
+
+  if(file.type === 'html-project' || file.projectPath || file.appPath){
+    openHtmlApp({
+      label:file.label,
+      appPath:file.appPath || file.projectPath || file.path,
+      fallbackAppPath:file.fallbackAppPath || ''
+    });
+    return;
+  }
+
+  const html = await fetchHTML(file.path);
+  createWindow({
+    title:file.label,
+    html,
+    kind:'default',
+    x:Math.round(window.innerWidth * .22),
+    y:Math.round(window.innerHeight * .12)
+  });
+}
+
+function openFolder(folder){
+  const files = (folder.files || []).map((file, index) => {
+    const icon = file.type === 'project' ? portfolioProjectIconMarkup(file) : portfolioFolderItemIconMarkup();
+    return `
+      <button class="folder-file portfolio-folder-file ${file.type === 'project' ? 'portfolio-project-file' : ''}" type="button" data-file-index="${index}" title="${escapeHTML(file.label)}">
+        ${icon}
+        <small>${escapeHTML(file.label)}</small>
+      </button>
+    `;
+  }).join('');
+
+  const html = `<div class="folder-grid portfolio-folder-grid">${files}</div>`;
+
+  const win = createWindow({
+    title:folder.label,
+    html,
+    kind:'folder-window',
+    x:Math.round(window.innerWidth * .24),
+    y:Math.round(window.innerHeight * .12)
+  });
+
+  win.querySelectorAll('[data-file-index]').forEach(btn => {
+    const file = folder.files[Number(btn.dataset.fileIndex)];
+
+    btn.addEventListener('click', async () => {
+      const selected = btn.classList.contains('selected');
+      win.querySelectorAll('.folder-file').forEach(el => el.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      if(selected){
+        await openPortfolioFolderItem(file);
+      }
+    });
+
+    btn.addEventListener('dblclick', async () => {
+      await openPortfolioFolderItem(file);
+    });
+  });
 }
