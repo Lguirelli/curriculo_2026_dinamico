@@ -178,12 +178,28 @@ function portfolioProjectIconMarkup(item){
 
 function buildPortfolioBreadcrumb(path=[]){
   if(!path.length) return '';
-  return `<nav class="portfolio-breadcrumb" aria-label="Caminho da pasta">
-    ${path.map((item, index) => {
-      const isLast = index === path.length - 1;
-      return `<button type="button" class="portfolio-breadcrumb-item ${isLast ? 'is-current' : ''}" data-breadcrumb-index="${index}">${index === 0 ? 'Portfólio' : escapeHTML(item.label)}</button>${isLast ? '' : '<span class="portfolio-breadcrumb-separator">/</span>'}`;
-    }).join('')}
-  </nav>`;
+
+  const canGoBack = path.length > 2;
+
+  return `
+    <nav class="portfolio-breadcrumb" aria-label="Caminho da pasta">
+      <button type="button" class="portfolio-back-button" data-folder-back ${canGoBack ? '' : 'disabled'} aria-label="Voltar">
+        ‹ Voltar
+      </button>
+
+      <div class="portfolio-breadcrumb-path">
+        ${path.map((item, index) => {
+          const isLast = index === path.length - 1;
+          return `
+            <button type="button" class="portfolio-breadcrumb-item ${isLast ? 'is-current' : ''}" data-breadcrumb-index="${index}">
+              ${index === 0 ? 'Portfólio' : escapeHTML(item.label)}
+            </button>
+            ${isLast ? '' : '<span class="portfolio-breadcrumb-separator">/</span>'}
+          `;
+        }).join('')}
+      </div>
+    </nav>
+  `;
 }
 
 function buildProjectGalleryHTML(project, path=[]){
@@ -209,6 +225,18 @@ function renderFolderContent(win, folder, path){
 
   const title = win.querySelector('.window-title, [data-window-title]');
   if(title) title.textContent = folder.label;
+
+  const backButton = win.querySelector('[data-folder-back]');
+  if(backButton){
+    backButton.addEventListener('click', () => {
+      if(path.length <= 2) return;
+      const nextPath = path.slice(0, -1);
+      const previous = nextPath[nextPath.length - 1];
+      if(previous?.folder){
+        renderFolderContent(win, previous.folder, nextPath);
+      }
+    });
+  }
 
   win.querySelectorAll('[data-breadcrumb-index]').forEach(btn => {
     btn.addEventListener('click', () => {

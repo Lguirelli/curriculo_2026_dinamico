@@ -1660,3 +1660,105 @@
     0 0 6px rgba(0,0,0,.90),
     0 0 12px rgba(0,0,0,.65) !important;
 }
+
+/* Portfolio inner items without visible boxes + back button */
+.portfolio-folder-file{
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  outline:0 !important;
+  appearance:none !important;
+  -webkit-appearance:none !important;
+}
+
+.portfolio-folder-file::before,
+.portfolio-folder-file::after{
+  display:none !important;
+  content:none !important;
+}
+
+.portfolio-folder-file:hover,
+.portfolio-folder-file.selected,
+.portfolio-folder-file:focus,
+.portfolio-folder-file:focus-visible{
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  outline:0 !important;
+}
+
+/* Remove qualquer caixa interna antiga que tenha ficado visível */
+.portfolio-folder-file > span,
+.portfolio-folder-file .portfolio-window-folder-icon,
+.portfolio-folder-file .portfolio-folder-icon-fixed,
+.portfolio-folder-file .portfolio-project-thumb{
+  border-radius:0 !important;
+}
+
+.portfolio-project-thumb{
+  border:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+}
+
+/* Ícones de pasta continuam arredondados só no SVG, não no botão/box */
+.portfolio-window-folder-icon{
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+
+.portfolio-breadcrumb{
+  display:flex !important;
+  align-items:center !important;
+  gap:12px !important;
+  padding:18px 22px 8px !important;
+}
+
+.portfolio-breadcrumb-path{
+  display:flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  min-width:0 !important;
+  overflow-x:auto !important;
+}
+
+.portfolio-back-button{
+  flex:0 0 auto !important;
+  height:32px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 12px !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+  border-radius:999px !important;
+  background:rgba(255,255,255,.065) !important;
+  color:rgba(255,255,255,.92) !important;
+  font:900 13px/1 var(--font-mono, "IBM Plex Mono", monospace) !important;
+  cursor:pointer !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.85) !important;
+  backdrop-filter:blur(10px) !important;
+  -webkit-backdrop-filter:blur(10px) !important;
+}
+
+.portfolio-back-button:hover:not(:disabled){
+  background:rgba(255,255,255,.12) !important;
+  color:#fff !important;
+}
+
+.portfolio-back-button:disabled{
+  opacity:.38 !important;
+  cursor:default !important;
+  pointer-events:none !important;
+}
+
+.portfolio-breadcrumb-item{
+  font-size:14px !important;
+}
+
+.portfolio-folder-file small{
+  font-size:14px !important;
+}
