@@ -899,3 +899,135 @@
 .note-item{
   display:none !important;
 }
+
+/* Mobile contact clock and responsive grid fix */
+.mobile-hero h1,
+#mobileHeroClock{
+  grid-area:clock !important;
+  margin:0 !important;
+  justify-self:end !important;
+  font-size:44px !important;
+  line-height:.9 !important;
+  letter-spacing:-.06em !important;
+  font-weight:900 !important;
+  color:rgba(255,255,255,.98) !important;
+  text-shadow:0 2px 10px rgba(0,0,0,.36) !important;
+  white-space:nowrap !important;
+}
+
+/* grid agora quebra de forma dinâmica conforme a largura */
+.mobile-app-grid{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(76px, 1fr)) !important;
+  gap:24px 18px !important;
+  align-items:start !important;
+  padding:0 8px 18px !important;
+}
+
+.mobile-app{
+  width:100% !important;
+  min-width:0 !important;
+}
+
+.mobile-app span{
+  flex:0 0 auto !important;
+}
+
+/* contatos voltam a seguir o visual claro/global, sem ficarem pretos */
+.mobile-contact-app span{
+  width:58px !important;
+  height:58px !important;
+  border-radius:18px !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.055)),
+    rgba(255,255,255,.075) !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  box-shadow:
+    0 14px 24px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.18) !important;
+  backdrop-filter:blur(12px) saturate(116%) !important;
+  -webkit-backdrop-filter:blur(12px) saturate(116%) !important;
+}
+
+.mobile-contact-app span img{
+  width:68% !important;
+  height:68% !important;
+  object-fit:contain !important;
+  display:block !important;
+  opacity:.94 !important;
+  filter:
+    brightness(0)
+    invert(1)
+    drop-shadow(0 4px 8px rgba(0,0,0,.24)) !important;
+}
+
+/* mantém landing/ranking com ícones próprios, sem caixa */
+.mobile-image-app[data-mobile-open="landing-page-editavel"] span,
+.mobile-image-app[data-mobile-open="ranking"] span{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+.mobile-image-app[data-mobile-open="landing-page-editavel"] span img,
+.mobile-image-app[data-mobile-open="ranking"] span img{
+  width:100% !important;
+  height:100% !important;
+  opacity:.92 !important;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.18)) !important;
+}
+
+/* melhora legibilidade e evita estouro dos nomes */
+.mobile-app small{
+  max-width:88px !important;
+  min-height:28px !important;
+  display:block !important;
+  font-size:13px !important;
+  line-height:1.12 !important;
+  font-weight:900 !important;
+  text-align:center !important;
+  color:rgba(255,255,255,.96) !important;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,.95),
+    0 0 6px rgba(0,0,0,.80),
+    0 0 10px rgba(0,0,0,.55) !important;
+  overflow-wrap:break-word !important;
+  word-break:normal !important;
+}
+
+/* em telas muito estreitas, força 3 colunas confortáveis */
+@media(max-width:390px){
+  .mobile-app-grid{
+    grid-template-columns:repeat(auto-fit, minmax(72px, 1fr)) !important;
+    gap:22px 10px !important;
+    padding-inline:2px !important;
+  }
+
+  .mobile-app span{
+    width:54px !important;
+    height:54px !important;
+  }
+
+  .mobile-app.mobile-folder-app span,
+  .mobile-folder-icon{
+    width:62px !important;
+    height:49px !important;
+  }
+
+  .mobile-app small{
+    max-width:78px !important;
+    font-size:12px !important;
+  }
+
+  #mobileHeroClock{
+    font-size:40px !important;
+  }
+}
+
+@media(min-width:560px){
+  .mobile-app-grid{
+    grid-template-columns:repeat(auto-fit, minmax(92px, 1fr)) !important;
+  }
+}

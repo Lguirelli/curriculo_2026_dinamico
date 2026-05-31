@@ -346,10 +346,15 @@ function initMobile(){
   document.getElementById('mobileBack')?.addEventListener('click', mobileGoBack);
   document.getElementById('mobileBackTop')?.addEventListener('click', mobileGoBack);
 
-  const clock = document.getElementById('mobileClock');
-  if(clock){
-    setInterval(() => {
-      clock.textContent = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
-    }, 1000);
-  }
+  const updateMobileClocks = () => {
+    const value = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+    const statusClock = document.getElementById('mobileClock');
+    const heroClock = document.getElementById('mobileHeroClock');
+
+    if(statusClock) statusClock.textContent = value;
+    if(heroClock) heroClock.textContent = value;
+  };
+
+  updateMobileClocks();
+  setInterval(updateMobileClocks, 1000);
 }
