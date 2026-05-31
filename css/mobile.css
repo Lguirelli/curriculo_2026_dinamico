@@ -346,3 +346,89 @@
   font-size:16px;
   font-weight:800;
 }
+
+/* Mobile contact icons and fullscreen views */
+.mobile-contact-app span,
+.mobile-image-app span{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+.mobile-contact-app span img,
+.mobile-image-app span img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.22));
+}
+
+.mobile-contact-app small{
+  font-size:12px;
+  font-weight:850;
+}
+
+.mobile-page.mobile-app-view.active{
+  inset:34px 0 64px 0;
+  padding:18px 16px;
+}
+
+.mobile-app-content{
+  height:calc(100% - 52px);
+  min-height:0;
+}
+
+.mobile-fullscreen-view,
+.mobile-project-view,
+.mobile-file-list,
+.mobile-content-card{
+  width:100%;
+  min-height:100%;
+}
+
+.mobile-project-frame,
+.mobile-fullscreen-frame{
+  width:100% !important;
+  height:calc(100vh - 132px) !important;
+  min-height:calc(100vh - 132px) !important;
+  border:0 !important;
+  display:block !important;
+  border-radius:0 !important;
+  background:#0b0d12 !important;
+}
+
+.mobile-ranking-frame,
+.mobile-landing-frame{
+  width:100% !important;
+  height:calc(100vh - 132px) !important;
+  min-height:calc(100vh - 132px) !important;
+  border-radius:0 !important;
+}
+
+.mobile-gallery-grid{
+  min-height:calc(100vh - 190px);
+}
+
+.mobile-gallery-card{
+  border-radius:0 !important;
+}
+
+.mobile-gallery-card img{
+  min-height:auto;
+  max-height:none;
+}
+
+.mobile-portfolio-list{
+  min-height:calc(100vh - 190px);
+}
+
+.mobile-breadcrumb{
+  min-height:34px;
+}
+
+.mobile-contact-view .mobile-content-card{
+  display:grid;
+  place-items:center;
+  text-align:center;
+}

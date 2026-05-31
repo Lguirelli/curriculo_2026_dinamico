@@ -1,3 +1,10 @@
+const MOBILE_CONTACT_LINKS = {
+  email: '#',
+  linkedin: '#',
+  instagram: '#',
+  whatsapp: '#'
+};
+
 const pages = () => ({
   home: document.getElementById('mobileHome'),
   app: document.getElementById('mobileAppView')
@@ -156,7 +163,7 @@ function renderMobileIframeApp(item){
       <button type="button" class="mobile-back-inline" data-mobile-stack-back>‹ Voltar</button>
       <span>${mobileEscape(item.label)}</span>
     </div>
-    <iframe class="mobile-project-frame ${appClass}" src="${src}" title="${mobileEscape(item.label)}"></iframe>
+    <iframe class="mobile-project-frame mobile-fullscreen-frame ${appClass}" src="${src}" title="${mobileEscape(item.label)}"></iframe>
   `);
 
   bindMobileStackBack();
@@ -247,6 +254,28 @@ function openMobileGames(){
   });
 }
 
+function openMobileContact(type){
+  const href = MOBILE_CONTACT_LINKS[type] || '#';
+
+  if(!href || href === '#'){
+    showMobileApp('Contato', `
+      <div class="mobile-fullscreen-view mobile-contact-view">
+        <div class="mobile-breadcrumb">
+          <button type="button" class="mobile-back-inline" data-mobile-stack-back>‹ Voltar</button>
+          <span>Contato</span>
+        </div>
+        <div class="mobile-content-card">
+          <p>Link de contato ainda não configurado.</p>
+        </div>
+      </div>
+    `);
+    bindMobileStackBack();
+    return;
+  }
+
+  window.open(href, '_blank', 'noopener,noreferrer');
+}
+
 function initMobile(){
   document.querySelectorAll('[data-mobile-open]').forEach(btn => btn.addEventListener('click', () => {
     const id = btn.dataset.mobileOpen;
@@ -274,6 +303,11 @@ function initMobile(){
       openMobilePortfolioItem(item, [{ label:'Portfólio', item }, { label:item.label, item }]);
     }
   }));
+
+  
+  document.querySelectorAll('[data-mobile-contact]').forEach(btn => {
+    btn.addEventListener('click', () => openMobileContact(btn.dataset.mobileContact));
+  });
 
   document.getElementById('mobileHomeBtn')?.addEventListener('click', showMobileHome);
   document.getElementById('mobileBack')?.addEventListener('click', mobileGoBack);
