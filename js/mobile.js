@@ -309,7 +309,148 @@ function openMobileContact(type){
   window.open(href, '_blank', 'noopener,noreferrer');
 }
 
+function normalizeMobileSearch(value){
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
+function flattenMobileSearchItems(items, parentLabel=''){
+  return (items || []).flatMap(item => {
+    const label = parentLabel ? `${parentLabel} / ${item.label}` : item.label;
+
+    if(item.type === 'folder' && Array.isArray(item.files)){
+      return [
+        {
+          label,
+          keywords: `${label} pasta portfolio`,
+          action:() => renderMobileFolder(item, [{ label:'Portfólio', item }, { label:item.label, item }])
+        },
+        ...flattenMobileSearchItems(item.files, label)
+      ];
+    }
+
+    if(item.type === 'project'){
+      return [{
+        label,
+        keywords: `${label} projeto portfolio design fotografia video`,
+        action:() => renderMobileProject(item, [{ label:'Portfólio', item }, { label:item.label, item }])
+      }];
+    }
+
+    if(item.type === 'html-app' || item.type === 'exe-app' || item.appPath || item.projectPath){
+      return [{
+        label,
+        keywords: `${label} app html portfolio`,
+        action:() => renderMobileIframeApp(item)
+      }];
+    }
+
+    if(item.path){
+      return [{
+        label,
+        keywords: `${label} arquivo nota curriculo`,
+        action:() => loadMobileFile(item.label, item.path)
+      }];
+    }
+
+    return [];
+  });
+}
+
+function getMobileSearchItems(){
+  const curriculum = (OS_DATA.curriculum || []).map(item => ({
+    label:`Currículo / ${String(item.label || '').replace(/\.txt$/i, '')}`,
+    keywords:`curriculo currículo notas ${item.label || ''}`,
+    action:() => loadMobileFile(item.label, item.path)
+  }));
+
+  const portfolio = flattenMobileSearchItems(OS_DATA.portfolio || []);
+
+  const games = (OS_DATA.games || []).map(game => ({
+    label:`Jogo / ${game.label}`,
+    keywords:`jogo games ${game.label}`,
+    action:() => openMobileGame(game.id, game.label)
+  }));
+
+  const fixedApps = [
+    {
+      label:'landing page editavel',
+      keywords:'landing page editavel landing página editável site html',
+      action:() => {
+        const item = (OS_DATA.portfolio || []).find(i => i.id === 'landing-page-editavel');
+        if(item) renderMobileIframeApp(item);
+      }
+    },
+    {
+      label:'ranking',
+      keywords:'ranking rank exe aplicativo',
+      action:() => {
+        const item = (OS_DATA.portfolio || []).find(i => i.id === 'ranking' || i.id === 'ranking-exe');
+        if(item) renderMobileIframeApp(item);
+      }
+    }
+  ];
+
+  return [...curriculum, ...portfolio, ...games, ...fixedApps];
+}
+
+function performMobileSearch(query){
+  const q = normalizeMobileSearch(query);
+  if(!q) return;
+
+  const result = getMobileSearchItems().find(item =>
+    normalizeMobileSearch(`${item.label} ${item.keywords || ''}`).includes(q)
+  );
+
+  if(result?.action){
+    result.action();
+    return;
+  }
+
+  showMobileApp('Busca', `
+    <div class="mobile-breadcrumb">
+      <button type="button" class="mobile-back-inline" data-mobile-stack-back>‹ Voltar</button>
+      <span>Busca</span>
+    </div>
+    <div class="mobile-content-card mobile-search-empty">
+      <strong>Nenhum resultado encontrado.</strong>
+      <p>Tente buscar por currículo, design, fotografia, vídeos, landing, ranking, snake, pong ou campo minado.</p>
+    </div>
+  `);
+  bindMobileStackBack();
+}
+
+function initMobileSearch(){
+  const form = document.getElementById('mobileSearchForm');
+  const input = document.getElementById('mobileSearchInput');
+  const button = document.getElementById('mobileSearchButton');
+
+  if(!form || !input) return;
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    performMobileSearch(input.value);
+  });
+
+  button?.addEventListener('click', () => {
+    if(!input.value.trim()){
+      input.focus();
+    }
+  });
+
+  input.addEventListener('keydown', event => {
+    if(event.key === 'Enter'){
+      event.preventDefault();
+      performMobileSearch(input.value);
+    }
+  });
+}
+
 function initMobile(){
+  initMobileSearch();
   document.querySelectorAll('[data-mobile-open]').forEach(btn => btn.addEventListener('click', () => {
     const id = btn.dataset.mobileOpen;
 
