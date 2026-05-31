@@ -305,7 +305,7 @@ function makeDesktopIconInteractive(icon, item){
     e.stopPropagation();
     clearSelection();
     icon.classList.add('selected');
-});
+  });
 
   icon.addEventListener('dblclick', e => {
     e.stopPropagation();
@@ -539,23 +539,6 @@ function initDesktop(){
 // desktop-html-app-delegated-open
 document.addEventListener('dblclick', event => {
   const icon = event.target.closest?.('.desktop-icon[data-item-id]');
-  if(!icon) return;
-
-  const item = resolveDesktopItemById(icon.dataset.itemId);
-  if(item?.type === 'html-app'){
-    event.preventDefault();
-    event.stopPropagation();
-    openHtmlApp(item);
-  }
-});
-
-
-
-
-
-// landing-html-app-dblclick-fallback
-document.addEventListener('dblclick', event => {
-  const icon = event.target.closest?.('.desktop-icon[data-item-id][data-type="html-app"]');
   if(!icon) return;
 
   const item = resolveDesktopItemById(icon.dataset.itemId);
