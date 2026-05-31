@@ -1762,3 +1762,26 @@
 .portfolio-folder-file small{
   font-size:14px !important;
 }
+
+/* Portfolio final files open inside the same window */
+.portfolio-inline-file-content{
+  width:100%;
+  max-width:100%;
+  font-size:18px !important;
+  line-height:1.75 !important;
+}
+
+.portfolio-inline-file-content .content-section,
+.portfolio-inline-file-content article,
+.portfolio-inline-file-content p,
+.portfolio-inline-file-content li{
+  font-size:18px !important;
+  line-height:1.75 !important;
+}
+
+.portfolio-inline-file-content h1,
+.portfolio-inline-file-content h2,
+.portfolio-inline-file-content h3{
+  font-size:clamp(24px, 2.6vw, 38px) !important;
+  line-height:1.15 !important;
+}

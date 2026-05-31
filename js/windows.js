@@ -260,6 +260,39 @@ function renderFolderContent(win, folder, path){
   });
 }
 
+function renderProjectContent(win, project, path){
+  const body = win.querySelector('.window-body');
+  if(!body) return;
+
+  body.innerHTML = buildProjectGalleryHTML(project, path);
+
+  const title = win.querySelector('.window-title, [data-window-title]');
+  if(title) title.textContent = project.label;
+
+  const backButton = win.querySelector('[data-folder-back]');
+  if(backButton){
+    backButton.addEventListener('click', () => {
+      if(path.length <= 2) return;
+      const nextPath = path.slice(0, -1);
+      const previous = nextPath[nextPath.length - 1];
+      if(previous?.folder){
+        renderFolderContent(win, previous.folder, nextPath);
+      }
+    });
+  }
+
+  win.querySelectorAll('[data-breadcrumb-index]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const index = Number(btn.dataset.breadcrumbIndex);
+      const target = path[index];
+
+      if(target?.folder && !btn.classList.contains('is-current')){
+        renderFolderContent(win, target.folder, path.slice(0, index + 1));
+      }
+    });
+  });
+}
+
 async function openPortfolioFolderItem(file, currentWin=null, path=[]){
   if(file.type === 'folder'){
     if(currentWin){
@@ -270,7 +303,14 @@ async function openPortfolioFolderItem(file, currentWin=null, path=[]){
     return;
   }
   if(file.type === 'project'){
-    openPortfolioProject(file, [...path, { label:file.label, folder:null }]);
+    const nextPath = [...path, { label:file.label, folder:null }];
+
+    if(currentWin){
+      renderProjectContent(currentWin, file, nextPath);
+    }else{
+      openPortfolioProject(file, nextPath);
+    }
+
     return;
   }
   if(file.type === 'html-project' || file.type === 'exe-app' || file.projectPath || file.appPath){
