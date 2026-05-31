@@ -23,7 +23,7 @@ function showMobileHome(){
 
 function showMobileApp(title, html){
   const p = pages();
-  document.getElementById('mobileAppTitle').textContent = title;
+  document.getElementById('mobileAppTitle').textContent = String(title || '').replace(/\.txt$/i, '');
   document.getElementById('mobileAppContent').innerHTML = html;
   p.home.classList.remove('active');
   p.app.classList.add('active');
@@ -76,10 +76,6 @@ function mobileProjectIcon(item){
 }
 
 function mobileAppIcon(item){
-  if(item.thumbnail){
-    return `<span class="mobile-project-thumb mobile-app-thumb"><img src="${item.thumbnail}" alt="" loading="lazy" /></span>`;
-  }
-
   if(item.id === 'landing-page-editavel'){
     return `<span class="mobile-project-thumb mobile-app-thumb mobile-duck-thumb"><img src="assets/icons/landing-duck.svg" alt="" /></span>`;
   }
@@ -223,21 +219,54 @@ function mobileGoBack(){
   else showMobileHome();
 }
 
-function openMobileNotes(){
+function stripHTMLToText(html){
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html || '';
+  return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+}
+
+function getMobileNoteTitle(label){
+  return String(label || '').replace(/\.txt$/i, '');
+}
+
+async function getMobileNotePreview(path){
+  try{
+    const html = await fetchHTML(path);
+    const text = stripHTMLToText(html);
+    return text.length > 96 ? text.slice(0, 96).trim() + '…' : text;
+  }catch(error){
+    return '';
+  }
+}
+
+async function renderMobileCurriculoNotes(){
   MOBILE_STATE.stack = [{ type:'home' }];
-  showMobileApp('Notas', `
-    <div class="note-list">
-      ${OS_DATA.curriculum.map(n => `
-        <button class="note-item" data-note="${n.path}" data-title="${n.label}">
-          ${mobileEscape(n.label)}
-        </button>
-      `).join('')}
+
+  const cards = await Promise.all(OS_DATA.curriculum.map(async item => {
+    const title = getMobileNoteTitle(item.label);
+    const preview = await getMobileNotePreview(item.path);
+
+    return `
+      <button class="mobile-note-card" data-note="${item.path}" data-title="${item.label}">
+        <span class="mobile-note-title">${mobileEscape(title)}</span>
+        <span class="mobile-note-preview">${mobileEscape(preview || 'Toque para abrir esta nota.')}</span>
+      </button>
+    `;
+  }));
+
+  showMobileApp('Currículo', `
+    <div class="mobile-notes-list">
+      ${cards.join('')}
     </div>
   `);
 
   document.querySelectorAll('[data-note]').forEach(n => {
     n.addEventListener('click', () => loadMobileFile(n.dataset.title, n.dataset.note));
   });
+}
+
+function openMobileNotes(){
+  renderMobileCurriculoNotes();
 }
 
 function openMobileGames(){
@@ -280,114 +309,6 @@ function openMobileContact(type){
   window.open(href, '_blank', 'noopener,noreferrer');
 }
 
-
-function getMobilePortfolioRootPath(item){
-  return [{ label:'Portfólio', item }, { label:item.label, item }];
-}
-
-function collectMobileSearchItems(){
-  const results = [];
-
-  (OS_DATA.curriculum || []).forEach(item => {
-    results.push({
-      label: item.label,
-      group: 'Notas',
-      item,
-      action: () => loadMobileFile(item.label, item.path)
-    });
-  });
-
-  function walkPortfolio(items, path=[]){
-    (items || []).forEach(item => {
-      const nextPath = [...path, { label:item.label, item }];
-      results.push({
-        label: item.label,
-        group: path.length ? path.map(p => p.label).join(' / ') : 'Portfólio',
-        item,
-        action: () => {
-          MOBILE_STATE.stack = [{ type:'home' }];
-          openMobilePortfolioItem(item, nextPath);
-        }
-      });
-      if(item.files) walkPortfolio(item.files, nextPath);
-    });
-  }
-
-  walkPortfolio(OS_DATA.portfolio || [], [{ label:'Portfólio' }]);
-
-  (OS_DATA.games || []).forEach(item => {
-    results.push({
-      label: item.label,
-      group: 'Jogos',
-      item,
-      action: () => openMobileGame(item.id, item.label)
-    });
-  });
-
-  return results;
-}
-
-function bindMobileSearch(){
-  const input = document.getElementById('mobileSearchInput');
-  const resultsBox = document.getElementById('mobileSearchResults');
-  const form = document.querySelector('[data-mobile-search-form]');
-  if(!input || !resultsBox) return;
-
-  const index = collectMobileSearchItems();
-
-  function render(){
-    const q = input.value.trim().toLowerCase();
-    if(!q){
-      resultsBox.innerHTML = '';
-      resultsBox.classList.remove('active');
-      return;
-    }
-
-    const matches = index
-      .filter(entry => `${entry.label} ${entry.group}`.toLowerCase().includes(q))
-      .slice(0, 8);
-
-    if(!matches.length){
-      resultsBox.innerHTML = '<p>Nenhum item encontrado.</p>';
-      resultsBox.classList.add('active');
-      return;
-    }
-
-    resultsBox.innerHTML = matches.map((entry, index) => `
-      <button type="button" data-mobile-search-result="${index}">
-        <strong>${mobileEscape(entry.label)}</strong>
-        <small>${mobileEscape(entry.group)}</small>
-      </button>
-    `).join('');
-    resultsBox.classList.add('active');
-
-    resultsBox.querySelectorAll('[data-mobile-search-result]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const entry = matches[Number(btn.dataset.mobileSearchResult)];
-        input.value = '';
-        resultsBox.innerHTML = '';
-        resultsBox.classList.remove('active');
-        entry.action();
-      });
-    });
-  }
-
-  input.addEventListener('input', render);
-  form?.addEventListener('submit', e => {
-    e.preventDefault();
-    const first = resultsBox.querySelector('[data-mobile-search-result]');
-    if(first) first.click();
-  });
-}
-
-function updateMobileClocks(){
-  const value = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
-  const statusClock = document.getElementById('mobileClock');
-  const heroClock = document.getElementById('mobileHeroClock');
-  if(statusClock) statusClock.textContent = value;
-  if(heroClock) heroClock.textContent = value;
-}
-
 function initMobile(){
   document.querySelectorAll('[data-mobile-open]').forEach(btn => btn.addEventListener('click', () => {
     const id = btn.dataset.mobileOpen;
@@ -425,7 +346,23 @@ function initMobile(){
   document.getElementById('mobileBack')?.addEventListener('click', mobileGoBack);
   document.getElementById('mobileBackTop')?.addEventListener('click', mobileGoBack);
 
-  bindMobileSearch();
+  const updateMobileClocks = () => {
+    const now = new Date();
+    const time = now.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+    const weekday = now.toLocaleDateString('pt-BR', {weekday:'long'});
+    const date = now.toLocaleDateString('pt-BR', {day:'2-digit', month:'long', year:'numeric'});
+
+    const statusClock = document.getElementById('mobileClock');
+    const heroClock = document.getElementById('mobileHeroClock');
+    const heroWeekday = document.getElementById('mobileHeroWeekday');
+    const heroDate = document.getElementById('mobileHeroDate');
+
+    if(statusClock) statusClock.textContent = time;
+    if(heroClock) heroClock.textContent = time;
+    if(heroWeekday) heroWeekday.textContent = weekday.charAt(0).toUpperCase() + weekday.slice(1);
+    if(heroDate) heroDate.textContent = date.replace(/ de /g, ' De ').replace(/^./, c => c.toUpperCase());
+  };
+
   updateMobileClocks();
   setInterval(updateMobileClocks, 1000);
 }
