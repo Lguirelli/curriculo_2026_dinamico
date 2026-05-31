@@ -1398,3 +1398,89 @@
     white-space:nowrap;
   }
 }
+
+/* Fix visible portfolio subfolder icons */
+.portfolio-folder-file{
+  min-width:112px !important;
+  min-height:108px !important;
+  padding:8px 6px !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+
+.portfolio-folder-icon-fixed{
+  width:66px !important;
+  height:52px !important;
+  display:block !important;
+  margin:0 auto 7px !important;
+  perspective:720px !important;
+  transform-style:preserve-3d !important;
+  filter:drop-shadow(0 10px 16px rgba(0,0,0,.18)) !important;
+  transition:transform .24s ease, filter .24s ease !important;
+}
+
+.portfolio-folder-svg-fixed{
+  width:100% !important;
+  height:100% !important;
+  display:block !important;
+  overflow:visible !important;
+}
+
+.portfolio-folder-back-fixed,
+.portfolio-folder-front-fixed{
+  stroke:none !important;
+  transform-box:fill-box !important;
+  transform-origin:center center !important;
+  transition:transform .30s cubic-bezier(.2,.8,.2,1), fill .30s ease !important;
+}
+
+.portfolio-folder-back-fixed{
+  fill:rgba(112,126,142,.92) !important;
+  transform:translateZ(-3px) !important;
+}
+
+.portfolio-folder-front-fixed{
+  fill:rgba(229,236,244,.94) !important;
+  transform:translateZ(8px) !important;
+}
+
+.portfolio-folder-file:hover .portfolio-folder-icon-fixed,
+.portfolio-folder-file.selected .portfolio-folder-icon-fixed{
+  transform:translateY(-2px) scale(1.05) !important;
+  filter:drop-shadow(0 12px 20px rgba(0,0,0,.22)) !important;
+}
+
+.portfolio-folder-file:hover .portfolio-folder-front-fixed,
+.portfolio-folder-file.selected .portfolio-folder-front-fixed{
+  transform:translateY(5px) translateZ(16px) rotateX(-24deg) !important;
+  fill:rgba(246,249,253,.96) !important;
+}
+
+.portfolio-folder-file:hover .portfolio-folder-back-fixed,
+.portfolio-folder-file.selected .portfolio-folder-back-fixed{
+  fill:rgba(106,120,137,.96) !important;
+}
+
+.portfolio-folder-file small{
+  max-width:112px !important;
+  display:block !important;
+  margin:0 auto !important;
+  padding:2px 5px !important;
+  border-radius:8px !important;
+  color:rgba(255,255,255,.98) !important;
+  font-size:11px !important;
+  font-weight:900 !important;
+  line-height:1.14 !important;
+  text-align:center !important;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,.95),
+    0 0 5px rgba(0,0,0,.85),
+    0 0 10px rgba(0,0,0,.60) !important;
+}
+
+.portfolio-folder-file:hover small,
+.portfolio-folder-file.selected small{
+  background:rgba(0,0,0,.22) !important;
+}
