@@ -1,0 +1,31 @@
+{
+  "id": "posts-prego-e-parafuso",
+  "title": "Prego e Parafuso — Posts para Redes Sociais",
+  "category": "Design",
+  "folder": "Social Media",
+  "path": "assets/portfolio/design/social-media/posts-prego-e-parafuso/",
+  "description": "Peças visuais para redes sociais com foco em comunicação comercial, produtos de construção, ferragens, ferramentas, portas, fechaduras, puxadores e fixação.",
+  "tags": [
+    "Social Media",
+    "Design Gráfico",
+    "Posts Estáticos",
+    "Comunicação Comercial",
+    "Materiais de Construção",
+    "Ferragens",
+    "Direção de Arte"
+  ],
+  "files": [
+    { "file": "post-01.png", "title": "Evite erros e instale sua fechadura com precisão" },
+    { "file": "post-02.png", "title": "Fechadura União Mundial" },
+    { "file": "post-03.png", "title": "Qual puxador escolher para seu móvel" },
+    { "file": "post-04.png", "title": "Puxadores União Mundial de inox" },
+    { "file": "post-05.png", "title": "A porta errada pode causar problemas na sua obra" },
+    { "file": "post-06.png", "title": "Portas folhadas de todas as medidas" },
+    { "file": "post-07.png", "title": "Uma ferramenta pode facilitar seu trabalho" },
+    { "file": "post-08.png", "title": "As melhores ferramentas para sua obra" },
+    { "file": "post-09.png", "title": "O parafuso certo faz toda a diferença" },
+    { "file": "post-10.png", "title": "Parafusos de qualidade fazem toda a diferença" },
+    { "file": "post-11.png", "title": "Parafuso rachando a madeira" },
+    { "file": "post-12.png", "title": "Tudo que você precisa para fixação" }
+  ]
+}
