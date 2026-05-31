@@ -687,3 +687,54 @@
   transform:translateY(-2px) scale(1.04) !important;
   background:transparent !important;
 }
+
+/* Final landing click and label readability */
+.desktop-duck-app-icon{
+  width:70px !important;
+  height:70px !important;
+  display:grid !important;
+  place-items:center !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  overflow:visible !important;
+  transition:transform .22s ease !important;
+}
+
+.desktop-duck-app-icon img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  display:block !important;
+  opacity:.88 !important;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.18)) !important;
+  pointer-events:none !important;
+  user-select:none !important;
+  -webkit-user-drag:none !important;
+}
+
+.desktop-icon:hover .desktop-duck-app-icon,
+.desktop-icon.selected .desktop-duck-app-icon{
+  transform:translateY(-2px) scale(1.04) !important;
+  background:transparent !important;
+}
+
+.desktop-icon-label{
+  max-width:88px !important;
+  padding:2px 5px !important;
+  border-radius:8px !important;
+  color:rgba(255,255,255,.96) !important;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,.92),
+    0 0 5px rgba(0,0,0,.80),
+    0 0 10px rgba(0,0,0,.55) !important;
+  line-height:1.12 !important;
+  font-weight:800 !important;
+}
+
+.desktop-icon.selected .desktop-icon-label,
+.desktop-icon:hover .desktop-icon-label{
+  background:rgba(0,0,0,.22) !important;
+}

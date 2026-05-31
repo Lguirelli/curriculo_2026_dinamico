@@ -21,7 +21,7 @@ window.OS_DATA = {
       { id:'edicao', label:'edição', type:'folder-file', path:'content/portfolio/videos/edicao.html' },
       { id:'motion', label:'motion', type:'folder-file', path:'content/portfolio/videos/motion.html' }
     ]},
-    { id:'landing-page-editavel', label:'landing page editavel', type:'html-app', icon:'duck', appPath:'content/apps/landing-page-editavel/index.html' }
+    { id:'landing-page-editavel', label:'landing page editavel', type:'html-app', icon:'duck', appPath:'content/portfolio/design/landing-page-editavel/index.html', fallbackAppPath:'content/apps/landing-page-editavel/index.html' }
   ],
   games: [
     { id:'snake', label:'Snake', icon:'assets/icons/game-snake.png' },

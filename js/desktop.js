@@ -223,14 +223,6 @@ function renderDesktopIcons(){
         <span class="desktop-icon-label">${item.label}</span>
       `;
     }
-    else if (item.type === 'html-app') {
-      icon.innerHTML = `
-        <span class="desktop-duck-app-icon" aria-hidden="true">
-          <img src="assets/icons/landing-duck.svg" alt="" draggable="false" />
-        </span>
-        <span class="desktop-icon-label">${item.label}</span>
-      `;
-    }
     else if (item.type === 'folder') {
       icon.innerHTML = `
         <span class="folder-glass-icon desktop-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
@@ -313,14 +305,16 @@ function makeDesktopIconInteractive(icon, item){
     e.stopPropagation();
     clearSelection();
     icon.classList.add('selected');
+
+    if(item.type === 'html-app' && !moved){
+      openHtmlApp(item);
+    }
   });
 
   icon.addEventListener('dblclick', e => {
     e.stopPropagation();
     if(moved) return;
-    if(item.type === 'txt') openTextFile(item);
-    if(item.type === 'folder') openFolder(item);
-    if(item.type === 'game') openGameWindow(item.id, item.label);
+    openDesktopItem(item);
   });
 }
 
@@ -520,3 +514,17 @@ document.addEventListener('dblclick', event => {
   }
 });
 
+
+
+// landing-html-app-click-fallback
+document.addEventListener('click', event => {
+  const icon = event.target.closest?.('.desktop-icon[data-item-id][data-type="html-app"]');
+  if(!icon) return;
+
+  const item = resolveDesktopItemById(icon.dataset.itemId);
+  if(item?.type === 'html-app'){
+    event.preventDefault();
+    event.stopPropagation();
+    openHtmlApp(item);
+  }
+});
