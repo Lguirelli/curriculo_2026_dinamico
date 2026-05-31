@@ -59,15 +59,6 @@ window.OS_DATA = {
               "id": "agente-guia-campanha-visual",
               "label": "Agente Guia — Campanha Visual",
               "type": "project",
-              "description": "Série de peças conceituais para redes sociais, combinando manipulação de imagem, direção de arte, copywriting visual e identidade de marca para comunicar automação, atendimento e conversão com IA.",
-              "tags": [
-                "Social Media",
-                "Direção de Arte",
-                "Manipulação de Imagem",
-                "Campanha Criativa",
-                "IA para Negócios",
-                "Branding"
-              ],
               "assets": [
                 "assets/portfolio/design/campanhas-criativas/agente-guia-campanha-visual/Prancheta 2.jpg",
                 "assets/portfolio/design/campanhas-criativas/agente-guia-campanha-visual/Prancheta 3.jpg",
@@ -95,8 +86,6 @@ window.OS_DATA = {
               "id": "paisagens-naturais",
               "label": "Paisagens Naturais",
               "type": "project",
-              "description": "",
-              "tags": [],
               "assets": [
                 "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/arvore.jpg",
                 "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/barragem 2.jpg",
@@ -110,8 +99,6 @@ window.OS_DATA = {
               "id": "arquitetura-e-cidade",
               "label": "Arquitetura e Cidade",
               "type": "project",
-              "description": "",
-              "tags": [],
               "assets": [
                 "assets/portfolio/fotografia/registro-urbano-e-natural/arquitetura-e-cidade/forum.jpg",
                 "assets/portfolio/fotografia/registro-urbano-e-natural/arquitetura-e-cidade/igreja.jpg",
@@ -123,8 +110,6 @@ window.OS_DATA = {
               "id": "patrimonio-e-turismo",
               "label": "Patrimônio e Turismo",
               "type": "project",
-              "description": "",
-              "tags": [],
               "assets": [
                 "assets/portfolio/fotografia/registro-urbano-e-natural/patrimonio-e-turismo/cristo.jpg",
                 "assets/portfolio/fotografia/registro-urbano-e-natural/patrimonio-e-turismo/cristo 2.jpg",
@@ -143,16 +128,6 @@ window.OS_DATA = {
               "id": "alambique-olivotto",
               "label": "Alambique Olivotto",
               "type": "project",
-              "description": "Registro fotográfico de ambiente, produto artesanal e processo de produção, com foco em identidade local, textura, luz ambiente e valorização da experiência turística.",
-              "tags": [
-                "Fotografia Comercial",
-                "Fotografia de Produto",
-                "Turismo",
-                "Ambiente",
-                "Produto Artesanal",
-                "Storytelling Visual",
-                "Luz Ambiente"
-              ],
               "assets": [
                 "assets/portfolio/fotografia/registro-comercial-e-turismo/alambique-olivotto/olivotto (1).jpg",
                 "assets/portfolio/fotografia/registro-comercial-e-turismo/alambique-olivotto/olivotto (2).jpg",
@@ -169,16 +144,6 @@ window.OS_DATA = {
           "id": "zoologico",
           "label": "Zoológico",
           "type": "project",
-          "description": "Registros fotográficos de animais em zoológico, explorando enquadramento, profundidade de campo, textura visual das grades e luz natural.",
-          "tags": [
-            "Fotografia",
-            "Zoológico",
-            "Animais",
-            "Aves",
-            "Felinos",
-            "Natureza",
-            "Composição"
-          ],
           "assets": [
             "assets/portfolio/fotografia/zoologico/_MG_5427.jpg",
             "assets/portfolio/fotografia/zoologico/_MG_5432.jpg",

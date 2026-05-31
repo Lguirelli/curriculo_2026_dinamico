@@ -136,77 +136,10 @@ function htmlFileIconMarkup(){
   `;
 }
 
-function enableWindowResize(win){
-  if(!win || win.dataset.resizeReady === 'true') return;
-  win.dataset.resizeReady = 'true';
-
-  const handles = ['right', 'bottom', 'corner'];
-
-  handles.forEach(type => {
-    const handle = document.createElement('span');
-    handle.className = `window-resize-handle resize-${type}`;
-    handle.dataset.resize = type;
-    win.appendChild(handle);
-  });
-
-  let resizeState = null;
-
-  win.querySelectorAll('.window-resize-handle').forEach(handle => {
-    handle.addEventListener('pointerdown', event => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const rect = win.getBoundingClientRect();
-      resizeState = {
-        type: handle.dataset.resize,
-        startX: event.clientX,
-        startY: event.clientY,
-        startW: rect.width,
-        startH: rect.height
-      };
-
-      win.classList.add('resizing');
-      handle.setPointerCapture(event.pointerId);
-    });
-
-    handle.addEventListener('pointermove', event => {
-      if(!resizeState) return;
-
-      const dx = event.clientX - resizeState.startX;
-      const dy = event.clientY - resizeState.startY;
-
-      const minW = 520;
-      const minH = 360;
-      const maxW = window.innerWidth - 24;
-      const maxH = window.innerHeight - 24;
-
-      if(resizeState.type === 'right' || resizeState.type === 'corner'){
-        win.style.width = `${Math.max(minW, Math.min(maxW, resizeState.startW + dx))}px`;
-      }
-
-      if(resizeState.type === 'bottom' || resizeState.type === 'corner'){
-        win.style.height = `${Math.max(minH, Math.min(maxH, resizeState.startH + dy))}px`;
-      }
-    });
-
-    handle.addEventListener('pointerup', event => {
-      if(!resizeState) return;
-      resizeState = null;
-      win.classList.remove('resizing');
-      handle.releasePointerCapture(event.pointerId);
-    });
-
-    handle.addEventListener('pointercancel', () => {
-      resizeState = null;
-      win.classList.remove('resizing');
-    });
-  });
-}
-
 function createBrowserFrameHTML(title, url, fallbackUrl=''){
   return `
     <section class="project-browser-content">
-      <iframe class="project-browser-frame" src="${url}" title="${title}" data-fallback-url="${fallbackUrl}"></iframe>
+      <iframe class="project-browser-frame" src="${url}" title="${escapeHTML(title)}" data-fallback-url="${fallbackUrl}"></iframe>
     </section>
   `;
 }
@@ -236,6 +169,16 @@ function openHtmlApp(item){
   if(typeof enableWindowResize === 'function') enableWindowResize(win);
 }
 
+function escapeHTML(value){
+  return String(value || '').replace(/[&<>"']/g, char => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#039;'
+  }[char]));
+}
+
 function portfolioFolderItemIconMarkup(){
   return `
     <span class="portfolio-folder-icon-fixed" aria-hidden="true">
@@ -260,51 +203,13 @@ function portfolioProjectIconMarkup(item){
   return portfolioFolderItemIconMarkup();
 }
 
-function escapeHTML(value){
-  return String(value || '').replace(/[&<>"']/g, char => ({
-    '&':'&amp;',
-    '<':'&lt;',
-    '>':'&gt;',
-    '"':'&quot;',
-    "'":'&#039;'
-  }[char]));
-}
-
-function buildTagList(tags=[]){
-  if(!tags.length) return '';
-  return `<div class="portfolio-tags">${tags.map(tag => `<span>${escapeHTML(tag)}</span>`).join('')}</div>`;
-}
-
-function buildProjectGalleryHTML(project, path=[]){
-  const breadcrumb = buildPortfolioBreadcrumb(path, true);
-  const images = (project.assets || []).map((src, index) => `
-    <figure class="portfolio-gallery-card">
-      <img src="${src}" alt="${escapeHTML(project.label)} ${index + 1}" loading="lazy" />
-    </figure>
-  `).join('');
-
-  return `
-    <section class="portfolio-project-view">
-      ${breadcrumb}
-      <header class="portfolio-project-header">
-        <span class="section-kicker">Portfólio</span>
-        <h2>${escapeHTML(project.label)}</h2>
-      </header>
-      <div class="portfolio-gallery-grid">${images}</div>
-    </section>
-  `;
-}
-
-function buildPortfolioBreadcrumb(path=[], includeCurrent=false){
+function buildPortfolioBreadcrumb(path=[]){
   if(!path.length) return '';
-
-  const crumbs = includeCurrent ? path : path.slice(0, -1);
-  if(!crumbs.length) return '';
 
   return `
     <nav class="portfolio-breadcrumb" aria-label="Caminho da pasta">
-      ${crumbs.map((item, index) => {
-        const isLast = index === crumbs.length - 1;
+      ${path.map((item, index) => {
+        const isLast = index === path.length - 1;
         return `
           <button type="button" class="portfolio-breadcrumb-item ${isLast ? 'is-current' : ''}" data-breadcrumb-index="${index}">
             ${index === 0 ? 'Portfólio' : escapeHTML(item.label)}
@@ -313,6 +218,24 @@ function buildPortfolioBreadcrumb(path=[], includeCurrent=false){
         `;
       }).join('')}
     </nav>
+  `;
+}
+
+function buildProjectGalleryHTML(project, path=[]){
+  const images = (project.assets || []).map((src, index) => `
+    <figure class="portfolio-gallery-card">
+      <img src="${src}" alt="${escapeHTML(project.label)} ${index + 1}" loading="lazy" />
+    </figure>
+  `).join('');
+
+  return `
+    <section class="portfolio-project-view">
+      ${buildPortfolioBreadcrumb(path)}
+      <header class="portfolio-project-header">
+        <h2>${escapeHTML(project.label)}</h2>
+      </header>
+      <div class="portfolio-gallery-grid">${images}</div>
+    </section>
   `;
 }
 
@@ -327,26 +250,25 @@ function renderFolderContent(win, folder, path){
     `;
   }).join('');
 
-  const html = `
-    <div class="portfolio-folder-view">
-      ${buildPortfolioBreadcrumb(path)}
-      <div class="folder-grid portfolio-folder-grid">${files}</div>
-    </div>
-  `;
-
   const body = win.querySelector('.window-body');
-  if(body) body.innerHTML = html;
+  if(body){
+    body.innerHTML = `
+      <div class="portfolio-folder-view">
+        ${buildPortfolioBreadcrumb(path)}
+        <div class="folder-grid portfolio-folder-grid">${files}</div>
+      </div>
+    `;
+  }
 
   const title = win.querySelector('.window-title, [data-window-title]');
   if(title) title.textContent = folder.label;
-
-  win.dataset.currentFolderId = folder.id || folder.label;
 
   win.querySelectorAll('[data-breadcrumb-index]').forEach(btn => {
     btn.addEventListener('click', () => {
       const index = Number(btn.dataset.breadcrumbIndex);
       const target = path[index];
-      if(target?.folder){
+
+      if(target?.folder && !btn.classList.contains('is-current')){
         renderFolderContent(win, target.folder, path.slice(0, index + 1));
       }
     });
@@ -355,14 +277,9 @@ function renderFolderContent(win, folder, path){
   win.querySelectorAll('[data-file-index]').forEach(btn => {
     const file = folder.files[Number(btn.dataset.fileIndex)];
 
-    btn.addEventListener('click', async () => {
-      const selected = btn.classList.contains('selected');
+    btn.addEventListener('click', () => {
       win.querySelectorAll('.folder-file').forEach(el => el.classList.remove('selected'));
       btn.classList.add('selected');
-
-      if(selected){
-        await openPortfolioFolderItem(file, win, path);
-      }
     });
 
     btn.addEventListener('dblclick', async () => {
@@ -376,13 +293,13 @@ async function openPortfolioFolderItem(file, currentWin=null, path=[]){
     if(currentWin){
       renderFolderContent(currentWin, file, [...path, { label:file.label, folder:file }]);
     }else{
-      openFolder(file, [...path, { label:file.label, folder:file }]);
+      openFolder(file, path);
     }
     return;
   }
 
   if(file.type === 'project'){
-    openPortfolioProject(file, path);
+    openPortfolioProject(file, [...path, { label:file.label, folder:null }]);
     return;
   }
 
@@ -406,7 +323,7 @@ async function openPortfolioFolderItem(file, currentWin=null, path=[]){
 }
 
 function openPortfolioProject(project, path=[]){
-  const html = buildProjectGalleryHTML(project, [...path, { label:project.label, folder:null }]);
+  const html = buildProjectGalleryHTML(project, path);
   const win = createWindow({
     title:project.label,
     html,
@@ -419,16 +336,17 @@ function openPortfolioProject(project, path=[]){
 }
 
 function openFolder(folder, existingPath=[]){
-  const html = `<div class="portfolio-folder-view"></div>`;
-
   const win = createWindow({
     title:folder.label,
-    html,
+    html:`<div class="portfolio-folder-view"></div>`,
     kind:'folder-window',
     x:Math.round(window.innerWidth * .24),
     y:Math.round(window.innerHeight * .12)
   });
 
-  const path = existingPath.length ? existingPath : [{ label:'Portfólio', folder:{ label:'Portfólio', files:OS_DATA.portfolio } }, { label:folder.label, folder }];
+  const path = existingPath.length
+    ? existingPath
+    : [{ label:'Portfólio', folder:{ label:'Portfólio', files:OS_DATA.portfolio } }, { label:folder.label, folder }];
+
   renderFolderContent(win, folder, path);
 }
