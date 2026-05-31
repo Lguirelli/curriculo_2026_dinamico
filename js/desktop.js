@@ -207,6 +207,7 @@ function renderDesktopIcons(){
     occupied.add(physicalKey(finalPos.x, finalPos.y));
 
     const icon = document.createElement('button');
+    icon.dataset.itemId = item.id;
     icon.className = `desktop-icon ${item.type === 'folder' ? 'folder' : ''} ${item.type === 'game' ? 'game' : ''}`;
     icon.dataset.id = item.id;
     icon.dataset.type = item.type;
@@ -454,6 +455,33 @@ function setupDesktopSearch(){
   });
 }
 
+function resolveDesktopItemById(id){
+  return [...OS_DATA.curriculum, ...OS_DATA.portfolio, ...OS_DATA.games].find(item => item.id === id);
+}
+
+function openDesktopItem(item){
+  if(!item) return;
+
+  if(item.type === 'html-app'){
+    openHtmlApp(item);
+    return;
+  }
+
+  if(item.type === 'folder'){
+    openFolder(item);
+    return;
+  }
+
+  if(item.type === 'txt'){
+    openTextFile(item);
+    return;
+  }
+
+  if(item.type === 'game'){
+    openGameWindow(item.id, item.label);
+  }
+}
+
 function updateDesktopClock(){
   const el = document.getElementById('topPanelClock');
   if(!el) return;
@@ -476,3 +504,19 @@ function initDesktop(){
     resizeTimer = window.setTimeout(renderDesktopIcons, 120);
   });
 }
+
+
+
+// desktop-html-app-delegated-open
+document.addEventListener('dblclick', event => {
+  const icon = event.target.closest?.('.desktop-icon[data-item-id]');
+  if(!icon) return;
+
+  const item = resolveDesktopItemById(icon.dataset.itemId);
+  if(item?.type === 'html-app'){
+    event.preventDefault();
+    event.stopPropagation();
+    openHtmlApp(item);
+  }
+});
+

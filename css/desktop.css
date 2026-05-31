@@ -654,3 +654,36 @@
   box-shadow:none !important;
   background:transparent !important;
 }
+
+/* Final duck full icon no box */
+.desktop-duck-app-icon{
+  width:66px !important;
+  height:66px !important;
+  display:grid !important;
+  place-items:center !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  overflow:visible !important;
+  transition:transform .22s ease !important;
+}
+
+.desktop-duck-app-icon img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  display:block !important;
+  opacity:.86 !important;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.18)) !important;
+  pointer-events:none !important;
+  user-select:none !important;
+  -webkit-user-drag:none !important;
+}
+
+.desktop-icon:hover .desktop-duck-app-icon,
+.desktop-icon.selected .desktop-duck-app-icon{
+  transform:translateY(-2px) scale(1.04) !important;
+  background:transparent !important;
+}
