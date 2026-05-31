@@ -85,36 +85,57 @@ window.OS_DATA = {
             {
               "id": "paisagens-naturais",
               "label": "Paisagens Naturais",
-              "type": "project",
-              "assets": [
-                "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/arvore.jpg",
-                "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/barragem 2.jpg",
-                "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/barragem 3.jpg",
-                "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/barragem 4.jpg",
-                "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/barragem.jpg",
-                "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/fonte.jpg"
+              "type": "folder",
+              "files": [
+                {
+                  "id": "paisagens-naturais",
+                  "label": "Paisagens Naturais",
+                  "type": "project",
+                  "assets": [
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/arvore.jpg",
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/barragem 2.jpg",
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/barragem 3.jpg",
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/barragem 4.jpg",
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/barragem.jpg",
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/paisagens-naturais/fonte.jpg"
+                  ]
+                }
               ]
             },
             {
               "id": "arquitetura-e-cidade",
               "label": "Arquitetura e Cidade",
-              "type": "project",
-              "assets": [
-                "assets/portfolio/fotografia/registro-urbano-e-natural/arquitetura-e-cidade/forum.jpg",
-                "assets/portfolio/fotografia/registro-urbano-e-natural/arquitetura-e-cidade/igreja.jpg",
-                "assets/portfolio/fotografia/registro-urbano-e-natural/arquitetura-e-cidade/igreja 2.jpg",
-                "assets/portfolio/fotografia/registro-urbano-e-natural/arquitetura-e-cidade/matriz (4).jpg"
+              "type": "folder",
+              "files": [
+                {
+                  "id": "arquitetura-e-cidade",
+                  "label": "Arquitetura e Cidade",
+                  "type": "project",
+                  "assets": [
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/arquitetura-e-cidade/forum.jpg",
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/arquitetura-e-cidade/igreja.jpg",
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/arquitetura-e-cidade/igreja 2.jpg",
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/arquitetura-e-cidade/matriz (4).jpg"
+                  ]
+                }
               ]
             },
             {
               "id": "patrimonio-e-turismo",
               "label": "Patrimônio e Turismo",
-              "type": "project",
-              "assets": [
-                "assets/portfolio/fotografia/registro-urbano-e-natural/patrimonio-e-turismo/cristo.jpg",
-                "assets/portfolio/fotografia/registro-urbano-e-natural/patrimonio-e-turismo/cristo 2.jpg",
-                "assets/portfolio/fotografia/registro-urbano-e-natural/patrimonio-e-turismo/cristo 3.jpg",
-                "assets/portfolio/fotografia/registro-urbano-e-natural/patrimonio-e-turismo/fontana (3).jpg"
+              "type": "folder",
+              "files": [
+                {
+                  "id": "patrimonio-e-turismo",
+                  "label": "Patrimônio e Turismo",
+                  "type": "project",
+                  "assets": [
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/patrimonio-e-turismo/cristo.jpg",
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/patrimonio-e-turismo/cristo 2.jpg",
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/patrimonio-e-turismo/cristo 3.jpg",
+                    "assets/portfolio/fotografia/registro-urbano-e-natural/patrimonio-e-turismo/fontana (3).jpg"
+                  ]
+                }
               ]
             }
           ]
@@ -143,26 +164,33 @@ window.OS_DATA = {
         {
           "id": "zoologico",
           "label": "Zoológico",
-          "type": "project",
-          "assets": [
-            "assets/portfolio/fotografia/zoologico/_MG_5427.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5432.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5449.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5452.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5456.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5464.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5467.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5468.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5469.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5471.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5474.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5476.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5480.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5482.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5484.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5488.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5491.jpg",
-            "assets/portfolio/fotografia/zoologico/_MG_5499.jpg"
+          "type": "folder",
+          "files": [
+            {
+              "id": "zoologico",
+              "label": "Zoológico",
+              "type": "project",
+              "assets": [
+                "assets/portfolio/fotografia/zoologico/_MG_5427.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5432.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5449.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5452.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5456.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5464.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5467.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5468.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5469.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5471.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5474.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5476.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5480.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5482.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5484.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5488.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5491.jpg",
+                "assets/portfolio/fotografia/zoologico/_MG_5499.jpg"
+              ]
+            }
           ]
         }
       ]
@@ -175,15 +203,15 @@ window.OS_DATA = {
       "files": [
         {
           "id": "edicao",
-          "label": "edição",
-          "type": "folder-file",
-          "path": "content/portfolio/videos/edicao.html"
+          "label": "Edição",
+          "type": "folder",
+          "files": []
         },
         {
           "id": "motion",
-          "label": "motion",
-          "type": "folder-file",
-          "path": "content/portfolio/videos/motion.html"
+          "label": "Motion",
+          "type": "folder",
+          "files": []
         }
       ]
     },
