@@ -144,12 +144,28 @@ function openHtmlApp(item){
   const url = item.appPath || item.projectPath || item.path;
   const fallbackUrl = item.fallbackAppPath || '';
   const html = createBrowserFrameHTML(item.label, url, fallbackUrl);
-  const win = createWindow({title:item.label, html, kind:'default', x:Math.round(window.innerWidth*.06), y:Math.round(window.innerHeight*.04)});
+
+  const win = createWindow({
+    title:item.label,
+    html,
+    kind:'default',
+    x:Math.round(window.innerWidth * .06),
+    y:Math.round(window.innerHeight * .04)
+  });
+
   win.classList.add('project-browser-window', 'resizable-window');
+
+  if(item.id === 'ranking' || item.id === 'ranking-exe' || item.label === 'ranking' || item.label === 'ranking.exe'){
+    win.classList.add('ranking-app-window');
+  }
+
   const frame = win.querySelector('.project-browser-frame');
   if(frame && fallbackUrl){
-    frame.addEventListener('error', () => { frame.src = fallbackUrl; }, { once:true });
+    frame.addEventListener('error', () => {
+      frame.src = fallbackUrl;
+    }, { once:true });
   }
+
   if(typeof enableWindowResize === 'function') enableWindowResize(win);
 }
 
@@ -159,13 +175,12 @@ function escapeHTML(value){
 
 function portfolioFolderItemIconMarkup(){
   return `
-    <span class="portfolio-window-folder-icon" aria-hidden="true">
-      <svg class="portfolio-window-folder-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
-        <path class="portfolio-window-folder-back" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
-        <path class="portfolio-window-folder-front" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
+    <span class="portfolio-folder-icon-fixed" aria-hidden="true">
+      <svg class="portfolio-folder-svg-fixed" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path class="portfolio-folder-back-fixed" fill="rgba(112,126,142,.92)" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
+        <path class="portfolio-folder-front-fixed" fill="rgba(229,236,244,.94)" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
       </svg>
-    </span>
-  `;
+    </span>`;
 }
 
 function portfolioProjectIconMarkup(item){
@@ -178,28 +193,12 @@ function portfolioProjectIconMarkup(item){
 
 function buildPortfolioBreadcrumb(path=[]){
   if(!path.length) return '';
-
-  const canGoBack = path.length > 2;
-
-  return `
-    <nav class="portfolio-breadcrumb" aria-label="Caminho da pasta">
-      <button type="button" class="portfolio-back-button" data-folder-back ${canGoBack ? '' : 'disabled'} aria-label="Voltar">
-        ‹ Voltar
-      </button>
-
-      <div class="portfolio-breadcrumb-path">
-        ${path.map((item, index) => {
-          const isLast = index === path.length - 1;
-          return `
-            <button type="button" class="portfolio-breadcrumb-item ${isLast ? 'is-current' : ''}" data-breadcrumb-index="${index}">
-              ${index === 0 ? 'Portfólio' : escapeHTML(item.label)}
-            </button>
-            ${isLast ? '' : '<span class="portfolio-breadcrumb-separator">/</span>'}
-          `;
-        }).join('')}
-      </div>
-    </nav>
-  `;
+  return `<nav class="portfolio-breadcrumb" aria-label="Caminho da pasta">
+    ${path.map((item, index) => {
+      const isLast = index === path.length - 1;
+      return `<button type="button" class="portfolio-breadcrumb-item ${isLast ? 'is-current' : ''}" data-breadcrumb-index="${index}">${index === 0 ? 'Portfólio' : escapeHTML(item.label)}</button>${isLast ? '' : '<span class="portfolio-breadcrumb-separator">/</span>'}`;
+    }).join('')}
+  </nav>`;
 }
 
 function buildProjectGalleryHTML(project, path=[]){
@@ -226,18 +225,6 @@ function renderFolderContent(win, folder, path){
   const title = win.querySelector('.window-title, [data-window-title]');
   if(title) title.textContent = folder.label;
 
-  const backButton = win.querySelector('[data-folder-back]');
-  if(backButton){
-    backButton.addEventListener('click', () => {
-      if(path.length <= 2) return;
-      const nextPath = path.slice(0, -1);
-      const previous = nextPath[nextPath.length - 1];
-      if(previous?.folder){
-        renderFolderContent(win, previous.folder, nextPath);
-      }
-    });
-  }
-
   win.querySelectorAll('[data-breadcrumb-index]').forEach(btn => {
     btn.addEventListener('click', () => {
       const index = Number(btn.dataset.breadcrumbIndex);
@@ -260,39 +247,6 @@ function renderFolderContent(win, folder, path){
   });
 }
 
-function renderProjectContent(win, project, path){
-  const body = win.querySelector('.window-body');
-  if(!body) return;
-
-  body.innerHTML = buildProjectGalleryHTML(project, path);
-
-  const title = win.querySelector('.window-title, [data-window-title]');
-  if(title) title.textContent = project.label;
-
-  const backButton = win.querySelector('[data-folder-back]');
-  if(backButton){
-    backButton.addEventListener('click', () => {
-      if(path.length <= 2) return;
-      const nextPath = path.slice(0, -1);
-      const previous = nextPath[nextPath.length - 1];
-      if(previous?.folder){
-        renderFolderContent(win, previous.folder, nextPath);
-      }
-    });
-  }
-
-  win.querySelectorAll('[data-breadcrumb-index]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const index = Number(btn.dataset.breadcrumbIndex);
-      const target = path[index];
-
-      if(target?.folder && !btn.classList.contains('is-current')){
-        renderFolderContent(win, target.folder, path.slice(0, index + 1));
-      }
-    });
-  });
-}
-
 async function openPortfolioFolderItem(file, currentWin=null, path=[]){
   if(file.type === 'folder'){
     if(currentWin){
@@ -303,14 +257,7 @@ async function openPortfolioFolderItem(file, currentWin=null, path=[]){
     return;
   }
   if(file.type === 'project'){
-    const nextPath = [...path, { label:file.label, folder:null }];
-
-    if(currentWin){
-      renderProjectContent(currentWin, file, nextPath);
-    }else{
-      openPortfolioProject(file, nextPath);
-    }
-
+    openPortfolioProject(file, [...path, { label:file.label, folder:null }]);
     return;
   }
   if(file.type === 'html-project' || file.type === 'exe-app' || file.projectPath || file.appPath){

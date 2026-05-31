@@ -1561,227 +1561,53 @@
   background:#0b0d12 !important;
 }
 
-/* FIX: visible icons inside portfolio windows */
-.portfolio-folder-file{
-  background:transparent !important;
-  border:0 !important;
-  box-shadow:none !important;
-  overflow:visible !important;
+/* Ranking fullscreen fix */
+.os-window.ranking-app-window{
+  width:min(1240px, calc(100vw - 72px)) !important;
+  height:min(860px, calc(100vh - 72px)) !important;
+  min-width:520px !important;
+  min-height:360px !important;
 }
 
-.portfolio-folder-file > span,
-.portfolio-folder-file .portfolio-window-folder-icon,
-.portfolio-folder-file .portfolio-project-thumb{
-  display:block !important;
-  visibility:visible !important;
-  opacity:1 !important;
+.os-window.ranking-app-window .window-body{
+  padding:0 !important;
+  overflow:hidden !important;
 }
 
-.portfolio-window-folder-icon{
-  width:84px !important;
-  height:66px !important;
-  display:block !important;
-  margin:0 auto 8px !important;
-  position:relative !important;
-  z-index:2 !important;
-  perspective:720px !important;
-  transform-style:preserve-3d !important;
-  filter:drop-shadow(0 11px 18px rgba(0,0,0,.22)) !important;
-  transition:transform .24s ease, filter .24s ease !important;
-  pointer-events:none !important;
-}
-
-.portfolio-window-folder-svg{
+.os-window.ranking-app-window .project-browser-content,
+.os-window.ranking-app-window .project-browser-frame{
   width:100% !important;
   height:100% !important;
+  min-height:100% !important;
   display:block !important;
-  overflow:visible !important;
-}
-
-.portfolio-window-folder-back,
-.portfolio-window-folder-front{
-  stroke:none !important;
-  transform-box:fill-box !important;
-  transform-origin:center center !important;
-  transition:transform .30s cubic-bezier(.2,.8,.2,1), fill .30s ease !important;
-}
-
-.portfolio-window-folder-back{
-  fill:rgba(112,126,142,.94) !important;
-  transform:translateZ(-3px) !important;
-}
-
-.portfolio-window-folder-front{
-  fill:rgba(229,236,244,.96) !important;
-  transform:translateZ(8px) !important;
-}
-
-.portfolio-folder-file:hover .portfolio-window-folder-icon,
-.portfolio-folder-file.selected .portfolio-window-folder-icon{
-  transform:translateY(-2px) scale(1.05) !important;
-  filter:drop-shadow(0 13px 22px rgba(0,0,0,.26)) !important;
-}
-
-.portfolio-folder-file:hover .portfolio-window-folder-front,
-.portfolio-folder-file.selected .portfolio-window-folder-front{
-  transform:translateY(5px) translateZ(16px) rotateX(-24deg) !important;
-  fill:rgba(246,249,253,.98) !important;
-}
-
-.portfolio-folder-file:hover .portfolio-window-folder-back,
-.portfolio-folder-file.selected .portfolio-window-folder-back{
-  fill:rgba(106,120,137,.98) !important;
-}
-
-/* neutraliza regras antigas que escondiam spans diferentes */
-.portfolio-folder-file > span:not(.portfolio-folder-item-icon),
-.portfolio-folder-file > span:not(.portfolio-html-file-icon):not(.portfolio-folder-item-icon),
-.portfolio-folder-file > span:not(.portfolio-folder-icon-fixed){
-  display:block !important;
-}
-
-/* melhora a leitura dos nomes dentro das janelas */
-.portfolio-folder-file small{
-  display:block !important;
-  visibility:visible !important;
-  opacity:1 !important;
-  max-width:142px !important;
-  margin:0 auto !important;
-  padding:3px 7px !important;
-  border-radius:8px !important;
-  font-size:14px !important;
-  line-height:1.2 !important;
-  font-weight:900 !important;
-  letter-spacing:-.01em !important;
-  text-align:center !important;
-  color:rgba(255,255,255,.98) !important;
-  text-shadow:
-    0 1px 2px rgba(0,0,0,.95),
-    0 0 6px rgba(0,0,0,.90),
-    0 0 12px rgba(0,0,0,.65) !important;
-}
-
-/* Portfolio inner items without visible boxes + back button */
-.portfolio-folder-file{
-  background:transparent !important;
   border:0 !important;
-  border-radius:0 !important;
-  box-shadow:none !important;
-  outline:0 !important;
-  appearance:none !important;
-  -webkit-appearance:none !important;
 }
 
-.portfolio-folder-file::before,
-.portfolio-folder-file::after{
-  display:none !important;
-  content:none !important;
+.os-window.ranking-app-window.maximized,
+.os-window.ranking-app-window.fullscreen,
+.os-window.ranking-app-window.is-fullscreen,
+.os-window.ranking-app-window.window-fullscreen,
+.os-window.ranking-app-window.is-maximized,
+.os-window.ranking-app-window.window-maximized{
+  inset:12px !important;
+  left:12px !important;
+  top:12px !important;
+  right:auto !important;
+  bottom:auto !important;
+  width:calc(100vw - 24px) !important;
+  height:calc(100vh - 24px) !important;
+  max-width:none !important;
+  max-height:none !important;
+  transform:none !important;
 }
 
-.portfolio-folder-file:hover,
-.portfolio-folder-file.selected,
-.portfolio-folder-file:focus,
-.portfolio-folder-file:focus-visible{
-  background:transparent !important;
-  border:0 !important;
-  border-radius:0 !important;
-  box-shadow:none !important;
-  outline:0 !important;
-}
-
-/* Remove qualquer caixa interna antiga que tenha ficado visível */
-.portfolio-folder-file > span,
-.portfolio-folder-file .portfolio-window-folder-icon,
-.portfolio-folder-file .portfolio-folder-icon-fixed,
-.portfolio-folder-file .portfolio-project-thumb{
-  border-radius:0 !important;
-}
-
-.portfolio-project-thumb{
-  border:0 !important;
-  box-shadow:none !important;
-  background:transparent !important;
-}
-
-/* Ícones de pasta continuam arredondados só no SVG, não no botão/box */
-.portfolio-window-folder-icon{
-  background:transparent !important;
-  border:0 !important;
-  border-radius:0 !important;
-  box-shadow:none !important;
-}
-
-.portfolio-breadcrumb{
-  display:flex !important;
-  align-items:center !important;
-  gap:12px !important;
-  padding:18px 22px 8px !important;
-}
-
-.portfolio-breadcrumb-path{
-  display:flex !important;
-  align-items:center !important;
-  gap:8px !important;
-  min-width:0 !important;
-  overflow-x:auto !important;
-}
-
-.portfolio-back-button{
-  flex:0 0 auto !important;
-  height:32px !important;
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  padding:0 12px !important;
-  border:1px solid rgba(255,255,255,.10) !important;
-  border-radius:999px !important;
-  background:rgba(255,255,255,.065) !important;
-  color:rgba(255,255,255,.92) !important;
-  font:900 13px/1 var(--font-mono, "IBM Plex Mono", monospace) !important;
-  cursor:pointer !important;
-  text-shadow:0 1px 2px rgba(0,0,0,.85) !important;
-  backdrop-filter:blur(10px) !important;
-  -webkit-backdrop-filter:blur(10px) !important;
-}
-
-.portfolio-back-button:hover:not(:disabled){
-  background:rgba(255,255,255,.12) !important;
-  color:#fff !important;
-}
-
-.portfolio-back-button:disabled{
-  opacity:.38 !important;
-  cursor:default !important;
-  pointer-events:none !important;
-}
-
-.portfolio-breadcrumb-item{
-  font-size:14px !important;
-}
-
-.portfolio-folder-file small{
-  font-size:14px !important;
-}
-
-/* Portfolio final files open inside the same window */
-.portfolio-inline-file-content{
-  width:100%;
-  max-width:100%;
-  font-size:18px !important;
-  line-height:1.75 !important;
-}
-
-.portfolio-inline-file-content .content-section,
-.portfolio-inline-file-content article,
-.portfolio-inline-file-content p,
-.portfolio-inline-file-content li{
-  font-size:18px !important;
-  line-height:1.75 !important;
-}
-
-.portfolio-inline-file-content h1,
-.portfolio-inline-file-content h2,
-.portfolio-inline-file-content h3{
-  font-size:clamp(24px, 2.6vw, 38px) !important;
-  line-height:1.15 !important;
+.os-window.ranking-app-window.maximized .window-body,
+.os-window.ranking-app-window.fullscreen .window-body,
+.os-window.ranking-app-window.is-fullscreen .window-body,
+.os-window.ranking-app-window.window-fullscreen .window-body,
+.os-window.ranking-app-window.is-maximized .window-body,
+.os-window.ranking-app-window.window-maximized .window-body{
+  height:calc(100% - 44px) !important;
+  padding:0 !important;
+  overflow:hidden !important;
 }

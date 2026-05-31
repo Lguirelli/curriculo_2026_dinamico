@@ -133,3 +133,24 @@ sliders.forEach((slider) => {
 });
 
 renderPodium();
+
+
+/* rankingPortfolioFullscreenFix */
+(function(){
+  function enterFullscreen(){
+    var docEl = document.documentElement;
+    if(docEl.requestFullscreen) docEl.requestFullscreen().catch(function(){});
+    else if(docEl.webkitRequestFullscreen) docEl.webkitRequestFullscreen();
+  }
+
+  document.addEventListener('click', function(event){
+    var el = event.target.closest('button, a, [role="button"]');
+    if(!el) return;
+
+    var label = ((el.textContent || '') + ' ' + (el.getAttribute('aria-label') || '') + ' ' + (el.className || '') + ' ' + (el.id || '')).toLowerCase();
+
+    if(label.includes('tela cheia') || label.includes('fullscreen') || label.includes('full-screen') || label.includes('expandir')){
+      enterFullscreen();
+    }
+  }, true);
+})();

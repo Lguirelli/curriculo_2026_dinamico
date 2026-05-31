@@ -223,12 +223,13 @@ function renderDesktopIcons(){
       `;
     } else if (item.type === 'exe-app') {
       icon.innerHTML = `
-        <span class="desktop-exe-app-icon" aria-hidden="true">
-          <span class="exe-app-screen">EXE</span>
+        <span class="desktop-ranking-app-icon" aria-hidden="true">
+          <img src="assets/icons/ranking-trophy.svg" alt="" draggable="false" />
         </span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
-    } else if (item.type === 'folder') {
+    }
+    else if (item.type === 'folder') {
       icon.innerHTML = `
         <span class="folder-glass-icon desktop-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
   <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />

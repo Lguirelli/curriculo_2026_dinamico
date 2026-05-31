@@ -577,3 +577,33 @@
     linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.05)),
     rgba(8,14,28,.44) !important;
 }
+
+/* Ranking trophy icon */
+.desktop-ranking-app-icon{
+  width:70px !important;
+  height:70px !important;
+  display:grid !important;
+  place-items:center !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+  transition:transform .22s ease !important;
+}
+
+.desktop-ranking-app-icon img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  display:block !important;
+  opacity:.92 !important;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.18)) !important;
+  pointer-events:none !important;
+  user-select:none !important;
+  -webkit-user-drag:none !important;
+}
+
+.desktop-icon:hover .desktop-ranking-app-icon,
+.desktop-icon.selected .desktop-ranking-app-icon{
+  transform:translateY(-2px) scale(1.04) !important;
+}

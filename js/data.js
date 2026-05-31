@@ -224,10 +224,10 @@ window.OS_DATA = {
       "fallbackAppPath": "content/apps/landing-page-editavel/index.html"
     },
     {
-      "id": "ranking-exe",
-      "label": "ranking.exe",
+      "id": "ranking",
+      "label": "ranking",
       "type": "exe-app",
-      "icon": "exe",
+      "icon": "trophy",
       "appPath": "content/apps/ranking/index.html"
     }
   ],
