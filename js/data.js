@@ -222,6 +222,13 @@ window.OS_DATA = {
       "icon": "duck",
       "appPath": "content/portfolio/design/landing-page-editavel/index.html",
       "fallbackAppPath": "content/apps/landing-page-editavel/index.html"
+    },
+    {
+      "id": "ranking-exe",
+      "label": "ranking.exe",
+      "type": "exe-app",
+      "icon": "exe",
+      "appPath": "content/apps/ranking/index.html"
     }
   ],
   "games": [

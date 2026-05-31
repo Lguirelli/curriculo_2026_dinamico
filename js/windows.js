@@ -244,7 +244,7 @@ async function openPortfolioFolderItem(file, currentWin=null, path=[]){
     openPortfolioProject(file, [...path, { label:file.label, folder:null }]);
     return;
   }
-  if(file.type === 'html-project' || file.projectPath || file.appPath){
+  if(file.type === 'html-project' || file.type === 'exe-app' || file.projectPath || file.appPath){
     openHtmlApp({label:file.label, appPath:file.appPath || file.projectPath || file.path, fallbackAppPath:file.fallbackAppPath || ''});
     return;
   }
