@@ -432,3 +432,270 @@
   place-items:center;
   text-align:center;
 }
+
+/* Mobile search/clock header replacing Lorenzo card */
+.mobile-search-clock{
+  position:relative;
+  z-index:1;
+  display:grid;
+  gap:12px;
+  margin:14px 0 22px;
+}
+
+.mobile-home-clock{
+  min-height:84px;
+  display:grid;
+  align-content:center;
+  gap:2px;
+  padding:18px 20px;
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255,255,255,.10), transparent 32%),
+    var(--surface-strong);
+  border:1px solid var(--surface-border);
+  box-shadow:var(--shadow-lg);
+  backdrop-filter:var(--blur) saturate(128%);
+  -webkit-backdrop-filter:var(--blur) saturate(128%);
+}
+
+.mobile-home-clock span{
+  font-size:42px;
+  line-height:.95;
+  font-weight:900;
+  letter-spacing:-.06em;
+  color:var(--text-1);
+  text-shadow:0 8px 22px rgba(0,0,0,.28);
+}
+
+.mobile-home-clock small{
+  font-size:13px;
+  line-height:1.2;
+  font-weight:800;
+  color:var(--text-2);
+  text-transform:capitalize;
+}
+
+.mobile-search-form{
+  height:48px;
+  display:grid;
+  grid-template-columns:20px 1fr;
+  align-items:center;
+  gap:10px;
+  padding:0 16px;
+  border-radius:18px;
+  background:rgba(255,255,255,.075);
+  border:1px solid var(--surface-border);
+  box-shadow:0 14px 34px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter:blur(16px) saturate(126%);
+  -webkit-backdrop-filter:blur(16px) saturate(126%);
+}
+
+.mobile-search-form img{
+  width:18px;
+  height:18px;
+  opacity:.86;
+  filter:brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,.18));
+}
+
+.mobile-search-form input{
+  width:100%;
+  height:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:var(--text-1);
+  font:800 14px/1 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+.mobile-search-form input::placeholder{
+  color:var(--text-3);
+}
+
+.mobile-search-results{
+  display:none;
+  gap:8px;
+}
+
+.mobile-search-results.active{
+  display:grid;
+}
+
+.mobile-search-results button,
+.mobile-search-empty{
+  min-height:48px;
+  display:grid;
+  align-content:center;
+  gap:2px;
+  padding:10px 14px;
+  border-radius:16px;
+  text-align:left;
+  background:rgba(255,255,255,.075);
+  border:1px solid var(--surface-border);
+  color:var(--text-1);
+  box-shadow:0 10px 22px rgba(0,0,0,.14);
+}
+
+.mobile-search-results strong{
+  font-size:13px;
+  line-height:1.15;
+}
+
+.mobile-search-results small{
+  font-size:11px;
+  line-height:1.1;
+  color:var(--text-3);
+}
+
+/* Global palette for dark SVG contact icons on mobile */
+.mobile-contact-app span,
+.mobile-image-app span,
+.mobile-app.folder span,
+.mobile-app:not(.mobile-folder-app):not(.mobile-image-app):not(.mobile-contact-app) span{
+  background:
+    linear-gradient(160deg, var(--highlight-white), rgba(255,255,255,.055)),
+    var(--surface) !important;
+  border:1px solid var(--surface-border) !important;
+  box-shadow:
+    0 12px 24px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.10) !important;
+  backdrop-filter:blur(14px) saturate(126%) !important;
+  -webkit-backdrop-filter:blur(14px) saturate(126%) !important;
+}
+
+.mobile-contact-app span img,
+.mobile-image-app span img{
+  width:76% !important;
+  height:76% !important;
+  object-fit:contain !important;
+  filter:
+    brightness(0) invert(1)
+    drop-shadow(0 0 10px rgba(255,255,255,.20))
+    drop-shadow(0 7px 12px rgba(0,0,0,.26)) !important;
+  opacity:.94;
+}
+
+.mobile-image-app[data-mobile-open="landing-page-editavel"] span img,
+.mobile-image-app[data-mobile-open="ranking"] span img{
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.22)) !important;
+}
+
+.mobile-contact-app:active span,
+.mobile-image-app:active span,
+.mobile-app.folder:active span{
+  transform:scale(.96);
+  background:var(--surface-hover) !important;
+}
+
+/* Mobile games fullscreen mode */
+.mobile-app-view.mobile-game-mode{
+  top:34px;
+  bottom:0;
+  padding:0;
+  overflow:hidden;
+}
+
+.mobile-app-view.mobile-game-mode .mobile-app-header{
+  display:none;
+}
+
+.mobile-app-view.mobile-game-mode .mobile-app-content{
+  width:100%;
+  height:100%;
+}
+
+.mobile-game-shell-view{
+  position:relative;
+  width:100%;
+  height:100%;
+  padding:8px;
+  display:grid;
+  place-items:stretch;
+}
+
+.mobile-game-back{
+  position:absolute;
+  z-index:30;
+  left:14px;
+  top:14px;
+  height:32px;
+  padding:0 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(3,8,18,.54);
+  color:var(--text-1);
+  font-weight:900;
+  box-shadow:0 10px 24px rgba(0,0,0,.20);
+  backdrop-filter:blur(12px) saturate(120%);
+  -webkit-backdrop-filter:blur(12px) saturate(120%);
+}
+
+.mobile-game-shell-view .game-box{
+  width:100% !important;
+  height:100% !important;
+  min-height:0 !important;
+}
+
+.mobile-game-shell-view .game-stage{
+  width:100% !important;
+  height:100% !important;
+  min-height:0 !important;
+  border-radius:24px !important;
+}
+
+.mobile-game-shell-view .game-canvas{
+  touch-action:none !important;
+}
+
+.mobile-game-shell-view .game-snake .game-stage{
+  display:grid !important;
+  place-items:center !important;
+  padding:8px !important;
+}
+
+.mobile-game-shell-view .game-pong .game-stage{
+  padding:8px !important;
+  gap:8px !important;
+}
+
+.mobile-game-shell-view .game-pong .game-hud-pong{
+  width:min(230px, 68%) !important;
+  height:38px !important;
+  flex-basis:38px !important;
+}
+
+.mobile-game-shell-view .game-pong .game-hud-pong span{
+  font-size:22px !important;
+}
+
+.mobile-game-shell-view .game-overlay-card{
+  width:min(330px, 86%) !important;
+  padding:22px 20px !important;
+}
+
+@media(max-width:420px){
+  .mobile-page{
+    padding:18px 16px;
+  }
+
+  .mobile-home-clock{
+    min-height:76px;
+    padding:16px 18px;
+  }
+
+  .mobile-home-clock span{
+    font-size:36px;
+  }
+
+  .mobile-app-grid{
+    gap:16px 10px;
+  }
+
+  .mobile-game-shell-view{
+    padding:6px;
+  }
+
+  .mobile-game-back{
+    left:12px;
+    top:12px;
+  }
+}

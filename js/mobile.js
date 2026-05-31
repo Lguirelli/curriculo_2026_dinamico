@@ -17,12 +17,14 @@ const MOBILE_STATE = {
 function showMobileHome(){
   const p = pages();
   MOBILE_STATE.stack = [];
+  p.app.classList.remove('mobile-game-mode');
   p.home.classList.add('active');
   p.app.classList.remove('active');
 }
 
 function showMobileApp(title, html){
   const p = pages();
+  p.app.classList.remove('mobile-game-mode');
   document.getElementById('mobileAppTitle').textContent = title;
   document.getElementById('mobileAppContent').innerHTML = html;
   p.home.classList.remove('active');
@@ -216,6 +218,7 @@ function mobileGoBack(){
   else if(previous.type === 'project') renderMobileProject(previous.project, previous.path);
   else if(previous.type === 'app') renderMobileIframeApp(previous.item);
   else if(previous.type === 'file') loadMobileFile(previous.title, previous.path);
+  else if(previous.type === 'mobile-games-list') openMobileGames();
   else showMobileHome();
 }
 
@@ -276,6 +279,97 @@ function openMobileContact(type){
   window.open(href, '_blank', 'noopener,noreferrer');
 }
 
+function flattenMobileSearchItems(items, group = ''){
+  return items.flatMap(item => {
+    const label = item.label || item.id || '';
+    const currentGroup = group ? `${group} / ${label}` : label;
+
+    if(item.type === 'folder' && Array.isArray(item.files)){
+      return [
+        { label, group, item },
+        ...flattenMobileSearchItems(item.files, currentGroup)
+      ];
+    }
+
+    return [{ label, group, item }];
+  });
+}
+
+function getMobileSearchItems(){
+  return [
+    ...flattenMobileSearchItems(OS_DATA.portfolio || [], 'Portfólio'),
+    ...(OS_DATA.curriculum || []).map(item => ({ label:item.label, group:'Notas', item })),
+    ...(OS_DATA.games || []).map(item => ({ label:item.label, group:'Jogos', item:{...item, type:'game'} }))
+  ];
+}
+
+function renderMobileSearchResults(query){
+  const resultsEl = document.getElementById('mobileSearchResults');
+  if(!resultsEl) return;
+
+  const q = String(query || '').trim().toLowerCase();
+  if(!q){
+    resultsEl.innerHTML = '';
+    resultsEl.classList.remove('active');
+    return;
+  }
+
+  const results = getMobileSearchItems()
+    .filter(entry => `${entry.label} ${entry.group}`.toLowerCase().includes(q))
+    .slice(0, 6);
+
+  if(!results.length){
+    resultsEl.innerHTML = `<span class="mobile-search-empty">Nada encontrado</span>`;
+    resultsEl.classList.add('active');
+    return;
+  }
+
+  resultsEl.innerHTML = results.map((entry, index) => `
+    <button type="button" data-mobile-search-result="${index}">
+      <strong>${mobileEscape(entry.label)}</strong>
+      <small>${mobileEscape(entry.group)}</small>
+    </button>
+  `).join('');
+
+  resultsEl.classList.add('active');
+
+  resultsEl.querySelectorAll('[data-mobile-search-result]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const entry = results[Number(btn.dataset.mobileSearchResult)];
+      const item = entry?.item;
+      if(!item) return;
+
+      resultsEl.innerHTML = '';
+      resultsEl.classList.remove('active');
+      const input = document.getElementById('mobileSearchInput');
+      if(input) input.value = '';
+      MOBILE_STATE.stack = [{ type:'home' }];
+
+      if(item.type === 'game'){
+        openMobileGames();
+        setTimeout(() => openMobileGame(item.id, item.label), 0);
+        return;
+      }
+
+      if(item.path && !item.type){
+        loadMobileFile(item.label, item.path);
+        return;
+      }
+
+      openMobilePortfolioItem(item, [{ label:'Portfólio', item }]);
+    });
+  });
+}
+
+function updateMobileHeroClock(){
+  const timeEl = document.getElementById('mobileHeroClockTime');
+  const dateEl = document.getElementById('mobileHeroClockDate');
+  const now = new Date();
+
+  if(timeEl) timeEl.textContent = now.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+  if(dateEl) dateEl.textContent = now.toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'long'});
+}
+
 function initMobile(){
   document.querySelectorAll('[data-mobile-open]').forEach(btn => btn.addEventListener('click', () => {
     const id = btn.dataset.mobileOpen;
@@ -313,8 +407,26 @@ function initMobile(){
   document.getElementById('mobileBack')?.addEventListener('click', mobileGoBack);
   document.getElementById('mobileBackTop')?.addEventListener('click', mobileGoBack);
 
+  const searchInput = document.getElementById('mobileSearchInput');
+  const searchForm = document.querySelector('[data-mobile-search-form]');
+
+  if(searchInput){
+    searchInput.addEventListener('input', () => renderMobileSearchResults(searchInput.value));
+  }
+
+  if(searchForm){
+    searchForm.addEventListener('submit', event => {
+      event.preventDefault();
+      renderMobileSearchResults(searchInput?.value || '');
+    });
+  }
+
+  updateMobileHeroClock();
+  setInterval(updateMobileHeroClock, 1000);
+
   const clock = document.getElementById('mobileClock');
   if(clock){
+    clock.textContent = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
     setInterval(() => {
       clock.textContent = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
     }, 1000);

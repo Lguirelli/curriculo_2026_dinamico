@@ -24,7 +24,7 @@ function gameShell(id, label) {
 }
 
 function getGameHint(id) {
-  if (id === 'snake') return 'Setas ou WASD para controlar.';
+  if (id === 'snake') return 'Setas, WASD ou arraste na tela para controlar.';
   if (id === 'mines') return 'Clique para abrir. Botão direito para marcar.';
   if (id === 'pong') return 'Mouse ou toque para controlar.';
   return 'Clique para iniciar.';
@@ -74,8 +74,19 @@ function openGameWindow(id, label) {
 
 function openMobileGame(id, label) {
   const shell = gameShell(id, label);
-  showMobileApp(label, shell.html);
-  setTimeout(() => initGame(id, shell.uid), 40);
+  const p = pages();
+
+  showMobileApp(label, `
+    <div class="mobile-game-shell-view">
+      <button type="button" class="mobile-game-back" data-mobile-stack-back>‹ Voltar</button>
+      ${shell.html}
+    </div>
+  `);
+
+  p.app.classList.add('mobile-game-mode');
+  MOBILE_STATE.stack.push({ type:'mobile-games-list' });
+  bindMobileStackBack();
+  setTimeout(() => initGame(id, shell.uid), 80);
 }
 
 function initGame(id, uid) {
@@ -133,8 +144,10 @@ function fitCanvasToStage(canvas, ratio = 1) {
   const rect = stage.getBoundingClientRect();
   const reservedTop = 0;
   const pad = rect.width < 720 ? 2 : 4;
-  const w = Math.max(260, Math.floor(rect.width - pad * 2));
-  const h = Math.max(220, Math.floor(rect.height - pad * 2 - reservedTop));
+  const minW = rect.width < 420 ? 180 : 260;
+  const minH = rect.height < 420 ? 180 : 220;
+  const w = Math.max(minW, Math.floor(rect.width - pad * 2));
+  const h = Math.max(minH, Math.floor(rect.height - pad * 2 - reservedTop));
 
   if (ratio === 1) {
     const size = Math.min(w, h);
@@ -277,7 +290,7 @@ function initSnake(uid) {
     draw();
 
     if (paused) {
-      showOverlay(uid, 'INICIAR', 'Setas ou WASD para controlar.', 'INICIAR', start);
+      showOverlay(uid, 'INICIAR', 'Setas, WASD ou arraste na tela para controlar.', 'INICIAR', start);
     } else {
       start();
     }
@@ -414,6 +427,34 @@ function initSnake(uid) {
   canvas.addEventListener('keydown', e => {
     changeDirection(e.key);
     e.preventDefault();
+  });
+
+  let touchStart = null;
+
+  canvas.addEventListener('pointerdown', e => {
+    touchStart = { x:e.clientX, y:e.clientY };
+    canvas.setPointerCapture?.(e.pointerId);
+    start();
+  });
+
+  canvas.addEventListener('pointerup', e => {
+    if(!touchStart) return;
+
+    const dx = e.clientX - touchStart.x;
+    const dy = e.clientY - touchStart.y;
+    touchStart = null;
+
+    if(Math.max(Math.abs(dx), Math.abs(dy)) < 18) return;
+
+    if(Math.abs(dx) > Math.abs(dy)){
+      changeDirection(dx > 0 ? 'ArrowRight' : 'ArrowLeft');
+    }else{
+      changeDirection(dy > 0 ? 'ArrowDown' : 'ArrowUp');
+    }
+  });
+
+  canvas.addEventListener('pointercancel', () => {
+    touchStart = null;
   });
 
   window.addEventListener('keydown', e => {
