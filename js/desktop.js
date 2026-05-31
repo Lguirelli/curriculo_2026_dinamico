@@ -305,11 +305,7 @@ function makeDesktopIconInteractive(icon, item){
     e.stopPropagation();
     clearSelection();
     icon.classList.add('selected');
-
-    if(item.type === 'html-app' && !moved){
-      openHtmlApp(item);
-    }
-  });
+});
 
   icon.addEventListener('dblclick', e => {
     e.stopPropagation();
@@ -555,8 +551,10 @@ document.addEventListener('dblclick', event => {
 
 
 
-// landing-html-app-click-fallback
-document.addEventListener('click', event => {
+
+
+// landing-html-app-dblclick-fallback
+document.addEventListener('dblclick', event => {
   const icon = event.target.closest?.('.desktop-icon[data-item-id][data-type="html-app"]');
   if(!icon) return;
 

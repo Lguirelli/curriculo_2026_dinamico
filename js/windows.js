@@ -121,6 +121,67 @@ function makeResizableWindow(win){
   });
 }
 
+
+function attachWindowResizeHandles(win, options = {}){
+  if(!win || win.dataset.resizeHandles === 'true') return;
+  win.dataset.resizeHandles = 'true';
+
+  const minWidth = options.minWidth || 360;
+  const minHeight = options.minHeight || 260;
+  const maxWidth = typeof options.maxWidth === 'function' ? options.maxWidth : () => options.maxWidth || window.innerWidth - 32;
+  const maxHeight = typeof options.maxHeight === 'function' ? options.maxHeight : () => options.maxHeight || window.innerHeight - 32;
+
+  const edges = [
+    ['right', 'resize-edge resize-edge-right'],
+    ['bottom', 'resize-edge resize-edge-bottom'],
+    ['corner', 'resize-edge resize-edge-corner']
+  ];
+
+  edges.forEach(([edge, className]) => {
+    const handle = document.createElement('span');
+    handle.className = className;
+    handle.dataset.resizeEdge = edge;
+    win.appendChild(handle);
+
+    handle.addEventListener('pointerdown', event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const startX = event.clientX;
+      const startY = event.clientY;
+      const startW = win.offsetWidth;
+      const startH = win.offsetHeight;
+
+      handle.setPointerCapture?.(event.pointerId);
+      win.classList.add('is-resizing');
+
+      const onMove = moveEvent => {
+        const dx = moveEvent.clientX - startX;
+        const dy = moveEvent.clientY - startY;
+
+        if(edge === 'right' || edge === 'corner'){
+          const width = Math.max(minWidth, Math.min(maxWidth(), startW + dx));
+          win.style.width = `${width}px`;
+        }
+
+        if(edge === 'bottom' || edge === 'corner'){
+          const height = Math.max(minHeight, Math.min(maxHeight(), startH + dy));
+          win.style.height = `${height}px`;
+        }
+      };
+
+      const onUp = () => {
+        win.classList.remove('is-resizing');
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('pointerup', onUp);
+      };
+
+      window.addEventListener('pointermove', onMove);
+      window.addEventListener('pointerup', onUp, { once:true });
+    });
+  });
+}
+
 async function openTextFile(item){
   const html = await fetchHTML(item.path);
   textWindowOffset = (textWindowOffset + 1) % 6;
@@ -139,12 +200,6 @@ function htmlFileIconMarkup(){
 function createBrowserFrameHTML(title, url, fallbackUrl=''){
   return `
     <section class="project-browser-content">
-      <div class="project-browser-bar">
-        <span class="browser-dot red"></span>
-        <span class="browser-dot yellow"></span>
-        <span class="browser-dot green"></span>
-        <span class="browser-address">${url}</span>
-      </div>
       <iframe class="project-browser-frame" src="${url}" title="${title}" data-fallback-url="${fallbackUrl}"></iframe>
     </section>
   `;
@@ -163,7 +218,23 @@ function openHtmlApp(item){
     y:Math.round(window.innerHeight * .04)
   });
 
-  win.classList.add('project-browser-window');
+  win.classList.add('project-browser-window', 'resizable-window');
+  win.style.width = `${Math.min(1120, Math.max(760, Math.round(window.innerWidth * .72)))}px`;
+  win.style.height = `${Math.min(760, Math.max(520, Math.round(window.innerHeight * .72)))}px`;
+
+  attachWindowResizeHandles(win, {
+    minWidth: 520,
+    minHeight: 360,
+    maxWidth: () => window.innerWidth - 32,
+    maxHeight: () => window.innerHeight - 32
+  });
+
+  const frame = win.querySelector('.project-browser-frame');
+  if(frame && fallbackUrl){
+    frame.addEventListener('error', () => {
+      frame.src = fallbackUrl;
+    }, { once:true });
+  }
 }
 
 function portfolioFolderItemIconMarkup(){
