@@ -68,6 +68,32 @@ window.OS_DATA = {
               ]
             }
           ]
+        },
+        {
+          "id": "social-media",
+          "label": "Social Media",
+          "type": "folder",
+          "files": [
+            {
+              "id": "posts-prego-e-parafuso",
+              "label": "Posts Prego e Parafuso",
+              "type": "project",
+              "assets": [
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-01.png",
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-02.png",
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-03.png",
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-04.png",
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-05.png",
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-06.png",
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-07.png",
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-08.png",
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-09.png",
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-10.png",
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-11.png",
+                "assets/portfolio/design/social-media/posts-prego-e-parafuso/post-12.png"
+              ]
+            }
+          ]
         }
       ]
     },

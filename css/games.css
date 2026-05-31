@@ -870,70 +870,48 @@
   }
 }
 
-/* Mobile playable game overrides */
-.mobile-app-view.mobile-game-mode .mobile-game-shell-view .game-box{
-  width:100% !important;
-  height:100% !important;
+/* Mobile game fixes */
+.mobile-game-fullscreen .game-box{
+  flex:1 1 auto !important;
   min-height:0 !important;
 }
 
-.mobile-app-view.mobile-game-mode .mobile-game-shell-view .game-stage{
-  width:100% !important;
+.mobile-game-fullscreen .game-stage{
   height:100% !important;
   min-height:0 !important;
-  border-radius:24px !important;
-  padding:8px !important;
-}
-
-.mobile-app-view.mobile-game-mode .mobile-game-shell-view .game-snake .game-stage{
-  display:grid !important;
-  place-items:center !important;
-}
-
-.mobile-app-view.mobile-game-mode .mobile-game-shell-view .game-snake .game-canvas{
-  max-width:calc(100vw - 28px) !important;
-  max-height:calc(100vh - 100px) !important;
-}
-
-.mobile-app-view.mobile-game-mode .mobile-game-shell-view .game-pong .game-stage{
-  display:flex !important;
-  flex-direction:column !important;
-  justify-content:center !important;
-  align-items:center !important;
-  gap:8px !important;
-}
-
-.mobile-app-view.mobile-game-mode .mobile-game-shell-view .game-pong .game-canvas{
-  width:auto !important;
-  height:auto !important;
-  max-width:calc(100vw - 28px) !important;
-  max-height:calc(100vh - 138px) !important;
-}
-
-.mobile-app-view.mobile-game-mode .mobile-game-shell-view .game-pong .game-hud-pong{
-  order:1 !important;
-  position:relative !important;
-  inset:auto !important;
-  width:min(230px, 68%) !important;
-  height:38px !important;
-  flex:0 0 38px !important;
-}
-
-.mobile-app-view.mobile-game-mode .mobile-game-shell-view .game-pong .game-hud-pong span{
-  font-size:22px !important;
-}
-
-.mobile-app-view.mobile-game-mode .mobile-game-shell-view .game-canvas{
+  border-radius:22px !important;
   touch-action:none !important;
 }
 
-@media(max-width:760px){
-  .mobile-app-view.mobile-game-mode .mobile-game-shell-view .game-stage{
-    border-radius:22px !important;
+.mobile-game-fullscreen .game-canvas{
+  max-width:calc(100% - 8px) !important;
+  max-height:calc(100% - 8px) !important;
+  touch-action:none !important;
+}
+
+@media (max-width:640px){
+  .mobile-game-fullscreen .game-hud{
+    top:10px !important;
+    left:10px !important;
+    right:10px !important;
   }
 
-  .mobile-app-view.mobile-game-mode .mobile-game-shell-view .game-overlay-card{
-    width:min(330px, 86%) !important;
-    padding:22px 20px !important;
+  .mobile-game-fullscreen .game-hud-pong span{
+    min-width:132px !important;
+    font-size:24px !important;
+  }
+
+  .mobile-game-fullscreen .game-overlay-card{
+    width:min(320px, 90%) !important;
+    padding:20px !important;
+    border-radius:20px !important;
+  }
+
+  .mobile-game-fullscreen .game-overlay-card h3{
+    font-size:20px !important;
+  }
+
+  .mobile-game-fullscreen .game-overlay-card p{
+    font-size:12px !important;
   }
 }
