@@ -94,6 +94,30 @@ window.OS_DATA = {
               ]
             }
           ]
+        },
+        {
+          "id": "identidade-visual",
+          "label": "Identidade Visual",
+          "type": "folder",
+          "files": [
+            {
+              "id": "isadora-guirelli-estudo-de-marca",
+              "label": "Isadora Guirelli — Estudo de Marca",
+              "type": "html-project",
+              "appPath": "content/portfolio/design/identidade-visual/isadora-guirelli-estudo-de-marca/index.html",
+              "thumbnail": "content/portfolio/design/identidade-visual/isadora-guirelli-estudo-de-marca/assets/logo-bege-vertical.jpg",
+              "description": "Estudo visual de identidade para especialista em tricologia, com variações de logo, paleta, tipografia, aplicações e direção visual premium, clínica e natural.",
+              "tags": [
+                "Branding",
+                "Identidade Visual",
+                "Logo",
+                "Paleta",
+                "Tipografia",
+                "Tricologia",
+                "Direção Visual"
+              ]
+            }
+          ]
         }
       ]
     },

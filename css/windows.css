@@ -782,3 +782,19 @@
   border-bottom:1px solid rgba(255,255,255,.26);
   border-radius:0 0 4px 0;
 }
+
+
+/* Brand study app window */
+.os-window.brand-position-window{
+  width:min(980px, calc(100vw - 42px));
+  height:min(680px, calc(100vh - var(--topbar) - 42px));
+}
+
+.os-window.brand-position-window .window-body{
+  padding:0;
+  overflow:hidden;
+}
+
+.os-window.brand-position-window .project-browser-frame{
+  background:#f3e8d8;
+}

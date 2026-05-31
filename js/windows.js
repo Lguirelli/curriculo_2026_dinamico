@@ -158,6 +158,10 @@ function openHtmlApp(item){
     win.classList.add('landing-app-window');
   }
 
+  if(item.id === 'isadora-guirelli-estudo-de-marca'){
+    win.classList.add('brand-position-window');
+  }
+
   const frame = win.querySelector('.project-browser-frame');
   if(frame && fallbackUrl){
     frame.addEventListener('error', () => {
@@ -190,7 +194,7 @@ function portfolioFolderItemIconMarkup(){
 }
 
 function portfolioProjectIconMarkup(item){
-  const first = item.assets?.[0] || '';
+  const first = item.assets?.[0] || item.thumbnail || '';
 
   if(first){
     return `
@@ -287,7 +291,7 @@ function renderFolderContent(win, folder, path){
 
   const content = files.length
     ? files.map((file, index) => {
-        const icon = file.type === 'project' ? portfolioProjectIconMarkup(file) : portfolioFolderItemIconMarkup();
+        const icon = (file.type === 'project' || file.thumbnail || file.appPath || file.projectPath) ? portfolioProjectIconMarkup(file) : portfolioFolderItemIconMarkup();
         return `
           <button class="folder-file portfolio-folder-file ${file.type === 'project' ? 'portfolio-project-file' : 'portfolio-subfolder-file'}" type="button" data-file-index="${index}" title="${escapeHTML(file.label)}">
             ${icon}

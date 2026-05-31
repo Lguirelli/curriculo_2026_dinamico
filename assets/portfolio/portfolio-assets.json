@@ -1,5 +1,5 @@
 {
-  "total_arquivos": 44,
+  "total_arquivos": 64,
   "base_path": "assets/portfolio",
   "pastas": [
     {
@@ -29,6 +29,73 @@
                 "design/campanhas-criativas/agente-guia-campanha-visual/Prancheta 4 copiar.jpg",
                 "design/campanhas-criativas/agente-guia-campanha-visual/Prancheta 4.jpg",
                 "design/campanhas-criativas/agente-guia-campanha-visual/Prancheta 1.jpg"
+              ]
+            }
+          ]
+        },
+        {
+          "nome": "Social Media",
+          "slug": "social-media",
+          "projetos": [
+            {
+              "nome": "Posts Prego e Parafuso",
+              "slug": "posts-prego-e-parafuso",
+              "tipo": "projeto",
+              "descricao": "Peças visuais para redes sociais com foco em comunicação comercial, produtos de ferragem, fixação, portas, puxadores e ferramentas.",
+              "tags": [
+                "Social Media",
+                "Design Gráfico",
+                "Posts Estáticos",
+                "Comunicação Comercial",
+                "Materiais de Construção",
+                "Direção de Arte"
+              ],
+              "arquivos": [
+                "design/social-media/posts-prego-e-parafuso/post-01.png",
+                "design/social-media/posts-prego-e-parafuso/post-02.png",
+                "design/social-media/posts-prego-e-parafuso/post-03.png",
+                "design/social-media/posts-prego-e-parafuso/post-04.png",
+                "design/social-media/posts-prego-e-parafuso/post-05.png",
+                "design/social-media/posts-prego-e-parafuso/post-06.png",
+                "design/social-media/posts-prego-e-parafuso/post-07.png",
+                "design/social-media/posts-prego-e-parafuso/post-08.png",
+                "design/social-media/posts-prego-e-parafuso/post-09.png",
+                "design/social-media/posts-prego-e-parafuso/post-10.png",
+                "design/social-media/posts-prego-e-parafuso/post-11.png",
+                "design/social-media/posts-prego-e-parafuso/post-12.png"
+              ]
+            }
+          ]
+        },
+        {
+          "nome": "Identidade Visual",
+          "slug": "identidade-visual",
+          "projetos": [
+            {
+              "nome": "Isadora Guirelli — Estudo de Marca",
+              "slug": "isadora-guirelli-estudo-de-marca",
+              "tipo": "html-project",
+              "descricao": "Estudo visual de identidade para especialista em tricologia, com variações de logo, paleta, tipografia, aplicações e direção visual premium, clínica e natural.",
+              "tags": [
+                "Branding",
+                "Identidade Visual",
+                "Logo",
+                "Paleta",
+                "Tipografia",
+                "Tricologia",
+                "Direção Visual"
+              ],
+              "appPath": "content/portfolio/design/identidade-visual/isadora-guirelli-estudo-de-marca/index.html",
+              "thumbnail": "content/portfolio/design/identidade-visual/isadora-guirelli-estudo-de-marca/assets/logo-bege-vertical.jpg",
+              "arquivos": [
+                "design/identidade-visual/isadora-guirelli-estudo-de-marca/brand-reference.jpg",
+                "design/identidade-visual/isadora-guirelli-estudo-de-marca/logo-bege-horizontal.jpg",
+                "design/identidade-visual/isadora-guirelli-estudo-de-marca/logo-bege-vertical.jpg",
+                "design/identidade-visual/isadora-guirelli-estudo-de-marca/logo-gelo-clinico.jpg",
+                "design/identidade-visual/isadora-guirelli-estudo-de-marca/logo-marinho-clinico.jpg",
+                "design/identidade-visual/isadora-guirelli-estudo-de-marca/logo-oliva-branco.jpg",
+                "design/identidade-visual/isadora-guirelli-estudo-de-marca/logo-verde-branco-variacoes.jpg",
+                "design/identidade-visual/isadora-guirelli-estudo-de-marca/logo-verde-clinico.jpg"
               ]
             }
           ]
