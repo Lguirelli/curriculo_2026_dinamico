@@ -3,6 +3,8 @@ window.OS_DATA = {
     { id:'resumo', label:'Resumo.txt', type:'txt', path:'content/curriculo/resumo.html' },
     { id:'formacao', label:'Formação.txt', type:'txt', path:'content/curriculo/formacao.html' },
     { id:'cursos', label:'Cursos.txt', type:'txt', path:'content/curriculo/cursos.html' },
+    { id:'idiomas', label:'Idiomas.txt', type:'txt', path:'content/curriculo/idiomas.html' },
+    { id:'ferramentas', label:'Ferramentas.txt', type:'txt', path:'content/curriculo/ferramentas.html' },
     { id:'experiencia', label:'Experiência.txt', type:'txt', path:'content/curriculo/experiencia.html' },
     { id:'habilidades', label:'Habilidades.txt', type:'txt', path:'content/curriculo/habilidades.html' }
   ],
@@ -19,7 +21,7 @@ window.OS_DATA = {
       { id:'edicao', label:'edição', type:'folder-file', path:'content/portfolio/videos/edicao.html' },
       { id:'motion', label:'motion', type:'folder-file', path:'content/portfolio/videos/motion.html' }
     ]},
-    { id:'landing-page-editavel', label:'landing page editavel', type:'html-app', icon:'html', appPath:'content/apps/landing-page-editavel/index.html' }
+    { id:'landing-page-editavel', label:'landing page editavel', type:'html-app', icon:'duck', appPath:'content/apps/landing-page-editavel/index.html' }
   ],
   games: [
     { id:'snake', label:'Snake', icon:'assets/icons/game-snake.png' },

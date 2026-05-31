@@ -147,33 +147,6 @@ function portfolioFolderItemIconMarkup(){
   `;
 }
 
-function createBrowserFrameHTML(title, url){
-  return `
-    <section class="project-browser-content">
-      <div class="project-browser-bar">
-        <span class="browser-dot red"></span>
-        <span class="browser-dot yellow"></span>
-        <span class="browser-dot green"></span>
-        <span class="browser-address">${url}</span>
-      </div>
-      <iframe class="project-browser-frame" src="${url}" title="${title}"></iframe>
-    </section>
-  `;
-}
-
-function openHtmlApp(item){
-  const html = createBrowserFrameHTML(item.label, item.appPath || item.projectPath || item.path);
-  const win = createWindow({
-    title:item.label,
-    html,
-    kind:'default',
-    x:Math.round(window.innerWidth * .06),
-    y:Math.round(window.innerHeight * .04)
-  });
-
-  win.classList.add('project-browser-window');
-}
-
 async function openPortfolioFolderItem(file){
   if(file.type === 'html-project' || file.projectPath || file.appPath){
     openHtmlApp({
@@ -194,18 +167,12 @@ async function openPortfolioFolderItem(file){
 }
 
 function openFolder(folder){
-  const files = (folder.files || []).map((file, index) => {
-    const icon = (file.type === 'html-project' || file.type === 'html-file' || file.icon === 'html')
-      ? htmlFileIconMarkup()
-      : portfolioFolderItemIconMarkup();
-
-    return `
-      <button class="folder-file portfolio-folder-file" type="button" data-file-index="${index}" title="${file.label}">
-        ${icon}
-        <small>${file.label}</small>
-      </button>
-    `;
-  }).join('');
+  const files = (folder.files || []).map((file, index) => `
+    <button class="folder-file portfolio-folder-file" type="button" data-file-index="${index}" title="${file.label}">
+      ${portfolioFolderItemIconMarkup()}
+      <small>${file.label}</small>
+    </button>
+  `).join('');
 
   const html = `<div class="folder-grid portfolio-folder-grid">${files}</div>`;
 
@@ -234,4 +201,33 @@ function openFolder(folder){
       await openPortfolioFolderItem(file);
     });
   });
+}
+
+function createBrowserFrameHTML(title, url){
+  return `
+    <section class="project-browser-content">
+      <div class="project-browser-bar">
+        <span class="browser-dot red"></span>
+        <span class="browser-dot yellow"></span>
+        <span class="browser-dot green"></span>
+        <span class="browser-address">${url}</span>
+      </div>
+      <iframe class="project-browser-frame" src="${url}" title="${title}"></iframe>
+    </section>
+  `;
+}
+
+function openHtmlApp(item){
+  const url = item.appPath || item.projectPath || item.path;
+  const html = createBrowserFrameHTML(item.label, url);
+
+  const win = createWindow({
+    title:item.label,
+    html,
+    kind:'default',
+    x:Math.round(window.innerWidth * .06),
+    y:Math.round(window.innerHeight * .04)
+  });
+
+  win.classList.add('project-browser-window');
 }
