@@ -233,7 +233,7 @@ function openHtmlApp(item){
     }, { once:true });
   }
 
-  enableWindowResize(win);
+  if(typeof enableWindowResize === 'function') enableWindowResize(win);
 }
 
 function portfolioFolderItemIconMarkup(){
@@ -275,7 +275,8 @@ function buildTagList(tags=[]){
   return `<div class="portfolio-tags">${tags.map(tag => `<span>${escapeHTML(tag)}</span>`).join('')}</div>`;
 }
 
-function buildProjectGalleryHTML(project){
+function buildProjectGalleryHTML(project, path=[]){
+  const breadcrumb = buildPortfolioBreadcrumb(path, true);
   const images = (project.assets || []).map((src, index) => `
     <figure class="portfolio-gallery-card">
       <img src="${src}" alt="${escapeHTML(project.label)} ${index + 1}" loading="lazy" />
@@ -284,6 +285,7 @@ function buildProjectGalleryHTML(project){
 
   return `
     <section class="portfolio-project-view">
+      ${breadcrumb}
       <header class="portfolio-project-header">
         <span class="section-kicker">Portfólio</span>
         <h2>${escapeHTML(project.label)}</h2>
@@ -295,27 +297,94 @@ function buildProjectGalleryHTML(project){
   `;
 }
 
-function openPortfolioProject(project){
-  const html = buildProjectGalleryHTML(project);
-  const win = createWindow({
-    title:project.label,
-    html,
-    kind:'default',
-    x:Math.round(window.innerWidth * .12),
-    y:Math.round(window.innerHeight * .08)
-  });
+function buildPortfolioBreadcrumb(path=[], includeCurrent=false){
+  if(!path.length) return '';
 
-  win.classList.add('portfolio-project-window');
+  const crumbs = includeCurrent ? path : path.slice(0, -1);
+  if(!crumbs.length) return '';
+
+  return `
+    <nav class="portfolio-breadcrumb" aria-label="Caminho da pasta">
+      ${crumbs.map((item, index) => {
+        const isLast = index === crumbs.length - 1;
+        return `
+          <button type="button" class="portfolio-breadcrumb-item ${isLast ? 'is-current' : ''}" data-breadcrumb-index="${index}">
+            ${index === 0 ? 'Portfólio' : escapeHTML(item.label)}
+          </button>
+          ${isLast ? '' : '<span class="portfolio-breadcrumb-separator">/</span>'}
+        `;
+      }).join('')}
+    </nav>
+  `;
 }
 
-async function openPortfolioFolderItem(file){
+function renderFolderContent(win, folder, path){
+  const files = (folder.files || []).map((file, index) => {
+    const icon = file.type === 'project' ? portfolioProjectIconMarkup(file) : portfolioFolderItemIconMarkup();
+    return `
+      <button class="folder-file portfolio-folder-file ${file.type === 'project' ? 'portfolio-project-file' : ''}" type="button" data-file-index="${index}" title="${escapeHTML(file.label)}">
+        ${icon}
+        <small>${escapeHTML(file.label)}</small>
+      </button>
+    `;
+  }).join('');
+
+  const html = `
+    <div class="portfolio-folder-view">
+      ${buildPortfolioBreadcrumb(path)}
+      <div class="folder-grid portfolio-folder-grid">${files}</div>
+    </div>
+  `;
+
+  const body = win.querySelector('.window-body');
+  if(body) body.innerHTML = html;
+
+  const title = win.querySelector('.window-title, [data-window-title]');
+  if(title) title.textContent = folder.label;
+
+  win.dataset.currentFolderId = folder.id || folder.label;
+
+  win.querySelectorAll('[data-breadcrumb-index]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const index = Number(btn.dataset.breadcrumbIndex);
+      const target = path[index];
+      if(target?.folder){
+        renderFolderContent(win, target.folder, path.slice(0, index + 1));
+      }
+    });
+  });
+
+  win.querySelectorAll('[data-file-index]').forEach(btn => {
+    const file = folder.files[Number(btn.dataset.fileIndex)];
+
+    btn.addEventListener('click', async () => {
+      const selected = btn.classList.contains('selected');
+      win.querySelectorAll('.folder-file').forEach(el => el.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      if(selected){
+        await openPortfolioFolderItem(file, win, path);
+      }
+    });
+
+    btn.addEventListener('dblclick', async () => {
+      await openPortfolioFolderItem(file, win, path);
+    });
+  });
+}
+
+async function openPortfolioFolderItem(file, currentWin=null, path=[]){
   if(file.type === 'folder'){
-    openFolder(file);
+    if(currentWin){
+      renderFolderContent(currentWin, file, [...path, { label:file.label, folder:file }]);
+    }else{
+      openFolder(file, path);
+    }
     return;
   }
 
   if(file.type === 'project'){
-    openPortfolioProject(file);
+    openPortfolioProject(file, path);
     return;
   }
 
@@ -338,18 +407,21 @@ async function openPortfolioFolderItem(file){
   });
 }
 
-function openFolder(folder){
-  const files = (folder.files || []).map((file, index) => {
-    const icon = file.type === 'project' ? portfolioProjectIconMarkup(file) : portfolioFolderItemIconMarkup();
-    return `
-      <button class="folder-file portfolio-folder-file ${file.type === 'project' ? 'portfolio-project-file' : ''}" type="button" data-file-index="${index}" title="${escapeHTML(file.label)}">
-        ${icon}
-        <small>${escapeHTML(file.label)}</small>
-      </button>
-    `;
-  }).join('');
+function openPortfolioProject(project, path=[]){
+  const html = buildProjectGalleryHTML(project, [...path, { label:project.label, folder:null }]);
+  const win = createWindow({
+    title:project.label,
+    html,
+    kind:'default',
+    x:Math.round(window.innerWidth * .12),
+    y:Math.round(window.innerHeight * .08)
+  });
 
-  const html = `<div class="folder-grid portfolio-folder-grid">${files}</div>`;
+  win.classList.add('portfolio-project-window');
+}
+
+function openFolder(folder, existingPath=[]){
+  const html = `<div class="portfolio-folder-view"></div>`;
 
   const win = createWindow({
     title:folder.label,
@@ -359,21 +431,6 @@ function openFolder(folder){
     y:Math.round(window.innerHeight * .12)
   });
 
-  win.querySelectorAll('[data-file-index]').forEach(btn => {
-    const file = folder.files[Number(btn.dataset.fileIndex)];
-
-    btn.addEventListener('click', async () => {
-      const selected = btn.classList.contains('selected');
-      win.querySelectorAll('.folder-file').forEach(el => el.classList.remove('selected'));
-      btn.classList.add('selected');
-
-      if(selected){
-        await openPortfolioFolderItem(file);
-      }
-    });
-
-    btn.addEventListener('dblclick', async () => {
-      await openPortfolioFolderItem(file);
-    });
-  });
+  const path = existingPath.length ? existingPath : [{ label:'Portfólio', folder:{ label:'Portfólio', files:OS_DATA.portfolio } }, { label:folder.label, folder }];
+  renderFolderContent(win, folder, path);
 }
