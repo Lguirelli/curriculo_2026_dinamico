@@ -38,7 +38,7 @@ window.OS_DATA = {
     },
     {
       "id": "habilidades",
-      "label": "Habilidades.txt",
+      "label": "Áreas.txt",
       "type": "txt",
       "path": "content/curriculo/habilidades.html"
     }
