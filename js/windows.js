@@ -15,7 +15,7 @@ async function fetchHTML(path){
 function createWindow({title, html, kind='default', x=null, y=null}){
   const layer = windowsLayer();
   const win = document.createElement('article');
-  win.className = `os-window ${kind === 'text' ? 'text-window' : kind === 'folder-window' ? 'folder-window' : kind === 'game' ? 'game-window' : ''}`;
+  win.className = `os-window ${kind === 'text' ? 'text-window' : kind === 'folder-window' ? 'folder-window' : ''}`;
   win.style.zIndex = ++topZ;
   if(x !== null) win.style.left = `${x}px`;
   if(y !== null) win.style.top = `${y}px`;
@@ -77,7 +77,6 @@ function makeDraggableWindow(win, handle){
 }
 
 function makeResizableWindow(win){
-  if(win.classList.contains('game-window')) return;
   const handles = win.querySelectorAll('[data-resize]');
   handles.forEach(handle=>{
     let startX=0,startY=0,startW=0,startH=0,resizing=false;
@@ -160,6 +159,10 @@ function openHtmlApp(item){
 
   if(item.id === 'isadora-guirelli-estudo-de-marca'){
     win.classList.add('brand-position-window');
+  }
+
+  if(item.id === 'backrooms-landing-3d'){
+    win.classList.add('backrooms-app-window');
   }
 
   const frame = win.querySelector('.project-browser-frame');

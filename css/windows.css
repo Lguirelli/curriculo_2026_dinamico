@@ -4,7 +4,6 @@
 .os-window.text-window{width:360px;height:240px;left:148px;top:82px;border-radius:24px;background:rgba(24,28,39,.32)}
 .os-window.fullscreen{left:18px!important;top:16px!important;width:calc(100vw - 36px)!important;height:calc(100vh - var(--topbar) - 36px)!important;max-width:none;max-height:none;border-radius:30px}
 .os-window.folder-window{width:560px;height:390px}
-.os-window.game-window{width:620px;height:520px}
 @keyframes windowIn{from{opacity:0;transform:scale(.965) translateY(10px);filter:blur(4px)}to{opacity:1;transform:scale(1) translateY(0);filter:blur(0)}}
 .window-header{height:44px;display:flex;align-items:center;gap:8px;padding:0 14px;background:rgba(16,19,28,.26);border-bottom:1px solid rgba(255,255,255,.07);cursor:grab;flex-shrink:0;position:relative}.window-header:active{cursor:grabbing}
 .window-title{font-size:12px;font-weight:750;color:var(--text-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-left:6px;margin-right:auto}.window-control{width:12px;height:12px;border-radius:50%;padding:0;display:block;box-shadow:inset 0 1px 0 rgba(255,255,255,.36),0 2px 5px rgba(0,0,0,.22);transition:transform .12s ease,filter .12s ease}.window-control:hover{transform:scale(1.14);filter:brightness(1.08)}.window-close{background:#ff5f57}.window-full{background:#febc2e}.window-min{background:#28c840}
@@ -299,7 +298,6 @@
   }
 }
 
-.game-window .window-resize-edge{display:none!important;}
 
 .windows-layer{z-index:90}
 
@@ -798,3 +796,19 @@
 .os-window.brand-position-window .project-browser-frame{
   background:#f3e8d8;
 }
+
+/* Backrooms 3D landing page window */
+.os-window.backrooms-app-window{
+  width:min(1180px, calc(100vw - 42px));
+  height:min(760px, calc(100vh - var(--topbar) - 42px));
+}
+
+.os-window.backrooms-app-window .window-body{
+  padding:0;
+  overflow:hidden;
+}
+
+.os-window.backrooms-app-window .project-browser-frame{
+  background:#080807;
+}
+

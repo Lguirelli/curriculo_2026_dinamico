@@ -185,8 +185,7 @@ function clearSelection(){
 function getInitialItems(){
   return [
     ...OS_DATA.curriculum.map((it, i) => ({...it, group: 'curriculo', side: 'left', defaultIndex: i})),
-    ...OS_DATA.portfolio.map((it, i) => ({...it, group: 'portfolio', side: 'right', defaultIndex: i})),
-    ...OS_DATA.games.map((it, i) => ({...it, group: 'game', type: 'game', side: 'right', defaultIndex: OS_DATA.portfolio.length + i}))
+    ...OS_DATA.portfolio.map((it, i) => ({...it, group: 'portfolio', side: 'right', defaultIndex: i}))
   ];
 }
 
@@ -207,7 +206,7 @@ function renderDesktopIcons(){
     occupied.add(physicalKey(finalPos.x, finalPos.y));
 
     const icon = document.createElement('button');
-    icon.className = `desktop-icon ${item.type === 'folder' ? 'folder' : ''} ${item.type === 'game' ? 'game' : ''}`;
+    icon.className = `desktop-icon ${item.type === 'folder' ? 'folder' : ''}`;
     icon.dataset.id = item.id;
     icon.dataset.type = item.type;
     icon.dataset.side = item.side;
@@ -242,11 +241,6 @@ function renderDesktopIcons(){
         <span class="txt-file-shell" aria-hidden="true">
           <img class="txt-file-icon" src="assets/icons/txt-file.svg" alt="" aria-hidden="true" draggable="false" />
         </span>
-        <span class="desktop-icon-label">${item.label}</span>
-      `;
-    } else if (item.type === 'game') {
-      icon.innerHTML = `
-        <span class="game-cover-icon" aria-hidden="true" style="background-image:url('${item.icon || ''}')"></span>
         <span class="desktop-icon-label">${item.label}</span>
       `;
     } else {
@@ -318,7 +312,6 @@ function makeDesktopIconInteractive(icon, item){
     if(item.type === 'txt') openTextFile(item);
     if(item.type === 'folder') openFolder(item);
     if(item.type === 'html-app' || item.type === 'exe-app') openHtmlApp(item);
-    if(item.type === 'game') openGameWindow(item.id, item.label);
   });
 }
 
@@ -341,11 +334,6 @@ function setupStartMenu(){
   menu.querySelectorAll('[data-open-folder]').forEach(b => b.addEventListener('click', () => {
     const folder = OS_DATA.portfolio.find(f => f.id === b.dataset.openFolder);
     if(folder) openFolder(folder);
-    menu.classList.remove('open');
-  }));
-
-  menu.querySelectorAll('[data-open-game]').forEach(b => b.addEventListener('click', () => {
-    openGameWindow(b.dataset.openGame, b.querySelector('small')?.textContent.trim() || b.textContent.trim());
     menu.classList.remove('open');
   }));
 }
@@ -400,12 +388,7 @@ function getSearchItems(){
     action: () => openTextFile(item)
   }));
   const portfolio = flattenPortfolioItems(OS_DATA.portfolio);
-  const games = OS_DATA.games.map(item => ({
-    label: item.label,
-    typeLabel: 'Jogo',
-    action: () => openGameWindow(item.id, item.label)
-  }));
-  return [...curriculum, ...portfolio, ...games];
+  return [...curriculum, ...portfolio];
 }
 
 function setupDesktopSearch(){

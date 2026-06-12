@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Backrooms — ocupação interna progressiva." />
+  <title>Backrooms | Espaço Corporativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="scene-wrap" aria-hidden="true">
+    <canvas id="scene"></canvas>
+    <div class="scene-depth"></div>
+    <div class="scene-gradient"></div>
+    <div class="scene-vignette"></div>
+    <div class="scene-status mono" id="sceneStatus">carregando percurso interno...</div>
+  </div>
+
+  <div class="noise"></div>
+  <div class="scanlines"></div>
+  <div class="grid-bg"></div>
+
+  <main class="site-shell">
+    <section class="topbar section-pad">
+      <div class="topbar-inner max-wrap mono">
+        <div class="brand-mark">
+          <span class="round-icon">↗</span>
+          <span>Backrooms</span>
+        </div>
+        <span class="topbar-note">estrutura interna / ocupação progressiva</span>
+      </div>
+    </section>
+
+    <section class="section-pad hero-wrap">
+      <div class="hero-card translucent-card" id="heroCard">
+        <header class="hero-nav mono">
+          <div class="nav-logo"><span class="building-icon">▥</span> UNIDADE 811</div>
+          <nav>
+            <a href="#positioning">O espaço</a>
+            <a href="#benefits">Benefícios</a>
+            <a href="#atmosphere">Atmosfera</a>
+            <a href="#plan">Planta</a>
+            <a href="#possibilities">Possibilidades</a>
+            <a href="#visit">Visita</a>
+          </nav>
+        </header>
+
+        <div class="hero-content">
+          <div class="hero-layout">
+            <div class="hero-main">
+              <p class="eyebrow mono">Unidade corporativa / setor interno 811</p>
+              <h1 class="display hero-title">UNIDADE 811</h1>
+              <p class="hero-kicker">Estrutura interna para operações em expansão.</p>
+<div class="hero-copy-grid">
+                <div class="hero-lead-group">
+                  <p class="hero-lead">Ambientes amplos, circulação contínua e uma estrutura interna projetada para empresas que precisam crescer sem limites aparentes.</p>
+                  <p class="hero-note">Alguns visitantes relatam a sensação de que o espaço continua além do previsto em projeto.</p>
+                </div>
+              </div>
+            </div>
+
+            <aside class="hero-visual-card" aria-label="Fachada externa da Backrooms">
+              <img src="./assets/hero-right.png" alt="Fachada externa da Backrooms" loading="eager">
+              <div class="hero-visual-caption mono">
+                <span>fachada externa</span>
+                <strong>acesso comercial / setor 811</strong>
+              </div>
+            </aside>
+          </div>
+
+          <div class="hero-bottom">
+            <div class="hero-tags mono">
+              <span>circulação contínua</span>
+              <span>iluminação permanente</span>
+              <span>planta adaptável</span>
+            </div>
+            <div class="hero-actions">
+              <a href="#visit" class="btn btn-primary">Solicitar apresentação <span>↗</span></a>
+              <a href="#plan" class="btn btn-ghost">Conhecer a planta</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="positioning" class="section-pad spaced">
+      <div class="panel max-wrap concept-panel">
+        <div class="section-heading two-col">
+          <div>
+            <p class="eyebrow mono">Posicionamento</p>
+            <h2>Projetado para quem precisa de mais espaço do que o mercado costuma oferecer.</h2>
+          </div>
+          <div class="section-copy">
+            <p>Enquanto edifícios tradicionais limitam operação, circulação e expansão, este projeto oferece uma estrutura incomum: ambientes que se conectam de forma fluida, com baixa interferência visual e alto potencial de ocupação.</p>
+            <p>É uma solução para empresas, centros de distribuição, equipes operacionais, arquivos, call centers, laboratórios criativos e negócios que precisam de continuidade.</p>
+          </div>
+        </div>
+        <div class="narrative-strip">
+          <p>A arquitetura evita rupturas bruscas. Um corredor leva a outro. Uma sala se abre para a próxima. A circulação parece natural, mesmo quando a distância percorrida não corresponde exatamente à metragem informada.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits" class="section-pad spaced-small">
+      <div class="max-wrap">
+        <div class="section-heading experience-heading benefits-heading-center">
+          <h2>Tudo o que sua operação precisa para continuar avançando.</h2>
+        </div>
+
+        <div class="benefit-grid">
+          <article class="benefit-card"><span class="mono">01</span><h3>Circulação contínua</h3><p>Corredores largos e sequenciais permitem fluxo constante entre setores, sem interrupções ou gargalos evidentes.</p></article>
+          <article class="benefit-card"><span class="mono">02</span><h3>Planta de alta expansão</h3><p>A distribuição interna favorece crescimento por módulos, com espaços que podem ser ocupados conforme a demanda aumenta.</p></article>
+          <article class="benefit-card"><span class="mono">03</span><h3>Iluminação permanente</h3><p>Sistema fluorescente distribuído para manter visibilidade estável em todos os períodos de uso.</p></article>
+          <article class="benefit-card"><span class="mono">04</span><h3>Privacidade operacional</h3><p>A ausência de fachadas externas e vitrines reduz distrações, exposição e interferência do ambiente urbano.</p></article>
+          <article class="benefit-card"><span class="mono">05</span><h3>Baixo ruído externo</h3><p>O isolamento natural da estrutura cria um ambiente concentrado, distante da movimentação convencional da cidade.</p></article>
+          <article class="benefit-card"><span class="mono">06</span><h3>Presença mínima de janelas</h3><p>Mais controle térmico, menos variação de luz e maior previsibilidade para operações internas.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="atmosphere" class="section-pad spaced-small">
+      <div class="panel max-wrap atmosphere-panel">
+        <div>
+          <p class="eyebrow mono">Atmosfera</p>
+          <h2>Um ambiente silencioso, neutro e altamente funcional.</h2>
+        </div>
+        <div class="atmosphere-copy">
+          <p>O acabamento segue uma estética corporativa familiar: carpete em tons quentes, paredes claras, iluminação fria e divisões modulares.</p>
+          <p>Nada disputa atenção com sua operação.</p>
+          <p>O espaço foi pensado para funcionar como uma extensão contínua do trabalho. Sem excesso de elementos decorativos. Sem interferência urbana. Sem distrações externas.</p>
+          <p class="soft-warning">A sensação é de permanência. Como se o ambiente tivesse sido criado para continuar funcionando, mesmo depois que todos saem.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="plan" class="section-pad spaced-small">
+      <div class="panel plan-panel max-wrap plan-panel-real">
+        <p class="eyebrow mono plan-mobile-eyebrow">Planta de implantação</p>
+        <div class="plan-copy">
+          <p class="eyebrow mono">Planta de implantação</p>
+          <h2>Uma planta que acompanha o crescimento da sua empresa.</h2>
+          <p>A organização do empreendimento permite múltiplas configurações: recepção interna, áreas administrativas, salas de reunião, setores técnicos, armazenamento, operação, descanso e circulação.</p>
+          <p>A planta pode ser interpretada por blocos, facilitando a adaptação para diferentes tipos de uso. Alguns módulos apresentam continuidade espacial acima da média.</p>
+          <div class="plan-list">
+            <div><span>Identificação interna</span><b class="mono">UNIDADE 811</b></div>
+            <div><span>Bloco principal</span><b class="mono">807 “Leste”</b></div>
+            <div><span>Módulo de entrada</span><b class="mono">811 Sala</b></div>
+            <div><span>Estacionamento</span><b class="mono">15 vagas</b></div>
+            <div><span>Acesso assistido</span><b class="mono">PNE / emergência</b></div>
+            <div><span>Escala de referência</span><b class="mono">1:100</b></div>
+          </div>
+          <a href="#possibilities" class="btn btn-primary inline-btn">Ver possibilidades de ocupação</a>
+        </div>
+
+        <div class="site-plan-card">
+          <div class="site-plan-toolbar mono">
+            <span>FOLHA A-1</span><span>PLANTA DE IMPLANTAÇÃO</span><span>MAIO / 2024</span>
+          </div>
+          <figure class="site-plan-frame">
+            <img src="./assets/planta-implantacao-oregon-811.png" alt="Planta de implantação do Backrooms com estacionamento, salas, saída de veículos e Backrooms" loading="lazy">
+            <figcaption class="mono">Referência técnica reinterpretada para o mapa de ocupação do Backrooms.</figcaption>
+          </figure>
+          <div class="site-plan-notes">
+            <article><span class="mono">811</span><p>Sala de reconhecimento e ponto de transição para permanência.</p></article>
+            <article><span class="mono">807</span><p>Setor Leste, bloco contínuo para ocupação progressiva.</p></article>
+            <article><span class="mono">801</span><p>Edificação paralela, isolada do fluxo principal.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="possibilities" class="section-pad spaced-small">
+      <div class="panel max-wrap possibilities-panel">
+        <div class="possibilities-copy">
+          <p class="eyebrow mono">Possibilidades</p>
+          <h2>O mesmo espaço<br>assume novas funções.</h2>
+          <p>Ao longo do reconhecimento, o Backrooms revela algo raro: a mesma base espacial aceita múltiplas leituras de uso sem perder coerência. Onde antes havia vazio, surgem recepção, treinamento, arquivo, operações, vendas, área demonstrativa e permanência.</p>
+          <p>Não se trata de cenários desconectados. Trata-se de uma estrutura capaz de absorver a função exigida em cada fase da operação, mantendo a mesma continuidade material, a mesma lógica de circulação e a mesma sensação de expansão.</p>
+          <div class="possibility-tags mono">
+            <span>recepção</span>
+            <span>treinamento</span>
+            <span>arquivo</span>
+            <span>operações</span>
+            <span>administrativo</span>
+            <span>vendas</span>
+            <span>demonstração</span>
+            <span>lounge</span>
+          </div>
+        </div>
+
+        <div class="possibilities-showcase">
+          <div class="possibility-frame" id="possibilityFrame">
+            <img class="possibility-slide is-active" src="./assets/possibility-01-empty-shell.jpg" alt="Espaço base vazio do Backrooms" data-title="Base espacial contínua" data-desc="A estrutura original parte do vazio: circulação aberta, leitura simples e alto potencial de adaptação." loading="lazy">
+            <img class="possibility-slide" src="./assets/possibility-02-training.png" alt="Sala de treinamento montada" data-title="Treinamento e alinhamento" data-desc="Ambientes amplos se convertem em salas de treinamento, onboarding e encontros de equipe sem perder fluidez." loading="lazy">
+            <img class="possibility-slide" src="./assets/possibility-03-archive-operations.png" alt="Arquivo e setor de operações" data-title="Arquivo e retaguarda operacional" data-desc="Setores de armazenamento, documentação e suporte podem ser integrados à rotina operacional com facilidade." loading="lazy">
+            <img class="possibility-slide" src="./assets/possibility-04-reception.png" alt="Recepção corporativa" data-title="Recepção e primeiro contato" data-desc="A mesma lógica espacial comporta recepção, espera, triagem e orientação sem quebrar a continuidade do percurso." loading="lazy">
+            <img class="possibility-slide" src="./assets/possibility-05-office-floor.png" alt="Área administrativa com mesas" data-title="Operação administrativa" data-desc="Estações de trabalho, gestão interna e times administrativos podem ocupar a planta de forma progressiva." loading="lazy">
+            <img class="possibility-slide" src="./assets/possibility-06-demo-space.png" alt="Espaço demonstrativo montado" data-title="Espaço demonstrativo" data-desc="A planta também suporta vitrines internas, exposição controlada de produtos e experiências de apresentação." loading="lazy">
+            <img class="possibility-slide" src="./assets/possibility-07-sales-center.png" alt="Central de vendas no espaço" data-title="Central de vendas" data-desc="Pontos de atendimento, consultoria comercial e apresentação de plantas encontram lugar natural dentro da estrutura." loading="lazy">
+            <img class="possibility-slide" src="./assets/possibility-08-lounge.png" alt="Lounge e área de permanência" data-title="Permanência e apoio" data-desc="Áreas de espera, descanso e apoio reforçam a ideia de um espaço preparado para permanência prolongada." loading="lazy">
+
+            <div class="possibility-overlay">
+              <span class="mono possibility-counter" id="possibilityCounter">01 / 08</span>
+              <div class="possibility-caption">
+                <strong id="possibilityTitle">Base espacial contínua</strong>
+                <p id="possibilityText">A estrutura original parte do vazio: circulação aberta, leitura simples e alto potencial de adaptação.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="visit" class="section-pad spaced-small">
+      <div class="max-wrap visit-grid">
+        <div class="panel visit-panel">
+          <p class="eyebrow mono">Visita técnica</p>
+          <h2>A visita técnica é a melhor forma de entender o potencial do espaço.</h2>
+          <p>Algumas características só ficam claras presencialmente: a profundidade dos corredores, a repetição precisa dos ambientes, a estabilidade da iluminação e a sensação de que cada setor pode levar a uma nova possibilidade de uso.</p>
+          <p>Durante a visita, nossa equipe acompanha o percurso recomendado e apresenta as áreas disponíveis para ocupação imediata.</p>
+          <p class="soft-warning">Por segurança, recomendamos permanecer dentro da rota indicada.</p>
+        </div>
+
+        <div class="panel commercial-panel">
+          <p class="eyebrow mono">Indicação comercial</p>
+          <h3>Ideal para operações que não cabem mais em espaços convencionais.</h3>
+          <ul>
+            <li>mais área útil</li><li>mais privacidade</li><li>mais controle interno</li><li>mais silêncio</li><li>mais continuidade</li><li>mais margem para crescer</li>
+          </ul>
+          <p>Não é um endereço para qualquer negócio. É um espaço para operações que precisam sair da lógica comum de sala, rua, fachada e vitrine.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad spaced-small proof-section">
+      <div class="panel max-wrap testimonials-panel proof-panel">
+        <div class="section-heading proof-heading">
+          <div>
+            <p class="eyebrow mono">Prova / conceito</p>
+            <h2>Uma ocupação analisada por diferentes perfis técnicos.</h2>
+          </div>
+          <p>A leitura do espaço se repete em três pontos: escala percebida, continuidade dos ambientes e limites internos pouco óbvios. O resultado é um imóvel que funciona como estrutura operacional e, ao mesmo tempo, como experiência de reconhecimento.</p>
+        </div>
+        <div class="proof-grid">
+          <article><span class="mono">01</span><h3>Sensação de escala</h3><p>O espaço parece maior à medida que a circulação avança. Para empresas em expansão, isso se traduz em margem de crescimento.</p></article>
+          <article><span class="mono">02</span><h3>Continuidade dos ambientes</h3><p>Os módulos mantêm linguagem visual consistente mesmo quando mudam de função, reduzindo ruptura entre setores.</p></article>
+          <article><span class="mono">03</span><h3>Limites pouco claros</h3><p>A planta organiza o percurso, mas a experiência física sugere uma profundidade maior do que a leitura inicial.</p></article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section id="usage-reports" class="section-pad spaced-small usage-section" aria-labelledby="usageReportsTitle">
+      <div class="panel max-wrap usage-panel">
+        <div class="usage-heading-centered">
+          <p class="eyebrow mono">Relatos de uso real</p>
+          <h2 id="usageReportsTitle">Operações que encontraram mais espaço do que esperavam.</h2>
+          <p>Empresas que ocuparam a Unidade 811 em fases de expansão, reorganização interna e operação temporária relatam a mesma percepção: <span class="usage-emphasis">o espaço se adapta antes de parecer cheio.</span></p>
+        </div>
+
+        <div class="usage-carousel" id="usageCarousel" aria-label="Carrossel de relatos de uso real">
+          <div class="usage-track" id="usageTrack">
+            <button class="usage-card" type="button" data-report="0" aria-label="Abrir relato de Eleanor Hayes">
+              <h3>Eleanor Hayes</h3>
+              <small>Diretora de Operações | Northline Systems</small>
+              <p>“Em poucos dias, a Unidade 811 absorveu mais setores do que o previsto, sem parecer improvisada.”</p>
+            </button>
+
+            <button class="usage-card" type="button" data-report="1" aria-label="Abrir relato de Martin Keller">
+              <h3>Martin Keller</h3>
+              <small>Gerente de Estratégia Imobiliária | Meridian Works</small>
+              <p>“Depois de alguns dias de uso, a sensação de profundidade deixa de ser estranha e passa a fazer parte da rotina.”</p>
+            </button>
+
+            <button class="usage-card" type="button" data-report="2" aria-label="Abrir relato de Claire Morgan">
+              <h3>Claire Morgan</h3>
+              <small>Arquiteta Corporativa | Vale Studio</small>
+              <p>“A repetição dos módulos ajuda na padronização, mas exige sinalização clara. Como espaço de uso real, abre possibilidades.”</p>
+            </button>
+
+            <button class="usage-card" type="button" data-report="3" aria-label="Abrir relato de Daniel Cross">
+              <h3>Daniel Cross</h3>
+              <small>Gerente de Facilities | Corefield Group</small>
+              <p>“Mantivemos uma equipe por quase dois meses. O ganho principal foi controle, menos ruído e mais estabilidade.”</p>
+            </button>
+
+            <button class="usage-card" type="button" data-report="4" aria-label="Abrir relato de Sofia Reed">
+              <h3>Sofia Reed</h3>
+              <small>Consultora de Expansão | Axis Planning</small>
+              <p>“Mesmo com a ocupação crescendo, o espaço nunca pareceu saturado. Sempre havia mais uma área disponível à frente.”</p>
+            </button>
+
+            <button class="usage-card" type="button" data-report="5" aria-label="Abrir relato de Adrian Cole">
+              <h3>Adrian Cole</h3>
+              <small>Parceiro de Investimentos | Greyhall Capital</small>
+              <p>“Não é um imóvel que vende presença urbana. É um imóvel que entrega profundidade interna.”</p>
+            </button>
+
+            <button class="usage-card" type="button" data-report="6" aria-label="Abrir relato de Naomi Brooks">
+              <h3>Naomi Brooks</h3>
+              <small>Líder de Implementação de Processos | Altum Services</small>
+              <p>“A Unidade 811 permite expandir sem quebrar o fluxo existente. Isso foi decisivo durante a implantação.”</p>
+            </button>
+
+            <button class="usage-card" type="button" data-report="7" aria-label="Abrir relato de Thomas Blake">
+              <h3>Thomas Blake</h3>
+              <small>Coordenador de Logística | Eastbridge Operations</small>
+              <p>“Os próprios módulos criavam separação entre recebimento, conferência e armazenamento.”</p>
+            </button>
+
+            <button class="usage-card" type="button" data-report="8" aria-label="Abrir relato de Isabel Grant">
+              <h3>Isabel Grant</h3>
+              <small>Consultora de Estratégia de Espaço de Trabalho | Lumen Offices</small>
+              <p>“O espaço não compete com o trabalho. Ele cria uma condição de concentração contínua.”</p>
+            </button>
+
+            <button class="usage-card" type="button" data-report="9" aria-label="Abrir relato de Victor Shaw">
+              <h3>Victor Shaw</h3>
+              <small>Diretor de Operações Internas | Holloway Group</small>
+              <p>“Você adiciona uma função, depois outra, depois outra. E o espaço continua.”</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="usage-modal" id="usageModal" aria-hidden="true">
+      <div class="usage-modal-backdrop" data-close-usage-modal></div>
+      <article class="usage-modal-card" role="dialog" aria-modal="true" aria-labelledby="usageModalTitle">
+        <button class="usage-modal-close" type="button" data-close-usage-modal aria-label="Fechar relato">×</button>
+        <p class="eyebrow mono" id="usageModalEyebrow">Relato de uso</p>
+        <h2 id="usageModalTitle"></h2>
+        <p class="usage-modal-role" id="usageModalRole"></p>
+        <div class="usage-modal-body" id="usageModalBody"></div>
+      </article>
+    </div>
+
+    <section id="access" class="section-pad access-section">
+      <div class="access-grid max-wrap">
+        <div class="panel cta-panel">
+          <p class="eyebrow mono">Apresentação comercial</p>
+          <h2>Sua próxima operação pode começar onde os limites deixam de ser claros.</h2>
+          <p>Conheça um espaço corporativo raro, com alta capacidade de adaptação e uma experiência interna difícil de comparar com qualquer outro imóvel disponível no mercado.</p>
+          <p>Solicite a apresentação comercial e descubra se este endereço faz sentido para a próxima fase da sua empresa.</p>
+          <div class="cta-actions">
+            <a href="mailto:access@unidade811.fake" class="btn btn-primary">Solicitar apresentação comercial</a>
+            <a href="#plan" class="btn btn-ghost">Ver planta do empreendimento</a>
+          </div>
+        </div>
+
+        <div class="faq-list">
+          <article class="panel faq-card"><span>⌖</span><div><h3>Espaço contínuo</h3><p>Ambientes conectados para operações que precisam crescer sem interrupção.</p></div></article>
+          <article class="panel faq-card"><span>◫</span><div><h3>Baixa interferência externa</h3><p>Sem ruído urbano, sem vitrines e sem distrações visuais.</p></div></article>
+          <article class="panel faq-card"><span>↘</span><div><h3>Planta adaptável</h3><p>Configuração flexível para diferentes modelos de ocupação.</p></div></article>
+          <article class="panel faq-card"><span>▧</span><div><h3>Escala incomum</h3><p>Áreas internas que parecem se expandir além da leitura convencional da planta.</p></div></article>
+        </div>
+      </div>
+
+      <footer class="footer max-wrap mono">
+        Backrooms Corporate Continuum. Visitas mediante agendamento. Disponibilidade sujeita à configuração operacional vigente. Percursos, módulos e acessos podem variar conforme status operacional.
+      </footer>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js"
+    }
+  }
+  </script>
+  <script type="module" src="./three-background.js?v=light-fog-01"></script>
+</body>
+</html>

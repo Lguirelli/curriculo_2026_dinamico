@@ -40,7 +40,7 @@ function mobileEscape(value){
 }
 
 function getMobileItemById(id){
-  return [...OS_DATA.portfolio, ...OS_DATA.curriculum, ...OS_DATA.games].find(item => item.id === id);
+  return [...OS_DATA.portfolio, ...OS_DATA.curriculum].find(item => item.id === id);
 }
 
 async function loadMobileFile(title, path){
@@ -156,7 +156,11 @@ function renderMobileIframeApp(item){
   MOBILE_STATE.stack.push({ type:'app', item });
 
   const src = item.appPath || item.projectPath || item.path;
-  const appClass = item.id === 'ranking' || item.id === 'ranking-exe' ? 'mobile-ranking-frame' : 'mobile-landing-frame';
+  const appClass = item.id === 'ranking' || item.id === 'ranking-exe'
+    ? 'mobile-ranking-frame'
+    : item.id === 'backrooms-landing-3d'
+      ? 'mobile-backrooms-frame'
+      : 'mobile-landing-frame';
 
   showMobileApp(item.label, `
     <div class="mobile-breadcrumb">
@@ -269,24 +273,6 @@ function openMobileNotes(){
   renderMobileCurriculoNotes();
 }
 
-function openMobileGames(){
-  MOBILE_STATE.stack = [{ type:'home' }];
-  showMobileApp('Jogos', `
-    <div class="mobile-file-list mobile-game-list">
-      ${OS_DATA.games.map(g => `
-        <button class="mobile-file-item mobile-game-item" data-mobile-game="${g.id}" data-title="${g.label}">
-          <span class="mobile-game-thumb" style="background-image:url('${g.icon || ''}')"></span>
-          <span>${mobileEscape(g.label)}</span>
-        </button>
-      `).join('')}
-    </div>
-  `);
-
-  document.querySelectorAll('[data-mobile-game]').forEach(g => {
-    g.addEventListener('click', () => openMobileGame(g.dataset.mobileGame, g.dataset.title));
-  });
-}
-
 function openMobileContact(type){
   const href = MOBILE_CONTACT_LINKS[type] || '#';
 
@@ -369,12 +355,6 @@ function getMobileSearchItems(){
 
   const portfolio = flattenMobileSearchItems(OS_DATA.portfolio || []);
 
-  const games = (OS_DATA.games || []).map(game => ({
-    label:`Jogo / ${game.label}`,
-    keywords:`jogo games ${game.label}`,
-    action:() => openMobileGame(game.id, game.label)
-  }));
-
   const fixedApps = [
     {
       label:'landing page editavel',
@@ -394,7 +374,7 @@ function getMobileSearchItems(){
     }
   ];
 
-  return [...curriculum, ...portfolio, ...games, ...fixedApps];
+  return [...curriculum, ...portfolio, ...fixedApps];
 }
 
 function performMobileSearch(query){
@@ -417,7 +397,7 @@ function performMobileSearch(query){
     </div>
     <div class="mobile-content-card mobile-search-empty">
       <strong>Nenhum resultado encontrado.</strong>
-      <p>Tente buscar por currículo, design, fotografia, vídeos, landing, ranking, snake, pong ou campo minado.</p>
+      <p>Tente buscar por currículo, design, fotografia, vídeos, landing ou ranking.</p>
     </div>
   `);
   bindMobileStackBack();
@@ -459,11 +439,6 @@ function initMobile(){
       return;
     }
 
-    if(id === 'games'){
-      openMobileGames();
-      return;
-    }
-
     const item = OS_DATA.portfolio.find(f => f.id === id);
 
     if(item){
@@ -477,11 +452,6 @@ function initMobile(){
       openMobilePortfolioItem(item, [{ label:'Portfólio', item }, { label:item.label, item }]);
     }
   }));
-
-  
-    document.querySelectorAll('[data-mobile-game]').forEach(btn => {
-    btn.addEventListener('click', () => openMobileGame(btn.dataset.mobileGame, btn.dataset.title || btn.textContent.trim()));
-  });
 
   document.querySelectorAll('[data-mobile-contact]').forEach(btn => {
     btn.addEventListener('click', () => openMobileContact(btn.dataset.mobileContact));

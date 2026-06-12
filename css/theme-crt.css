@@ -103,19 +103,6 @@ html.crt-theme .mobile-app-header,
 html.crt-theme .mobile-note-card,
 html.crt-theme .mobile-content-card,
 html.crt-theme .portfolio-gallery-card,
-html.crt-theme .game-window{
-  background:
-    linear-gradient(180deg, rgba(49,255,122,.035), rgba(49,255,122,.010)),
-    rgba(1,14,11,.70) !important;
-  border:1px solid var(--crt-line) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(49,255,122,.08),
-    0 0 0 1px rgba(49,255,122,.14),
-    0 0 18px rgba(49,255,122,.22),
-    0 0 44px rgba(45,252,255,.08) !important;
-  backdrop-filter:blur(10px) saturate(140%) !important;
-  -webkit-backdrop-filter:blur(10px) saturate(140%) !important;
-}
 
 html.crt-theme .window-header,
 html.crt-theme .window-titlebar,
@@ -195,8 +182,6 @@ html.crt-theme .mobile-image-app[data-mobile-open="landing-page-editavel"] img{
     saturate(1.15) !important;
 }
 
-html.crt-theme .game-stage,
-html.crt-theme .game-canvas,
 html.crt-theme .mobile-project-frame,
 html.crt-theme .project-browser-frame{
   border-color:var(--crt-line) !important;

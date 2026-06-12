@@ -118,6 +118,28 @@ window.OS_DATA = {
               ]
             }
           ]
+        },
+        {
+          "id": "projetos-web",
+          "label": "Projetos Web",
+          "type": "folder",
+          "files": [
+            {
+              "id": "backrooms-landing-3d",
+              "label": "Backrooms — Landing Page 3D",
+              "type": "html-project",
+              "appPath": "content/portfolio/design/projetos-web/backrooms/index.html",
+              "thumbnail": "content/portfolio/design/projetos-web/backrooms/assets/hero-right.png",
+              "description": "Landing page experimental com ambientação 3D, narrativa imersiva, carrossel de possibilidades e estrutura comercial de apresentação.",
+              "tags": [
+                "Landing Page",
+                "3D",
+                "Web Design",
+                "Experiência Imersiva",
+                "Three.js"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -279,23 +301,6 @@ window.OS_DATA = {
       "type": "exe-app",
       "icon": "trophy",
       "appPath": "content/apps/ranking/index.html"
-    }
-  ],
-  "games": [
-    {
-      "id": "snake",
-      "label": "Snake",
-      "icon": "assets/icons/game-snake.png"
-    },
-    {
-      "id": "mines",
-      "label": "Campo Minado",
-      "icon": "assets/icons/game-mines.png"
-    },
-    {
-      "id": "pong",
-      "label": "Pong",
-      "icon": "assets/icons/game-pong.png"
     }
   ]
 };
