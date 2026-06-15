@@ -249,7 +249,7 @@ details:hover {
   font-size: 14px;
 }
 
-.placeholder {
+.  {
   min-height: 280px;
   border: 1px dashed rgba(255, 255, 255, .18);
   border-radius: var(--radius);
@@ -265,7 +265,7 @@ details:hover {
   padding: 24px;
 }
 
-.icon-placeholder {
+.icon-  {
   width: 44px;
   height: 44px;
   border-radius: 14px;
@@ -668,7 +668,7 @@ details:hover {
   box-shadow: var(--shadow);
 }
 
-.service-placeholder-icon {
+.service- -icon {
   width: 72px;
   height: 72px;
   margin-bottom: 28px;
@@ -682,7 +682,7 @@ details:hover {
     var(--surface);
 }
 
-.service-placeholder-icon span {
+.service- -icon span {
   width: 38px;
   height: 38px;
   border-radius: 999px;
@@ -916,8 +916,8 @@ details:hover {
   text-align: center;
 }
 
-input::placeholder,
-textarea::placeholder {
+input:: ,
+textarea::  {
   color: rgba(174, 182, 197, .72);
 }
 
@@ -1733,25 +1733,25 @@ strong {
 
 .visual-card,
 .logo-box,
-.icon-placeholder {
+.icon-  {
   user-select: none;
 }
 
 .visual-card .section-kicker,
 .visual-card p,
 .logo-box,
-.icon-placeholder {
+.icon-  {
   cursor: default;
 }
 
 .visual-card .section-kicker:hover,
 .visual-card p:hover,
 .logo-box:hover,
-.icon-placeholder:hover {
+.icon- :hover {
   outline: none !important;
 }
 
-.placeholder.visual-card {
+. .visual-card {
   min-height: 320px;
   display: grid !important;
   place-items: center !important;
@@ -2009,7 +2009,7 @@ body {
 .grid-3,
 .section-copy,
 .card,
-.placeholder,
+. ,
 .visual-card,
 .final-cta-box,
 .benefit-item,
@@ -2027,7 +2027,7 @@ body {
 .section,
 .hero,
 .card,
-.placeholder,
+. ,
 .visual-card,
 .final-cta-box,
 .logo-box,
@@ -2293,7 +2293,7 @@ body[data-theme="light"] .editor-label {
 }
 
 body[data-theme="light"] .logo-mark,
-body[data-theme="light"] .icon-placeholder,
+body[data-theme="light"] .icon- ,
 body[data-theme="light"] .btn-accent,
 body[data-theme="light"] .editor-reset {
   background: var(--accent) !important;
@@ -2458,7 +2458,7 @@ body[data-theme="light"] .section-kicker {
 }
 
 body[data-theme="light"] .logo-mark,
-body[data-theme="light"] .icon-placeholder,
+body[data-theme="light"] .icon- ,
 body[data-theme="light"] .btn-accent {
   background: var(--accent) !important;
   border-color: var(--accent) !important;
@@ -2474,7 +2474,7 @@ body[data-theme="light"] .section:nth-of-type(even) {
 body[data-theme="light"] .card,
 body[data-theme="light"] .service-slide,
 body[data-theme="light"] details,
-body[data-theme="light"] .placeholder,
+body[data-theme="light"] . ,
 body[data-theme="light"] .logo-box {
   background: var(--surface) !important;
   border-color: var(--line) !important;
@@ -2636,7 +2636,7 @@ body[data-theme="dark"] .editor-panel {
 .editable-main .hero,
 .editable-main .card,
 .editable-main .service-slide,
-.editable-main .placeholder,
+.editable-main . ,
 .editable-main .final-cta-box,
 .editable-main details {
   height: auto !important;
@@ -3098,7 +3098,7 @@ small,
 
   .card,
   .service-slide,
-  .placeholder,
+  . ,
   .logo-box,
   details,
   .final-cta-box {
@@ -3110,7 +3110,7 @@ small,
   .btn,
   .service-slide,
   .card,
-  .placeholder,
+  . ,
   .logo-box,
   .hero-proof span {
     transform: none !important;
@@ -3139,7 +3139,7 @@ body {
 .footer-grid,
 .service-grid-static,
 .card,
-.placeholder,
+. ,
 .logo-box,
 .service-slide,
 .final-cta-box,
@@ -3176,7 +3176,7 @@ body {
 }
 
 .card,
-.placeholder,
+. ,
 .logo-box,
 .service-slide,
 .final-cta-box,
