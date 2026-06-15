@@ -797,18 +797,18 @@
   background:#f3e8d8;
 }
 
-/* Backrooms 3D landing page window */
-.os-window.backrooms-app-window{
+/*  3D landing page window */
+.os-window.-app-window{
   width:min(1180px, calc(100vw - 42px));
   height:min(760px, calc(100vh - var(--topbar) - 42px));
 }
 
-.os-window.backrooms-app-window .window-body{
+.os-window.-app-window .window-body{
   padding:0;
   overflow:hidden;
 }
 
-.os-window.backrooms-app-window .project-browser-frame{
+.os-window.-app-window .project-browser-frame{
   background:#080807;
 }
 

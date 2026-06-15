@@ -466,7 +466,7 @@
 .dock.search-open .dock-search-toggle .dock-icon-img{display:none!important}
 .dock-search-input{flex:1;width:0;min-width:0;height:100%;padding:0;border:0;outline:0;background:transparent;color:var(--text-1);font:500 20px/1 var(--font-sans,system-ui);letter-spacing:-.02em;opacity:0;pointer-events:none;transition:opacity .18s ease,padding .18s ease}
 .dock.search-open .dock-search-input{width:auto;padding:0 10px 0 16px!important;opacity:1;pointer-events:auto}
-.dock-search-input::placeholder{color:rgba(255,255,255,.68)}
+.dock-search-input:: {color:rgba(255,255,255,.68)}
 .dock-search-submit{width:40px;height:40px;min-width:40px;margin-right:0!important;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.04)),rgba(32,44,92,.36);display:grid;place-items:center;opacity:0;transform:scale(.86);pointer-events:none;transition:opacity .2s ease,transform .2s ease,box-shadow .2s ease}
 .dock.search-open .dock-search-submit{opacity:1;transform:scale(1);pointer-events:auto}
 .dock-search-submit img{width:20px;height:20px;object-fit:contain;filter:brightness(0) invert(1) opacity(.92);pointer-events:none}

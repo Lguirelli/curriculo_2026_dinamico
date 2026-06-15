@@ -15,7 +15,7 @@ Protótipo de currículo e portfólio em formato de sistema operacional.
 ## Comportamento desktop
 
 - Arquivos `.txt` começam alinhados no grid à esquerda.
-- Pastas e jogos começam alinhados no grid à direita.
+- Pastas e  começam alinhados no grid à direita.
 - 1 clique seleciona.
 - Arrastar reposiciona.
 - Ao soltar, aplica snap to grid.

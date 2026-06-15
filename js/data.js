@@ -125,11 +125,11 @@ window.OS_DATA = {
           "type": "folder",
           "files": [
             {
-              "id": "backrooms-landing-3d",
-              "label": "Backrooms — Landing Page 3D",
+              "id": "-landing-3d",
+              "label": " — Landing Page 3D",
               "type": "html-project",
-              "appPath": "content/portfolio/design/projetos-web/backrooms/index.html",
-              "thumbnail": "content/portfolio/design/projetos-web/backrooms/assets/hero-right.png",
+              "appPath": "content/portfolio/design/projetos-web//index.html",
+              "thumbnail": "content/portfolio/design/projetos-web//assets/hero-right.png",
               "description": "Landing page experimental com ambientação 3D, narrativa imersiva, carrossel de possibilidades e estrutura comercial de apresentação.",
               "tags": [
                 "Landing Page",

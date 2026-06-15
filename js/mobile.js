@@ -158,8 +158,8 @@ function renderMobileIframeApp(item){
   const src = item.appPath || item.projectPath || item.path;
   const appClass = item.id === 'ranking' || item.id === 'ranking-exe'
     ? 'mobile-ranking-frame'
-    : item.id === 'backrooms-landing-3d'
-      ? 'mobile-backrooms-frame'
+    : item.id === '-landing-3d'
+      ? 'mobile--frame'
       : 'mobile-landing-frame';
 
   showMobileApp(item.label, `

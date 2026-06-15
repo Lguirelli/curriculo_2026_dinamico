@@ -234,7 +234,7 @@ details:hover {
   font-size: 14px;
 }
 
-.placeholder {
+.  {
   min-height: 280px;
   border: 1px dashed rgba(255, 255, 255, .18);
   border-radius: var(--radius);
@@ -250,7 +250,7 @@ details:hover {
   padding: 24px;
 }
 
-.icon-placeholder {
+.icon-  {
   width: 44px;
   height: 44px;
   border-radius: 14px;
@@ -703,7 +703,7 @@ details:hover {
   filter: blur(3px) saturate(.6) brightness(.62);
 }
 
-.service-placeholder-icon {
+.service- -icon {
   width: 72px;
   height: 72px;
   margin-bottom: 28px;
@@ -717,7 +717,7 @@ details:hover {
     var(--surface);
 }
 
-.service-placeholder-icon span {
+.service- -icon span {
   width: 38px;
   height: 38px;
   border-radius: 999px;
@@ -915,8 +915,8 @@ details:hover {
   text-align: center;
 }
 
-input::placeholder,
-textarea::placeholder {
+input:: ,
+textarea::  {
   color: rgba(174, 182, 197, .72);
 }
 
@@ -3935,7 +3935,7 @@ textarea:focus-visible {
 .blog-page-hero .container,
 .final-cta-box,
 .logo-strip,
-.placeholder {
+.  {
   text-align: center;
 }
 

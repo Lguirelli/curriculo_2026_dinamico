@@ -161,8 +161,8 @@ function openHtmlApp(item){
     win.classList.add('brand-position-window');
   }
 
-  if(item.id === 'backrooms-landing-3d'){
-    win.classList.add('backrooms-app-window');
+  if(item.id === '-landing-3d'){
+    win.classList.add('-app-window');
   }
 
   const frame = win.querySelector('.project-browser-frame');

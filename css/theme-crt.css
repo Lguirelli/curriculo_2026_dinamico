@@ -133,9 +133,9 @@ html.crt-theme .search-expanded input{
   caret-color:var(--crt-green) !important;
 }
 
-html.crt-theme .mobile-search-form input::placeholder,
-html.crt-theme .desktop-search input::placeholder,
-html.crt-theme .search-expanded input::placeholder{
+html.crt-theme .mobile-search-form input:: ,
+html.crt-theme .desktop-search input:: ,
+html.crt-theme .search-expanded input:: {
   color:rgba(217,255,232,.68) !important;
 }
 

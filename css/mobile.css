@@ -1953,7 +1953,7 @@
   }
 }
 
-.mobile-backrooms-frame{
+.mobile--frame{
   min-height:calc(100dvh - 132px);
   background:#080807;
 }
