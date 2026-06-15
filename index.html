@@ -1,145 +1,57 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lorenzo OS — Currículo e Portfólio</title>
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/desktop.css?v=remove-crt-switch-1" />
-  <link rel="stylesheet" href="css/windows.css?v=clean-conflict-rules-1" />
-  <link rel="stylesheet" href="css/mobile.css?v=remove-crt-switch-1" />
-  <link rel="stylesheet" href="css/components/desktop-clock.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Landing page modular de alta conversão." />
+  <title>Landing Page Modular</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="Landing Page Modular — IA, Automação e Marketing Digital" />
+  <meta property="og:description" content="Criamos agentes de IA, landing pages, automações e dashboards para empresas em crescimento que querem vender melhor e tomar decisões com mais clareza." />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="assets/images/hero-desktop-bg.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Landing Page Modular — IA, Automação e Marketing Digital" />
+  <meta name="twitter:description" content="Criamos agentes de IA, landing pages, automações e dashboards para empresas em crescimento." />
+  <meta name="twitter:image" content="assets/images/hero-desktop-bg.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Schema.org: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Landing Page Modular",
+    "url": "",
+    "description": "Criamos agentes de IA, landing pages, automações e dashboards para empresas em crescimento.",
+    "sameAs": []
+  }
+  </script>
 </head>
-<body>
-  <main id="desktopOS" class="desktop-os" aria-label="Desktop portfolio">
-    <header class="top-panel">
-      <button id="startButton" class="top-apps-button" type="button">Apps</button>
-      <div id="topPanelClock" class="top-panel-clock">quinta, 28 de maio 00:00</div>
-      <div class="top-panel-status">
-        <span>pt</span>
-        <span>◔</span>
-        <span>⌁</span>
-        <span>▣</span>
-      </div>
-    </header>
+<body class="home-page" data-root="">
+  <div id="site-header" data-section="sections/header.html"></div>
 
-    <section id="desktopArea" class="desktop-area">
-      <div class="wallpaper-scene" aria-hidden="true">
-        <div class="wallpaper-moon"></div>
-        <div class="wallpaper-mist mist-a"></div>
-        <div class="wallpaper-mist mist-b"></div>
-      </div>
-      <div id="desktopClockMount" class="desktop-clock-mount" aria-label="Relógio e data do sistema"></div>
-      <div id="desktopIcons" class="desktop-icons"></div>
-    </section>
-
-    <aside id="startMenu" class="start-menu" aria-label="Menu de aplicativos">
-      <div class="start-menu-sidebar">
-        <strong>All Applications</strong>
-        <span>Currículo</span>
-        <span>Portfólio</span>
-      </div>
-      <div class="start-menu-grid">
-        <button data-open-folder="design"><span class="folder-glass-icon start-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
-  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
-  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
-</svg></span><small>Design</small></button>
-        <button data-open-folder="fotografia"><span class="folder-glass-icon start-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
-  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
-  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
-</svg></span><small>Fotografia</small></button>
-        <button data-open-folder="videos"><span class="folder-glass-icon start-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
-  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
-  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
-</svg></span><small>Vídeos</small></button>
-      </div>
-    </aside>
-
-    <nav class="dock" aria-label="Contatos e pesquisa" data-dock>
-  <form class="dock-search-form" data-search-form>
-    <button type="button" class="dock-icon dock-search-toggle" title="Pesquisar" aria-label="Pesquisar" data-search-toggle>
-      <img class="dock-icon-img" src="assets/icons/search.svg" alt="" aria-hidden="true" draggable="false" />
-    </button>
-    <input id="desktopSearchInput" class="dock-search-input" type="search" autocomplete="off" placeholder="Search..." aria-label="Pesquisar no portfólio" />
-    <button type="submit" class="dock-search-submit" aria-label="Pesquisar">
-      <img src="assets/icons/search.svg" alt="" aria-hidden="true" draggable="false" />
-    </button>
-  </form>
-  <a href="#" class="dock-icon dock-contact-icon" title="Email" aria-label="Email">
-    <img class="dock-icon-img" src="assets/icons/email.svg" alt="" aria-hidden="true" draggable="false" />
-  </a>
-  <a href="#" class="dock-icon dock-contact-icon" title="LinkedIn" aria-label="LinkedIn">
-    <img class="dock-icon-img" src="assets/icons/linkedin.svg" alt="" aria-hidden="true" draggable="false" />
-  </a>
-  <a href="#" class="dock-icon dock-contact-icon" title="Instagram" aria-label="Instagram">
-    <img class="dock-icon-img" src="assets/icons/instagram.svg" alt="" aria-hidden="true" draggable="false" />
-  </a>
-  <a href="#" class="dock-icon dock-contact-icon" title="WhatsApp" aria-label="WhatsApp">
-    <img class="dock-icon-img" src="assets/icons/whatsapp.svg" alt="" aria-hidden="true" draggable="false" />
-  </a>
-  <div id="desktopSearchResults" class="dock-search-results" aria-live="polite"></div>
-</nav>
-
-    <section id="windowsLayer" class="windows-layer" aria-label="Janelas abertas"></section>
+  <main id="main">
+    <div data-section="sections/hero.html"></div>
+    <div data-section="sections/trust-strip.html"></div>
+    <div data-section="sections/problem.html"></div>
+    <div data-section="sections/benefits.html"></div>
+    <div data-section="sections/how-it-works.html"></div>
+    <div data-section="sections/case-preview.html"></div>
+    <div data-section="sections/comparison.html"></div>
+    <div data-section="sections/services.html"></div>
+    <div data-section="sections/lead-qualifier.html"></div>
+    <div data-section="sections/faq.html"></div>
+    <div data-section="sections/final-cta.html"></div>
   </main>
 
-  <main id="mobileOS" class="mobile-os" aria-label="Mobile portfolio">
-    <section class="phone-screen">
-      <header class="mobile-status">
-        <span id="mobileClock">00:00</span>
-        <span>▮▮ 5G ◔</span>
-      </header>
+  <div id="site-footer" data-section="sections/footer.html"></div>
 
-      <section id="mobileHome" class="mobile-page active">
-        <div class="mobile-hero">
-          <span class="moon">☾</span>
-          <div class="mobile-hero-timeblock"><span id="mobileHeroWeekday">Sábado</span><h1 id="mobileHeroClock">00:00</h1><strong id="mobileHeroDate">30 De Maio De 2026</strong></div>
-          <p class="mobile-search-open"><span>Search...</span><button type="button" class="mobile-search-button" aria-label="Pesquisar"><img src="assets/icons/search.svg" alt="" /></button></p>
-        </div>
-        <div class="mobile-app-grid">
-          <button class="mobile-app mobile-notes-app mobile-txt-app" data-mobile-open="notes"><span><img src="assets/icons/txt-file.svg" alt="" /></span><small>Currículo</small></button>
-          <button class="mobile-app mobile-folder-app" data-mobile-open="design"><span class="folder-glass-icon mobile-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
-  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
-  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
-</svg></span><small>Design</small></button>
-          <button class="mobile-app mobile-folder-app" data-mobile-open="fotografia"><span class="folder-glass-icon mobile-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
-  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
-  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
-</svg></span><small>Fotografia</small></button>
-          <button class="mobile-app mobile-folder-app" data-mobile-open="videos"><span class="folder-glass-icon mobile-folder-icon" aria-hidden="true"><svg class="folder-glass-svg" viewBox="0 0 873.37 694.59" xmlns="http://www.w3.org/2000/svg" focusable="false">
-  <path class="folder-back-path" d="M827.19,233.59c1.44,7.07-1.22,288.41-.19,302.99-2.63,25.23-22.55,47.9-48.89,47.9,0,0-690.56-.06-690.56-.06-26.3,0-47.97-24.9-47.97-50.41C63.12-105.93-91.47,13.19,440.93,2.38c47.31.47,63.76,60.47,111.23,59.79,0,0,206.75.33,206.75.33,37.96.07,67.96,33.35,68.1,63.6,1,21.77-.56,84.81.17,107.49Z" />
-  <path class="folder-front-path" d="M827.23,170.69c27.66,5.6,46.58,29.96,46.13,58.18,0,0-.26,412.61-.26,412.61-2.92,27.98-25,53.11-54.21,53.11,0,0-765.69-.06-765.69-.06C24.03,694.53,0,666.92,0,638.64c0,0,.04-516.79.04-516.79,0-24.21,18.2-45.2,39.76-52.11,5.6-1.79,9.73-2.46,15.49-2.45,0,0,246.67.29,246.67.29,42.74-3.02,72.76,50.38,97.4,76.93,12.45,14.79,30.56,25.85,50.87,25.86,0,0,376.99.31,376.99.31Z" />
-</svg></span><small>Vídeos</small></button>
-          <button class="mobile-app mobile-image-app" data-mobile-open="landing-page-editavel"><span><img src="assets/icons/landing-duck.svg" alt="" /></span><small>landing page editavel</small></button>
-          <button class="mobile-app mobile-image-app" data-mobile-open="ranking"><span><img src="assets/icons/ranking-trophy.svg" alt="" /></span><small>Ranking</small></button>
-        </div>
-      </section>
-
-      <section id="mobileAppView" class="mobile-page mobile-app-view">
-        <header class="mobile-app-header"><button id="mobileBackTop">‹</button><h2 id="mobileAppTitle">App</h2></header>
-        <div id="mobileAppContent" class="mobile-app-content"></div>
-      </section>
-
-      <div class="mobile-contact-dock" aria-label="Contatos">
-        <button type="button" data-mobile-contact="email" aria-label="Email"><img src="assets/icons/email.svg" alt="" /></button>
-        <button type="button" data-mobile-contact="linkedin" aria-label="LinkedIn"><img src="assets/icons/linkedin.svg" alt="" /></button>
-        <button type="button" data-mobile-contact="instagram" aria-label="Instagram"><img src="assets/icons/instagram.svg" alt="" /></button>
-        <button type="button" data-mobile-contact="whatsapp" aria-label="WhatsApp"><img src="assets/icons/whatsapp.svg" alt="" /></button>
-      </div>
-
-      <nav class="mobile-nav">
-        <button id="mobileScreens" aria-label="Telas abertas">▢</button>
-        <button id="mobileHomeBtn" aria-label="Home">○</button>
-        <button id="mobileBack" aria-label="Voltar">◂</button>
-      </nav>
-    </section>
-  </main>
-
-  <script src="js/data.js?v=ranking-name-icon-fullscreen-1"></script>
-  <script src="js/windows.js?v=clean-conflict-rules-1"></script>
-  <script src="js/desktop.js?v=remove-crt-switch-1"></script>
-  <script src="js/mobile.js?v=mobile-home-grid-contact-dock-1"></script>
-  <script src="js/components/desktop-clock.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/include-sections.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
